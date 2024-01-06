@@ -9,7 +9,7 @@
 
     <!-- ================== BEGIN core-css ================== -->
     @vite(['resources/css/app.min.css', 'resources/css/vendor.min.css', 'resources/js/app.min.js', 'resources/js/vendor.min.js'])
-    <script src="https://kit.fontawesome.com/0a007e12dc.js" crossorigin="anonymous"></script>
+    <script src="{{'https://kit.fontawesome.com/0a007e12dc.js'}}" crossorigin="anonymous"></script>
     <style>
             input:active, input:hover, input:focus
             {
@@ -24,25 +24,25 @@
 
             @media screen and (max-width: 1023px)
             {
-                .first_input, .second_input
+                .first_input, .brdr-b-l, .brdr-b-r
                 {
                     position: relative;
                 }
-                .first_input:before, .first_input:after, .second_input:before
+                 .first_input:after, .brdr-b-l:before, .brdr-b-r:before
                 {
                     position: absolute;
                     content: "";
                     background-color: black;
                     opacity: .25;
                 }
-                .first_input:before
+                .brdr-b-l:before
                 {
                     width: 95%;
                     height: 1px;
                     bottom: 0;
                     right: 0;
                 }
-                .second_input:before
+                .brdr-b-r:before
                 {
                     width: 95%;
                     height: 1px;
@@ -75,23 +75,23 @@
     <div class="header header-float">
         <div class="container d-flex">
             <div class="header-logo">
-                <a href="index.html" class="logo-link">
+                <a href="#" class="logo-link">
                     <span class="logo"></span><b>ColorAdmin</b> <small>CORPORATE</small>
                 </a>
             </div>
             <div class="header-nav">
                 <div class="container">
                     <div class="header-nav-item">
-                        <a href="about.html" class="header-nav-link">Тариф</a>
+                        <a href="#" class="header-nav-link">Тариф</a>
                     </div>
                     <div class="header-nav-item">
-                        <a href="products.html" class="header-nav-link">Помощь</a>
+                        <a href="#" class="header-nav-link">Помощь</a>
                     </div>
                     <div class="header-nav-item">
-                        <a href="newsroom.html" class="header-nav-link">Блог</a>
+                        <a href="#" class="header-nav-link">Блог</a>
                     </div>
                     <div class="header-nav-item">
-                        <a href="careers.html" class="header-nav-link">Отзывы</a>
+                        <a href="#" class="header-nav-link">Отзывы</a>
                     </div>
                 </div>
             </div>
@@ -118,35 +118,58 @@
                     <p class="footer-desc">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in orci felis. Phasellus id urna nunc. Nulla sed nibh at libero tincidunt scelerisque sed porttitor lectus.
                     </p>
+                    <h4 class="footer-title">Мы в социальных сетях</h4>
+                    <div class="row">
+                        <div class="footer-media-list col-6">
+                            <a href="#" class="me-1"><i class="fab fa-lg fa-facebook fa-fw"></i></a>
+                            <a href="#" class="me-2"><i class="fab fa-lg fa-instagram fa-fw"></i></a>
+                            <a href="#" class="me-2"><i class="fab fa-lg fa-twitter fa-fw"></i></a>
+                            <a href="#" class="me-2"><i class="fab fa-lg fa-youtube fa-fw"></i></a>
+                            <a href="#" class="me-2"><i class="fab fa-lg fa-linkedin fa-fw"></i></a>
+                        </div>
+                        <div class="d-flex d-lg-none col-2">
+                            <img class="me-2" src="{{asset('img/visa.svg')}}" alt="visa">
+                            <img class="me-2" src="{{asset('img/masterCard.svg')}}" alt="mastercard">
+                            <img src="{{asset('img/mir.svg')}}" alt="mir">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-3 mb-4 mb-lg-0">
-                    <h4 class="footer-title">Помощь</h4>
-                    <ul class="footer-link-list">
-                        <li><a href="#">Частозадаваемые вопросы</a></li>
-                    </ul>
+                <div class="col-lg-4 mb-4 mb-lg-0 d-flex">
+                    <div class="col mb-4 mb-lg-0">
+                        <h4 class="footer-title">Помощь</h4>
+                        <ul class="footer-link-list">
+                            <li><a href="#">Частозадаваемые вопросы</a></li>
+                        </ul>
+                        <br>
+                        <h4 class="footer-title">Сотрудничество</h4>
+                        <ul class="footer-link-list">
+                            <li><a href="#">Партнерская программа</a></li>
+                        </ul>
+                    </div>
+                    <div class="col mb-4 mb-lg-0 ps-5">
+                        <h4 class="footer-title">Клиентам</h4>
+                        <ul class="footer-link-list">
+                            <li><a href="#">Тариф</a></li>
+                            <li><a href="#">Блог</a></li>
+                            <li><a href="#">Отзывы</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-lg-3 mb-4 mb-lg-0">
-                    <h4 class="footer-title">Клиентам</h4>
-                    <ul class="footer-link-list">
-                        <li><a href="#">Тариф</a></li>
-                        <li><a href="#">Блог</a></li>
-                        <li><a href="#">Отзывы</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 mb-4 mb-lg-0">
-                    <h4 class="footer-title">Сотрудничество</h4>
-                    <ul class="footer-link-list">
-                        <li><a href="#">Партнерская программа</a></li>
-                    </ul>
+                <div class="col-lg-3 mb-4 mb-lg-0 d-none d-lg-block">
+                    <img class="me-2" src="{{asset('img/visa.svg')}}" alt="visa">
+                    <img class="me-2" src="{{asset('img/masterCard.svg')}}" alt="mastercard">
+                    <img src="{{asset('img/mir.svg')}}" alt="mir">
                 </div>
             </div>
-            <div class="footer-copyright">
+            {{--
+            <div class="footer-copyright border-gray-500">
                 <div class="row">
                     <div class="col-lg-6 text-center text-lg-start mb-3 mb-lg-0">
                         <div class="footer-copyright-text">&copy; 2016 - 2023 Color Admin All Rights Reserved</div>
                     </div>
                 </div>
             </div>
+            --}}
         </div>
     </div>
     <!-- END footer -->
