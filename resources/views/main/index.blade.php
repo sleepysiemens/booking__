@@ -232,8 +232,8 @@
                 <div class="card-body">
                     <div class="row">
                         <h4 class="col m-0">Сколько стоят ваши услуги?</h4>
-                        <span class="col-1 text-black opacity-50 d-flex filter-btn">
-                            <i class="fas fa-chevron-down m-auto" id="question-1-marker"></i>
+                        <span class="col-1 text-black opacity-50 d-flex filter-btn" id="question-1-marker">
+                            <i class="fas fa-chevron-down m-auto"></i>
                         </span>
                     </div>
                     <div class="row fs-16px" style="display: none" id="answer-1">
