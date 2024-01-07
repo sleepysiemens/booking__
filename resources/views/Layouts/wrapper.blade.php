@@ -10,6 +10,7 @@
     <!-- ================== BEGIN core-css ================== -->
     @vite(['resources/css/app.min.css', 'resources/css/vendor.min.css', 'resources/js/app.min.js', 'resources/js/vendor.min.js'])
     <script src="{{'https://kit.fontawesome.com/0a007e12dc.js'}}" crossorigin="anonymous"></script>
+    <script src={{"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"}}></script>
     <style>
             input:active, input:hover, input:focus
             {
@@ -58,6 +59,16 @@
                     margin: auto;
                 }
             }
+
+            .filter-btn
+            {
+                transition: .3s;
+            }
+
+            .rotate-btn
+            {
+                transform: rotate(180deg);
+            }
     </style>
 
     <!-- ================== END core-css ================== -->
@@ -75,7 +86,7 @@
     <div class="header header-float">
         <div class="container d-flex">
             <div class="header-logo">
-                <a href="#" class="logo-link">
+                <a href="{{asset(route('main.index'))}}" class="logo-link">
                     <span class="logo"></span><b>ColorAdmin</b> <small>CORPORATE</small>
                 </a>
             </div>
@@ -127,11 +138,6 @@
                             <a href="#" class="me-2"><i class="fab fa-lg fa-youtube fa-fw"></i></a>
                             <a href="#" class="me-2"><i class="fab fa-lg fa-linkedin fa-fw"></i></a>
                         </div>
-                        <div class="d-flex d-lg-none col-2">
-                            <img class="me-2" src="{{asset('img/visa.svg')}}" alt="visa">
-                            <img class="me-2" src="{{asset('img/masterCard.svg')}}" alt="mastercard">
-                            <img src="{{asset('img/mir.svg')}}" alt="mir">
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-4 mb-lg-0 d-flex">
@@ -155,10 +161,42 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 mb-4 mb-lg-0 d-none d-lg-block">
-                    <img class="me-2" src="{{asset('img/visa.svg')}}" alt="visa">
-                    <img class="me-2" src="{{asset('img/masterCard.svg')}}" alt="mastercard">
-                    <img src="{{asset('img/mir.svg')}}" alt="mir">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="col mb-4 mb-lg-0">
+                        <h4 class="footer-title mb-3">Способы оплаты</h4>
+                        <div class="container ps-0">
+                            <div class="row">
+                                <div class="col-4 d-flex">
+                                    <img class="h-35px mb-2 mx-auto" src="{{asset('img/visa.webp')}}" alt="visa">
+                                </div>
+                                <div class="col-4 d-flex">
+                                    <img class="h-35px mb-2 mx-auto" src="{{asset('img/mastercard.webp')}}" alt="mastercard">
+                                </div>
+                                <div class="col-4 d-flex">
+                                    <img class="h-35px mb-2 mx-auto" src="{{asset('img/mir.webp')}}" alt="mir">
+                                </div>
+                                <div class="col-4 d-flex">
+                                    <img class="h-35px mb-2 mx-auto" src="{{asset('img/sberpay.webp')}}" alt="mir">
+                                </div>
+                                <div class="col-4 d-flex">
+                                    <img class="h-35px mb-2 mx-auto" src="{{asset('img/unionpay.webp')}}" alt="mir">
+                                </div>
+                                <div class="col-4 d-flex">
+                                    <img class="h-35px mb-2 mx-auto" src="{{asset('img/webmoney.webp')}}" alt="mir">
+                                </div>
+                                <div class="col-4 d-flex">
+                                    <img class="h-35px mb-2 mx-auto" src="{{asset('img/sbp.webp')}}" alt="mir">
+                                </div>
+                                <div class="col-4 d-flex">
+                                    <img class="h-35px mb-2 mx-auto" src="{{asset('img/qiwi.webp')}}" alt="mir">
+                                </div>
+                                <div class="col-4 d-flex">
+                                    <img class="h-35px mb-2 mx-auto" src="{{asset('img/crypto.webp')}}" alt="mir">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
             {{--
@@ -178,3 +216,4 @@
 
 </body>
 </html>
+@yield('scripts')

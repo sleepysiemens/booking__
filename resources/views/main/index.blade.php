@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- BEGIN section -->
-    <div class="section section-hero">
+    <div class="section section-hero" style="height: 70vh;">
         <!-- BEGIN section-bg -->
         <div class="section-bg with-cover" style="background-image: url({{asset('img/top-view-tourist-items-with-copy-space.jpg')}});"></div>
         <div class="section-bg bg-gray-800 bg-opacity-50"></div>
@@ -212,9 +212,114 @@
     </div>
     <!-- END section -->
 
+    <!-- BEGIN section -->
+    <div class="section pt-0">
+        <!-- BEGIN container -->
+        <div class="container">
+            <!-- BEGIN section-title -->
+            <div class="pt-lg-5 pb-lg-3 text-center">
+                <div class="display-6 fw-bolder mb-3 d-flex align-items-center justify-content-center">
+                    Вопросы и ответы
+                </div>
+            </div>
+            <!-- END section-title -->
+        </div>
+        <!-- END container -->
+        <!-- BEGIN container -->
+        <div class="container">
+
+            <div class="card bg-light mb-3 border-0 cursor-pointer" id="question-1">
+                <div class="card-body">
+                    <div class="row">
+                        <h4 class="col m-0">Сколько стоят ваши услуги?</h4>
+                        <span class="col-1 text-black opacity-50 d-flex filter-btn">
+                            <i class="fas fa-chevron-down m-auto" id="question-1-marker"></i>
+                        </span>
+                    </div>
+                    <div class="row fs-16px" style="display: none" id="answer-1">
+                        <div class="col pt-3">
+                            <p>Стоимость бронирования вы можете посмотреть на нашем сайте в разделе Тариф</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-light mb-3 border-0 cursor-pointer" id="question-2">
+                <div class="card-body">
+                    <div class="row">
+                        <h4 class="col m-0">Через сколько я получу бронь после оформления заказа?</h4>
+                        <span class="col-1 text-black opacity-50 d-flex filter-btn" id="question-2-marker">
+                            <i class="fas fa-chevron-down m-auto"></i>
+                        </span>
+                    </div>
+                    <div class="row fs-16px" style="display: none" id="answer-2">
+                        <div class="col pt-3">
+                            <p>Максимальное время выписки брони билета 30 минут (обычно выписываем в течение 15 минут).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-light mb-3 border-0 cursor-pointer" id="question-3">
+                <div class="card-body">
+                    <div class="row">
+                        <h4 class="col m-0">Когда лучше делать бронирование для визы, если подача на визу через неделю?</h4>
+                        <a class="col-1 text-black opacity-50 d-flex filter-btn" id="question-3-marker">
+                            <i class="fas fa-chevron-down m-auto"></i>
+                        </a>
+                    </div>
+                    <div class="row fs-16px" style="display: none" id="answer-3">
+                        <div class="col pt-3">
+                            <p>Чтобы бронь держалась в момент рассмотрения визы, вам лучше оформить её за 1 день до подачи.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-light mb-3 border-0 cursor-pointer" id="question-4">
+                <div class="card-body">
+                    <div class="row">
+                        <h4 class="col m-0">Подходит ли ваша бронь для прохождения пограничного контроля в аэропорту?</h4>
+                        <a class="col-1 text-black opacity-50 d-flex filter-btn" id="question-4-marker">
+                            <i class="fas fa-chevron-down m-auto"></i>
+                        </a>
+                    </div>
+                    <div class="row fs-16px" style="display: none" id="answer-4">
+                        <div class="col pt-3">
+                            <p>Да, бронь авиабилета подходит также для прохождения пограничного контроля в стране вылета/прилета. Маршрутная квитанция авиабилета предоставляется на английском и русском языке, что соответствует правилам, а также содержит номер бронирования по которому можно проверить билет.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-light mb-3 border-0 cursor-pointer" id="question-5">
+                <div class="card-body">
+                    <div class="row">
+                        <h4 class="col m-0">Можно ли выкупить свою бронь билета для осуществления полета?</h4>
+                        <a class="col-1 text-black opacity-50 d-flex filter-btn" id="question-5-marker">
+                            <i class="fas fa-chevron-down m-auto"></i>
+                        </a>
+                    </div>
+                    <div class="row fs-16px" style="display: none" id="answer-5">
+                        <div class="col pt-3">
+                            <p>Нет, бронь билета нельзя выкупить. Для осуществления полета вы можете купить билет на сайтах по продаже билетов.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="#" class="section-btn"><i class="fa fa-arrow-right"></i> Все вопросы</a>
+            </div>
+
+        </div>
+        <!-- END container -->
+    </div>
+    <!-- END section -->
+
     {{----}}
     <!-- BEGIN section -->
-    <div class="section">
+    <div class="section bg-light">
         <!-- BEGIN container -->
         <div class="container">
             <div class="section-subtitle">Отзывы</div>
@@ -258,4 +363,28 @@
     <!-- END section -->
     {{----}}
 
+@endsection
+
+@section('scripts')
+    <script>
+        let marker=[];
+        for(let cnt=1;cnt<=5;cnt++)
+        {
+            marker[cnt]=0;
+            $('#question-'+cnt).on('click', function (){
+                $('#answer-'+cnt).slideToggle( "fast", function() {});
+                if(marker[cnt]==0)
+                {
+                    $('#question-'+cnt+'-marker').addClass('rotate-btn');
+                    marker[cnt]++;
+                }
+                else
+                {
+                    $('#question-'+cnt+'-marker').removeClass('rotate-btn');
+                    marker[cnt]--;
+                }
+            })
+        }
+
+    </script>
 @endsection

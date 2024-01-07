@@ -15,3 +15,5 @@ use Illuminate\Support\Facades\Route;
 //
 
 Route::get('/', 'App\Http\Controllers\MainController@index')->name('main.index');
+Route::get('/booking', 'App\Http\Controllers\MainController@booking')->name('booking.index');
+Route::get('/search', 'App\Http\Controllers\MainController@search')->name('search.index');
