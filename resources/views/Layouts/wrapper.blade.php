@@ -58,6 +58,17 @@
                     bottom: 25%;
                     margin: auto;
                 }
+
+                #search-form
+                {
+                    width: 95% !important;
+                    margin: auto;
+                }
+
+                #filter-div
+                {
+                    display: none;
+                }
             }
 
             .filter-btn

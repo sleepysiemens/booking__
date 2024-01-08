@@ -23,51 +23,7 @@
                         <!-- END hero-title-desc -->
 
                         <!-- BEGIN row -->
-                        <form class="row text-black mt-4 mb-5 border-4 border rounded-2 border-primary bg-primary shadow position-absolute w-100 z-2">
-                            <div class="row col-12 col-lg-10 col-12 bg-white rounded rounded-1 p-0 ms-0 me-1">
-                                <fieldset class="first_input brdr-b-l p-0 col-1 h-60px m-0 col-lg col-6">
-                                    <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Откуда</legend>
-                                    <input class="bg-transparent border-0 ms-2 p-0 h-100" type="text" name="fio">
-                                </fieldset>
-
-                                <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
-
-                                <div class="w-50px p-0 h-60px m-0 d-flex col-sm-1 d-none d-lg-flex">
-                                    <i class="fas fa-exchange-alt m-auto opacity-50"></i>
-
-                                </div>
-                                <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
-
-                                <fieldset class="brdr-b-r p-0 col-1 h-60px m-0 col-lg col-6">
-                                    <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Куда</legend>
-                                    <input class="bg-transparent border-0 ms-2 p-0 h-100" type="text" name="fio">
-
-                                </fieldset>
-                                <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
-
-                                <fieldset class="first_input brdr-b-l p-0 col-1 h-60px m-0 col-lg col-6">
-                                    <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Дата туда</legend>
-                                    <input class="bg-transparent border-0 ms-2 p-0 h-100" type="text" name="fio">
-
-                                </fieldset>
-                                <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
-
-                                <fieldset class="brdr-b-r p-0 col-1 h-60px m-0 col-lg col-6">
-                                    <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Дата обратно</legend>
-                                    <input class="bg-transparent border-0 ms-2 p-0 h-100" type="text" name="fio">
-
-                                </fieldset>
-                                <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
-
-                                <fieldset class="first_input p-0 col-1 h-60px m-0 col-lg col-6">
-                                    <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Пассажиры, класс</legend>
-                                    <input class="bg-transparent border-0 ms-2 p-0 h-100" type="text" name="fio">
-                                </fieldset>
-                            </div>
-                            <div class="col w-25 d-flex p-0 bg-primary h-50px h-lg-60px">
-                                <button type="button" class="p-0 btn btn-primary m-auto h-100 w-100">Найти</button>
-                            </div>
-                        </form>
+                        @include('blocks.search')
                         <!-- END row -->
                     </div>
                     <!-- END col-8 -->
@@ -79,16 +35,24 @@
         <!-- END container -->
     </div>
     <!-- END section -->
-    <div class="section d-lg-none h-250px bg-light">
+    <div class="section d-lg-none bg-light py-0" style="height: 220px;">
+    </div>
+    <div class="section bg-light py-3 d-lg-none">
+        <div class="container">
+            <button class="btn border-primary border-2 bg-primary-100 text-primary w-100 d-flex shadow h-50px justify-content-center" id="filter-btn">
+                <i class="fas fa-filter my-auto"></i>
+                <p class="my-auto ms-2">Фильтр</p>
+            </button>
+        </div>
     </div>
     <!-- BEGIN section -->
     <div class="section pt-0 bg-light min-vh-100 pt-lg-5">
         <!-- BEGIN container -->
-        <div class="container">
+        <div class="container px-0">
             <!-- BEGIN row -->
-            <div class="row mb-5">
+            <div class="mb-5 row row-cols-lg-12 w-100 mx-auto">
                 {{--FILTER--}}
-                <div class="col-3 ps-0">
+                <div class="col-lg-3 col ps-lg-0 d-lg-block mb-3" id="filter-div">
                     {{--Filter card--}}
                     <div class="card shadow mb-3">
                         <div class="card-body">
@@ -171,12 +135,12 @@
                 </div>
                 {{--/FILTER--}}
 
-                <div class="col-9 pe-0">
+                <div class="col-lg-9 pe-lg-0">
                 @foreach($i=[1,2,3,4,5,6] as $ii)
                         <div class="card shadow mb-3">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-lg">
                                         {{--HEADER--}}
                                         <div class="d-flex">
                                             <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
@@ -205,7 +169,7 @@
                                                     <p class="text-dark fw-300 mt-0">Россия, Москва (MOW)</p>
                                                 </div>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-2 d-none d-lg-block">
                                                 <div class="container">
                                                     <p class="fw-500 mb-0">4 ч 30 мин</p>
                                                     <p class="fw-400 fs-12px text-green mb-0">прямой</p>
@@ -216,15 +180,24 @@
                                         {{--/BODY--}}
                                     </div>
                                     <div class="col-1 p-0 bg-black opacity-20 d-none d-lg-block" style="width: 1px;"></div>
+                                    <div class="bg-black opacity-20 d-block d-lg-none w-100 mb-3" style="height: 1px;"></div>
                                     {{--PRICE--}}
-                                    <div class="col-2">
+                                    <div class="col-lg-2">
                                         <div class="container h-100">
-                                            <div class="row h-25">
-                                                <h2 class="fw-400 my-1 fs-22px">11 261 ₽</h2>
+                                            <div class="h-100 d-flex d-lg-block justify-content-between">
+                                                <div class="d-lg-none">
+                                                    <p class="fw-500 mb-0">4 ч 30 мин</p>
+                                                    <p class="fw-400 fs-12px text-green mb-0">прямой</p>
+                                                    <p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>
+                                                </div>
+                                                <div class="row my-auto">
+                                                    <h2 class="fw-400 my-lg-1 fs-22px">11 261 ₽</h2>
+                                                </div>
+                                                <div class="row mt-lg-5 d-flex">
+                                                    <button class="btn-primary btn fs-12px h-55px m-auto">Забронировать</button>
+                                                </div>
                                             </div>
-                                            <div class="row h-75 d-flex">
-                                                <button class="btn-primary btn fs-12px h-55px m-auto">Забронировать</button>
-                                            </div>
+
                                         </div>
                                     </div>
                                     {{--/PRICE--}}
@@ -273,7 +246,7 @@
                 $('#avia-btn').removeClass('rotate-btn');
                 avia--;
             }
-        })
+        });
 
         let flight=0;
         $('#flight-btn').on('click', function (){
@@ -288,7 +261,11 @@
                 $('#flight-btn').removeClass('rotate-btn');
                 flight--;
             }
-        })
+        });
+
+        $('#filter-btn').on('click', function (){
+            $('#filter-div').slideToggle( "fast", function() {});
+        });
     </script>
 @endsection
 
