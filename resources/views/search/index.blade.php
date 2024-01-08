@@ -367,7 +367,7 @@
             if(marker[cnt]==0)
             {
                 $('#details-btn-marker-'+cnt).addClass('rotate-btn');
-                $('#details-short-'+cnt).addClass('d-none');
+                $('#details-short-'+cnt).slideToggle( "fast", function() {});
                 $('#details-long-'+cnt).slideToggle( "fast", function() {});
 
                 marker[cnt]++;
@@ -375,7 +375,7 @@
             else
             {
                 $('#details-btn-marker-'+cnt).removeClass('rotate-btn');
-                $('#details-short-'+cnt).removeClass('d-none');
+                $('#details-short-'+cnt).slideToggle( "fast", function() {});
                 $('#details-long-'+cnt).slideToggle( "fast", function() {});
                 marker[cnt]--;
             }
