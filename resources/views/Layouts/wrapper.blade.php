@@ -12,6 +12,9 @@
     <script src="{{'https://kit.fontawesome.com/0a007e12dc.js'}}" crossorigin="anonymous"></script>
     <script src={{"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"}}></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap');
+    </style>
+    <style>
             input:active, input:hover, input:focus
             {
                 outline: 0;
@@ -21,6 +24,14 @@
 
             input:-webkit-autofill {
                 transition: all 5000s ease-in-out 0s;
+            }
+
+            .details
+            {
+                width: 200px;
+                max-width: none;
+                right: 0;
+                text-align: center;
             }
 
             @media screen and (max-width: 1023px)
@@ -69,6 +80,13 @@
                 {
                     display: none;
                 }
+
+                .details
+                {
+                    position: absolute;
+                    top: 100%;
+                    width: 90vw;
+                }
             }
 
             .filter-btn
@@ -79,6 +97,11 @@
             .rotate-btn
             {
                 transform: rotate(180deg);
+            }
+
+            .ff-montserrat
+            {
+                font-family: 'Montserrat';
             }
     </style>
 

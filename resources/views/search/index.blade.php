@@ -136,9 +136,10 @@
                 {{--/FILTER--}}
 
                 <div class="col-lg-9 pe-lg-0">
+                    @php $cnt=0 @endphp
                 @foreach($i=[1,2,3,4,5,6] as $ii)
                         <div class="card shadow mb-3">
-                            <div class="card-body">
+                            <div class="card-body pb-lg-3 pb-5">
                                 <div class="row">
                                     <div class="col-lg">
                                         {{--HEADER--}}
@@ -150,39 +151,122 @@
                                         </div>
                                         {{--/HEADER--}}
                                         {{--BODY--}}
-                                        <div class="row mt-3">
-                                            <div class="col">
-                                                <div class="container">
-                                                    <p class="text-dark mb-0">21 января, вс</p>
-                                                    <h2 class="fw-400 my-1">18:25</h2>
-                                                    <p class="text-dark fw-300 mt-0">Россия, Новосибирск (OVB)</p>
+                                        @if($ii%2==1)
+                                            @php $cnt++ @endphp
+                                        @endif
+                                        <div style="display: block;" id="details-short-{{$cnt}}">
+                                            <div class="row row-cols-lg-4 mt-3" >
+                                                <div class="col">
+                                                    <div class="container">
+                                                        <p class="text-dark mb-0">21 января, вс</p>
+                                                        <h2 class="fw-400 my-1 ff-montserrat">18:25</h2>
+                                                        <p class="text-dark fw-300 mt-0">Россия, Новосибирск (OVB)</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col d-flex opacity-25">
+                                                    <div class="bg-black w-100 my-auto position-relative" style="height: 2px">
+                                                        @if($ii%2==1)
+                                                            <div class="position-absolute bg-white m-auto rounded-circle border-2 border-black border" style="width: 10px; height: 10px; left: 0; right: 0; top: 0; bottom: 0"></div>
+                                                        @endif
+                                                    </div>
+                                                    <i class="fas fa-caret-right my-auto"></i>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="container">
+                                                        <p class="text-dark mb-0">21 января, вс</p>
+                                                        <h2 class="fw-400 my-1 ff-montserrat">18:55</h2>
+                                                        <p class="text-dark fw-300 mt-0 fs-12px">Россия, Москва (MOW)</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col d-none d-lg-block">
+                                                    <div class="container">
+                                                        <p class="fw-500 mb-0">4 ч 30 мин</p>
+                                                        <p class="fw-400 fs-12px text-green mb-0">прямой</p>
+                                                        <p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-2 d-flex opacity-25">
-                                                <div class="bg-black w-100 my-auto" style="height: 2px"></div>
-                                                <i class="fas fa-caret-right my-auto"></i>
-                                            </div>
-                                            <div class="col">
-                                                <div class="container">
-                                                    <p class="text-dark mb-0">21 января, вс</p>
-                                                    <h2 class="fw-400 my-1">18:55</h2>
-                                                    <p class="text-dark fw-300 mt-0">Россия, Москва (MOW)</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-2 d-none d-lg-block">
-                                                <div class="container">
-                                                    <p class="fw-500 mb-0">4 ч 30 мин</p>
-                                                    <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                                    <p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>
-                                                </div>
-                                            </div>
+
                                         </div>
+                                        @if($ii%2==1)
+                                            <div style="display: none" id="details-long-{{$cnt}}">
+                                                <div class="row row-cols-lg-4 mt-3" >
+                                                    <div class="col">
+                                                        <div class="container">
+                                                            <p class="text-dark mb-0">21 января, вс</p>
+                                                            <h2 class="fw-400 my-1 ff-montserrat">18:25</h2>
+                                                            <p class="text-dark fw-300 mt-0">Россия, Новосибирск (OVB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col d-flex opacity-25">
+                                                        <div class="bg-black w-100 my-auto position-relative" style="height: 2px">
+                                                        </div>
+                                                        <i class="fas fa-caret-right my-auto"></i>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="container">
+                                                            <p class="text-dark mb-0">21 января, вс</p>
+                                                            <h2 class="fw-400 my-1 ff-montserrat">06:55</h2>
+                                                            <p class="text-dark fw-300 mt-0 fs-12px">Россия, Москва (MOW)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col d-none d-lg-block">
+                                                        <div class="container">
+                                                            <p class="fw-500 mb-0">4 ч 30 мин</p>
+                                                            <p class="fw-400 fs-12px text-green mb-0">прямой</p>
+                                                            <p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="card bg-light border-light">
+                                                        <div class="card-body row text-black-200 py-2">
+                                                            <div class="col d-flex">
+                                                                <i class="far fa-clock my-auto"></i>
+                                                                <p class="m-0 my-auto ms-2">Пересадка</p>
+                                                            </div>
+                                                            <div class="col d-flex justify-content-end">
+                                                                <p class="m-0 my-auto">3 ч 20 мин</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row row-cols-lg-4 mt-3">
+                                                    <div class="col">
+                                                        <div class="container">
+                                                            <p class="text-dark mb-0">21 января, вс</p>
+                                                            <h2 class="fw-400 my-1 ff-montserrat">18:25</h2>
+                                                            <p class="text-dark fw-300 mt-0">Россия, Новосибирск (OVB)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col d-flex opacity-25">
+                                                        <div class="bg-black w-100 my-auto position-relative" style="height: 2px">
+                                                        </div>
+                                                        <i class="fas fa-caret-right my-auto"></i>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="container">
+                                                            <p class="text-dark mb-0">21 января, вс</p>
+                                                            <h2 class="fw-400 my-1 ff-montserrat">06:55</h2>
+                                                            <p class="text-dark fw-300 mt-0 fs-12px">Россия, Москва (MOW)</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col d-none d-lg-block">
+                                                        <div class="container">
+                                                            <p class="fw-500 mb-0">4 ч 30 мин</p>
+                                                            <p class="fw-400 fs-12px text-green mb-0">прямой</p>
+                                                            <p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
                                         {{--/BODY--}}
                                     </div>
                                     <div class="col-1 p-0 bg-black opacity-20 d-none d-lg-block" style="width: 1px;"></div>
                                     <div class="bg-black opacity-20 d-block d-lg-none w-100 mb-3" style="height: 1px;"></div>
                                     {{--PRICE--}}
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-3">
                                         <div class="container h-100">
                                             <div class="h-100 d-flex d-lg-block justify-content-between">
                                                 <div class="d-lg-none">
@@ -191,13 +275,17 @@
                                                     <p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>
                                                 </div>
                                                 <div class="row my-auto">
-                                                    <h2 class="fw-400 my-lg-1 fs-22px">11 261 ₽</h2>
+                                                    <h2 class="fw-500 my-lg-1 fs-22px ff-montserrat text-lg-center text-end mt-lg-3">11 261 ₽</h2>
                                                 </div>
-                                                <div class="row mt-lg-5 d-flex">
+                                                <div class="row mt-lg-5 d-flex position-relative">
                                                     <button class="btn-primary btn fs-12px h-55px m-auto">Забронировать</button>
+                                                    @if($ii%2==1)
+                                                        <div class="d-flex mt-lg-3 justify-content-center details mt-2">
+                                                            <a class="text-primary cursor-pointer w-100" onclick="details({{$cnt}})"><i class="fas fa-chevron-down filter-btn" id="details-btn-marker-{{$cnt}}"></i> Детали перелета</a>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                     {{--/PRICE--}}
@@ -266,6 +354,33 @@
         $('#filter-btn').on('click', function (){
             $('#filter-div').slideToggle( "fast", function() {});
         });
+
+        let marker=[];
+
+        for(let j=1; j<={{$cnt}}; j++)
+        {
+            marker[j]=0;
+        }
+
+        function details(cnt)
+        {
+            if(marker[cnt]==0)
+            {
+                $('#details-btn-marker-'+cnt).addClass('rotate-btn');
+                $('#details-short-'+cnt).addClass('d-none');
+                $('#details-long-'+cnt).slideToggle( "fast", function() {});
+
+                marker[cnt]++;
+            }
+            else
+            {
+                $('#details-btn-marker-'+cnt).removeClass('rotate-btn');
+                $('#details-short-'+cnt).removeClass('d-none');
+                $('#details-long-'+cnt).slideToggle( "fast", function() {});
+                marker[cnt]--;
+            }
+        }
+
     </script>
 @endsection
 
