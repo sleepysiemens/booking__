@@ -54,7 +54,7 @@
                 {{--FILTER--}}
                 <div class="col-lg-3 col ps-lg-0 d-lg-block mb-3" id="filter-div">
                     {{--Filter card--}}
-                    <div class="card shadow mb-3">
+                    <div class="card border-0 shadow mb-3">
                         <div class="card-body">
                             <div class="row">
                                 <p class="fs-16px col mb-0">Пересадки</p>
@@ -76,7 +76,7 @@
                     {{--/Filter card--}}
 
                     {{--Filter card--}}
-                    <div class="card shadow mb-3">
+                    <div class="card border-0 shadow mb-3">
                         <div class="card-body">
                             <div class="row">
                                 <p class="fs-16px col mb-0">Авиакомпании</p>
@@ -103,7 +103,7 @@
                     {{--/Filter card--}}
 
                     {{--Filter card--}}
-                    <div class="card shadow mb-3">
+                    <div class="card border-0 shadow mb-3">
                         <div class="card-body">
                             <div class="row">
                                 <p class="fs-16px col mb-0">Вылет и прибытие</p>
@@ -138,7 +138,7 @@
                 <div class="col-lg-9 pe-lg-0">
                     @php $cnt=0 @endphp
                 @foreach($i=[1,2,3,4,5,6] as $ii)
-                        <div class="card shadow mb-3">
+                        <div class="card border-0 shadow mb-3">
                             <div class="card-body pb-lg-3 pb-5">
                                 <div class="row">
                                     <div class="col-lg">

@@ -286,7 +286,7 @@
                 @foreach($i as $ii)
                     <div class="col-lg-4">
                         <!-- BEGIN reviews -->
-                        <div class="card shadow mb-4">
+                        <div class="card border-0 shadow mb-4">
                             <div class="card-body h-250px">
                                 <div class="news">
                                     <div class="news-content">

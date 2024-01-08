@@ -23,11 +23,12 @@
         {
             font-family: "Roboto" !important;
         }
-            input:active, input:hover, input:focus
+            input:active, input:hover, input:focus, input, select, select:active, select:hover, select:focus, textarea, textarea:active, textarea:hover, textarea:focus
             {
                 outline: 0;
                 outline-offset: 0;
                 background-color: transparent;
+                border: none;
             }
 
             input:-webkit-autofill {
