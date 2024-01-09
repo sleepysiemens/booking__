@@ -175,7 +175,7 @@
                                                     <div class="container">
                                                         <p class="text-dark mb-0">21 января, вс</p>
                                                         <h2 class="fw-400 my-1 ff-montserrat">18:55</h2>
-                                                        <p class="text-dark fw-300 mt-0 fs-12px">Россия, Москва (MOW)</p>
+                                                        <p class="text-dark fw-300 mt-0">Россия, Москва (MOW)</p>
                                                     </div>
                                                 </div>
                                                 <div class="col d-none d-lg-block">
@@ -207,7 +207,7 @@
                                                         <div class="container">
                                                             <p class="text-dark mb-0">21 января, вс</p>
                                                             <h2 class="fw-400 my-1 ff-montserrat">06:55</h2>
-                                                            <p class="text-dark fw-300 mt-0 fs-12px">Россия, Москва (MOW)</p>
+                                                            <p class="text-dark fw-300 mt-0">Россия, Москва (MOW)</p>
                                                         </div>
                                                     </div>
                                                     <div class="col d-none d-lg-block">
@@ -248,7 +248,7 @@
                                                         <div class="container">
                                                             <p class="text-dark mb-0">21 января, вс</p>
                                                             <h2 class="fw-400 my-1 ff-montserrat">06:55</h2>
-                                                            <p class="text-dark fw-300 mt-0 fs-12px">Россия, Москва (MOW)</p>
+                                                            <p class="text-dark fw-300 mt-0">Россия, Москва (MOW)</p>
                                                         </div>
                                                     </div>
                                                     <div class="col d-none d-lg-block">

@@ -19,6 +19,10 @@ class MainController extends Controller
     public function booking()
     {
         return view('booking.index');
+    }
 
+    public function profile()
+    {
+        return view('profile.index');
     }
 }

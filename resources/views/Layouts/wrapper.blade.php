@@ -43,6 +43,30 @@
                 text-align: center;
             }
 
+            .info-banner
+            {
+                display: none;
+                transition: .3s;
+                opacity: 0;
+            }
+
+            .sec
+            {
+                display: none;
+                transition: .1s;
+                opacity: 1;
+            }
+
+            .sec-active
+            {
+                display: block;
+            }
+
+            .info:hover .info-banner
+            {
+                display: block;
+            }
+
             @media screen and (max-width: 1023px)
             {
                 .first_input, .brdr-b-l, .brdr-b-r

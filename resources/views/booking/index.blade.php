@@ -115,7 +115,7 @@
                                         <div class="container">
                                             <p class="text-dark mb-0">21 января, вс</p>
                                             <h2 class="fw-400 my-1 ff-montserrat">06:55</h2>
-                                            <p class="text-dark fw-300 mt-0 fs-12px">Россия, Москва (MOW)</p>
+                                            <p class="text-dark fw-300 mt-0">Россия, Москва (MOW)</p>
                                         </div>
                                     </div>
                                     <div class="col d-none d-lg-block">
@@ -163,7 +163,26 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="d-none justify-content-end text-black-200">
+                                    <div class="d-flex justify-content-end text-black-200 info position-relative">
+                                        <div class="card info-banner position-absolute w-100 bg-light" style="right: 200px">
+                                            <div class="card-body">
+                                                <h6 class="mb-2">Как заполнить данные</h6>
+                                                <p class="mb-0"><b>Общая информация</b></p>
+                                                <p>
+                                                    Данные для оформления брони билетов должны соответствовать документу пассажира, по которому он собирается путешествовать. При вводе данных все буквы должны быть написаны латиницей (в английской раскладке клавиатуры), без пробелов и дефисов. Двойная фамилия указывается слитно, без пробелов и дефисов.
+                                                </p>
+                                                <p class="mb-1"><b>Паспорт</b></p>
+                                                <ul>
+                                                    <li >
+                                                        <p class="mb-0">Написание как в документе 1234567890</p>
+                                                    </li>
+                                                    <li>
+                                                        <p>Срок действия паспорта (до какого годен) указывается при наличии</p>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
                                         <i class="far fa-question-circle my-auto"></i>
                                         <p class="my-auto ms-1">Как заполнить данные</p>
                                     </div>
@@ -293,7 +312,12 @@
                                 </div>
                             </div>
                             <div class="row mt-2">
-                                <div class="col d-flex fs-14px text-warning-400">
+                                <div class="col d-flex fs-14px text-warning-400 position-relative info cursor-pointer">
+                                    <div class="position-absolute card bg-black-300 bottom-100 border-0 opacity-90 w-100 info-banner" style="left: 0">
+                                        <div class="card-body">
+                                            <p class="text-white fs-12px m-0">После бронирования авиакомпания может уменьшить тайм-лимит по авиабилетам в одностороннем порядке.</p>
+                                        </div>
+                                    </div>
                                     <i class="fas fa-info-circle my-auto"></i>
                                     <p class="my-auto ms-2">Бронь действительна до 7 дней</p>
                                 </div>
