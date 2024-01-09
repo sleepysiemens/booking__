@@ -155,8 +155,8 @@
                         <div class="card-body">
                             <div class="row pb-3">
                                 <div class="col d-flex">
-                                    <div class="rounded-circle overflow-hidden bg-light w-45px h-45px my-auto d-flex">
-                                        <i class="fas fa-user m-auto text-black-100 fs-18px"></i>
+                                    <div class="rounded-circle overflow-hidden bg-light w-lg-45px h-lg-45px h-20px w-25px my-auto d-none d-lg-flex">
+                                        <i class="fas fa-user m-auto text-black-100 fs-18px "></i>
                                     </div>
                                     <div class="ms-3 d-flex">
                                         <h4 class="my-auto">1-пассажир, взрослый</h4>
