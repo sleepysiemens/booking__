@@ -108,12 +108,14 @@
                             <div class="row">
                                 <div class="col">
                                     <button class="d-flex btn btn-primary w-100 h-50px">
-                                        <p class="m-auto">Забронировать</p>
+                                        <p class="m-auto fs-12px d-block d-sm-none">Забронировать</p>
+                                        <p class="m-auto fs-16px d-none d-lg-block">Забронировать</p>
                                     </button>
                                 </div>
                                 <div class="col">
                                     <button class="d-flex btn btn-white border-2 w-100 h-50px">
-                                        <p class="m-auto">Пример брони (PDF)</p>
+                                        <p class="m-auto fs-12px d-block d-sm-none">Пример брони (PDF)</p>
+                                        <p class="m-auto fs-16px d-none d-lg-block">Пример брони (PDF)</p>
                                     </button>
                                 </div>
                             </div>
