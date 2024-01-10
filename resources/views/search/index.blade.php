@@ -114,16 +114,16 @@
                             <div class="container pt-2" id="flight">
                                 <p class="opacity-70">Вылет</p>
                                 <div class="row mb-3">
-                                    <input class="col-5 m-auto border-primary rounded py-2 fs-16px" type="time">
+                                    <input class="col-5 m-auto border border-primary rounded py-2 fs-16px" type="time">
                                     <p class="col-auto m-auto">-</p>
-                                    <input class="col-5 m-auto border-primary rounded py-2 fs-16px" type="time">
+                                    <input class="col-5 m-auto border border-primary rounded py-2 fs-16px" type="time">
                                 </div>
 
                                 <p class="opacity-70">Прибытие</p>
                                 <div class="row mb-3">
-                                    <input class="col-5 m-auto border-primary rounded py-2 fs-16px" type="time">
+                                    <input class="col-5 m-auto border border-primary rounded py-2 fs-16px" type="time">
                                     <p class="col-auto m-auto">-</p>
-                                    <input class="col-5 m-auto border-primary rounded py-2 fs-16px" type="time">
+                                    <input class="col-5 m-auto border border-primary rounded py-2 fs-16px" type="time">
                                 </div>
                             </div>
                         </div>

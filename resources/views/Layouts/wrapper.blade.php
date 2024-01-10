@@ -134,7 +134,7 @@
 
             .ff-montserrat
             {
-                font-family: 'Montserrat';
+                font-family: 'Montserrat' !important;
             }
     </style>
 
@@ -160,10 +160,10 @@
             <div class="header-nav">
                 <div class="container">
                     <div class="header-nav-item">
-                        <a href="#" class="header-nav-link">Тариф</a>
+                        <a href="{{route('tariff.index')}}" class="header-nav-link">Тариф</a>
                     </div>
                     <div class="header-nav-item">
-                        <a href="#" class="header-nav-link">Помощь</a>
+                        <a href="{{route('help.index')}}" class="header-nav-link">Помощь</a>
                     </div>
                     <div class="header-nav-item">
                         <a href="#" class="header-nav-link">Блог</a>

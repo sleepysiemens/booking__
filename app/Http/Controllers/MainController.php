@@ -25,4 +25,14 @@ class MainController extends Controller
     {
         return view('profile.index');
     }
+
+    public function tariff()
+    {
+        return view('tariff.index');
+    }
+
+    public function help()
+    {
+        return view('help.index');
+    }
 }
