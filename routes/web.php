@@ -22,3 +22,4 @@ Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tarif
 Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
 Route::get('/blog', 'App\Http\Controllers\MainController@blog')->name('blog.index');
 Route::get('/blog/page', 'App\Http\Controllers\MainController@blog_show')->name('blog.show');
+Route::get('/wait/{stage}', 'App\Http\Controllers\MainController@wait')->name('wait.index');

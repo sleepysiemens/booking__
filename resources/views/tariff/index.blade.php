@@ -67,7 +67,7 @@
                                                 <h3 class="ff-montserrat">699 ₽</h3>
                                                 <p class="fs-14px opacity-70">При оплате картой выпущенной банком РФ оплата в рублях</p>
                                             </div>
-                                            <div class="col-1 p-0 bg-black m-auto opacity-10 d-none d-lg-block" style="width: 2px; height: 120px"></div>
+                                            <div class="col-1 p-0 bg-black m-auto opacity-10 h-1" style="width: 2px; height: 120px"></div>
                                             <div class="col mx-2">
                                                 <p class="fw-500">При оплате в евро:</p>
                                                 <h3 class="ff-montserrat">14 €</h3>

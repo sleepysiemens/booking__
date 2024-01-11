@@ -44,4 +44,8 @@ class MainController extends Controller
     {
         return view('blog.show');
     }
+    public function wait($stage)
+    {
+        return view('wait.index', compact(['stage']));
+    }
 }
