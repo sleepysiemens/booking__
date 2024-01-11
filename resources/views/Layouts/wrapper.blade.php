@@ -166,7 +166,7 @@
                         <a href="{{route('help.index')}}" class="header-nav-link">Помощь</a>
                     </div>
                     <div class="header-nav-item">
-                        <a href="#" class="header-nav-link">Блог</a>
+                        <a href="{{route('blog.index')}}" class="header-nav-link">Блог</a>
                     </div>
                     <div class="header-nav-item">
                         <a href="#" class="header-nav-link">Отзывы</a>

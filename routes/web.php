@@ -20,3 +20,5 @@ Route::get('/search', 'App\Http\Controllers\MainController@search')->name('searc
 Route::get('/profile', 'App\Http\Controllers\MainController@profile')->name('profile.index');
 Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tariff.index');
 Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
+Route::get('/blog', 'App\Http\Controllers\MainController@blog')->name('blog.index');
+Route::get('/blog/page', 'App\Http\Controllers\MainController@blog_show')->name('blog.show');

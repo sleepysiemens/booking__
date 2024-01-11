@@ -35,4 +35,13 @@ class MainController extends Controller
     {
         return view('help.index');
     }
+
+    public function blog()
+    {
+        return view('blog.index');
+    }
+    public function blog_show()
+    {
+        return view('blog.show');
+    }
 }
