@@ -46,8 +46,8 @@
                                 </div>
                             </div>
                             @if($stage==3)
-                                <div class="col-12 col-lg-8 row justify-content-center my-3">
-                                    <div class="col-6 d-flex">
+                                <div class="row justify-content-center my-3">
+                                    <div class="col-lg-3 col-6 d-flex">
                                         <img class="w-100 opacity-70 m-auto" src="{{asset('img/four_check_star_mark_circles-ai.png')}}" alt="img">
                                     </div>
                                 </div>
