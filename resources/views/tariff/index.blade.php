@@ -3,7 +3,7 @@
 @section('content')
     <div class="section section-hero h-300px">
         <!-- BEGIN section-bg -->
-        <div class="section-bg with-cover" style="background-image: url(http://127.0.0.1:8000/img/top-view-tourist-items-with-copy-space.jpg);"></div>
+        <div class="section-bg with-cover" style="background-image: url({{asset('img/top-view-tourist-items-with-copy-space.jpg')}});"></div>
         <div class="section-bg bg-gray-800 bg-opacity-50"></div>
         <!-- END section-bg -->
 

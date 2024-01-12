@@ -48,4 +48,9 @@ class MainController extends Controller
     {
         return view('wait.index', compact(['stage']));
     }
+
+    public function ticket()
+    {
+        return view('ticket.index');
+    }
 }

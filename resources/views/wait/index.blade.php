@@ -3,7 +3,7 @@
 @section('content')
     <div class="section section-hero h-300px">
         <!-- BEGIN section-bg -->
-        <div class="section-bg with-cover" style="background-image: url(http://127.0.0.1:8000/img/top-view-tourist-items-with-copy-space.jpg);"></div>
+        <div class="section-bg with-cover" style="background-image: url({{asset('img/top-view-tourist-items-with-copy-space.jpg')}});"></div>
         <div class="section-bg bg-gray-800 bg-opacity-50"></div>
         <!-- END section-bg -->
 
@@ -51,7 +51,7 @@
                                     <div class="rounded-circle w-20px h-20px border border-3 border-primary">
                                     </div>
                                     <div class="position-absolute w-100px" style="right: -40px">
-                                        <p class="text-center fw-400 text-primary fs-16px mt-2">обработка заказа</p>
+                                        <p class="text-center fw-400 text-primary fs-16px mt-2">Обработка заказа</p>
                                     </div>
                                 </div>
 
@@ -64,7 +64,7 @@
                                     <div class="rounded-circle w-20px h-20px border border-3 @if($stage>1) border-primary @else border-black-100 @endif">
                                     </div>
                                     <div class="position-absolute w-100px" style="right: -40px">
-                                        <p class="text-center fw-400 @if($stage>1) text-primary @else text-black-100 @endif fs-16px mt-2">подготовка документов</p>
+                                        <p class="text-center fw-400 @if($stage>1) text-primary @else text-black-100 @endif fs-16px mt-2">Подготовка документов</p>
                                     </div>
                                 </div>
 
@@ -77,16 +77,23 @@
                                     <div class="rounded-circle w-20px h-20px border border-3 @if($stage>2) border-primary @else border-black-100 @endif">
                                     </div>
                                     <div class="position-absolute w-100px" style="right: -40px">
-                                        <p class="text-center fw-400 @if($stage>2) text-primary @else text-black-100 @endif  fs-16px mt-2">готово</p>
+                                        <p class="text-center fw-400 @if($stage>2) text-primary @else text-black-100 @endif  fs-16px mt-2">Готово</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row px-20px mt-5">
+                            <div class="row justify-content-center mt-5">
+                                <div class="col-12 col-lg-8">
+                                    <h4 class="text-center m-0 text-primary opacity-70">Обычно это занимает до 10 минут</h4>
+                                    <img class="w-100" src="{{asset('img/loading.jpg')}}" alt="img">
+                                </div>
+                            </div>
+
+                            <div class="row px-20px">
                                 <div class="col-12 p-0 bg-black m-auto opacity-10" style="height: 2px"></div>
                             </div>
 
-                            <div class="row mt-5 h-50px px-20px">
+                            <div class="row mt-5 mb-3 h-50px px-20px">
                                 @if($stage>2)
                                     <div class="col">
                                         <button class="d-flex btn btn-primary w-100 h-50px">

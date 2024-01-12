@@ -23,3 +23,4 @@ Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.inde
 Route::get('/blog', 'App\Http\Controllers\MainController@blog')->name('blog.index');
 Route::get('/blog/page', 'App\Http\Controllers\MainController@blog_show')->name('blog.show');
 Route::get('/wait/{stage}', 'App\Http\Controllers\MainController@wait')->name('wait.index');
+Route::get('/ticket', 'App\Http\Controllers\MainController@ticket')->name('ticket.index');
