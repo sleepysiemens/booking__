@@ -42,58 +42,69 @@
                             <div class="row justify-content-center mt-2">
                                 <div class="col-auto">
                                     <h1 class="text-center mb-3">Ожидание билета</h1>
-                                    <p class="text-center">Поздравляем! Вы забронировали билет</p>
+                                    <p class="text-center">Поздравляем! Вы забронировали билет.</p>
                                 </div>
                             </div>
+                            @if($stage==3)
+                                <div class="col-12 col-lg-8 row justify-content-center my-3">
+                                    <div class="col-6 d-flex">
+                                        <img class="w-100 opacity-70 m-auto" src="{{asset('img/four_check_star_mark_circles-ai.png')}}" alt="img">
+                                    </div>
+                                </div>
+                            @endif
                             <div class="row px-20px mt-3 justify-content-center pb-50px">
 
                                 <div class="col-auto p-0 position-relative">
-                                    <div class="rounded-circle w-20px h-20px border border-3 border-primary">
+                                    <div class="rounded-circle w-20px h-20px border border-3 @if($stage==3) border-green @else border-primary @endif ">
                                     </div>
                                     <div class="position-absolute w-100px" style="right: -40px">
-                                        <p class="text-center fw-400 text-primary fs-16px mt-2">Обработка заказа</p>
+                                        <p class="text-center fw-400 @if($stage==3) text-green @else text-primary @endif fs-16px mt-2">Обработка заказа</p>
                                     </div>
                                 </div>
 
                                 <div class="col-3 p-0 d-flex">
-                                    <div class="w-100 @if($stage>1) bg-primary @else bg-black-100 @endif my-auto" style="height: 3px">
+                                    <div class="w-100 @if($stage>1) @if($stage==3) bg-green @else bg-primary @endif @else bg-black-100 @endif my-auto" style="height: 3px">
                                     </div>
                                 </div>
 
                                 <div class="col-auto p-0 position-relative">
-                                    <div class="rounded-circle w-20px h-20px border border-3 @if($stage>1) border-primary @else border-black-100 @endif">
+                                    <div class="rounded-circle w-20px h-20px border border-3 @if($stage>1) @if($stage==3) border-green @else border-primary @endif @else  border-black-100 @endif">
                                     </div>
                                     <div class="position-absolute w-100px" style="right: -40px">
-                                        <p class="text-center fw-400 @if($stage>1) text-primary @else text-black-100 @endif fs-16px mt-2">Подготовка документов</p>
+                                        <p class="text-center fw-400 @if($stage>1) @if($stage==3) text-green @else text-primary @endif @else text-black-100 @endif fs-16px mt-2">Подготовка документов</p>
                                     </div>
                                 </div>
 
                                 <div class="col-3 p-0 d-flex">
-                                    <div class="w-100 @if($stage>2) bg-primary @else bg-black-100 @endif my-auto" style="height: 3px">
+                                    <div class="w-100 @if($stage>2) @if($stage==3) bg-green @else bg-primary @endif @else bg-black-100 @endif my-auto" style="height: 3px">
                                     </div>
                                 </div>
 
                                 <div class="col-auto p-0 position-relative">
-                                    <div class="rounded-circle w-20px h-20px border border-3 @if($stage>2) border-primary @else border-black-100 @endif">
+                                    <div class="rounded-circle w-20px h-20px border border-3 @if($stage>2) @if($stage==3) border-green @else border-primary @endif @else border-black-100 @endif">
                                     </div>
                                     <div class="position-absolute w-100px" style="right: -40px">
-                                        <p class="text-center fw-400 @if($stage>2) text-primary @else text-black-100 @endif  fs-16px mt-2">Готово</p>
+                                        <p class="text-center fw-400 @if($stage>2) @if($stage==3) text-green @else text-primary @endif @else text-black-100 @endif  fs-16px mt-2">Готово</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row justify-content-center mt-5">
-                                <div class="col-12 col-lg-8">
-                                    <h4 class="text-center m-0 text-primary opacity-70">Обычно это занимает до 10 минут</h4>
-                                    <img class="w-100" src="{{asset('img/loading.jpg')}}" alt="img">
-                                </div>
+                            <div class="row justify-content-center">
+                                @if($stage < 3)
+                                    <div class="col-12 col-lg-8 mt-5">
+                                        <h4 class="text-center m-0 text-primary opacity-70">Обычно это занимает до 10 минут.</h4>
+                                        <img class="w-100" src="{{asset('img/loading.jpg')}}" alt="img">
+                                    </div>
+                                @else
+                                    <div class="row px-20px mt-4">
+                                        <div class="col-12 p-0 bg-black m-auto opacity-10" style="height: 2px"></div>
+                                    </div>
+                                @endif
                             </div>
 
-                            <div class="row px-20px">
-                                <div class="col-12 p-0 bg-black m-auto opacity-10" style="height: 2px"></div>
-                            </div>
 
-                            <div class="row mt-5 mb-3 h-50px px-20px">
+
+                            <div class="row mt-4 mb-3 h-50px px-20px">
                                 @if($stage>2)
                                     <div class="col">
                                         <button class="d-flex btn btn-primary w-100 h-50px">
@@ -102,10 +113,10 @@
                                         </button>
                                     </div>
                                     <div class="col">
-                                        <button class="d-flex btn btn-white border-2 w-100 h-50px">
+                                        <a href="{{route('ticket.index')}}" class="d-flex btn btn-white border-2 w-100 h-50px">
                                             <p class="m-auto fs-12px d-block d-sm-none">Посмотреть билет</p>
                                             <p class="m-auto fs-16px d-none d-lg-block">Посмотреть билет</p>
-                                        </button>
+                                        </a>
                                     </div>
                                 @endif
                             </div>
