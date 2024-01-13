@@ -14,7 +14,7 @@ class TestController extends Controller
 
         $flightService = $travel->getFlightService();
         $flightService
-            ->setIp('212.164.38.195')
+            ->setIp($_SERVER['REMOTE_ADDR'])
             ->setHost('77.222.38.12')
             ->setMarker('36076')
             ->addPassenger('adults', 2)
