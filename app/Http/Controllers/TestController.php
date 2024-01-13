@@ -15,7 +15,7 @@ class TestController extends Controller
         $flightService = $travel->getFlightService();
         $flightService
             ->setIp($_SERVER['REMOTE_ADDR'])
-            ->setHost('77.222.38.12')
+            ->setHost('77-222-38-12.swtest.ru')
             ->setMarker('36076')
             ->addPassenger('adults', 2)
             ->addSegment('LED', 'MOW', '2024-02-02');
