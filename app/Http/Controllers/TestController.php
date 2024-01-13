@@ -19,6 +19,7 @@ class TestController extends Controller
             ->setMarker('36076')
             ->addPassenger('adults', 2)
             ->addSegment('LED', 'MOW', '2016-02-01');
+        dump($flightService);
         $searchData    = $flightService->search('ru', 'Y');
         $searchResults = $flightService->getSearchResults($searchData['search_id']);
     }
