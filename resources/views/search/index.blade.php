@@ -137,7 +137,7 @@
 
                 <div class="col-lg-9 pe-lg-0">
                     @php $cnt=0 @endphp
-                @foreach($i=[1,2,3,4,5,6] as $ii)
+                @foreach($flights as $flight)
                         <div class="card border-0 shadow mb-3">
                             <div class="card-body pb-lg-3 pb-5">
                                 <div class="row">
@@ -158,9 +158,10 @@
                                             <div class="row row-cols-lg-4 mt-3" >
                                                 <div class="col">
                                                     <div class="container">
-                                                        <p class="text-dark mb-0">21 января, вс</p>
-                                                        <h2 class="fw-400 my-1 ff-montserrat">18:25</h2>
-                                                        <p class="text-dark fw-300 mt-0">Россия, Новосибирск (OVB)</p>
+                                                        <p class="text-dark mb-0">{{$flight->getDepartDate()->format('d M, D')}}</p>
+                                                        <p class="text-dark mb-0"></p>
+                                                        <h2 class="fw-400 my-1 ff-montserrat">{{$flight->getDepartDate()->format('H:i')}}</h2>
+                                                        <p class="text-dark fw-300 mt-0">{{$flight->getOrigin()->getNameTranslations()['ru']}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col d-flex opacity-25">
@@ -173,22 +174,22 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="container">
-                                                        <p class="text-dark mb-0">21 января, вс</p>
-                                                        <h2 class="fw-400 my-1 ff-montserrat">18:55</h2>
-                                                        <p class="text-dark fw-300 mt-0">Россия, Москва (MOW)</p>
+                                                        <p class="text-dark mb-0">{{$flight->getReturnDate()->format('d M, D')}}</p>
+                                                        <h2 class="fw-400 my-1 ff-montserrat">{{$flight->getReturnDate()->format('H:i')}}</h2>
+                                                        <p class="text-dark fw-300 mt-0">{{$flight->getDestination()->getNameTranslations()['ru']}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col d-none d-lg-block">
                                                     <div class="container">
                                                         <p class="fw-500 mb-0">4 ч 30 мин</p>
                                                         <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                                        <p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>
+                                                        <p class="fw-400 fs-12px text-black-200">Рейс {{$flight->getFlightNumber()}}</p>
                                                     </div>
                                                 </div>
                                             </div>
 
                                         </div>
-                                        @if($ii%2==1)
+                                        @if($ii%2!=1)
                                             <div style="display: none" id="details-long-{{$cnt}}">
                                                 <div class="row row-cols-lg-4 mt-3" >
                                                     <div class="col">
@@ -272,10 +273,10 @@
                                                 <div class="d-lg-none">
                                                     <p class="fw-500 mb-0">4 ч 30 мин</p>
                                                     <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                                    <p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>
+                                                    <p class="fw-400 fs-12px text-black-200">Рейс {{$flight->getFlightNumber()}}</p>
                                                 </div>
                                                 <div class="row my-auto">
-                                                    <h2 class="fw-500 my-lg-1 fs-22px ff-montserrat text-lg-center text-end mt-lg-3">11 261 ₽</h2>
+                                                    <h2 class="fw-500 my-lg-1 fs-22px ff-montserrat text-lg-center text-end mt-lg-3">{{$flight->getValue()}} ₽</h2>
                                                 </div>
                                                 <div class="row mt-lg-5 d-flex position-relative">
                                                     <button class="btn-primary btn fs-12px h-55px m-auto">Забронировать</button>

@@ -11,11 +11,6 @@ class MainController extends Controller
         return view('main.index');
     }
 
-    public function search()
-    {
-        return view('search.index');
-    }
-
     public function booking()
     {
         return view('booking.index');
