@@ -25,7 +25,7 @@ class SearchController extends Controller
             ->setMarker('36076')
             ->addPassenger('adults', 2)
             ->addSegment('LED', 'MOW', '2024-02-02');
-        dd($flightService);
+        #dd($flightService);
         $searchData    = $flightService->search('ru', 'Y');
         $searchResults = $flightService->getSearchResults($searchData['search_id']);
 
