@@ -143,12 +143,14 @@
                                 <div class="row">
                                     <div class="col-lg">
                                         {{--HEADER--}}
-                                        <div class="d-flex">
-                                            <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
-                                                <img class="w-100 h-100" src="http://127.0.0.1:8000/img/SU.png" alt="avia">
+                                        @if($flight->getAirline()!=null)
+                                            <div class="d-flex">
+                                                <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
+                                                    <img class="w-100 h-100" src="{{asset('img/SU.png'.$flight->getAirline())}}" alt="avia">
+                                                </div>
+                                                <p class="m-auto ms-2">{{$flight->getAirline()}}</p>
                                             </div>
-                                            <p class="m-auto ms-2">Аэрофлот</p>
-                                        </div>
+                                        @endif
                                         {{--/HEADER--}}
                                         {{--BODY--}}
                                         @if($ii%2==1)
@@ -189,7 +191,7 @@
                                             </div>
 
                                         </div>
-                                        @if($ii%2!=1)
+                                        {{--@if($ii%2!=1)
                                             <div style="display: none" id="details-long-{{$cnt}}">
                                                 <div class="row row-cols-lg-4 mt-3" >
                                                     <div class="col">
@@ -261,7 +263,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
+                                        @endif--}}
                                         {{--/BODY--}}
                                     </div>
                                     <div class="col-1 p-0 bg-black opacity-20 d-none d-lg-block" style="width: 1px;"></div>

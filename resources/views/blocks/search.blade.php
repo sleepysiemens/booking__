@@ -4,7 +4,7 @@
         <div class="row col-12 col-lg-10 col-12 bg-white rounded rounded-1 p-0 ms-0 me-1">
             <fieldset class="first_input brdr-b-l p-0 col-1 h-60px m-0 col-lg col-6">
                 <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Откуда</legend>
-                <input class="bg-transparent border-0 ms-2 p-0 h-100" type="text" name="origin" value="LED">
+                <input class="bg-transparent border-0 ms-2 p-0 h-100" type="text" name="origin" required value="LED">
             </fieldset>
 
             <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
@@ -17,28 +17,28 @@
 
             <fieldset class="brdr-b-r p-0 col-1 h-60px m-0 col-lg col-6">
                 <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Куда</legend>
-                <input class="bg-transparent border-0 ms-2 p-0 h-100" type="text" name="destination" value="MOW">
+                <input class="bg-transparent border-0 ms-2 p-0 h-100" type="text" name="destination" required value="MOW">
 
             </fieldset>
             <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
 
             <fieldset class="first_input brdr-b-l p-0 col-1 h-60px m-0 col-lg col-6">
                 <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Дата туда</legend>
-                <input class="bg-transparent border-0 ms-2 p-0 h-100" style="width: 95%;" type="date" name="departDate">
+                <input class="bg-transparent border-0 ms-2 p-0 h-100" style="width: 95%;" type="date" required name="departDate">
 
             </fieldset>
             <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
 
             <fieldset class="brdr-b-r p-0 col-1 h-60px m-0 col-lg col-6">
                 <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Дата обратно</legend>
-                <input class="bg-transparent border-0 ms-2 p-0 h-100" style="width: 95%;" type="date" name="returnDate">
+                <input class="bg-transparent border-0 ms-2 p-0 h-100" style="width: 95%;" type="date" required name="returnDate">
 
             </fieldset>
             <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
 
             <fieldset class="first_input p-0 col-1 h-60px m-0 col-lg col-6">
                 <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Пассажиры, класс</legend>
-                <input class="bg-transparent border-0 ms-2 p-0 h-100" type="text" name="passenger">
+                <input class="bg-transparent border-0 ms-2 p-0 h-100" type="text" required name="passenger">
             </fieldset>
         </div>
         <div class="col w-25 d-flex p-0 bg-primary h-50px h-lg-60px">

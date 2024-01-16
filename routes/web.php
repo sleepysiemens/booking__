@@ -26,3 +26,7 @@ Route::get('/wait/{stage}', 'App\Http\Controllers\MainController@wait')->name('w
 Route::get('/ticket', 'App\Http\Controllers\MainController@ticket')->name('ticket.index');
 
 Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
+
+
+Route::get('/get_flights', 'App\Http\Controllers\SearchController@get_flights')->name('search.get_flights');
+Route::get('/get_search_link', 'App\Http\Controllers\SearchController@get_search_link')->name('search.get_search_link');
