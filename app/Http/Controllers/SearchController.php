@@ -21,7 +21,7 @@ class SearchController extends Controller
         $flightService = $travel->getFlightService();
         $flightService
             ->setIp($_SERVER['REMOTE_ADDR'])
-            ->setHost('kupitrip.online')
+            ->setHost('search.tripavia.com')
             ->setMarker('36076')
             ->addPassenger('adults', 2)
             ->addSegment('LED', 'MOW', '2024-02-02');
