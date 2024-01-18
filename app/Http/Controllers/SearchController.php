@@ -21,9 +21,9 @@ class SearchController extends Controller
         $flightService = $travel->getFlightService();
         $flightService
             ->setIp($_SERVER['REMOTE_ADDR'])
-            ->setHost('search.tripavia.com')
+            ->setHost('aviasales.ru')
             ->setMarker('36076')
-            ->addPassenger('adults', 2)
+            ->addPassenger('adults', 1)
             ->addSegment('LED', 'MOW', '2024-02-02');
         $searchData    = $flightService->search('ru', 'Y');
         $searchResults = $flightService->getSearchResults($searchData['search_id']);
