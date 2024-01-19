@@ -44,10 +44,9 @@ class SearchController extends Controller
 
         $options['json']['signature'] = $flightService->getSignature($options['json']);
 
+        dd($options);
+
         $searchData = $flightService->getClient()->setApiVersion('v1')->execute($url, $options, 'POST', false);
-
-        dd($searchData);
-
 
         $searchResults = $flightService->getSearchResults($searchData['search_id']);
 
