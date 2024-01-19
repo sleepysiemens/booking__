@@ -25,5 +25,5 @@ Route::get('/blog/page', 'App\Http\Controllers\MainController@blog_show')->name(
 Route::get('/wait/{stage}', 'App\Http\Controllers\MainController@wait')->name('wait.index');
 Route::get('/ticket', 'App\Http\Controllers\MainController@ticket')->name('ticket.index');
 
-Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
+Route::get('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
 
