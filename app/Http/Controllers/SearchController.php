@@ -38,7 +38,7 @@ class SearchController extends Controller
                 'locale'     => 'ru',
                 'trip_class' => 'Y',
                 'passengers' => ['adults'=>1],
-                'segments'   => [['origin'=>'LED', 'destination'=>'MOW', 'date'=>'2024-02-02']],
+                'segments'   => [['origin'=>'LED', 'destination'=>'MOW', 'date'=>'2024-02-02'], ['origin'=>'MOW', 'destination'=>'LED', 'date'=>'2024-04-02']],
             ],
         ];
 
