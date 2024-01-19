@@ -33,7 +33,7 @@ class SearchController extends Controller
         $options = [
             'json' => [
                 'marker'     => '36076',
-                'host'       => 'aviasales.ru',
+                'host'       => 'search.tripavia.com',
                 'user_ip'    => $_SERVER['REMOTE_ADDR'],
                 'locale'     => 'ru',
                 'trip_class' => 'Y',
