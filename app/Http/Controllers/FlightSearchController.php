@@ -90,20 +90,21 @@ class FlightSearchController extends Controller
         $travel = new Travel('048a44328dd6efc65b762b8e8c20e30a');
         $flightService = $travel->getFlightService();
         $signature = $flightService->getSignature($data);
+        //dd($signature);
 
         $data['signature']=$signature;
 
         try {
             $response = Http::post($url, $data);
 
+            // Выведите весь ответ для отладки
+            dump($response->body());
+
             // Получите тело ответа
             $body = $response->body();
 
             // Преобразуйте JSON-ответ в массив (если необходимо)
             $responseData = json_decode($body, true);
-
-            // Обработайте полученные данные по вашим потребностям
-            // ...
 
             // Верните данные в виде ответа
             return response()->json($responseData);
