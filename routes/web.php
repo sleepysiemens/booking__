@@ -29,4 +29,4 @@ Route::post('/test', 'App\Http\Controllers\FlightSearchController@searchFlights'
 Route::get('/search_new', 'App\Http\Controllers\FlightSearchController@searchRoutes')->name('search_new.index');
 Route::get('/search_new_new', 'App\Http\Controllers\FlightSearchController@flightSearch')->name('search_new_new.index');
 
-Route::get('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
+Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
