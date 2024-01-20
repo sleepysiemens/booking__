@@ -51,254 +51,16 @@
         <div class="container px-0">
             <!-- BEGIN row -->
             <div class="mb-5 row row-cols-lg-12 w-100 mx-auto">
-                {{--FILTER--}}
-                <div class="col-lg-3 col ps-lg-0 d-lg-block mb-3" id="filter-div">
-                    {{--Filter card--}}
-                    <div class="card border-0 shadow mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <p class="fs-16px col mb-0">Пересадки</p>
-                                <a class="col-2 text-black opacity-50 d-flex filter-btn cursor-pointer" id="transfer-btn">
-                                    <i class="fas fa-chevron-down m-auto"></i>
-                                </a>
-                            </div>
-                            <div class="container" id="transfer">
-                                @foreach($i=[1,2] as $ii)
-                                    <div class="row pt-3">
-                                        <input class="col-1 h-20px my-auto" type="checkbox" id="transfer-{{$ii}}">
-                                        <label class="col-auto" for="transfer-{{$ii}}"><p class="m-auto">Без пересадок</p></label>
-                                    </div>
-                                @endforeach
-
-                            </div>
-                        </div>
-                    </div>
-                    {{--/Filter card--}}
-
-                    {{--Filter card--}}
-                    <div class="card border-0 shadow mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <p class="fs-16px col mb-0">Авиакомпании</p>
-                                <a class="col-2 text-black opacity-50 d-flex filter-btn cursor-pointer" id="avia-btn">
-                                    <i class="fas fa-chevron-down m-auto"></i>
-                                </a>
-                            </div>
-                            <div class="container" id="avia">
-                                @foreach($i=[1,2] as $ii)
-                                    <div class="row pt-3">
-                                        <input class="col-1 h-20px my-auto" type="checkbox" id="company-{{$ii}}">
-                                        <label class="col-auto d-flex" for="company-{{$ii}}">
-                                            <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
-                                                <img class="w-100 h-100" src="{{asset('img/SU.png')}}" alt="avia">
-                                            </div>
-                                            <p class="m-auto ms-2">Аэрофлот</p>
-                                        </label>
-                                    </div>
-                                @endforeach
-
-                            </div>
-                        </div>
-                    </div>
-                    {{--/Filter card--}}
-
-                    {{--Filter card--}}
-                    <div class="card border-0 shadow mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <p class="fs-16px col mb-0">Вылет и прибытие</p>
-                                <a class="col-2 text-black opacity-50 d-flex filter-btn cursor-pointer" id="flight-btn">
-                                    <i class="fas fa-chevron-down m-auto"></i>
-                                </a>
-                            </div>
-                            <div class="container pt-2" id="flight">
-                                <p class="opacity-70">Вылет</p>
-                                <div class="row mb-3">
-                                    <input class="col-5 m-auto border border-primary rounded py-2 fs-16px" type="time">
-                                    <p class="col-auto m-auto">-</p>
-                                    <input class="col-5 m-auto border border-primary rounded py-2 fs-16px" type="time">
-                                </div>
-
-                                <p class="opacity-70">Прибытие</p>
-                                <div class="row mb-3">
-                                    <input class="col-5 m-auto border border-primary rounded py-2 fs-16px" type="time">
-                                    <p class="col-auto m-auto">-</p>
-                                    <input class="col-5 m-auto border border-primary rounded py-2 fs-16px" type="time">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{--/Filter card--}}
-                    <div class="container fs-16px text-primary">
-                        <a><i class="fas fa-times"></i> Сбросить фильтр</a>
-                    </div>
-                </div>
-                {{--/FILTER--}}
+                @include('blocks.search.filter')
 
                 <div class="col-lg-9 pe-lg-0">
-                    @php $cnt=0 @endphp
-                @foreach($flights as $flight)
-                        <div class="card border-0 shadow mb-3">
-                            <div class="card-body pb-lg-3 pb-5">
-                                <div class="row">
-                                    <div class="col-lg">
-                                        {{--HEADER--}}
-                                        @if($flight->getAirline()!=null)
-                                            <div class="d-flex">
-                                                <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
-                                                    <img class="w-100 h-100" src="{{asset('img/SU.png'.$flight->getAirline())}}" alt="avia">
-                                                </div>
-                                                <p class="m-auto ms-2">{{$flight->getAirline()}}</p>
-                                            </div>
-                                        @endif
-                                        {{--/HEADER--}}
-                                        {{--BODY--}}
-                                        @if($ii%2==1)
-                                            @php $cnt++ @endphp
-                                        @endif
-                                        <div style="display: block;" id="details-short-{{$cnt}}">
-                                            <div class="row row-cols-lg-4 mt-3" >
-                                                <div class="col">
-                                                    <div class="container">
-                                                        <p class="text-dark mb-0">{{$flight->getDepartDate()->format('d M, D')}}</p>
-                                                        <p class="text-dark mb-0"></p>
-                                                        <h2 class="fw-400 my-1 ff-montserrat">{{$flight->getDepartDate()->format('H:i')}}</h2>
-                                                        <p class="text-dark fw-300 mt-0">{{$flight->getOrigin()->getNameTranslations()['ru']}}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col d-flex opacity-25">
-                                                    <div class="bg-black w-100 my-auto position-relative" style="height: 2px">
-                                                        @if($ii%2==1)
-                                                            <div class="position-absolute bg-white m-auto rounded-circle border-2 border-black border" style="width: 10px; height: 10px; left: 0; right: 0; top: 0; bottom: 0"></div>
-                                                        @endif
-                                                    </div>
-                                                    <i class="fas fa-caret-right my-auto"></i>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="container">
-                                                        <p class="text-dark mb-0">{{$flight->getReturnDate()->format('d M, D')}}</p>
-                                                        <h2 class="fw-400 my-1 ff-montserrat">{{$flight->getReturnDate()->format('H:i')}}</h2>
-                                                        <p class="text-dark fw-300 mt-0">{{$flight->getDestination()->getNameTranslations()['ru']}}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col d-none d-lg-block">
-                                                    <div class="container">
-                                                        <p class="fw-500 mb-0">4 ч 30 мин</p>
-                                                        <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                                        <p class="fw-400 fs-12px text-black-200">Рейс {{$flight->getFlightNumber()}}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        {{--@if($ii%2!=1)
-                                            <div style="display: none" id="details-long-{{$cnt}}">
-                                                <div class="row row-cols-lg-4 mt-3" >
-                                                    <div class="col">
-                                                        <div class="container">
-                                                            <p class="text-dark mb-0">21 января, вс</p>
-                                                            <h2 class="fw-400 my-1 ff-montserrat">18:25</h2>
-                                                            <p class="text-dark fw-300 mt-0">Россия, Новосибирск (OVB)</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col d-flex opacity-25">
-                                                        <div class="bg-black w-100 my-auto position-relative" style="height: 2px">
-                                                        </div>
-                                                        <i class="fas fa-caret-right my-auto"></i>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="container">
-                                                            <p class="text-dark mb-0">21 января, вс</p>
-                                                            <h2 class="fw-400 my-1 ff-montserrat">06:55</h2>
-                                                            <p class="text-dark fw-300 mt-0">Россия, Москва (MOW)</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col d-none d-lg-block">
-                                                        <div class="container">
-                                                            <p class="fw-500 mb-0">4 ч 30 мин</p>
-                                                            <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                                            <p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="card bg-light border-light">
-                                                        <div class="card-body row text-black-200 py-2">
-                                                            <div class="col d-flex">
-                                                                <i class="far fa-clock my-auto"></i>
-                                                                <p class="m-0 my-auto ms-2">Пересадка</p>
-                                                            </div>
-                                                            <div class="col d-flex justify-content-end">
-                                                                <p class="m-0 my-auto">3 ч 20 мин</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row row-cols-lg-4 mt-3">
-                                                    <div class="col">
-                                                        <div class="container">
-                                                            <p class="text-dark mb-0">21 января, вс</p>
-                                                            <h2 class="fw-400 my-1 ff-montserrat">18:25</h2>
-                                                            <p class="text-dark fw-300 mt-0">Россия, Новосибирск (OVB)</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col d-flex opacity-25">
-                                                        <div class="bg-black w-100 my-auto position-relative" style="height: 2px">
-                                                        </div>
-                                                        <i class="fas fa-caret-right my-auto"></i>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="container">
-                                                            <p class="text-dark mb-0">21 января, вс</p>
-                                                            <h2 class="fw-400 my-1 ff-montserrat">06:55</h2>
-                                                            <p class="text-dark fw-300 mt-0">Россия, Москва (MOW)</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col d-none d-lg-block">
-                                                        <div class="container">
-                                                            <p class="fw-500 mb-0">4 ч 30 мин</p>
-                                                            <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                                            <p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif--}}
-                                        {{--/BODY--}}
-                                    </div>
-                                    <div class="col-1 p-0 bg-black opacity-20 d-none d-lg-block" style="width: 1px;"></div>
-                                    <div class="bg-black opacity-20 d-block d-lg-none w-100 mb-3" style="height: 1px;"></div>
-                                    {{--PRICE--}}
-                                    <div class="col-lg-3">
-                                        <div class="container h-100">
-                                            <div class="h-100 d-flex d-lg-block justify-content-between">
-                                                <div class="d-lg-none">
-                                                    <p class="fw-500 mb-0">4 ч 30 мин</p>
-                                                    <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                                    <p class="fw-400 fs-12px text-black-200">Рейс {{$flight->getFlightNumber()}}</p>
-                                                </div>
-                                                <div class="row my-auto">
-                                                    <h2 class="fw-500 my-lg-1 fs-22px ff-montserrat text-lg-center text-end mt-lg-3">{{$flight->getValue()}} ₽</h2>
-                                                </div>
-                                                <div class="row mt-lg-5 d-flex position-relative">
-                                                    <button class="btn-primary btn fs-12px h-55px m-auto">Забронировать</button>
-                                                    @if($ii%2==1)
-                                                        <div class="d-flex mt-lg-3 justify-content-center details mt-2">
-                                                            <a class="text-primary cursor-pointer w-100" onclick="details({{$cnt}})"><i class="fas fa-chevron-down filter-btn" id="details-btn-marker-{{$cnt}}"></i> Детали перелета</a>
-                                                        </div>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {{--/PRICE--}}
-                                </div>
-                            </div>
-                        </div>
-                @endforeach
+                    @php
+                        $cnt=0;
+                    @endphp
+                    @foreach($results as $result)
+                        @include('blocks.search.ticket')
+                    @endforeach
                 </div>
-
-            </div>
             <!-- END row -->
 
         </div>
@@ -359,7 +121,7 @@
         });
 
         let marker=[];
-
+        {{--
         for(let j=1; j<={{$cnt}}; j++)
         {
             marker[j]=0;
@@ -383,7 +145,7 @@
                 marker[cnt]--;
             }
         }
-
+--}}
     </script>
 @endsection
 
