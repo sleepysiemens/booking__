@@ -98,8 +98,8 @@ class OldSeachService
             ],
             'segments' => [
                 [
-                    'origin'      => $departure[1],
-                    'destination' => $arrival[1],
+                    'origin'      => $departure,
+                    'destination' => $arrival,
                     'date'        => date('Y-m-d', $start)
                 ]
             ]
@@ -117,7 +117,7 @@ class OldSeachService
 
         $query['signature'] = $this->getSignature($this->token, $query);
 
-        return($query);
+        //return($query);
 
         $result = json_decode(file_get_contents($this->api_search_id, false, stream_context_create([
             'http' => [
