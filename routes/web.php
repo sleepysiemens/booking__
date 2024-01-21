@@ -24,9 +24,7 @@ Route::get('/blog', 'App\Http\Controllers\MainController@blog')->name('blog.inde
 Route::get('/blog/page', 'App\Http\Controllers\MainController@blog_show')->name('blog.show');
 Route::get('/wait/{stage}', 'App\Http\Controllers\MainController@wait')->name('wait.index');
 Route::get('/ticket', 'App\Http\Controllers\MainController@ticket')->name('ticket.index');
-
-//Route::get('/test', 'App\Http\Controllers\FlightSearchController@searchFlights')->name('test.index');
-//Route::get('/search_new', 'App\Http\Controllers\FlightSearchController@searchRoutes')->name('search_new.index');
-//Route::get('/search_new_new', 'App\Http\Controllers\FlightSearchController@flightSearch')->name('search_new_new.index');
-
 Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
+
+
+Route::get('/test', 'App\Http\Controllers\TestController@test')->name('test.index');
