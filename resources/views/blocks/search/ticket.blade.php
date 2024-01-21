@@ -31,7 +31,7 @@
                             </div>
                             <div class="col d-flex opacity-25">
                                 <div class="bg-black w-100 my-auto position-relative" style="height: 2px">
-                                    <div class="position-absolute bg-white m-auto rounded-circle border-2 border-black border" style="width: 10px; height: 10px; left: 0; right: 0; top: 0; bottom: 0"></div>
+                                    {{--<div class="position-absolute bg-white m-auto rounded-circle border-2 border-black border" style="width: 10px; height: 10px; left: 0; right: 0; top: 0; bottom: 0"></div>--}}
                                 </div>
                                 <i class="fas fa-caret-right my-auto"></i>
                             </div>
@@ -137,12 +137,12 @@
                                 <p class="fw-400 fs-12px text-black-200">Рейс {{9}}</p>
                             </div>
                             <div class="row my-auto">
-                                <h2 class="fw-500 my-lg-1 fs-22px ff-montserrat text-lg-center text-end mt-lg-3">{{10}} ₽</h2>
+                                <h2 class="fw-500 my-lg-1 fs-22px ff-montserrat text-lg-center text-end mt-lg-3">{{$result['price']}} ₽</h2>
                             </div>
                             <div class="row mt-lg-5 d-flex position-relative">
                                 <button class="btn-primary btn fs-12px h-55px m-auto">Забронировать</button>
                                 <div class="d-flex mt-lg-3 justify-content-center details mt-2">
-                                    <a class="text-primary cursor-pointer w-100" onclick="details({{$cnt}})"><i class="fas fa-chevron-down filter-btn" id="details-btn-marker-{{$cnt}}"></i> Детали перелета</a>
+                                    {{--<a class="text-primary cursor-pointer w-100" onclick="details({{$cnt}})"><i class="fas fa-chevron-down filter-btn" id="details-btn-marker-{{$cnt}}"></i> Детали перелета</a>--}}
                                 </div>
                             </div>
                         </div>

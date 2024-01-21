@@ -17,14 +17,15 @@ class SearchController extends Controller
 
     public function search()
     {
-        $origin = 'NYC';
-        $destination = 'LON';
+        $origin = request('origin');
+        $destination = request('destination');
         //$departureDate = date('Y-m-d');
-        $departureDate = '2024-02-03';
-        $returnDate = '2024-02-06';
+        $departureDate = request('departDate');
+        $returnDate = request('returnDate');
 
         // Используйте сервис для выполнения запроса
         $result = $this->flightSearchService->searchFlights($origin, $destination, $departureDate);
+        //$result = $this->travelpayoutsService->searchRoutes($origin, $destination, $departureDate);
 
         // Обработка и возвращение данных по вашему усмотрению.
         $results=$result['data'][$destination];
