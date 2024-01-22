@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\AirportService;
+
 
 class MainController extends Controller
 {
     public function index()
     {
-        return view('main.index');
+        $airportService = new AirportService();
+
+        $airports = $airportService->getAllAirports();
+        //dd($airports[0]);
+        return view('main.index', compact('airports'));
     }
 
     public function booking()

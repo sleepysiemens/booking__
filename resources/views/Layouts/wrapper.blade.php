@@ -3,12 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <title>Color Admin | Home</title>
+    <scrpt src="{{asset ('js/app.js')}}" defer></scrpt>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
 
     <!-- ================== BEGIN core-css ================== -->
-    @vite(['resources/css/app.min.css', 'resources/css/vendor.min.css', 'resources/js/app.min.js', 'resources/js/vendor.min.js'])
+    @vite([
+    'resources/css/app.min.css',
+    'resources/css/vendor.min.css',
+    'resources/js/app.js',
+    'resources/js/app.min.js',
+    'resources/js/vendor.min.js',
+    ])
     <script src="{{'https://kit.fontawesome.com/0a007e12dc.js'}}" crossorigin="anonymous"></script>
     <script src={{"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"}}></script>
     <style>

@@ -14,6 +14,7 @@ class SearchController extends Controller
 
     public function search()
     {
+        dd(request()->all());
         $origin = request('origin');
         $destination = request('destination');
         //$departureDate = date('Y-m-d');
