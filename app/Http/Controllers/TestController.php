@@ -17,18 +17,16 @@ class TestController extends Controller
 
     public function test()
     {
-        //$result=$this->OldSeachService->get_search_link();
+        $result=$this->OldSeachService->get_search_link();
 
-        //$client = new Client();
-        //$response = $client->get("https://api.travelpayouts.com/v1/prices/cheap?origin={$origin}&destination={$destination}&depart_date={$departureDate}&token={$this->apiKey}");
+        $client = new Client();
 
-        //dd($result);
-
+        dd($result);
+/*
         $url = 'https://api.travelpayouts.com/v1/flight_search';
 
         $params =
             [
-                "signature"=> "b97bad81ba0f1f9f9994f0291c1e3123",
                 "marker"=> "36076",
                 "host"=> "tripavia.com",
                 "user_ip"=> "212.164.65.246",
@@ -62,7 +60,7 @@ class TestController extends Controller
         $data = $response->json();
 
 // Вывод результата
-        dd($status, $data);
+        dd($status, $data);*/
     }
 
 }
