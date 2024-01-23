@@ -17,7 +17,7 @@
                             </div>
                             <div class="col-auto d-flex">
                                 <p class="m-auto opacity-50">
-                                    {{result.code}}
+                                    {{result.airport_code}}
                                 </p>
                             </div>
                         </div>
@@ -53,7 +53,8 @@ export default {
             const data = window.airportsData || [];
             return data.filter(item => {
                 if (typeof item.name === 'string') {
-                    return item.name.toLowerCase().includes(query.toLowerCase());
+                    return item.code.toLowerCase().includes(query.toLowerCase());
+                    //return item.merged_values.includes(query.toLowerCase());
                 }
                 return false;
             });
@@ -61,7 +62,7 @@ export default {
         selectItem(itemName) {
             this.selectedResult = itemName.name;
             this.searchQuery = itemName.name;
-            this.searchQuery_ = itemName.code;
+            this.searchQuery_ = itemName.airport_code;
             this.isCardVisible = false;
         },
         showCard() {

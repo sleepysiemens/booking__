@@ -35,51 +35,73 @@ class AirportService
                 $cnt=0;
                 foreach ($airportData as $airport)
                 {
-                    if(isset($airport['name_translations']['ru']))
+                    //удалить жд вокзалы
+                    if($airport['iata_type']!='airport')
                     {
-                        $airport_name=$airport['name_translations']['ru'];
+                        //unset($airportData[$cnt]);
+                        $i=1;
                     }
                     else
                     {
-                        $airport_name=$airport['name'];
-                    }
-
-                    foreach ($cityData as $city)
-                    {
-                        if($city['code']==$airport['city_code'])
+                        //изменяем название аэропорта на русское
+                        if(isset($airport['name_translations']['ru']))
                         {
-                            if(isset($city['name_translations']['ru']))
-                            {
-                                $city_name=$city['name_translations']['ru'];
-                            }
-                            else
-                                $city_name=$city['name'];
-                            break;
+                            $airport_name=$airport['name_translations']['ru'];
                         }
-                    }
-
-                    foreach ($countryData as $country)
-                    {
-                        if($country['code']==$airport['country_code'])
+                        else
                         {
-                            if(isset($country['name_translations']['ru']))
-                            {
-                                $country_name=$country['name_translations']['ru'];
-                            }
-                            else
-                                $country_name=$country['name'];
-                            break;
+                            $airport_name=$airport['name'];
                         }
-                    }
-                    if($airport_name==null)
-                        $airport_name=$city_name;
-                    $airportData[$cnt]['name']=$airport_name;
-                    $airportData[$cnt]['city_name']=$city_name;
-                    $airportData[$cnt]['country_name']=$country_name;
 
-                    $cnt++;
+                        //берем название города на русском
+                        foreach ($cityData as $city)
+                        {
+                            if($city['code']==$airport['city_code'])
+                            {
+                                if(isset($city['name_translations']['ru']))
+                                {
+                                    $city_name=$city['name_translations']['ru'];
+                                }
+                                else
+                                    $city_name=$city['name'];
+                                break;
+                            }
+                        }
+
+                        //берем название страны на русском
+                        foreach ($countryData as $country)
+                        {
+                            if($country['code']==$airport['country_code'])
+                            {
+                                if(isset($country['name_translations']['ru']))
+                                {
+                                    $country_name=$country['name_translations']['ru'];
+                                }
+                                else
+                                    $country_name=$country['name'];
+                                break;
+                            }
+                        }
+                        if($airport_name==null)
+                            $airport_name=$city_name;
+
+                        $airportData[$cnt]['name']=$airport_name;
+                        $airportData[$cnt]['city_name']=$city_name;
+                        $airportData[$cnt]['country_name']=$country_name;
+                        $airportData[$cnt]['airport_code']=$airportData[$cnt]['code'];
+
+                        $airportData[$cnt]['code']=
+                            $airportData[$cnt]['name'].'/'.
+                            $airport['code'].'/'.
+                            $airportData[$cnt]['city_name'].'/'.
+                            $airport['city_code'].'/'.
+                            $airportData[$cnt]['country_name'].'/'.
+                            $airport['country_code'].'/'
+                        ;
+
+                        $cnt++;
+                    }
                 }
-
         //dd($airportData);
         return $airportData;
     }
