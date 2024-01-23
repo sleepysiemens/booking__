@@ -18,13 +18,7 @@ class FlightSearchService
     {
         $client = new Client();
         $response = $client->get("https://api.travelpayouts.com/v1/prices/cheap?origin={$origin}&destination={$destination}&depart_date={$departureDate}&token={$this->apiKey}");
-        /*$response = $client->get("https://api.travelpayouts.com/v2/prices/direct", [
-            'query' => [
-                'origin' => $origin,
-                'destination' => $destination,
-                'token' => '048a44328dd6efc65b762b8e8c20e30a',
-            ],
-        ]);*/
+
         return json_decode($response->getBody(), true);
     }
 }

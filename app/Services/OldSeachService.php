@@ -117,7 +117,7 @@ class OldSeachService
 
         $query['signature'] = $this->getSignature($this->token, $query);
 
-        //return($query);
+        return($query);
 
         $result = json_decode(file_get_contents($this->api_search_id, false, stream_context_create([
             'http' => [
