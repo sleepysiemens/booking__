@@ -22,6 +22,8 @@ class FlightSearchService
         $response = json_decode($response->getBody(), true);
         $response=$response['data'];
 
+        $result=[];
+
         foreach ($response as $item)
         {
             foreach ($item as $value)
