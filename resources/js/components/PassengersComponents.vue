@@ -1,7 +1,7 @@
 <template>
     <fieldset class="first_input p-0 col-1 h-60px m-0 col-lg col-6 position-relative">
         <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Пассажиры, класс</legend>
-        <input class="bg-transparent border-0 ms-2 p-0 h-100" name="passengers_amount" @click="toggleCard" type="text" v-model="total" readonly/>
+        <input class="bg-transparent border-0 ms-3 p-0 h-100" name="passengers_amount" @click="toggleCard" type="text" v-model="total" readonly/>
 
         <div class="card position-absolute mt-3 top-100 z-3" v-if="isCardVisible" ref="card" id="card">
             <ul class="list-group border-0">

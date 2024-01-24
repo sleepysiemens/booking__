@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 //
 
 Route::get('/', 'App\Http\Controllers\MainController@index')->name('main.index');
+Route::get('/test', 'App\Http\Controllers\MainController@test')->name('main.test');
 Route::get('/booking', 'App\Http\Controllers\MainController@booking')->name('booking.index');
 //Route::get('/search', 'App\Http\Controllers\MainController@search')->name('search.index');
 Route::get('/profile', 'App\Http\Controllers\MainController@profile')->name('profile.index');
@@ -27,4 +28,4 @@ Route::get('/ticket', 'App\Http\Controllers\MainController@ticket')->name('ticke
 Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
 
 
-Route::get('/test', 'App\Http\Controllers\TestController@test')->name('test.index');
+//Route::get('/test', 'App\Http\Controllers\TestController@test')->name('test.index');

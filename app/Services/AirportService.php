@@ -32,6 +32,7 @@ class AirportService
 
                 $countryData = json_decode($body, true);
 
+                $cities=[];
                 $cnt=0;
                 foreach ($airportData as $airport)
                 {
@@ -64,8 +65,22 @@ class AirportService
                                 }
                                 else
                                     $city_name=$city['name'];
+                                //break;
+
+                                $cities[]=
+                                    [
+                                        'city_code'=>$city['code'],
+                                        'country_code'=>$city['country_code'],
+                                        'time_zone'=>$city['time_zone'],
+                                        'code'=>$city['code'].'/'.$city['country_code'].$city_name,
+                                        'iata_type'=>'city',
+                                        'name'=>$city_name,
+                                        'city_name'=>$city['name'],
+                                        'airport_code'=>$city['code'],
+                                    ];
                                 break;
                             }
+
                         }
 
                         //берем название страны на русском
@@ -87,7 +102,7 @@ class AirportService
 
                         $airportData[$cnt]['name']=$airport_name;
                         $airportData[$cnt]['city_name']=$city_name;
-                        $airportData[$cnt]['country_name']=$country_name;
+                        //$airportData[$cnt]['country_name']=$country_name;
                         $airportData[$cnt]['airport_code']=$airportData[$cnt]['code'];
 
                         $airportData[$cnt]['code']=
@@ -95,15 +110,38 @@ class AirportService
                             $airport['code'].'/'.
                             $airportData[$cnt]['city_name'].'/'.
                             $airport['city_code'].'/'.
-                            $airportData[$cnt]['country_name'].'/'.
+                            //$airportData[$cnt]['country_name'].'/'.
                             $airport['country_code'].'/'
                         ;
 
                         $cnt++;
                     }
                 }
-        //dd($airportData);
-        return $airportData;
+        //dd($cities);
+        $cities = collect($cities)->unique()->all();
+                $cnt=0;
+                foreach ($cities as $city)
+                {
+                    foreach ($countryData as $country)
+                    {
+                        if($country['code']==$city['country_code'])
+                        {
+                            if(isset($country['name_translations']['ru']))
+                            {
+                                $country_name=$country['name_translations']['ru'];
+                            }
+                            else
+                                $country_name=$country['name'];
+                            break;
+                        }
+                    }
+
+                    $cities[$cnt]['country_name']=$country_name;
+                    $cnt++;
+                }
+
+        $result=array_merge($cities, $airportData);
+        return $result;
     }
 }
 ?>

@@ -1,14 +1,20 @@
 <template>
     <fieldset class="first_input brdr-b-l p-0 col-1 h-60px m-0 col-lg col-6 position-relative d-flex">
         <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Откуда</legend>
-        <input class="bg-transparent border-0 ms-2 p-0 h-100" v-model="searchQuery" @input="search" @focus="showCard" @blur="hideCard" type="text" name="origin" />
+        <input class="bg-transparent border-0 ms-3 p-0 h-100" v-model="searchQuery" @input="search" @focus="showCard" @blur="hideCard" type="text" name="origin" id="origin "/>
         <input type="hidden" name="origin_" v-model="searchQuery_">
         <div class="card position-absolute top-100 mt-3 search-origin-component overflow-y-scroll z-3" v-show="isCardVisible">
                 <ul class="list-group border-0">
                     <li class="list-group-item border-0 select-item border-bottom border-1" v-for="result in getDisplayResults()" :key="result.id" @click="selectItem(result)">
                         <div class="row">
                             <div class="col">
-                                <p class="mb-0">
+                                <div class="d-flex opacity-50" v-if="result.iata_type === 'airport'">
+                                    <i class="fas fa-plane-departure my-auto me-2"></i>
+                                    <p class="my-auto">
+                                        {{ result.name}}
+                                    </p>
+                                </div>
+                                <p class="mb-0" v-if="result.iata_type === 'city'">
                                     {{ result.name}}
                                 </p>
                                 <p class="m-0 fs-12px opacity-50">
@@ -116,7 +122,7 @@ export default {
 
 input
 {
-    width: 95%;
+    width: 90%;
     margin: auto!important;
 }
 </style>

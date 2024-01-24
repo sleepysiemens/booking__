@@ -1,7 +1,7 @@
 <template>
     <fieldset class="first_input brdr-b-l p-0 col-1 h-60px m-0 col-lg col-6 position-relative">
         <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Дата обратно</legend>
-        <input class="bg-transparent border-0 ms-2 p-0 h-100" style="width: 95%;" name="returnDate" type="text" v-model="selectedDate" @focus="toggleCalendar">
+        <input class="bg-transparent border-0 ms-3 p-0 h-100" style="width: 95%;" name="returnDate" type="text" v-model="selectedDate" @focus="toggleCalendar">
 
 
         <div class="card position-absolute top-100 mt-3 z-3" id="card" v-show="isCalendarVisible" @click.stop>
