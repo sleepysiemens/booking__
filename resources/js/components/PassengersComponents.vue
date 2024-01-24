@@ -1,9 +1,9 @@
 <template>
     <fieldset class="first_input p-0 col-1 h-60px m-0 col-lg col-6 position-relative">
         <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Пассажиры, класс</legend>
-        <input class="bg-transparent border-0 ms-2 p-0 h-100" name="passengers" @click="toggleCard" type="text" v-model="total" readonly/>
+        <input class="bg-transparent border-0 ms-2 p-0 h-100" name="passengers_amount" @click="toggleCard" type="text" v-model="total" readonly/>
 
-        <div class="card position-absolute mt-3 top-100" v-if="isCardVisible" ref="card" id="card">
+        <div class="card position-absolute mt-3 top-100 z-3" v-if="isCardVisible" ref="card" id="card">
             <ul class="list-group border-0">
                 <li class="list-group-item border-0 select-item">
 
@@ -17,7 +17,7 @@
                             <div @click="decrement(1)" class="col-4 d-flex bg-light rounded-circle text-black-200 p-0 btn">
                                 <i class="fas fa-minus m-auto"></i>
                             </div>
-                            <input name="adults" v-model="counter1" class="col-4"/>
+                            <input name="passengers[adults]" v-model="counter1" class="col-4"/>
                             <div @click="increment(1)" class="col-4 d-flex bg-light rounded-circle text-black-200 p-0 btn">
                                 <i class="fas fa-plus m-auto"></i>
                             </div>
@@ -38,7 +38,7 @@
                             <div @click="decrement(2)" class="col-4 d-flex bg-light rounded-circle text-black-200 p-0 btn">
                                 <i class="fas fa-minus m-auto"></i>
                             </div>
-                            <input name="children" v-model="counter2" class="col-4"/>
+                            <input name="passengers[children]" v-model="counter2" class="col-4"/>
                             <div @click="increment(2)" class="col-4 d-flex bg-light rounded-circle text-black-200 p-0 btn">
                                 <i class="fas fa-plus m-auto"></i>
                             </div>
@@ -59,7 +59,7 @@
                             <div @click="decrement(3)" class="col-4 d-flex bg-light rounded-circle text-black-200 p-0 btn">
                                 <i class="fas fa-minus m-auto"></i>
                             </div>
-                            <input name="infants" v-model="counter3" class="col-4"/>
+                            <input name="passengers[infants]" v-model="counter3" class="col-4"/>
                             <div @click="increment(3)" class="col-4 d-flex bg-light rounded-circle text-black-200 p-0 btn">
                                 <i class="fas fa-plus m-auto"></i>
                             </div>
@@ -72,12 +72,12 @@
             <div class="container pb-2">
                 <div class="row bg-light m-2 rounded-2 border-3 border border-light h-35px">
                     <label :class="{ 'active': selectedOption === 'option1' }" class="col-6 rounded-1 d-flex class-select">
-                        <input class="d-none" type="radio" name="class" value="0" @change="handleChange('option1')"checked>
+                        <input class="d-none" type="radio" name="trip_class" value="0" @change="handleChange('option1')" checked>
                         <p class="m-auto">Эконом</p>
                     </label>
 
                     <label :class="{ 'active': selectedOption === 'option2' }" class="col-6 rounded-1 d-flex class-select">
-                        <input class="d-none" type="radio" name="class" value="1" @change="handleChange('option2')">
+                        <input class="d-none" type="radio" name="trip_class" value="1" @change="handleChange('option2')">
                         <p class="m-auto">Бизнес</p>
                     </label>
                 </div>
@@ -92,10 +92,10 @@ export default {
         return {
             isCardVisible: false,
 
-            counter1: 1,
-            counter2: 0,
-            counter3: 0,
-            total: '1 пассажир',
+            counter1: window.requestData['passengers']['adults'],
+            counter2: window.requestData['passengers']['children'],
+            counter3: window.requestData['passengers']['infants'],
+            total: window.requestData['passengers_amount'],
 
             selectedOption: 'option1',
         };

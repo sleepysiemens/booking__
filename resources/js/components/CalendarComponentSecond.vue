@@ -1,10 +1,10 @@
 <template>
     <fieldset class="first_input brdr-b-l p-0 col-1 h-60px m-0 col-lg col-6 position-relative">
         <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Дата обратно</legend>
-        <input class="bg-transparent border-0 ms-2 p-0 h-100" style="width: 95%;" name="returnDate" type="text" v-model="selectedDate" @click="toggleCalendar">
+        <input class="bg-transparent border-0 ms-2 p-0 h-100" style="width: 95%;" name="returnDate" type="text" v-model="selectedDate" @focus="toggleCalendar">
 
 
-        <div class="card position-absolute top-100 mt-3" id="card" v-if="isCalendarVisible" @click.stop>
+        <div class="card position-absolute top-100 mt-3 z-3" id="card" v-show="isCalendarVisible" @click.stop>
             <div class="card-body">
                 <div class="row justify-content-between">
 
@@ -39,8 +39,13 @@
                     <div class="col-6">
                         <div class="calendar">
                             <div class="days">
-                                <div v-for="day in daysInMonth" :key="day" @click="selectDay(day)">
-                                    {{ day }}
+                                <div class="d-flex rounded-circle p-0 day"
+                                     v-for="day in daysInMonth"
+                                     :key="day"
+                                     @click="selectDay(day)"
+                                     :class="{ 'selected-day': isSelectedDay(day, 'currentMonth') }"
+                                >
+                                    <p class="m-auto">{{ day }}</p>
                                 </div>
                             </div>
                         </div>
@@ -49,8 +54,13 @@
                     <div class="col-6">
                         <div class="calendar">
                             <div class="days">
-                                <div v-for="day in daysInNextMonth" :key="day" @click="selectNextMonthDay(day)">
-                                    {{ day }}
+                                <div class="d-flex rounded-circle p-0 day"
+                                     v-for="day in daysInMonth"
+                                     :key="day"
+                                     @click="selectNextMonthDay(day)"
+                                     :class="{ 'selected-day': isSelectedDay(day, 'nextMonth') }"
+                                >
+                                    <p class="m-auto">{{ day }}</p>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +71,6 @@
         </div>
 
     </fieldset>
-    <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
 </template>
 
 <script>
@@ -69,7 +78,7 @@ export default {
     data() {
         return {
             isCalendarVisible: false,
-            selectedDate: '',
+            selectedDate: window.requestData['returnDate'],
             currentDate: new Date(),
         };
     },
@@ -103,26 +112,60 @@ export default {
 
             return days;
         },
+
+        selectedDays() {
+            // Преобразуем выбранную дату в массив выбранных дней
+            const selectedDate = new Date(this.selectedDate);
+            const selectedMonth = selectedDate.getMonth();
+            return {
+                currentMonth: selectedMonth === this.currentDate.getMonth()
+                    ? [selectedDate.getDate()]
+                    : [],
+                nextMonth: selectedMonth === this.currentDate.getMonth() + 1
+                    ? [selectedDate.getDate()]
+                    : [],
+            };
+        },
     },
     methods: {
         toggleCalendar() {
             this.isCalendarVisible = !this.isCalendarVisible;
+            if (this.isCalendarVisible) {
+                // Добавим слушатель клика к документу при открытии div
+                document.addEventListener('click', this.handleDocumentClick);
+            } else {
+                // Удалим слушатель клика к документу при закрытии div
+                document.removeEventListener('click', this.handleDocumentClick);
+            }
         },
+        handleDocumentClick(event) {
+            // Проверим, был ли клик внутри div, если нет, скроем div
+            if (!this.$el.contains(event.target)) {
+                this.toggleCalendar();
+            }
+        },
+
+
         selectDay(day) {
             const selectedDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day+1);
             this.selectedDate = selectedDate.toISOString().split('T')[0];
-            this.isCalendarVisible = false;
+            this.toggleCalendar();
         },
         selectNextMonthDay(day) {
             const selectedDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth()+1, day+1);
             this.selectedDate = selectedDate.toISOString().split('T')[0];
-            this.isCalendarVisible = false;
+            this.toggleCalendar();
         },
         prevMonth() {
             this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, 1);
         },
         nextMonth() {
             this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 1);
+        },
+
+        isSelectedDay(day, month) {
+            // Проверяем, является ли текущий день выбранным в указанном месяце
+            return this.selectedDays[month].includes(day);
         },
     },
 };
@@ -134,8 +177,8 @@ export default {
 <style scoped>
 .card
 {
-    width: 250%;
-    right: 0;
+    min-width: 250%;
+    left: 0;
 }
 
 .calend-btn
@@ -156,5 +199,38 @@ export default {
 .calendar .days div {
     padding: 5px;
     cursor: pointer;
+}
+
+.calendar .days div.selected-day {
+    background-color: #4caf50; /* Замените на желаемый цвет выделения */
+    color: #ffffff; /* Замените на желаемый цвет текста */
+}
+
+.day
+{
+    height: 26px;
+    width: 26px;
+}
+
+@media screen and (max-width: 1200px)
+{
+    width: 300% !important;
+}
+
+@media screen and (max-width: 500px)
+{
+    .card
+    {
+        width: 200%;
+        left: auto;
+        right: 0 !important;
+    }
+
+    .day
+    {
+        height: 20px;
+        width: 20px;
+    }
+
 }
 </style>

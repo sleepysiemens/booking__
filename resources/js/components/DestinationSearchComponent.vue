@@ -1,9 +1,9 @@
 <template>
     <fieldset class="first_input brdr-b-l p-0 col-1 h-60px m-0 col-lg col-6 position-relative d-flex">
         <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Куда</legend>
-        <input class="bg-transparent border-0 ms-2 p-0 h-100" v-model="searchQuery" @input="search" @click="showCard" type="text" name="destination" />
+        <input class="bg-transparent border-0 ms-2 p-0 h-100" v-model="searchQuery" @input="search" @click="showCard" @blur="hideCard" type="text" name="destination" />
         <input type="hidden" name="destination_" v-model="searchQuery_">
-        <div class="card position-absolute top-100 mt-3 search-origin-component overflow-y-scroll" v-show="isCardVisible">
+        <div class="card position-absolute top-100 mt-3 search-origin-component overflow-y-scroll z-3" v-show="isCardVisible">
             <ul class="list-group border-0">
                 <li class="list-group-item border-0 select-item border-bottom border-1" v-for="result in getDisplayResults()" :key="result.id" @click="selectItem(result)">
                     <div class="row">
@@ -32,8 +32,8 @@
 export default {
     data() {
         return {
-            searchQuery: '',
-            searchQuery_: '',
+            searchQuery: window.requestData['destination'],
+            searchQuery_: window.requestData['destination_'],
             searchResults: [],
             isCardVisible: false,
             selectedResult: '',
@@ -66,7 +66,12 @@ export default {
             this.isCardVisible = false;
         },
         showCard() {
-            this.isCardVisible = !this.isCardVisible;
+            this.isCardVisible = true;
+        },
+        hideCard() {
+            setTimeout(() => {
+                this.isCardVisible = false;
+            }, 200);
         },
         getDisplayResults() {
             // Возвращаем все результаты, если поле поиска пустое

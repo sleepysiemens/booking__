@@ -15,11 +15,12 @@ class SearchController extends Controller
 
     public function search()
     {
-        $airportService = new AirportService();
+        $request=request()->all();
+        //if($request[''])
 
+        $airportService = new AirportService();
         $airports = $airportService->getAllAirports();
 
-        //dd(request()->all());
         $origin = request('origin_');
         $destination = request('destination_');
         $departureDate = request('departDate');
@@ -32,6 +33,6 @@ class SearchController extends Controller
 
         //dd($results);
 
-        return view('search.index', compact(['results', 'origin', 'destination', 'airports']));
+        return view('search.index', compact(['results', 'origin', 'destination', 'airports', 'request']));
     }
 }
