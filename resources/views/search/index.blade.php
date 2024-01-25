@@ -69,7 +69,19 @@
     <!-- END section -->
 
 @endsection
+
 @section('scripts')
+            <script>
+                // Интегрируем массив напрямую в JavaScript
+                window.airportsData = @json($airports);
+                @if(isset($request))
+                    window.requestData = @json($request);
+                @else
+                    window.requestData = {req:' ',origin:'',origin_:'', destination:'', destination_:'', departDate:'', returnDate:'', passengers: {adults: 0, children: 0, infants: 0}, trip_class:0, passengers_amount: '1 пассажир'};
+                @endif
+                //console.log(window.requestData);
+            </script>
+
     <script>
         let transfer=0;
         $('#transfer-btn').on('click', function (){

@@ -16,7 +16,19 @@ class SearchController extends Controller
     public function search()
     {
         $request=request()->all();
-        //if($request[''])
+
+        if(!isset($request['passengers']))
+        {
+            $request['passengers']=
+                [
+                    'adults'=>1,
+                    'children'=>0,
+                    'infants'=>0,
+                ];
+            $request['trip_class']=0;
+        }
+
+        //dd($request);
 
         $airportService = new AirportService();
         $airports = $airportService->getAllAirports();
