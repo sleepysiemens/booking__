@@ -38,8 +38,8 @@
 export default {
     data() {
         return {
-            searchQuery: window.requestData['origin'],
-            searchQuery_: window.requestData['origin_'],
+            searchQuery: window.requestData['destination'],
+            searchQuery_: window.requestData['destination_'],
             searchResults: [],
             isCardVisible: false,
             selectedResult: '',
