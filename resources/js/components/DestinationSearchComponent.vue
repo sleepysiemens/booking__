@@ -38,8 +38,8 @@
 export default {
     data() {
         return {
-            searchQuery: window.requestData['destination'],
-            searchQuery_: window.requestData['destination_'],
+            searchQuery: window.requestData['origin'],
+            searchQuery_: window.requestData['origin_'],
             searchResults: [],
             isCardVisible: false,
             selectedResult: '',
@@ -52,7 +52,7 @@ export default {
         },
 
         search() {
-            if (typeof this.searchQuery === 'string') {
+            if (typeof this.searchQuery === 'string' && this.searchQuery.trim() !== '') {
                 this.searchResults = this.fakeSearch(this.searchQuery);
                 this.isCardVisible = true;
             } else {
@@ -62,13 +62,15 @@ export default {
         },
         fakeSearch(query) {
             const data = window.airportsData || [];
-            return data.filter(item => {
+            const filteredData = data.filter(item => {
                 if (typeof item.name === 'string') {
                     return item.code.toLowerCase().includes(query.toLowerCase());
-                    //return item.merged_values.includes(query.toLowerCase());
                 }
                 return false;
             });
+
+            // Ограничиваем результаты до первых 10 элементов
+            return filteredData.slice(0, 10);
         },
         selectItem(itemName) {
             this.selectedResult = itemName.name;
@@ -77,12 +79,16 @@ export default {
             this.isCardVisible = false;
         },
         showCard() {
-            this.isCardVisible = true;
+            // Проверяем, что поле ввода не пусто перед отображением списка
+            if (this.searchQuery.trim() !== '') {
+                this.isCardVisible = true;
+            }
         },
         hideCard() {
             setTimeout(() => {
                 this.isCardVisible = false;
-            }, 200);
+            }, 150);
+            //this.isCardVisible = false;
         },
         getDisplayResults() {
             // Возвращаем все результаты, если поле поиска пустое
