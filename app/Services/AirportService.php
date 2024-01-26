@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class AirportService
@@ -25,6 +26,15 @@ class AirportService
     }
 
     public function getAllAirports()
+    {
+        // Проверяем, есть ли кэш для этого массива
+        return Cache::remember('big_array_cache_key', now()->addHour(), function () {
+            // Если кэша нет, создаем массив и кэшируем его
+            return $this->generateAllAirports();
+        });
+    }
+
+    public function generateAllAirports()
     {
         $response = Http::get('https://api.travelpayouts.com/data/ru/airports.json', ['x-access-token:' => $this->apiKey]);
         $body = $response->body();
