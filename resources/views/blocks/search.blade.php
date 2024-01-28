@@ -7,13 +7,7 @@
             <airports-component></airports-component>
             <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
 
-            <calendar-component-first></calendar-component-first>
-
-            <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
-
-            <calendar-component-second></calendar-component-second>
-
-
+            <calendar-component></calendar-component>
             <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
 
             <passengers-component></passengers-component>

@@ -19,15 +19,13 @@ const app = createApp({});
 import OriginSearchComponent from './components/OriginSearchComponent.vue';
 import DestinationSearchComponent from "./components/DestinationSearchComponent.vue";
 import PassengersComponents from "./components/PassengersComponents.vue";
-import CalendarComponentFirst from "./components/CalendarComponentFirst.vue";
-import CalendarComponentSecond from "./components/CalendarComponentSecond.vue";
+import CalendarComponent from "./components/CalendarComponent.vue";
 import AirportsComponent from "./components/AirportsComponent.vue";
 
 app.component('origin-search-component', OriginSearchComponent);
 app.component('destination-search-component', DestinationSearchComponent);
 app.component('passengers-component', PassengersComponents);
-app.component('calendar-component-first', CalendarComponentFirst);
-app.component('calendar-component-second', CalendarComponentSecond);
+app.component('calendar-component', CalendarComponent);
 app.component('airports-component', AirportsComponent);
 
 /**

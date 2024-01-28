@@ -1,8 +1,15 @@
 <template>
-    <fieldset class="first_input brdr-b-l p-0 col-1 h-60px m-0 col-lg col-6 position-relative">
-        <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Дата туда</legend>
-        <input class="bg-transparent border-0 ms-3 p-0 h-100 input" style="width: 95%;" name="departDate" type="text" v-model="selectedDate" @focus="toggleCalendar" autocomplete="off">
+    <div class="m-0 col-auto row position-relative p-0">
+        <fieldset class="first_input brdr-b-l p-0 col-1 h-60px m-0 col-lg col-6 position-relative d-flex">
+            <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Дата туда</legend>
+            <input class="bg-transparent border-0 ms-3 p-0 h-100 input" style="width: 95%;" name="departDate" type="text" v-model="startDate" @focus="toggleStartDate" autocomplete="off">
+        </fieldset>
+        <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
 
+        <fieldset class="brdr-b-r p-0 col-1 h-60px m-0 col-lg col-6 position-relative d-flex">
+            <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Дата обратно</legend>
+            <input class="bg-transparent border-0 ms-3 p-0 h-100" style="width: 95%;" name="returnDate" type="text" v-model="endDate" @focus="toggleEndDate" autocomplete="off">
+        </fieldset>
 
         <div class="card position-absolute top-100 mt-3 z-3" id="card" v-show="isCalendarVisible" @click.stop>
             <div class="card-body">
@@ -40,10 +47,10 @@
                         <div class="calendar">
                             <div class="days">
                                 <div class="d-flex rounded-circle p-0 day"
-                                    v-for="day in daysInMonth"
-                                    :key="day"
-                                    @click="selectDay(day)"
-                                    :class="{ 'selected-day': isSelectedDay(day, 'currentMonth') }"
+                                     v-for="day in daysInMonth"
+                                     :key="day"
+                                     @click="selectDay(day)"
+                                     :class="{ 'selected-day': isSelectedDay(day, 'currentMonth') }"
                                 >
                                     <p class="m-auto">{{ day }}</p>
                                 </div>
@@ -55,10 +62,10 @@
                         <div class="calendar">
                             <div class="days">
                                 <div class="d-flex rounded-circle p-0 day"
-                                    v-for="day in daysInMonth"
-                                    :key="day"
-                                    @click="selectNextMonthDay(day)"
-                                    :class="{ 'selected-day': isSelectedDay(day, 'nextMonth') }"
+                                     v-for="day in daysInMonth"
+                                     :key="day"
+                                     @click="selectNextMonthDay(day)"
+                                     :class="{ 'selected-day': isSelectedDay(day, 'nextMonth') }"
                                 >
                                     <p class="m-auto">{{ day }}</p>
                                 </div>
@@ -70,7 +77,7 @@
             </div>
         </div>
 
-    </fieldset>
+    </div>
 </template>
 
 <script>
@@ -78,7 +85,10 @@ export default {
     data() {
         return {
             isCalendarVisible: false,
-            selectedDate: window.requestData['departDate'],
+            isStartDate: false,
+            isEndDate: false,
+            startDate: window.requestData['departDate'],
+            endDate: window.requestData['returnDate'],
             currentDate: new Date(),
         };
     },
@@ -115,21 +125,51 @@ export default {
 
         selectedDays() {
             // Преобразуем выбранную дату в массив выбранных дней
-            const selectedDate = new Date(this.selectedDate);
-            const selectedMonth = selectedDate.getMonth();
+            const startDate = new Date(this.startDate);
+            const endDate = new Date(this.endDate);
+            const selectedStartMonth = startDate.getMonth();
+            const selectedEndMonth = endDate.getMonth();
+
+            var currentMonth=[];
+            var nextMonth=[];
+
+            if(selectedStartMonth === this.currentDate.getMonth())
+            {
+                if(selectedEndMonth === this.currentDate.getMonth())
+                    currentMonth=[startDate.getDate(), endDate.getDate()];
+                else
+                    currentMonth=[startDate.getDate()];
+            }
+
+            if(selectedEndMonth === this.currentDate.getMonth()+1)
+            {
+                if(selectedStartMonth === this.currentDate.getMonth()+1)
+                    nextMonth=[endDate.getDate(), startDate.getDate()];
+                else
+                    nextMonth=[endDate.getDate()];
+            }
+
+
             return {
-                currentMonth: selectedMonth === this.currentDate.getMonth()
-                    ? [selectedDate.getDate()]
-                    : [],
-                nextMonth: selectedMonth === this.currentDate.getMonth() + 1
-                    ? [selectedDate.getDate()]
-                    : [],
+                currentMonth ,nextMonth
             };
         },
     },
     methods: {
+        toggleStartDate()
+        {
+            this.isStartDate=true;
+            this.isEndDate=false;
+            this.toggleCalendar();
+        },
+        toggleEndDate()
+        {
+            this.isEndDate=true;
+            this.isStartDate=false;
+            this.toggleCalendar();
+        },
         toggleCalendar() {
-            this.isCalendarVisible = !this.isCalendarVisible;
+            this.isCalendarVisible = true;
             if (this.isCalendarVisible) {
                 // Добавим слушатель клика к документу при открытии div
                 document.addEventListener('click', this.handleDocumentClick);
@@ -141,20 +181,25 @@ export default {
         handleDocumentClick(event) {
             // Проверим, был ли клик внутри div, если нет, скроем div
             if (!this.$el.contains(event.target)) {
-                this.toggleCalendar();
+                this.isCalendarVisible=false;
             }
         },
 
 
         selectDay(day) {
-            const selectedDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day+1);
-            this.selectedDate = selectedDate.toISOString().split('T')[0];
-            this.toggleCalendar();
+            const startDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day+1);
+            if(this.isStartDate===true)
+                this.startDate = startDate.toISOString().split('T')[0];
+            else
+                this.endDate = startDate.toISOString().split('T')[0];
+
         },
         selectNextMonthDay(day) {
-            const selectedDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth()+1, day+1);
-            this.selectedDate = selectedDate.toISOString().split('T')[0];
-            this.toggleCalendar();
+            const startDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth()+1, day+1);
+            if(this.isStartDate===true)
+                this.startDate = startDate.toISOString().split('T')[0];
+            else
+                this.endDate = startDate.toISOString().split('T')[0];
         },
         prevMonth() {
             this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, 1);
@@ -177,7 +222,7 @@ export default {
 <style scoped>
 .card
 {
-    width: 250%;
+    width: 100%;
     left: 0;
 }
 
@@ -220,16 +265,10 @@ export default {
 
 @media screen and (max-width: 1200px)
 {
-    width: 300% !important;
 }
 
 @media screen and (max-width: 500px)
 {
-    .card
-    {
-        width: 200%;
-    }
-
     .day
     {
         height: 20px;
