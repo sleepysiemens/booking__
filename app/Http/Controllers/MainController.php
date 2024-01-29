@@ -12,6 +12,7 @@ class MainController extends Controller
     {
         $airportService = new AirportService();
 
+        //$airports = $airportService->generateAllAirports();
         $airports = $airportService->getAllAirports();
         //dd($airports);
         return view('main.index', compact('airports'));
