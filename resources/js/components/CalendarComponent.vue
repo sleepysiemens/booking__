@@ -385,5 +385,10 @@ export default {
         width: 20px;
     }
 
+    .card
+    {
+        width: 100%;
+    }
+
 }
 </style>
