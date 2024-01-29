@@ -57,11 +57,15 @@
                     <div class="col-6">
                         <div class="calendar">
                             <div class="days">
-                                <div class="d-flex rounded-circle p-0 day"
+                                <div class="d-flex rounded-circle p-0 day mb-2"
                                      v-for="day in daysInMonth"
                                      :key="day"
                                      @click="selectDay(day)"
-                                     :class="{ 'selected-day': isSelectedDay(day, 'currentMonth') }"
+                                     :class="{
+                                         'selected-day': isSelectedDay(day, 'currentMonth'),
+                                         'between-days': isBetweenSelectedDates(day, 'currentMonth'),
+                                         'disabled': isInPast(day, 'currentMonth'),
+                                     }"
                                 >
                                     <p class="m-auto">{{ day }}</p>
                                 </div>
@@ -72,11 +76,15 @@
                     <div class="col-6">
                         <div class="calendar">
                             <div class="days">
-                                <div class="d-flex rounded-circle p-0 day"
-                                     v-for="day in daysInMonth"
+                                <div class="d-flex rounded-circle p-0 day mb-2"
+                                     v-for="day in daysInNextMonth"
                                      :key="day"
                                      @click="selectNextMonthDay(day)"
-                                     :class="{ 'selected-day': isSelectedDay(day, 'nextMonth') }"
+                                     :class="{
+                                         'selected-day': isSelectedDay(day, 'nextMonth'),
+                                         'between-days': isBetweenSelectedDates(day, 'nextMonth'),
+                                         'disabled': isInPast(day, 'nextMonth'),
+                                     }"
                                 >
                                     <p class="m-auto">{{ day }}</p>
                                 </div>
@@ -202,27 +210,44 @@ export default {
 
 
         selectDay(day) {
-            const startDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day+1);
-            if(this.isStartDate===true)
-            {
-                this.startDate = startDate.toISOString().split('T')[0];
-                this.$refs.end_date.focus();
-            }
-            else
-                this.endDate = startDate.toISOString().split('T')[0];
+            const startDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day + 1);
+            const currentDate = new Date();
 
-        },
-        selectNextMonthDay(day)
-        {
-            const startDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth()+1, day+1);
-            if(this.isStartDate===true)
+            if (startDate >= currentDate)
             {
-                this.startDate = startDate.toISOString().split('T')[0];
-                this.$refs.end_date.focus();
+                if (this.isStartDate)
+                {
+                    this.startDate = startDate.toISOString().split('T')[0];
+                    this.$refs.end_date.focus();
+                }
+                else
+                {
+                    if(startDate.toISOString().split('T')[0] >= this.startDate)
+                        this.endDate = startDate.toISOString().split('T')[0];
+                }
             }
-            else
-                this.endDate = startDate.toISOString().split('T')[0];
         },
+
+        selectNextMonthDay(day) {
+            const startDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, day + 1);
+            const currentDate = new Date();
+
+            if (startDate >= currentDate)
+            {
+                if (this.isStartDate)
+                {
+                    this.startDate = startDate.toISOString().split('T')[0];
+                    this.$refs.end_date.focus();
+                }
+                else
+                {
+                    if(startDate.toISOString().split('T')[0] >= this.startDate)
+                        this.endDate = startDate.toISOString().split('T')[0];
+                }
+            }
+        },
+
+
         prevMonth()
         {
             this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, 1);
@@ -236,6 +261,46 @@ export default {
         {
             // Проверяем, является ли текущий день выбранным в указанном месяце
             return this.selectedDays[month].includes(day);
+        },
+
+        isBetweenSelectedDates(day, month)
+        {
+            var currentDate;
+            if(month==='currentMonth')
+            {
+                currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day+1);
+            }
+            else
+            {
+                currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, day+1);
+            }
+            currentDate=currentDate.toISOString().split('T')[0];
+
+            if(this.endDate!=='не установлено')
+            {
+                if(currentDate>this.startDate&&currentDate<this.endDate)
+                    return true;
+            }
+            else
+            return false;
+        },
+
+        isInPast(day, month)
+        {
+            var Day;
+            if(month==='currentMonth')
+            {
+                Day = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day+1);
+            }
+            else
+            {
+                Day = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, day+1);
+            }
+
+            var currentDate = new Date();
+            Day=Day.toISOString().split('T')[0];
+            currentDate=currentDate.toISOString().split('T')[0];
+            return (Day < currentDate);
         },
 
         noEndDate()
@@ -279,8 +344,21 @@ export default {
 }
 
 .calendar .days div.selected-day {
-    background-color: #4caf50; /* Замените на желаемый цвет выделения */
+    background-color: var(--bs-app-theme);
     color: #ffffff; /* Замените на желаемый цвет текста */
+}
+
+.calendar .days div.between-days
+{
+    background-color: var(--bs-app-theme);
+    color: #ffffff; /* Замените на желаемый цвет текста */
+    opacity: .5;
+}
+
+.calendar .days div.disabled
+{
+    opacity: .5;
+    cursor: default;
 }
 
 .day
