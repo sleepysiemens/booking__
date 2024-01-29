@@ -8,11 +8,22 @@
 
         <fieldset class="brdr-b-r p-0 col-1 h-60px m-0 col-lg col-6 position-relative d-flex">
             <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Дата обратно</legend>
-            <input class="bg-transparent border-0 ms-3 p-0 h-100" style="width: 95%;" name="returnDate" type="text" v-model="endDate" @focus="toggleEndDate" autocomplete="off">
+            <input class="bg-transparent border-0 ms-3 p-0 h-100" style="width: 95%;" name="returnDate" type="text" v-model="endDate" @focus="toggleEndDate" ref="end_date" autocomplete="off">
         </fieldset>
 
-        <div class="card position-absolute top-100 mt-3 z-3" id="card" v-show="isCalendarVisible" @click.stop>
+        <div class="card position-absolute top-100 mt-3 z-3 p-0" id="card" v-show="isCalendarVisible" @click.stop>
             <div class="card-body">
+                <div class="row py-2 mb-4">
+                    <div class="col-6 d-flex">
+                        <h5 class="my-auto" v-show="isStartDate">Выберите дату отправления</h5>
+                        <h5 class="my-auto" v-show="isEndDate">Выберите дату возвращения</h5>
+                    </div>
+                    <div class="col-6">
+                        <a class="btn btn-primary d-flex" @click="noEndDate">
+                            <p class="m-auto">Обратный билет не нужен</p>
+                        </a>
+                    </div>
+                </div>
                 <div class="row justify-content-between">
 
                     <div class="col-6 row justify-content-start">
@@ -135,18 +146,22 @@ export default {
 
             if(selectedStartMonth === this.currentDate.getMonth())
             {
-                if(selectedEndMonth === this.currentDate.getMonth())
-                    currentMonth=[startDate.getDate(), endDate.getDate()];
-                else
-                    currentMonth=[startDate.getDate()];
+                currentMonth[0]=startDate.getDate();
+            }
+
+            if(selectedEndMonth === this.currentDate.getMonth())
+            {
+                currentMonth[1]=endDate.getDate();
+            }
+
+            if(selectedStartMonth === this.currentDate.getMonth()+1)
+            {
+                nextMonth[0]=startDate.getDate();
             }
 
             if(selectedEndMonth === this.currentDate.getMonth()+1)
             {
-                if(selectedStartMonth === this.currentDate.getMonth()+1)
-                    nextMonth=[endDate.getDate(), startDate.getDate()];
-                else
-                    nextMonth=[endDate.getDate()];
+                nextMonth[1]=endDate.getDate();
             }
 
 
@@ -189,28 +204,44 @@ export default {
         selectDay(day) {
             const startDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day+1);
             if(this.isStartDate===true)
+            {
                 this.startDate = startDate.toISOString().split('T')[0];
+                this.$refs.end_date.focus();
+            }
             else
                 this.endDate = startDate.toISOString().split('T')[0];
 
         },
-        selectNextMonthDay(day) {
+        selectNextMonthDay(day)
+        {
             const startDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth()+1, day+1);
             if(this.isStartDate===true)
+            {
                 this.startDate = startDate.toISOString().split('T')[0];
+                this.$refs.end_date.focus();
+            }
             else
                 this.endDate = startDate.toISOString().split('T')[0];
         },
-        prevMonth() {
+        prevMonth()
+        {
             this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, 1);
         },
-        nextMonth() {
+        nextMonth()
+        {
             this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 1);
         },
 
-        isSelectedDay(day, month) {
+        isSelectedDay(day, month)
+        {
             // Проверяем, является ли текущий день выбранным в указанном месяце
             return this.selectedDays[month].includes(day);
+        },
+
+        noEndDate()
+        {
+            this.endDate = 'не установлено';
+            this.isCalendarVisible = false;
         },
     },
 };
@@ -222,7 +253,8 @@ export default {
 <style scoped>
 .card
 {
-    width: 100%;
+    max-width: none;
+    width: 145%;
     left: 0;
 }
 
