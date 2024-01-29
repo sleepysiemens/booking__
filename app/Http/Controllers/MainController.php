@@ -23,7 +23,7 @@ class MainController extends Controller
         $airportService = new AirportService();
 
         $airports = $airportService->getAllAirports();
-        dd($airports);
+        //dd($airports);
         return view('main.index', compact('airports'));
     }
 
