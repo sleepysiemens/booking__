@@ -1,2 +1,1 @@
-User-agent: *
-Disallow: /search /test
+User-Agent: * Disallow: /search/
