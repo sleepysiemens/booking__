@@ -24,7 +24,7 @@
         "sizes": "default",
         "search_target": "_blank",
         "active_tab": "avia",
-        "search_host": "search.jetradar.com",
+        "search_host": "tripavia.com",
         "hotels_host": "search.hotellook.com",
         "hotel": "",
         "hotel_alt": null,
@@ -39,7 +39,7 @@
         "powered_by": true,
         "source_id": 170736,
         "id": 276955,
-        "marker": XXXXX,
+        "marker": 36076,
         "origin": {
             "name": ""
         },
@@ -61,7 +61,7 @@
             "locale": "en_us",
             "currency": "usd",
             "marker": 11501,
-            "search_host": "search.jetradar.com",
+            "search_host": "tripavia.com",
             "offers_switch": false,
             "api_url": "//minprices-jetradar.aviasales.ru/minimal_prices/offers.json",
             "routes": []
