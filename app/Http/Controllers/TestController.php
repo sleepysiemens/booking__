@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Http;
 
 class TestController extends Controller
 {
-    public function getAvailableTickets(Request $request)
+    public function getAvailableTickets()
     {
-        // Replace with your actual API key
+       /* // Replace with your actual API key
         $apiKey = '048a44328dd6efc65b762b8e8c20e30a';
 
         // Create an array to store query parameters
@@ -99,6 +99,7 @@ class TestController extends Controller
 
         dd($tickets);
 
-        return view('tickets.index', ['tickets' => $tickets]);
+        return view('tickets.index', ['tickets' => $tickets]);*/
+        return view('test');
     }
 }
