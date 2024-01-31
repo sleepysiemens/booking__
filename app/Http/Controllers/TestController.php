@@ -2,30 +2,88 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Nesk\Puphpeteer\Puppeteer;
+use Symfony\Component\Panther\Client;
+
 
 class TestController extends Controller
 {
     public function parseFlightInfo()
     {
-        $url = 'https://search.jetradar.com/flights/OVB0602MOW13021';
+// Создаем клиента Panther
+        $client = Client::createChromeClient();
 
-        // Используем Puphpeteer для выполнения запроса с поддержкой JavaScript
-        $puppeteer = new Puppeteer();
-        $browser = $puppeteer->launch();
-        $page = $browser->newPage();
-        $page->goto($url);
+        //$client = static::createPantherClient();
 
-        // Дождитесь, пока выполнится JavaScript (может потребоваться настройка времени ожидания)
-        // Пример: $page->waitForTimeout(3000);
+        $crawler = $client->request('GET', 'https://www.onetwotrip.com/ru/f/search/0702OVBMOW?sc=E&ac=1&srcmarker2=newindex');
 
-        // Получите содержимое страницы после выполнения JavaScript
-        $html = $page->content();
+        // Подождите некоторое время, чтобы данные подгрузились
+        $client->waitFor('.Vo739'); // Увеличьте время ожидания при необходимости
 
-        // Закройте браузер после использования
-        $browser->close();
+        // Теперь можно собирать данные, которые подгрузились в результате скролла
+        $tickets = $crawler->filter('.Vo739')->each(function ($node)
+        {
+            $depart_time = $node->filter('.QPp8j')->first()
+            ->each(function ($child)
+            {
+                return $child->text('', true);
+            });
+            //
+            $arrival_time = $node->filter('.QPp8j')->last()
+                ->each(function ($child)
+                {
+                    return $child->text('', true);
+                });
+            //
+            $airline=$node->filter('._7kfLX')
+                ->each(function ($child)
+                {
+                    return $child->text('', true);
+                });
+            //
+            $duration=$node->filter('.mBsCn')->filter('span')->first()
+                ->each(function ($child)
+                {
+                    return $child->text('', true);
+                });
+            //
+            $airline_logo=$node->filter('.NJzsX')
+                ->each(function ($child)
+                {
+                    return $child->getAttribute('background-image');
+                });
+            //
+            $price=$node->filter('._4-iO8')->filter('span')
+                ->each(function ($child)
+                {
+                    return $child->text('', true);
+                });
+            //
+            $origin=$node->filter('.QVkKQ')->first()
+                ->each(function ($child)
+                {
+                    return $child->text('', true);
+                });
+            //
+            $destination=$node->filter('.QVkKQ')->last()
+                ->each(function ($child)
+                {
+                    return $child->text('', true);
+                });
 
-        dd($html);
+            $ticket=
+                [
+                    'depart_time'=>$depart_time,
+                    'arrival_time'=>$arrival_time,
+                    'airline'=>$airline,
+                    'airline_logo'=>$airline_logo,
+                    'duration'=>$duration,
+                    'price'=>$price,
+                    'origin'=>$origin,
+                    'destination'=>$destination,
+                ];
+            return $ticket;
+        });
+
+        dd($tickets);
     }
 }

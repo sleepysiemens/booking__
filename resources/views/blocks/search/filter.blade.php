@@ -10,13 +10,14 @@
                 </a>
             </div>
             <div class="container" id="transfer">
-                @foreach($i=[1,2] as $ii)
                     <div class="row pt-3">
-                        <input class="col-1 h-20px my-auto" type="checkbox" id="transfer-{{$ii}}">
-                        <label class="col-auto" for="transfer-{{$ii}}"><p class="m-auto">Без пересадок</p></label>
+                        <input class="col-1 h-20px my-auto" type="checkbox" id="transfer-0" name="transfer" value="0">
+                        <label class="col-auto" for="transfer-0"><p class="m-auto">Без пересадок</p></label>
                     </div>
-                @endforeach
-
+                    <div class="row pt-3">
+                        <input class="col-1 h-20px my-auto" type="checkbox" id="transfer-1" name="transfer" value="1">
+                        <label class="col-auto" for="transfer-1"><p class="m-auto">С пересадками</p></label>
+                    </div>
             </div>
         </div>
     </div>
@@ -32,14 +33,16 @@
                 </a>
             </div>
             <div class="container" id="avia">
-                @foreach($i=[1,2] as $ii)
+                @php $ii=0; @endphp
+                @foreach($airlines_filter as $airline)
+                    @php $ii++; @endphp
                     <div class="row pt-3">
                         <input class="col-1 h-20px my-auto" type="checkbox" id="company-{{$ii}}">
                         <label class="col-auto d-flex" for="company-{{$ii}}">
                             <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
                                 <img class="w-100 h-100" src="{{asset('img/SU.png')}}" alt="avia">
                             </div>
-                            <p class="m-auto ms-2">Аэрофлот</p>
+                            <p class="m-auto ms-2">{{$airline['airline']}}</p>
                         </label>
                     </div>
                 @endforeach

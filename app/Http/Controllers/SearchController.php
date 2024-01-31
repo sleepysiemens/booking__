@@ -28,23 +28,18 @@ class SearchController extends Controller
             $request['trip_class']=0;
         }
 
-        //dd($request);
-
         $airportService = new AirportService();
         $airports = $airportService->getAllAirports();
 
-        $origin = request('origin_');
-        $destination = request('destination_');
-        $departureDate = request('departDate');
-        $returnDate = request('returnDate');
 
-        // Используйте сервис для выполнения запроса
-        $results = $this->flightSearchService->searchFlights($origin, $destination, $departureDate);
+        $results = $this->flightSearchService->parseFlightInfo($request['origin_'], $request['destination_'], $request['departDate']);
+
+        $airlines_filter=$this->flightSearchService->FilterAirlines($results);
 
         // Обработка и возвращение данных по вашему усмотрению.
 
-        //dd($results);
+        //dd($request['departDate']);
 
-        return view('search.index', compact(['results', 'origin', 'destination', 'airports', 'request']));
+        return view('search.index', compact(['results', 'airports', 'request', 'airlines_filter']));
     }
 }

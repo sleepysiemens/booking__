@@ -15,18 +15,9 @@
                         <div class="row row-cols-lg-4 mt-3" >
                             <div class="col">
                                 <div class="container">
-                                    @php
-                                        $dep_date=explode("T", $result['departure_at']);
-                                        $dep_time=explode('-', $dep_date[1]);
-                                        $dep_time=explode(':', $dep_time[0]);
-
-                                        $arr_date=explode("T", $result['return_at']);
-                                        $arr_time=explode('-', $arr_date[1]);
-                                        $arr_time=explode(':', $arr_time[0]);
-                                    @endphp
-                                    <p class="text-dark mb-0">{{$dep_date[0]}}</p>
-                                    <h2 class="fw-400 my-1 ff-montserrat">{{$dep_time[0]}}:{{$dep_time[1]}}</h2>
-                                    <p class="text-dark fw-300 mt-0">{{$origin}}</p>
+                                    <p class="text-dark mb-0">{{$request['departDate']}}</p>
+                                    <h2 class="fw-400 my-1 ff-montserrat">{{$result['depart_time']}}</h2>
+                                    <p class="text-dark fw-300 mt-0">{{$result['origin']}}</p>
                                 </div>
                             </div>
                             <div class="col d-flex opacity-25">
@@ -37,21 +28,22 @@
                             </div>
                             <div class="col">
                                 <div class="container">
-                                    <p class="text-dark mb-0">{{$arr_date[0]}}</p>
-                                    <h2 class="fw-400 my-1 ff-montserrat">{{$arr_time[0]}}:{{$arr_time[1]}}</h2>
-                                    <p class="text-dark fw-300 mt-0">{{$destination}}</p>
+                                    <p class="text-dark mb-0">{{$request['departDate']}}</p>
+                                    <h2 class="fw-400 my-1 ff-montserrat">{{$result['arrival_time']}}</h2>
+                                    <p class="text-dark fw-300 mt-0">{{$result['destination']}}</p>
                                 </div>
                             </div>
                             <div class="col d-none d-lg-block">
                                 <div class="container">
-                                    <p class="fw-500 mb-0">4 ч 30 мин</p>
+                                    <p class="fw-500 mb-0">{{$result['duration']}}</p>
                                     <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                    <p class="fw-400 fs-12px text-black-200">Рейс {{8}}</p>
+                                    {{--<p class="fw-400 fs-12px text-black-200">Рейс {{8}}</p>--}}
                                 </div>
                             </div>
                         </div>
 
                     </div>
+                    {{--DETAILS--}}
                     <div style="display: none" id="details-long-{{$cnt}}">
                         <div class="row row-cols-lg-4 mt-3" >
                             <div class="col">
@@ -123,6 +115,7 @@
                             </div>
                         </div>
                     </div>
+
                     {{--/BODY--}}
                 </div>
                 <div class="col-1 p-0 bg-black opacity-20 d-none d-lg-block" style="width: 1px;"></div>
