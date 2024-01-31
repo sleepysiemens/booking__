@@ -14,7 +14,8 @@ class FlightSearchService
 
         $depart_date=date('dm',strtotime($depart_date));
 
-        $crawler = $client->request('GET', 'https://www.onetwotrip.com/ru/f/search/'.$depart_date.$origin.$destination.'?sc=E&ac=1&srcmarker2=newindex');
+        //$crawler = $client->request('GET', 'https://www.onetwotrip.com/ru/f/search/'.$depart_date.$origin.$destination.'?sc=E&ac=1&srcmarker2=newindex');
+        $crawler = $client->request('GET', 'https://www.onetwotrip.com/ru/f/search/0202LEDMOW?sc=E&ac=1&srcmarker2=newindex');
 
         // Подождите некоторое время, чтобы данные подгрузились
         $client->waitFor('.Vo739'); // Увеличьте время ожидания при необходимости
