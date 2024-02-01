@@ -10,7 +10,7 @@ class FlightSearchService
     public function parseFlightInfo($origin, $destination, $depart_date)
     {
         // Создаем клиента Panther
-        $client = Client::createChromeClient('/usr/bin/chromium-browser', ['--headless', '--disable-gpu'], [], 'http://localhost');
+        $client = Client::createChromeClient('/usr/bin/chromium-browser', null, ['--headless', '--disable-gpu'], 'http://localhost');
         //$client = Client::createFirefoxClient();
         $depart_date=date('dm',strtotime($depart_date));
 
