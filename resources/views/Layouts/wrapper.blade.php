@@ -2,7 +2,7 @@
 <html lang="en" class="overflow-x-hidden">
 <head>
     <meta charset="utf-8" />
-    <title>Color Admin | Home</title>
+    <title>Trip Avia | Home</title>
     <scrpt src="{{asset ('js/app.js')}}" defer></scrpt>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
@@ -157,11 +157,12 @@
 <div id="app">
 
     <!-- BEGIN header -->
+    @yield('overlay')
     <div class="header header-float">
         <div class="container d-flex">
             <div class="header-logo">
                 <a href="{{asset(route('main.index'))}}" class="logo-link">
-                    <span class="logo"></span><b>ColorAdmin</b> <small>CORPORATE</small>
+                    <span class="logo"></span><b>TripAvia</b> <small>CORPORATE</small>
                 </a>
             </div>
             <div class="header-nav">
@@ -176,7 +177,7 @@
                         <a href="{{route('blog.index')}}" class="header-nav-link">Блог</a>
                     </div>
                     <div class="header-nav-item">
-                        <a href="#" class="header-nav-link">Отзывы</a>
+                        <a href="{{route('reviews.index')}}" class="header-nav-link">Отзывы</a>
                     </div>
                 </div>
             </div>
@@ -198,11 +199,10 @@
             <div class="row gx-5">
                 <div class="col-lg-3 mb-4 mb-lg-0">
                     <div class="footer-logo">
-                        <span class="footer-logo-text">ColorAdmin <small>CORPORATE</small></span>
+                        <span class="footer-logo-text">TripAvia <small>CORPORATE</small></span>
                     </div>
                     <p class="footer-desc">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in orci felis. Phasellus id urna nunc. Nulla sed nibh at libero tincidunt scelerisque sed porttitor lectus.
-                    </p>
+                        Ваш надежный партнер в организации поездок. Откройте мир с нашим сервисом по поиску и бронированию авиабилетов для визы. Наши инструменты помогут вам найти оптимальные варианты перелетов, а заботливая поддержка обеспечит беззаботное путешествие.                    </p>
                     <h4 class="footer-title">Мы в социальных сетях</h4>
                     <div class="row">
                         <div class="footer-media-list col-6">

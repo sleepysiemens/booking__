@@ -64,4 +64,9 @@ class MainController extends Controller
     {
         return view('ticket.index');
     }
+
+    public function reviews()
+    {
+        return view('reviews.index');
+    }
 }
