@@ -21,12 +21,14 @@ import DestinationSearchComponent from "./components/DestinationSearchComponent.
 import PassengersComponents from "./components/PassengersComponents.vue";
 import CalendarComponent from "./components/CalendarComponent.vue";
 import AirportsComponent from "./components/AirportsComponent.vue";
+import RatingComponent from "./components/RatingComponent.vue";
 
 app.component('origin-search-component', OriginSearchComponent);
 app.component('destination-search-component', DestinationSearchComponent);
 app.component('passengers-component', PassengersComponents);
 app.component('calendar-component', CalendarComponent);
 app.component('airports-component', AirportsComponent);
+app.component('rating-component', RatingComponent);
 
 /**
  * The following block of code may be used to automatically register your

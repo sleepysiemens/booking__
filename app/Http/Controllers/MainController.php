@@ -46,15 +46,6 @@ class MainController extends Controller
     {
         return view('help.index');
     }
-
-    public function blog()
-    {
-        return view('blog.index');
-    }
-    public function blog_show()
-    {
-        return view('blog.show');
-    }
     public function wait($stage)
     {
         return view('wait.index', compact(['stage']));
@@ -63,10 +54,5 @@ class MainController extends Controller
     public function ticket()
     {
         return view('ticket.index');
-    }
-
-    public function reviews()
-    {
-        return view('reviews.index');
     }
 }

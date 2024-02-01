@@ -35,9 +35,9 @@
                 <p class="opacity-70 text-black text-decoration-underline">
                     <a class="text-black" href="{{route('main.index')}}">Главная</a>
                     /
-                    <a class="text-black" href="{{route('blog.index')}}">Блог</a>
+                    <a class="text-black" href="{{route('blog.index', 1)}}">Блог</a>
                     /
-                    <a class="text-black" href="{{route('blog.show')}}">Что такое виза цифрового кочевника?</a>
+                    <a class="text-black" href="{{route('blog.show', 1)}}">Что такое виза цифрового кочевника?</a>
                 </p>
             </div>
             <div class="row my-2">
@@ -153,7 +153,7 @@
             <div class="row">
                 @for($i=1; $i<=3; $i++)
                     <div class="col-lg-4 col-12 mb-3">
-                        <a href="{{asset(route('blog.show'))}}" class="card shadow border-0 overflow-hidden cursor-pointer">
+                        <a href="{{asset(route('blog.show', 1))}}" class="card shadow border-0 overflow-hidden cursor-pointer">
                             <div class="card-header w-100 h-200px overflow-hidden p-0">
                                 <img class="w-100 h-100 object-fit-cover" src="{{asset('img/top-view-tourist-items-with-copy-space.jpg')}}" alt="img">
                             </div>

@@ -174,7 +174,7 @@
                         <a href="{{route('help.index')}}" class="header-nav-link">Помощь</a>
                     </div>
                     <div class="header-nav-item">
-                        <a href="{{route('blog.index')}}" class="header-nav-link">Блог</a>
+                        <a href="{{route('blog.index', 1)}}" class="header-nav-link">Блог</a>
                     </div>
                     <div class="header-nav-item">
                         <a href="{{route('reviews.index')}}" class="header-nav-link">Отзывы</a>
@@ -218,7 +218,7 @@
                     <div class="col mb-4 mb-lg-0">
                         <h4 class="footer-title">Помощь</h4>
                         <ul class="footer-link-list">
-                            <li><a href="#">Частозадаваемые вопросы</a></li>
+                            <li><a href="{{route('help.index')}}">Частозадаваемые вопросы</a></li>
                         </ul>
                         <br>
                         <h4 class="footer-title">Сотрудничество</h4>
@@ -229,9 +229,9 @@
                     <div class="col mb-4 mb-lg-0 ps-5">
                         <h4 class="footer-title">Клиентам</h4>
                         <ul class="footer-link-list">
-                            <li><a href="#">Тариф</a></li>
-                            <li><a href="#">Блог</a></li>
-                            <li><a href="#">Отзывы</a></li>
+                            <li><a href="{{route('tariff.index')}}">Тариф</a></li>
+                            <li><a href="{{route('blog.index', 1)}}">Блог</a></li>
+                            <li><a href="{{route('reviews.index')}}">Отзывы</a></li>
                         </ul>
                     </div>
                 </div>
