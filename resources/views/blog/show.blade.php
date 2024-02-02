@@ -37,7 +37,7 @@
                     /
                     <a class="text-black" href="{{route('blog.index', 1)}}">Блог</a>
                     /
-                    <a class="text-black" href="{{route('blog.show', 1)}}">Что такое виза цифрового кочевника?</a>
+                    <a class="text-black" href="{{route('blog.show',$post->id)}})}}">{{$post->title}}</a>
                 </p>
             </div>
             <div class="row my-2">
@@ -52,40 +52,28 @@
                             <div class="row">
                                 <div class="col-auto pe-0">
                                     <span class="btn btn-light border-0 d-flex">
-                                        <p class="m-auto text-black fw-300 opacity-50 fs-12px">Визовый режим</p>
+                                        <p class="m-auto text-black fw-300 opacity-50 fs-12px">{{$categories[($post->category)-1]->name}}</p>
                                     </span>
                                 </div>
                                 <div class="col-auto d-flex">
-                                    <p class="text-black-200 fs-12px m-auto">27 декабря</p>
+                                    <p class="text-black-200 fs-12px m-auto">{{date("d M",strtotime($post->created_at))}}</p>
                                 </div>
                             </div>
 
                             <div class="row mt-3">
                                 <div class="display-6 fw-bolder mb-3 d-flex align-items-center justify-content-start">
-                                    Что такое виза цифрового кочевника?
+                                    {{$post->title}}
                                 </div>
                             </div>
 
                             <div class="row px-2">
-                                <img class="p-0 rounded-2 rounded" src="{{asset('img/top-view-tourist-items-with-copy-space.jpg')}}" alt="img">
+                                <img class="p-0 rounded-2 rounded" src="{{asset('img/blog/'.$post->image)}}" alt="img">
                             </div>
 
                             <div class="row mt-5">
                                 <div class="col">
                                     <p class="fs-16px px-2">
-                                        Виза цифрового кочевника страны – это инновационная и перспективная инициатива, которая открывает новые возможности для глобальной мобильности и работы удаленно. В современном мире все больше людей предпочитают работать в онлайн-среде, не привязываясь к определенному месту проживания. Виза цифрового кочевника позволяет этим людям свободно перемещаться по разным странам, сохраняя свою работу и доход.
-                                    </p>
-                                    <p class="fs-16px px-2">
-                                        Цифровые кочевники – это профессионалы в области информационных технологий, фрилансеры или представители современных стартапов, которые основную часть своей работы выполняют через интернет. Они не зависят от офисного пространства и готовы работать из любой точки мира.
-                                    </p>
-                                    <p class="fs-16px px-2">
-                                        Виза цифрового кочевника страны позволяет им легально пребывать в других государствах на определенный срок для работы или бизнес-деятельности. Это создает благоприятные условия для развития международной коллаборации и обмена знаниями.
-                                    </p>
-                                    <p class="fs-16px px-2">
-                                        Такая виза имеет ряд преимуществ. Во-первых, она способствует привлечению талантливых профессионалов и инноваторов из разных стран, что стимулирует экономический рост и развитие. Во-вторых, она обеспечивает возможность культурного обмена и взаимопонимания между разными нациями.
-                                    </p>
-                                    <p class="fs-16px px-2">
-                                        В целом, виза цифрового кочевника страны представляет собой новую эру глобальной мобильности и гибкости работы. Она открывает двери для новых возможностей и содействует развитию международного сообщества профессионалов в сфере информационных технологий.
+                                        {!! $post->text !!}
                                     </p>
                                 </div>
                             </div>
@@ -125,19 +113,15 @@
 
                 <div class="col-3 d-none d-lg-block" style="transform: translateY(-25px)">
                     <h6>Последние новости</h6>
-                    <div class="card shadow border-0 mb-3">
-                        <div class="card-body">
-                            <p class="fw-400">Южная Корея: визы "цифровым кочевникам" и поклонникам корейской культуры</p>
-                            <p class="fs-12px fw-300 m-0 opacity-50">27 декабря</p>
+                    @foreach($latest_posts as $latest_post)
+                        <div class="card shadow border-0 mb-3">
+                            <div class="card-body">
+                                <p class="fw-400">{!! $latest_post->text !!}</p>
+                                <p class="fs-12px fw-300 m-0 opacity-50">{{date("d M",strtotime($latest_post->created_at))}}</p>
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
 
-                    <div class="card shadow border-0 mb-3">
-                        <div class="card-body">
-                            <p class="fw-400">Южная Корея: визы "цифровым кочевникам" и поклонникам корейской культуры</p>
-                            <p class="fs-12px fw-300 m-0 opacity-50">27 декабря</p>
-                        </div>
-                    </div>
 
                 </div>
             </div>
@@ -151,33 +135,33 @@
                 <h1>Может быть интересно</h1>
             </div>
             <div class="row">
-                @for($i=1; $i<=3; $i++)
+                @foreach($common_posts as $common_post)
                     <div class="col-lg-4 col-12 mb-3">
-                        <a href="{{asset(route('blog.show', 1))}}" class="card shadow border-0 overflow-hidden cursor-pointer">
+                        <a href="{{asset(route('blog.show', $common_post->id))}}" class="card shadow border-0 overflow-hidden cursor-pointer">
                             <div class="card-header w-100 h-200px overflow-hidden p-0">
-                                <img class="w-100 h-100 object-fit-cover" src="{{asset('img/top-view-tourist-items-with-copy-space.jpg')}}" alt="img">
+                                <img class="w-100 h-100 object-fit-cover" src="{{asset('img/blog/'.$common_post->image)}}" alt="img">
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-auto">
                                         <span class="btn btn-light border-0 d-flex">
-                                            <p class="m-auto text-black fw-300 opacity-50 fs-12px">Визовый режим</p>
+                                            <p class="m-auto text-black fw-300 opacity-50 fs-12px">{{$categories[($common_post->category)-1]->name}}</p>
                                         </span>
                                     </div>
                                     <div class="row mt-3">
-                                        <h6>Что такое виза цифрового кочевника?</h6>
+                                        <h6>{{$common_post->title}}</h6>
                                     </div>
                                     <div class="row">
-                                        <p class="opacity-80">Виза цифрового кочевника страны – это инновационная и перспективная инициатива ...</p>
+                                        <p class="opacity-80">{!! $common_post->text !!}</p>
                                     </div>
                                     <div class="row mt-3">
-                                        <p class="text-black-200 fs-12px m-0">27 декабря</p>
+                                        <p class="text-black-200 fs-12px m-0">{{date("d M",strtotime($common_post->created_at))}}</p>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>

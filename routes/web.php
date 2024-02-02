@@ -24,7 +24,7 @@ Route::get('/ticket', 'App\Http\Controllers\MainController@ticket')->name('ticke
 Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
 
 Route::get('/blog/{page}', 'App\Http\Controllers\BlogController@index')->name('blog.index');
-Route::get('/blog/post/{blog}', 'App\Http\Controllers\BlogController@show')->name('blog.show');
+Route::get('/blog/post/{post}', 'App\Http\Controllers\BlogController@show')->name('blog.show');
 
 Route::get('/reviews', 'App\Http\Controllers\ReviewController@index')->name('reviews.index');
 Route::post('/reviews', 'App\Http\Controllers\ReviewController@store')->name('reviews.store');

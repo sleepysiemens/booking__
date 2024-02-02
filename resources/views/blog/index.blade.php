@@ -58,7 +58,7 @@
             <div class="row">
                 @foreach($posts as $post)
                     <div class="col-12 col-lg-4 mt-4">
-                        <a href="{{asset(route('blog.show', 1))}}" class="card shadow border-0 overflow-hidden cursor-pointer">
+                        <a href="{{asset(route('blog.show', $post->id))}}" class="card shadow border-0 overflow-hidden cursor-pointer">
                             <div class="card-header w-100 h-200px overflow-hidden p-0">
                                 <img class="w-100 h-100 object-fit-cover" src="{{asset('img/blog/'.$post->image)}}" alt="img">
                             </div>
