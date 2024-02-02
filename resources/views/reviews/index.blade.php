@@ -34,7 +34,7 @@
             <p class="opacity-70 text-black text-decoration-underline">
                 <a class="text-black" href="{{route('main.index')}}">Главная</a>
                 /
-                <a class="text-black" href="{{route('blog.index'), 1}}">Отзывы</a>
+                <a class="text-black" href="{{route('blog.index',1)}}">Отзывы</a>
             </p>
         </div>
     </div>
