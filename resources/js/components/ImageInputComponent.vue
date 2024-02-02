@@ -16,6 +16,7 @@ export default {
     data() {
         return {
             selectedFile: null,
+            if(preview_img){},
             previewUrl: preview_img,
         };
     },

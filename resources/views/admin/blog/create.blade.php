@@ -58,5 +58,8 @@
                 </div>
             </div>
         </div>
+        <script>
+            const preview_img = null;
+        </script>
     </form>
 @endsection
