@@ -11,6 +11,11 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/app.min.js',
                 'resources/js/vendor.min.js',
+
+                'resources/css/login/app.min.css',
+                'resources/css/login/vendor.min.css',
+
+                'resources/css/admin/app.min.css',
             ],
             refresh: true,
         }),
