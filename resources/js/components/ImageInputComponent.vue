@@ -1,6 +1,6 @@
 <template>
     <div class="p-0 w-100 h-500px position-relative overflow-hidden rounded-3">
-        <input class="d-none" ref="fileInput" id="file-input" type="file" @change="handleFileChange" />
+        <input class="d-none" ref="fileInput" id="file-input" type="file" name="image" @change="handleFileChange" />
         <label for="file-input" class="w-100 h-100 bg-light d-flex cursor-pointer position-absolute">
             <i class="far fa-image m-auto fs-80px opacity-50"></i>
         </label>
@@ -16,7 +16,7 @@ export default {
     data() {
         return {
             selectedFile: null,
-            previewUrl: null,
+            previewUrl: preview_img,
         };
     },
     methods: {

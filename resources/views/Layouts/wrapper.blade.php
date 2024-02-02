@@ -182,7 +182,7 @@
                 </div>
             </div>
             <div class="header-btn">
-                <a href="#" class="btn btn-primary fw-bold rounded-pill">Войти <i class="fa fa-arrow-right ms-1 opacity-5"></i></a>
+                <a href="{{route('login')}}" class="btn btn-primary fw-bold rounded-pill">Войти <i class="fa fa-arrow-right ms-1 opacity-5"></i></a>
             </div>
             <button class="header-mobile-nav-toggler" type="button" data-toggle="header-mobile-nav">
                 <span class="header-mobile-nav-toggler-icon"></span>

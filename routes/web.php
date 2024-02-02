@@ -28,4 +28,26 @@ Route::get('/blog/post/{blog}', 'App\Http\Controllers\BlogController@show')->nam
 
 Route::get('/reviews', 'App\Http\Controllers\ReviewController@index')->name('reviews.index');
 Route::post('/reviews', 'App\Http\Controllers\ReviewController@store')->name('reviews.store');
-//Route::get('/test', 'App\Http\Controllers\TestController@test')->name('test.index');
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], function ()
+{
+    Route::get('/', 'App\Http\Controllers\Admin\MainController@index')->name('admin.index');
+
+    Route::get('/reviews', 'App\Http\Controllers\Admin\ReviewController@index')->name('admin.reviews.index');
+    Route::get('/reviews/{review}/edit', 'App\Http\Controllers\Admin\ReviewController@edit')->name('admin.reviews.edit');
+    Route::patch('/reviews/{review}', 'App\Http\Controllers\Admin\ReviewController@update')->name('admin.reviews.update');
+    Route::delete('/reviews/{review}', 'App\Http\Controllers\Admin\ReviewController@delete')->name('admin.reviews.delete');
+
+    Route::get('/blog', 'App\Http\Controllers\Admin\BlogController@index')->name('admin.blog.index');
+    Route::get('/blog/create', 'App\Http\Controllers\Admin\BlogController@create')->name('admin.blog.create');
+    Route::post('/blog', 'App\Http\Controllers\Admin\BlogController@store')->name('admin.blog.store');
+    Route::get('/blog/{post}/edit', 'App\Http\Controllers\Admin\BlogController@edit')->name('admin.blog.edit');
+    Route::patch('/blog/{post}', 'App\Http\Controllers\Admin\BlogController@update')->name('admin.blog.update');
+
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/test-html', function (){return view('Layouts.login');});

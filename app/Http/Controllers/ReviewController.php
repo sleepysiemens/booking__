@@ -10,7 +10,7 @@ class ReviewController extends Controller
 {
     public function index()
     {
-        $reviews=Review::all();
+        $reviews=Review::query()->where('is_published','=',1)->get();
         return view('reviews.index', compact(['reviews']));
     }
 

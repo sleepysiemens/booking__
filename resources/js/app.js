@@ -22,6 +22,7 @@ import PassengersComponents from "./components/PassengersComponents.vue";
 import CalendarComponent from "./components/CalendarComponent.vue";
 import AirportsComponent from "./components/AirportsComponent.vue";
 import RatingComponent from "./components/RatingComponent.vue";
+import ImageInputComponent from "./components/ImageInputComponent.vue";
 
 app.component('origin-search-component', OriginSearchComponent);
 app.component('destination-search-component', DestinationSearchComponent);
@@ -29,6 +30,7 @@ app.component('passengers-component', PassengersComponents);
 app.component('calendar-component', CalendarComponent);
 app.component('airports-component', AirportsComponent);
 app.component('rating-component', RatingComponent);
+app.component('image-input-component', ImageInputComponent);
 
 /**
  * The following block of code may be used to automatically register your

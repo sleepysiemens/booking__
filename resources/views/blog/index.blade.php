@@ -48,53 +48,51 @@
                 <div class="col-auto pe-0 mb-2">
                     <button class="btn d-flex btn-primary rounded-5 h-40px"><p class="m-auto px-2">Все</p></button>
                 </div>
-                <div class="col-auto pe-0 mb-2">
-                    <button class="btn d-flex btn-white rounded-5 h-40px"><p class="m-auto px-2">Путешествия</p></button>
-                </div>
-                <div class="col-auto pe-0 mb-2">
-                    <button class="btn d-flex btn-white rounded-5 h-40px"><p class="m-auto px-2">Наши новости</p></button>
-                </div>
-                <div class="col-auto pe-0 mb-2">
-                    <button class="btn d-flex btn-white rounded-5 h-40px"><p class="m-auto px-2">Визовый режим</p></button>
-                </div>
+                @foreach($categories as $category)
+                    <div class="col-auto pe-0 mb-2">
+                        <button class="btn d-flex btn-white rounded-5 h-40px"><p class="m-auto px-2">{{$category->name}}</p></button>
+                    </div>
+                @endforeach
             </div>
 
             <div class="row">
-                @for($i=1; $i<=9; $i++)
+                @foreach($posts as $post)
                     <div class="col-12 col-lg-4 mt-4">
                         <a href="{{asset(route('blog.show', 1))}}" class="card shadow border-0 overflow-hidden cursor-pointer">
                             <div class="card-header w-100 h-200px overflow-hidden p-0">
-                                <img class="w-100 h-100 object-fit-cover" src="{{asset('img/top-view-tourist-items-with-copy-space.jpg')}}" alt="img">
+                                <img class="w-100 h-100 object-fit-cover" src="{{asset('img/blog/'.$post->image)}}" alt="img">
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-auto">
                                         <span class="btn btn-light border-0 d-flex">
-                                            <p class="m-auto text-black fw-300 opacity-50 fs-12px">Визовый режим</p>
+                                            <p class="m-auto text-black fw-300 opacity-50 fs-12px">{{$categories[($post->category)-1]->name}}</p>
                                         </span>
                                     </div>
                                     <div class="row mt-3">
-                                        <h6>Что такое виза цифрового кочевника?</h6>
+                                        <h6>{{$post->title}}</h6>
                                     </div>
                                     <div class="row">
-                                        <p class="opacity-80">Виза цифрового кочевника страны – это инновационная и перспективная инициатива, которая открывает новые ...</p>
+                                        <p class="opacity-80">
+                                            {{$post->text}}
+                                        </p>
                                     </div>
                                     <div class="row mt-3">
-                                        <p class="text-black-200 fs-12px m-0">27 декабря</p>
+                                        <p class="text-black-200 fs-12px m-0">{{ date("d M",strtotime($post->created_at)) }}</p>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                @endfor
+                @endforeach
             </div>
 
             <div class="row mt-4 justify-content-center">
-                @for($i=1; $i<=3; $i++)
+                @for($i=1; $i<=$page_cnt; $i++)
                     <div class="col-auto pe-0">
-                        <button class="btn @if($i==1) btn-black @else btn-white @endif d-flex">
+                        <a href="{{route('blog.index', $i)}}" class="btn @if($i==$page) btn-black @else btn-white @endif d-flex">
                             <p class="m-auto">{{$i}}</p>
-                        </button>
+                        </a>
                     </div>
                 @endfor
 

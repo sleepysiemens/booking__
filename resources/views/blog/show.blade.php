@@ -41,7 +41,7 @@
                 </p>
             </div>
             <div class="row my-2">
-                <a href="{{route('blog.index')}}" class="fs-16px d-flex"><i class="fas fa-arrow-left fs-14px my-auto me-1"></i> назад</a>
+                <a href="{{route('blog.index',1)}}" class="fs-16px d-flex"><i class="fas fa-arrow-left fs-14px my-auto me-1"></i> назад</a>
             </div>
 
             <div class="row mt-4">
