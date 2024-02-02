@@ -54,7 +54,7 @@
             <div class="row">
                 @foreach($reviews as $review)
                     <div class="col-12 col-lg-4 mt-4">
-                        <a href="{{asset(route('blog.show'))}}" class="card shadow border-0 overflow-hidden cursor-pointer">
+                        <div class="card shadow border-0 overflow-hidden cursor-pointer">
                             <div class="card-body">
                                 <div class="row py-2 mt-1 justify-content-between">
                                     <h6 class="col my-auto fs-20px">{{$review->name}} {{$review->surname}}</h6>
@@ -66,12 +66,12 @@
                                             <p class="my-auto text-white fw-600 fs-12px">{{$review->rating}}</p>
                                         </span>
                                     </div>
-                                    <div class="col-auto">
+                                    {{--<div class="col-auto">
                                         <span class="btn btn-light border-0 d-flex justify-content-center">
                                             <i class="fas fa-check my-auto text-black opacity-50 me-1 fs-12px"></i>
                                             <p class="my-auto text-black fw-300 opacity-50 fs-12px">Есть ответ</p>
                                         </span>
-                                    </div>
+                                    </div>--}}
                                 </div>
                                 <div class="row mt-3">
                                     <p class="opacity-80">
@@ -82,7 +82,7 @@
                                     <p class="text-black-200 fs-12px m-0">{{date("d.m.Y H:i",strtotime($review->created_at))}}</p>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 @endforeach
             </div>
