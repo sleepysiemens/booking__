@@ -192,7 +192,7 @@ input:-webkit-autofill {
 .header-link
 {
     overflow: hidden;
-    height: 37px;
+    max-height: 37px;
     transition: .4s;
 
     .first
@@ -200,7 +200,6 @@ input:-webkit-autofill {
         color: #fff;
         transform: translateY(0);
         transition: .4s;
-
     }
 
     .second
