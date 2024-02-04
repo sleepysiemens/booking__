@@ -47,18 +47,17 @@
 
             <!-- BEGIN row -->
             <div class="row">
-                @php $i=[1, 2, 3, 4]; @endphp
-                @foreach($i as $ii)
+                @foreach($posts as $post)
                 <!-- BEGIN col-3 -->
                 <div class="col-lg-3">
                     <!-- BEGIN news -->
                     <div class="news">
                         <div class="news-media">
-                            <div class="news-media-img news-media-img-lg" style="background-image: url({{asset('img/top-view-tourist-items-with-copy-space.jpg')}});"></div>
+                            <div class="news-media-img news-media-img-lg" style="background-image: url({{asset('img/blog/'.$post->image)}});"></div>
                         </div>
                         <div class="news-content">
-                            <div class="news-title">Новость</div>
-                            <div class="news-date">1 января, 2024</div>
+                            <div class="news-title">{{$post->title}}</div>
+                            <div class="news-date">{{date("d M Y", strtotime($post->created_at))}}</div>
                         </div>
                         <a href="#" class="stretched-link"></a>
                     </div>
@@ -71,7 +70,13 @@
             <!-- END row -->
 
             <div class="text-center">
-                <a href="#" class="section-btn"><i class="fa fa-arrow-right"></i> Все новости</a>
+                <a href="{{route('blog.index', 1 )}}" class="arrow-btn">
+                    <span>
+                        <i class="fa fa-arrow-right first"></i>
+                        <i class="fa fa-arrow-right second"></i>
+                    </span>
+                    Все новости
+                </a>
             </div>
         </div>
         <!-- END container -->
@@ -183,89 +188,19 @@
         <!-- END container -->
         <!-- BEGIN container -->
         <div class="container">
-
-            <div class="card bg-light mb-3 border-0 cursor-pointer" id="question-1">
-                <div class="card-body">
-                    <div class="row">
-                        <h4 class="col m-0">Сколько стоят ваши услуги?</h4>
-                        <span class="col-1 text-black opacity-50 d-flex filter-btn" id="question-1-marker">
-                            <i class="fas fa-chevron-down m-auto"></i>
-                        </span>
-                    </div>
-                    <div class="row fs-16px" style="display: none" id="answer-1">
-                        <div class="col pt-3">
-                            <p>Стоимость бронирования вы можете посмотреть на нашем сайте в разделе Тариф</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card bg-light mb-3 border-0 cursor-pointer" id="question-2">
-                <div class="card-body">
-                    <div class="row">
-                        <h4 class="col m-0">Через сколько я получу бронь после оформления заказа?</h4>
-                        <span class="col-1 text-black opacity-50 d-flex filter-btn" id="question-2-marker">
-                            <i class="fas fa-chevron-down m-auto"></i>
-                        </span>
-                    </div>
-                    <div class="row fs-16px" style="display: none" id="answer-2">
-                        <div class="col pt-3">
-                            <p>Максимальное время выписки брони билета 30 минут (обычно выписываем в течение 15 минут).</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card bg-light mb-3 border-0 cursor-pointer" id="question-3">
-                <div class="card-body">
-                    <div class="row">
-                        <h4 class="col m-0">Когда лучше делать бронирование для визы, если подача на визу через неделю?</h4>
-                        <a class="col-1 text-black opacity-50 d-flex filter-btn" id="question-3-marker">
-                            <i class="fas fa-chevron-down m-auto"></i>
-                        </a>
-                    </div>
-                    <div class="row fs-16px" style="display: none" id="answer-3">
-                        <div class="col pt-3">
-                            <p>Чтобы бронь держалась в момент рассмотрения визы, вам лучше оформить её за 1 день до подачи.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card bg-light mb-3 border-0 cursor-pointer" id="question-4">
-                <div class="card-body">
-                    <div class="row">
-                        <h4 class="col m-0">Подходит ли ваша бронь для прохождения пограничного контроля в аэропорту?</h4>
-                        <a class="col-1 text-black opacity-50 d-flex filter-btn" id="question-4-marker">
-                            <i class="fas fa-chevron-down m-auto"></i>
-                        </a>
-                    </div>
-                    <div class="row fs-16px" style="display: none" id="answer-4">
-                        <div class="col pt-3">
-                            <p>Да, бронь авиабилета подходит также для прохождения пограничного контроля в стране вылета/прилета. Маршрутная квитанция авиабилета предоставляется на английском и русском языке, что соответствует правилам, а также содержит номер бронирования по которому можно проверить билет.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card bg-light mb-3 border-0 cursor-pointer" id="question-5">
-                <div class="card-body">
-                    <div class="row">
-                        <h4 class="col m-0">Можно ли выкупить свою бронь билета для осуществления полета?</h4>
-                        <a class="col-1 text-black opacity-50 d-flex filter-btn" id="question-5-marker">
-                            <i class="fas fa-chevron-down m-auto"></i>
-                        </a>
-                    </div>
-                    <div class="row fs-16px" style="display: none" id="answer-5">
-                        <div class="col pt-3">
-                            <p>Нет, бронь билета нельзя выкупить. Для осуществления полета вы можете купить билет на сайтах по продаже билетов.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <question-component question="Сколько стоят ваши услуги?" answer="Стоимость бронирования вы можете посмотреть на нашем сайте в разделе Тариф"></question-component>
+            <question-component question="Через сколько я получу бронь после оформления заказа?" answer="Максимальное время выписки брони билета 30 минут (обычно выписываем в течение 15 минут)."></question-component>
+            <question-component question="Когда лучше делать бронирование для визы, если подача на визу через неделю?" answer="Чтобы бронь держалась в момент рассмотрения визы, вам лучше оформить её за 1 день до подачи."></question-component>
+            <question-component question="Подходит ли ваша бронь для прохождения пограничного контроля в аэропорту?" answer="Да, бронь авиабилета подходит также для прохождения пограничного контроля в стране вылета/прилета. Маршрутная квитанция авиабилета предоставляется на английском и русском языке, что соответствует правилам, а также содержит номер бронирования по которому можно проверить билет."></question-component>
+            <question-component question="Можно ли выкупить свою бронь билета для осуществления полета?" answer="Нет, бронь билета нельзя выкупить. Для осуществления полета вы можете купить билет на сайтах по продаже билетов."></question-component>
 
             <div class="text-center">
-                <a href="#" class="section-btn"><i class="fa fa-arrow-right"></i> Все вопросы</a>
+                <a href="#" class="arrow-btn">
+                    <span>
+                        <i class="fa fa-arrow-right first"></i>
+                        <i class="fa fa-arrow-right second"></i>
+                    </span>
+                     Все вопросы</a>
             </div>
 
         </div>
@@ -282,8 +217,7 @@
 
             <!-- BEGIN row -->
             <div class="row">
-                @php $i=[1, 2, 3]; @endphp
-                @foreach($i as $ii)
+                @foreach($reviews as $review)
                     <div class="col-lg-4">
                         <!-- BEGIN reviews -->
                         <div class="card border-0 shadow mb-4">
@@ -292,11 +226,11 @@
                                     <div class="news-content">
                                         <div class="row">
                                             <div class="news-title col">Отзыв</div>
-                                            <p class="news-date col text-end">20 дек, 2023</p>
+                                            <p class="news-date col text-end">{{date("d.m.Y H:i",strtotime($review->created_at))}}</p>
                                         </div>
-                                        <div class="news-label"><span class="bg-teal-200 text-teal-800"><i class="fas fa-star text-teal-400"></i>  4.0</span></div>
+                                        <div class="news-label"><span class="bg-teal-200 text-teal-800"><i class="fas fa-star text-teal-400"></i>  {{$review->rating}}.0</span></div>
                                         <div class="section-desc">
-                                            Our suite of developer-friendly products and services help you build, secure, and deliver enterprise-grade apps in less time — for any platform.
+                                            {{$review->text}}
                                         </div>
                                     </div>
                                 </div>
@@ -311,7 +245,13 @@
             <!-- END row -->
 
             <div class="text-center">
-                <a href="#" class="section-btn"><i class="fa fa-arrow-right"></i> Все отзывы</a>
+                <a href="{{route('reviews.index')}}" class="arrow-btn">
+                    <span>
+                        <i class="fa fa-arrow-right first"></i>
+                        <i class="fa fa-arrow-right second"></i>
+                    </span>
+                    Все отзывы
+                </a>
             </div>
         </div>
         <!-- END container -->
@@ -322,26 +262,6 @@
 @endsection
 
 @section('scripts')
-    <script>
-        let marker=[];
-        for(let cnt=1;cnt<=5;cnt++)
-        {
-            marker[cnt]=0;
-            $('#question-'+cnt).on('click', function (){
-                $('#answer-'+cnt).slideToggle( "fast", function() {});
-                if(marker[cnt]==0)
-                {
-                    $('#question-'+cnt+'-marker').addClass('rotate-btn');
-                    marker[cnt]++;
-                }
-                else
-                {
-                    $('#question-'+cnt+'-marker').removeClass('rotate-btn');
-                    marker[cnt]--;
-                }
-            })
-        }
-    </script>
 
     <script>
         // Интегрируем массив напрямую в JavaScript

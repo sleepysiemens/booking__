@@ -10,8 +10,8 @@ class FlightSearchService
     public function parseFlightInfo($origin, $destination, $depart_date)
     {
         // Создаем клиента Panther
-        $client = Client::createChromeClient('/usr/bin/chromium-browser', null, ['--headless=new', '--disable-gpu', '--no-sandbox'], 'http://localhost');
-        //$client = Client::createFirefoxClient();
+        ++$client = Client::createChromeClient('/usr/bin/chromium-browser', null, ['--headless=new', '--disable-gpu', '--no-sandbox'], 'http://localhost');
+        $client = Client::createChromeClient();
         $depart_date=date('dm',strtotime($depart_date));
 
         //$crawler = $client->request('GET', 'https://www.onetwotrip.com/ru/f/search/'.$depart_date.$origin.$destination.'?sc=E&ac=1&srcmarker2=newindex');

@@ -12,6 +12,7 @@
     @vite([
     'resources/css/app.min.css',
     'resources/css/vendor.min.css',
+    'resources/css/custom.css',
     'resources/js/app.js',
     'resources/js/app.min.js',
     'resources/js/vendor.min.js',
@@ -23,126 +24,6 @@
     </style>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
-    </style>
-    <style>
-
-        html, body
-        {
-            font-family: "Roboto" !important;
-        }
-            input:active, input:hover, input:focus, input, select, select:active, select:hover, select:focus, textarea, textarea:active, textarea:hover, textarea:focus
-            {
-                outline: 0;
-                outline-offset: 0;
-                background-color: transparent;
-                border: none;
-            }
-
-            input:-webkit-autofill {
-                transition: all 5000s ease-in-out 0s;
-            }
-
-            .details
-            {
-                width: 200px;
-                max-width: none;
-                right: 0;
-                text-align: center;
-            }
-
-            .info-banner
-            {
-                display: none;
-                transition: .3s;
-                opacity: 0;
-            }
-
-            .sec
-            {
-                display: none;
-                transition: .1s;
-                opacity: 1;
-            }
-
-            .sec-active
-            {
-                display: block;
-            }
-
-            .info:hover .info-banner
-            {
-                display: block;
-            }
-
-            @media screen and (max-width: 1023px)
-            {
-                .first_input, .brdr-b-l, .brdr-b-r
-                {
-                    position: relative;
-                }
-                 .first_input:after, .brdr-b-l:before, .brdr-b-r:before
-                {
-                    position: absolute;
-                    content: "";
-                    background-color: black;
-                    opacity: .25;
-                }
-                .brdr-b-l:before
-                {
-                    width: 95%;
-                    height: 1px;
-                    bottom: 0;
-                    right: 0;
-                }
-                .brdr-b-r:before
-                {
-                    width: 95%;
-                    height: 1px;
-                    bottom: 0;
-                    left: 0;
-                }
-                .first_input:after
-                {
-                    height: 90%;
-                    width: 1px;
-                    right: 0;
-                    bottom: 25%;
-                    margin: auto;
-                }
-
-                #search-form
-                {
-                    width: 95% !important;
-                    margin: auto;
-                }
-
-                #filter-div
-                {
-                    display: none;
-                }
-
-                .details
-                {
-                    position: absolute;
-                    top: 100%;
-                    width: 90vw;
-                }
-            }
-
-            .filter-btn
-            {
-                transition: .3s;
-            }
-
-            .rotate-btn
-            {
-                transform: rotate(180deg);
-            }
-
-            .ff-montserrat
-            {
-                font-family: 'Montserrat' !important;
-            }
     </style>
 
     <!-- ================== END core-css ================== -->

@@ -16,6 +16,9 @@ export default defineConfig({
                 'resources/css/login/vendor.min.css',
 
                 'resources/css/admin/app.min.css',
+
+
+                'resources/css/custom.css',
             ],
             refresh: true,
         }),

@@ -61,9 +61,9 @@
                                 </div>
                                 <div class="row mb-2">
                                     <div class="col-auto">
-                                        <span class="btn btn-primary border-0 d-flex justify-content-center">
-                                            <i class="fas fa-star my-auto text-white opacity-75 me-2 fs-12px"></i>
-                                            <p class="my-auto text-white fw-600 fs-12px">{{$review->rating}}</p>
+                                        <span class="btn bg-teal-200 text-teal-800 border-0 d-flex justify-content-center p-2">
+                                            <i class="fas fa-star text-teal-400 my-auto opacity-75 me-2 fs-12px"></i>
+                                            <p class="my-auto fw-600 fs-12px">{{$review->rating}}.0</p>
                                         </span>
                                     </div>
                                     {{--<div class="col-auto">
