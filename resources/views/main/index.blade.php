@@ -229,7 +229,7 @@
                                             <p class="news-date col text-end">{{date("d.m.Y H:i",strtotime($review->created_at))}}</p>
                                         </div>
                                         <div class="news-label"><span class="bg-teal-200 text-teal-800"><i class="fas fa-star text-teal-400"></i>  {{$review->rating}}.0</span></div>
-                                        <div class="section-desc">
+                                        <div class="section-desc hide-text">
                                             {{$review->text}}
                                         </div>
                                     </div>

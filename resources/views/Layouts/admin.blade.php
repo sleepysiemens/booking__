@@ -6,6 +6,12 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap');
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+    </style>
 
     @vite([
     'resources/css/app.min.css',
@@ -14,6 +20,7 @@
     'resources/js/app.js',
     'resources/js/app.min.js',
     'resources/js/vendor.min.js',
+    'resources/css/custom.css',
     ])
 
     <script src="{{'https://kit.fontawesome.com/0a007e12dc.js'}}" crossorigin="anonymous"></script>

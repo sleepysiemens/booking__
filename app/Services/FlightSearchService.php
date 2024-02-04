@@ -10,12 +10,14 @@ class FlightSearchService
     public function parseFlightInfo($origin, $destination, $depart_date)
     {
         // Создаем клиента Panther
-        $client = Client::createChromeClient('/usr/bin/chromedriver', null, ['--headless=new', '--disable-gpu'], 'http://localhost');
-        //$client = Client::createChromeClient();
+        $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
+            'chromedriver_arguments' => ['--headless=new', '--disable-gpu', '--no-sandbox'],
+        ], 'http://localhost');
+        //$client = Client::createFirefoxClient();
         $depart_date=date('dm',strtotime($depart_date));
 
-        $crawler = $client->request('GET', 'https://www.onetwotrip.com/ru/f/search/'.$depart_date.$origin.$destination.'?sc=E&ac=1&srcmarker2=newindex');
-        //$crawler = $client->request('GET', 'https://www.onetwotrip.com/ru/f/search/0202LEDMOW?sc=E&ac=1&srcmarker2=newindex');
+        //$crawler = $client->request('GET', 'https://www.onetwotrip.com/ru/f/search/'.$depart_date.$origin.$destination.'?sc=E&ac=1&srcmarker2=newindex');
+        $crawler = $client->request('GET', 'https://www.onetwotrip.com/ru/f/search/0602LEDMOW?sc=E&ac=1&srcmarker2=newindex');
 
         // Подождите некоторое время, чтобы данные подгрузились
         $client->waitFor('.Vo739'); // Увеличьте время ожидания при необходимости
@@ -99,7 +101,6 @@ class FlightSearchService
         }
         return $tickets;
     }
-
     public function FilterAirlines($tickets)
     {
         $airlines=[];
@@ -115,3 +116,4 @@ class FlightSearchService
         return $airlines;
     }
 }
+

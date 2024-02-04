@@ -69,11 +69,11 @@
                                             <p class="m-auto text-black fw-300 opacity-50 fs-12px">{{$categories[($post->category)-1]->name}}</p>
                                         </span>
                                     </div>
-                                    <div class="row mt-3">
+                                    <div class="row mt-3 h-40px">
                                         <h6>{{$post->title}}</h6>
                                     </div>
                                     <div class="row">
-                                        <p class="opacity-80">
+                                            <p class="opacity-80 hide-text">
                                             {{$post->text}}
                                         </p>
                                     </div>

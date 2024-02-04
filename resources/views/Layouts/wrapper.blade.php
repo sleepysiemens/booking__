@@ -49,21 +49,36 @@
             <div class="header-nav">
                 <div class="container">
                     <div class="header-nav-item">
-                        <a href="{{route('tariff.index')}}" class="header-nav-link">Тариф</a>
+                        <a href="{{route('tariff.index')}}" class="header-nav-link header-link">
+                            <p class="first">Тариф</p>
+                            <p class="second">Тариф</p>
+                        </a>
                     </div>
                     <div class="header-nav-item">
-                        <a href="{{route('help.index')}}" class="header-nav-link">Помощь</a>
+                        <a href="{{route('help.index')}}" class="header-nav-link header-link">
+                            <p class="first">Помощь</p>
+                            <p class="second">Помощь</p>
+                        </a>
                     </div>
                     <div class="header-nav-item">
-                        <a href="{{route('blog.index', 1)}}" class="header-nav-link">Блог</a>
+                        <a href="{{route('blog.index', 1)}}" class="header-nav-link header-link">
+                            <p class="first">Блог</p>
+                            <p class="second">Блог</p>
+                        </a>
                     </div>
                     <div class="header-nav-item">
-                        <a href="{{route('reviews.index')}}" class="header-nav-link">Отзывы</a>
+                        <a href="{{route('reviews.index')}}" class="header-nav-link header-link">
+                            <p class="first">Отзывы</p>
+                            <p class="second">Отзывы</p>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="header-btn">
-                <a href="{{route('login')}}" class="btn btn-primary fw-bold rounded-pill">Войти <i class="fa fa-arrow-right ms-1 opacity-5"></i></a>
+                <a href="{{route('login')}}" class="btn btn-primary fw-bold rounded-pill header-link">
+                    <p class="first">Войти <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
+                    <p class="second">Войти <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
+                </a>
             </div>
             <button class="header-mobile-nav-toggler" type="button" data-toggle="header-mobile-nav">
                 <span class="header-mobile-nav-toggler-icon"></span>

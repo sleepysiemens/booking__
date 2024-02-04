@@ -28,16 +28,16 @@
                                             <p class="m-auto text-black fw-300 opacity-50 fs-12px">{{$categories[($post->category)-1]->name}}</p>
                                         </span>
                                 </div>
-                                <div class="row mt-3">
+                                <div class="row mt-3 h-40px">
                                     <h6>{{$post->title}}</h6>
                                 </div>
                                 <div class="row">
-                                    <p class="opacity-80">
+                                    <p class="opacity-80 hide-text fs-14px">
                                         {{$post->text}}
                                     </p>
                                 </div>
                                 <div class="row mt-3">
-                                    <p class="text-black-200 fs-12px m-0">27 декабря</p>
+                                    <p class="text-black-200 fs-12px m-0">{{date("d M", strtotime($post->created_at))}}</p>
                                 </div>
                             </div>
 

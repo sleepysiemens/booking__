@@ -116,7 +116,8 @@
                     @foreach($latest_posts as $latest_post)
                         <div class="card shadow border-0 mb-3">
                             <div class="card-body">
-                                <p class="fw-400">{!! $latest_post->text !!}</p>
+                                <h6>{{$latest_post->title}}</h6>
+                                <p class="fw-400 hide-text">{!! $latest_post->text !!}</p>
                                 <p class="fs-12px fw-300 m-0 opacity-50">{{date("d M",strtotime($latest_post->created_at))}}</p>
                             </div>
                         </div>
@@ -148,11 +149,11 @@
                                             <p class="m-auto text-black fw-300 opacity-50 fs-12px">{{$categories[($common_post->category)-1]->name}}</p>
                                         </span>
                                     </div>
-                                    <div class="row mt-3">
+                                    <div class="row mt-3 h-40px">
                                         <h6>{{$common_post->title}}</h6>
                                     </div>
                                     <div class="row">
-                                        <p class="opacity-80">{!! $common_post->text !!}</p>
+                                        <p class="opacity-80 hide-text">{!! $common_post->text !!}</p>
                                     </div>
                                     <div class="row mt-3">
                                         <p class="text-black-200 fs-12px m-0">{{date("d M",strtotime($common_post->created_at))}}</p>
