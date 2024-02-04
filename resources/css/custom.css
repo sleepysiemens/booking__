@@ -186,13 +186,13 @@ input:-webkit-autofill {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    height: 63px;
+    min-height: 63px;
 }
 
 .header-link
 {
     overflow: hidden;
-    max-height: 37px;
+    height: 37px;
     transition: .4s;
 
     .first
@@ -200,6 +200,7 @@ input:-webkit-autofill {
         color: #fff;
         transform: translateY(0);
         transition: .4s;
+
     }
 
     .second
