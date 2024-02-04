@@ -44,7 +44,7 @@
 
                     </div>
                     {{--DETAILS--}}
-                    <div style="display: none" id="details-long-{{$cnt}}">
+                    <div style="display: none" id="details-long-">
                         <div class="row row-cols-lg-4 mt-3" >
                             <div class="col">
                                 <div class="container">
@@ -132,12 +132,28 @@
                             <div class="row my-auto">
                                 <h2 class="fw-500 my-lg-1 fs-22px ff-montserrat text-lg-center text-end mt-lg-3">{{$result['price']}} ₽</h2>
                             </div>
-                            <div class="row mt-lg-5 d-flex position-relative">
+                            <form class="row mt-lg-5 d-flex position-relative" method="post" action="{{route('booking.index')}}">
+                                @csrf
+                                <input type="hidden" name="origin_" value="{{$result['origin']}}">
+                                <input type="hidden" name="origin" value="{{$request['origin']}}">
+                                <input type="hidden" name="destination_" value="{{$result['destination']}}">
+                                <input type="hidden" name="destination" value="{{$request['destination']}}">
+                                <input type="hidden" name="departDate" value="{{$request['departDate']}}">
+                                <input type="hidden" name="departTime" value="{{$result['depart_time']}}">
+                                <input type="hidden" name="arrivalTime" value="{{$result['arrival_time']}}">
+                                <input type="hidden" name="duration" value="{{$result['duration']}}">
+                                <input type="hidden" name="airline" value="{{$result['airline']}}">
+                                <input type="hidden" name="airline_logo" value="{{$result['airline_logo']}}">
+
+                                <input type="hidden" name="adults_amount" value="{{$request['passengers']['adults']}}">
+                                <input type="hidden" name="children_amount" value="{{$request['passengers']['children']}}">
+                                <input type="hidden" name="infants_amount" value="{{$request['passengers']['infants']}}">
+
                                 <button class="btn-primary btn fs-12px h-55px m-auto">Забронировать</button>
                                 <div class="d-flex mt-lg-3 justify-content-center details mt-2">
                                     {{--<a class="text-primary cursor-pointer w-100" onclick="details({{$cnt}})"><i class="fas fa-chevron-down filter-btn" id="details-btn-marker-{{$cnt}}"></i> Детали перелета</a>--}}
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

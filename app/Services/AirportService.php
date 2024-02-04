@@ -69,7 +69,8 @@ class AirportService
                             'city_name'=>$city_name,
                             'name'=>$city_name,
                             'iata_type'=>'city',
-                            'code'=>$country['name_translations']['en'].'/'.$country_name.'/'.$country['code'].'/'.$city_name.'/'.$city['name_translations']['en'].'/'.$country['code'],
+                            'code'=>$country['name_translations']['en'].'/'.$country_name.'/'.$country['code'].'/'.
+                                $city['name_translations']['en'].'/'.$city_name.'/'.$city['code'],
                             'city_code'=>$city['code'],
                             'airport_code'=>$city['code'],
                         ];
@@ -87,7 +88,8 @@ class AirportService
                                     'name'=>$airport_name,
                                     'airport_code'=>$airport['code'],
                                     'iata_type'=>'airport',
-                                    'code'=>$country['name_translations']['en'].'/'.$country_name.'/'.$country['code'].'/'.$city_name.'/'.$city['name_translations']['en'].'/'.$country['code'].'/'.$airport_name.'/'.$airport['name_translations']['en'].'/'.$airport['code'],
+                                    'code'=>$country['name_translations']['en'].'/'.$country_name.'/'.$country['code'].'/'.
+                                        $city['name_translations']['en'].'/'.$city_name.'/'.$city['code'].'/'.$airport_name.'/'.$airport['name_translations']['en'].'/'.$airport['code'],
                                 ];
                         }
                     }

@@ -13,11 +13,10 @@ class FlightSearchService
         $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
             'chromedriver_arguments' => ['--headless=new', '--disable-gpu', '--no-sandbox'],
         ], 'http://localhost');
-        //$client = Client::createFirefoxClient();
+        //$client = Client::createChromeClient();
         $depart_date=date('dm',strtotime($depart_date));
 
-        //$crawler = $client->request('GET', 'https://www.onetwotrip.com/ru/f/search/'.$depart_date.$origin.$destination.'?sc=E&ac=1&srcmarker2=newindex');
-        $crawler = $client->request('GET', 'https://www.onetwotrip.com/ru/f/search/0602LEDMOW?sc=E&ac=1&srcmarker2=newindex');
+        $crawler = $client->request('GET', 'https://www.onetwotrip.com/ru/f/search/'.$depart_date.$origin.$destination.'?sc=E&ac=1&srcmarker2=newindex');
 
         // Подождите некоторое время, чтобы данные подгрузились
         $client->waitFor('.Vo739'); // Увеличьте время ожидания при необходимости
@@ -113,7 +112,11 @@ class FlightSearchService
                 ];
         }
 
-        return $airlines;
+        $associativeArray = array_column($airlines, null, 'airline');
+
+        $result=array_values($associativeArray);
+
+        return $result;
     }
 }
 

@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 //
 
 Route::get('/', 'App\Http\Controllers\MainController@index')->name('main.index');
-Route::get('/booking', 'App\Http\Controllers\MainController@booking')->name('booking.index');
 Route::get('/profile', 'App\Http\Controllers\MainController@profile')->name('profile.index');
 Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tariff.index');
 Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
@@ -28,6 +27,9 @@ Route::get('/blog/post/{post}', 'App\Http\Controllers\BlogController@show')->nam
 
 Route::get('/reviews', 'App\Http\Controllers\ReviewController@index')->name('reviews.index');
 Route::post('/reviews', 'App\Http\Controllers\ReviewController@store')->name('reviews.store');
+
+Route::post('/booking', 'App\Http\Controllers\BookingController@index')->name('booking.index');
+
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], function ()
 {
@@ -49,5 +51,3 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], functio
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/test-html', function (){return view('Layouts.login');});

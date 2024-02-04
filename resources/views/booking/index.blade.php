@@ -43,8 +43,8 @@
                                         <i class="fas fa-plane-departure m-auto text-black-100 fs-18px"></i>
                                     </div>
                                     <div class="ms-3">
-                                        <h4 class="m-0">Новосибирск - Красноярск</h4>
-                                        <p class="text-warning m-0">1 пересадка</p>
+                                        <h4 class="m-0">{{$request['origin']}} - {{$request['destination']}}</h4>
+                                        <p class="text-warning m-0">прямой</p>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
@@ -52,7 +52,7 @@
                                         <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
                                             <img class="w-100 h-100" src="http://127.0.0.1:8000/img/SU.png" alt="avia">
                                         </div>
-                                        <p class="my-auto ms-2">Аэрофлот</p>
+                                        <p class="my-auto ms-2">{{$request['airline']}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -60,9 +60,9 @@
                                 <div class="row row-cols-lg-4 mt-3">
                                     <div class="col">
                                         <div class="container">
-                                            <p class="text-dark mb-0">21 января, вс</p>
-                                            <h2 class="fw-400 my-1 ff-montserrat">18:25</h2>
-                                            <p class="text-dark fw-300 mt-0">Россия, Новосибирск (OVB)</p>
+                                            <p class="text-dark mb-0">{{date("d M D",strtotime($request['departDate']))}}</p>
+                                            <h2 class="fw-400 my-1 ff-montserrat">{{$request['departTime']}}</h2>
+                                            <p class="text-dark fw-300 mt-0">{{$request['origin']}} ({{$request['origin_']}})</p>
                                         </div>
                                     </div>
                                     <div class="col d-flex opacity-25">
@@ -72,19 +72,20 @@
                                     </div>
                                     <div class="col">
                                         <div class="container">
-                                            <p class="text-dark mb-0">21 января, вс</p>
-                                            <h2 class="fw-400 my-1 ff-montserrat">06:55</h2>
-                                            <p class="text-dark fw-300 mt-0 fs-12px">Россия, Москва (MOW)</p>
+                                            <p class="text-dark mb-0">{{date("d M D",strtotime($request['departDate']))}}</p>
+                                            <h2 class="fw-400 my-1 ff-montserrat">{{$request['arrivalTime']}}</h2>
+                                            <p class="text-dark fw-300 mt-0 fs-12px">{{$request['destination']}} ({{$request['destination_']}})</p>
                                         </div>
                                     </div>
                                     <div class="col d-none d-lg-block">
                                         <div class="container">
-                                            <p class="fw-500 mb-0">4 ч 30 мин</p>
+                                            <p class="fw-500 mb-0">{{$request['duration']}}</p>
                                             <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                            <p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>
+                                            {{--<p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>--}}
                                         </div>
                                     </div>
                                 </div>
+                                {{--
                                 <div class="container">
                                     <div class="card bg-light border-light">
                                         <div class="card-body row text-black-200 py-2">
@@ -98,6 +99,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                --}}
+                                {{--
                                 <div class="row row-cols-lg-4 mt-3">
                                     <div class="col">
                                         <div class="container">
@@ -125,7 +128,7 @@
                                             <p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>
                                         </div>
                                     </div>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                     </div>
@@ -152,6 +155,10 @@
                     </div>
 
                     <div class="card border-0 shadow mb-3">
+                        @php $passengers_cnt=0; @endphp
+
+                        @for($i=1;$i<=$request['adults_amount'];$i++)
+                            @php $passengers_cnt++; @endphp
                         <div class="card-body">
                             <div class="row pb-3">
                                 <div class="col d-flex">
@@ -159,33 +166,11 @@
                                         <i class="fas fa-user m-auto text-black-100 fs-18px "></i>
                                     </div>
                                     <div class="ms-3 d-flex">
-                                        <h4 class="my-auto">1-пассажир, взрослый</h4>
+                                        <h4 class="my-auto">{{$passengers_cnt}}-пассажир, взрослый</h4>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="d-flex justify-content-end text-black-200 info position-relative">
-                                        <div class="card info-banner position-absolute w-100 bg-light" style="right: 200px">
-                                            <div class="card-body">
-                                                <h6 class="mb-2">Как заполнить данные</h6>
-                                                <p class="mb-0"><b>Общая информация</b></p>
-                                                <p>
-                                                    Данные для оформления брони билетов должны соответствовать документу пассажира, по которому он собирается путешествовать. При вводе данных все буквы должны быть написаны латиницей (в английской раскладке клавиатуры), без пробелов и дефисов. Двойная фамилия указывается слитно, без пробелов и дефисов.
-                                                </p>
-                                                <p class="mb-1"><b>Паспорт</b></p>
-                                                <ul>
-                                                    <li >
-                                                        <p class="mb-0">Написание как в документе 1234567890</p>
-                                                    </li>
-                                                    <li>
-                                                        <p>Срок действия паспорта (до какого годен) указывается при наличии</p>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <i class="far fa-question-circle my-auto"></i>
-                                        <p class="my-auto ms-1">Как заполнить данные</p>
-                                    </div>
+                                <div class="col my-auto">
+                                    <more-info-component></more-info-component>
                                 </div>
                             </div>
 
@@ -260,6 +245,196 @@
                                 </div>
                             </div>
                         </div>
+                        @endfor
+
+                        @if($request['children_amount']>0)
+                            <div class="col-1 p-0 bg-black w-100 m-auto opacity-30 d-none d-lg-block" style="height: 1px;"></div>
+                        @endif
+
+                        @for($i=1;$i<=$request['children_amount'];$i++)
+                            @php $passengers_cnt++; @endphp
+                            <div class="card-body">
+                                <div class="row pb-3">
+                                    <div class="col d-flex">
+                                        <div class="rounded-circle overflow-hidden bg-light w-lg-45px h-lg-45px h-20px w-25px my-auto d-none d-lg-flex">
+                                            <i class="fas fa-user m-auto text-black-100 fs-18px "></i>
+                                        </div>
+                                        <div class="ms-3 d-flex">
+                                            <h4 class="my-auto">{{$passengers_cnt}}-пассажир, ребенок</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col my-auto">
+                                        <more-info-component></more-info-component>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Фамилия на латинице</legend>
+                                            <input type="text" name="surname" class="w-100">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Имя на латинице</legend>
+                                            <input type="text" name="name" class="w-100">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Дата рождения</legend>
+                                            <input type="date" name="date" class="w-100">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Пол</legend>
+                                            <select class="w-100" name="sex">
+                                                <option value="m">Мужской</option>
+                                                <option value="f">Женский</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                                <div class="row pb-3">
+                                    <h4 class="m-0">Данные паспорта</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Гражданство</legend>
+                                            <select class="w-100" name="country">
+                                                <option value="Russia">Россия</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Документ</legend>
+                                            <select class="w-100" name="doc">
+                                                <option value="zag">Заграничный паспорт РФ</option>
+                                                <option value="vn">Внутренний паспорт РФ</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
+                                            <input type="text" name="number" class="w-100">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
+                                            <input type="text" name="serial" class="w-100">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Срок действия</legend>
+                                            <input type="date" name="serial" class="w-100">
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        @endfor
+
+                        @if($request['infants_amount']>0)
+                            <div class="col-1 p-0 bg-black w-100 m-auto opacity-30 d-none d-lg-block" style="height: 1px;"></div>
+                        @endif
+
+                        @for($i=1;$i<=$request['infants_amount'];$i++)
+                            @php $passengers_cnt++; @endphp
+                            <div class="card-body">
+                                <div class="row pb-3">
+                                    <div class="col d-flex">
+                                        <div class="rounded-circle overflow-hidden bg-light w-lg-45px h-lg-45px h-20px w-25px my-auto d-none d-lg-flex">
+                                            <i class="fas fa-user m-auto text-black-100 fs-18px "></i>
+                                        </div>
+                                        <div class="ms-3 d-flex">
+                                            <h4 class="my-auto">{{$passengers_cnt}}-пассажир, младенец</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col my-auto">
+                                        <more-info-component></more-info-component>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Фамилия на латинице</legend>
+                                            <input type="text" name="surname" class="w-100">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Имя на латинице</legend>
+                                            <input type="text" name="name" class="w-100">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Дата рождения</legend>
+                                            <input type="date" name="date" class="w-100">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Пол</legend>
+                                            <select class="w-100" name="sex">
+                                                <option value="m">Мужской</option>
+                                                <option value="f">Женский</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                                <div class="row pb-3">
+                                    <h4 class="m-0">Данные паспорта</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Гражданство</legend>
+                                            <select class="w-100" name="country">
+                                                <option value="Russia">Россия</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Документ</legend>
+                                            <select class="w-100" name="doc">
+                                                <option value="zag">Заграничный паспорт РФ</option>
+                                                <option value="vn">Внутренний паспорт РФ</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
+                                            <input type="text" name="number" class="w-100">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
+                                            <input type="text" name="serial" class="w-100">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Срок действия</legend>
+                                            <input type="date" name="serial" class="w-100">
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        @endfor
+
                     </div>
 
                     <div class="card border-0 shadow mb-3">

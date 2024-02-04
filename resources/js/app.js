@@ -27,6 +27,7 @@ import AirportsComponent from "./components/AirportsComponent.vue";
 import RatingComponent from "./components/RatingComponent.vue";
 import ImageInputComponent from "./components/ImageInputComponent.vue";
 import QuestionComponent from "./components/QuestionComponent.vue";
+import MoreInfoComponent from "./components/MoreInfoComponent.vue";
 
 app.component('origin-search-component', OriginSearchComponent);
 app.component('destination-search-component', DestinationSearchComponent);
@@ -36,6 +37,7 @@ app.component('airports-component', AirportsComponent);
 app.component('rating-component', RatingComponent);
 app.component('image-input-component', ImageInputComponent);
 app.component('question-component', QuestionComponent);
+app.component('more-info-component', MoreInfoComponent);
 
 /**
  * The following block of code may be used to automatically register your

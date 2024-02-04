@@ -38,7 +38,7 @@ class SearchController extends Controller
 
         // Обработка и возвращение данных по вашему усмотрению.
 
-        //dd($request['departDate']);
+        //dd($request);
 
         return view('search.index', compact(['results', 'airports', 'request', 'airlines_filter']));
     }

@@ -21,20 +21,6 @@ class MainController extends Controller
         return view('main.index', compact('airports', 'posts', 'reviews'));
     }
 
-    public function test()
-    {
-        $airportService = new AirportService();
-
-        $airports = $airportService->getAllAirports();
-        //dd($airports);
-        return view('main.index', compact('airports'));
-    }
-
-    public function booking()
-    {
-        return view('booking.index');
-    }
-
     public function profile()
     {
         return view('profile.index');

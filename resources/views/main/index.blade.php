@@ -49,7 +49,7 @@
             <div class="row">
                 @foreach($posts as $post)
                 <!-- BEGIN col-3 -->
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-6 latest-news pt-2 rounded-3">
                     <!-- BEGIN news -->
                     <div class="news">
                         <div class="news-media">
@@ -69,7 +69,7 @@
             </div>
             <!-- END row -->
 
-            <div class="text-center">
+            <div class="text-center mt-2">
                 <a href="{{route('blog.index', 1 )}}" class="arrow-btn">
                     <span>
                         <i class="fa fa-arrow-right first"></i>
