@@ -13,7 +13,7 @@ class FlightSearchService
         $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
             'chromedriver_arguments' => ['--headless=new', '--disable-gpu', '--no-sandbox'],
         ], 'http://localhost');
-        $client = Client::createChromeClient();
+        //$client = Client::createChromeClient();
         $depart_date=date('dm',strtotime($depart_date));
 
         $crawler = $client->request('GET', 'https://www.onetwotrip.com/ru/f/search/'.$depart_date.$origin.$destination.'?sc=E&ac=1&srcmarker2=newindex');
