@@ -1,9 +1,12 @@
 <template>
     <fieldset class="first_input p-0 col-1 h-60px m-0 col-lg col-6 position-relative">
         <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Пассажиры, класс</legend>
-        <input class="bg-transparent border-0 ms-3 p-0 h-100" name="passengers_amount" @focus="toggleCard" @blur="disableCard" type="text" v-model="total" readonly/>
+        <input class="bg-transparent border-0 ms-3 p-0 h-100" name="passengers_amount" @focus="toggleCard" type="text" v-model="total" readonly/>
+        <input type="hidden" name="passengers[adults]" v-model="counter1">
+        <input type="hidden" name="passengers[children]" v-model="counter2">
+        <input type="hidden" name="passengers[infants]" v-model="counter3">
 
-        <div class="card position-absolute mt-3 top-100 z-3" v-if="isCardVisible" ref="card" id="card">
+        <div class="card position-absolute mt-3 top-100 z-3" v-if="isCardVisible" ref="card" id="card" @click.stop>
             <ul class="list-group border-0">
                 <li class="list-group-item border-0 select-item">
 
@@ -17,7 +20,7 @@
                             <div @click="decrement(1)" class="col-4 d-flex bg-light rounded-circle text-black-200 p-0 btn">
                                 <i class="fas fa-minus m-auto"></i>
                             </div>
-                            <input name="passengers[adults]" v-model="counter1" class="col-4"/>
+                            <input name="passengers[adults]" v-model="counter1" class="col-4 text-center" readonly/>
                             <div @click="increment(1)" class="col-4 d-flex bg-light rounded-circle text-black-200 p-0 btn">
                                 <i class="fas fa-plus m-auto"></i>
                             </div>
@@ -38,7 +41,7 @@
                             <div @click="decrement(2)" class="col-4 d-flex bg-light rounded-circle text-black-200 p-0 btn">
                                 <i class="fas fa-minus m-auto"></i>
                             </div>
-                            <input name="passengers[children]" v-model="counter2" class="col-4"/>
+                            <input name="passengers[children]" v-model="counter2" class="col-4 text-center" readonly/>
                             <div @click="increment(2)" class="col-4 d-flex bg-light rounded-circle text-black-200 p-0 btn">
                                 <i class="fas fa-plus m-auto"></i>
                             </div>
@@ -59,7 +62,7 @@
                             <div @click="decrement(3)" class="col-4 d-flex bg-light rounded-circle text-black-200 p-0 btn">
                                 <i class="fas fa-minus m-auto"></i>
                             </div>
-                            <input name="passengers[infants]" v-model="counter3" class="col-4"/>
+                            <input name="passengers[infants]" v-model="counter3" class="col-4 text-center" readonly/>
                             <div @click="increment(3)" class="col-4 d-flex bg-light rounded-circle text-black-200 p-0 btn">
                                 <i class="fas fa-plus m-auto"></i>
                             </div>
@@ -105,11 +108,21 @@ export default {
         toggleCard()
         {
             this.isCardVisible = true;
+            if (this.isCardVisible) {
+                // Добавим слушатель клика к документу при открытии div
+                document.addEventListener('click', this.handleDocumentClick);
+            } else {
+                // Удалим слушатель клика к документу при закрытии div
+                document.removeEventListener('click', this.handleDocumentClick);
+            }
         },
-        disableCard()
-        {
-            this.isCardVisible = false;
+        handleDocumentClick(event) {
+            // Проверим, был ли клик внутри div, если нет, скроем div
+            if (!this.$el.contains(event.target)) {
+                this.isCardVisible=false;
+            }
         },
+
         increment(counterNumber)
         {
             this['counter' + counterNumber]++;

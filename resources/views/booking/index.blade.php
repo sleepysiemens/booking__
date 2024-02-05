@@ -159,6 +159,9 @@
 
                         @for($i=1;$i<=$request['adults_amount'];$i++)
                             @php $passengers_cnt++; @endphp
+                            @if($passengers_cnt!=1)
+                                <div class="col-1 p-0 bg-black m-auto opacity-20 d-none d-lg-block" style="height: 1px; width: 95%"></div>
+                            @endif
                         <div class="card-body">
                             <div class="row pb-3">
                                 <div class="col d-flex">
@@ -247,12 +250,11 @@
                         </div>
                         @endfor
 
-                        @if($request['children_amount']>0)
-                            <div class="col-1 p-0 bg-black w-100 m-auto opacity-30 d-none d-lg-block" style="height: 1px;"></div>
-                        @endif
-
                         @for($i=1;$i<=$request['children_amount'];$i++)
                             @php $passengers_cnt++; @endphp
+                            @if($passengers_cnt!=1)
+                                <div class="col-1 p-0 bg-black m-auto opacity-20 d-none d-lg-block" style="height: 1px; width: 95%"></div>
+                            @endif
                             <div class="card-body">
                                 <div class="row pb-3">
                                     <div class="col d-flex">
@@ -341,12 +343,11 @@
                             </div>
                         @endfor
 
-                        @if($request['infants_amount']>0)
-                            <div class="col-1 p-0 bg-black w-100 m-auto opacity-30 d-none d-lg-block" style="height: 1px;"></div>
-                        @endif
-
                         @for($i=1;$i<=$request['infants_amount'];$i++)
                             @php $passengers_cnt++; @endphp
+                            @if($passengers_cnt!=1)
+                                <div class="col-1 p-0 bg-black m-auto opacity-20 d-none d-lg-block" style="height: 1px; width: 95%"></div>
+                            @endif
                             <div class="card-body">
                                 <div class="row pb-3">
                                     <div class="col d-flex">
@@ -456,21 +457,22 @@
                 <div class="col-lg-3 col-12">
                     <div class="card border-0 shadow">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h6 class="my-auto">1 пассажир</h6>
-                                </div>
-                                <div class="col-6">
-                                    <h6 class="my-auto fw-500 text-end">699 ₽ / 14 €</h6>
-                                </div>
-                            </div>
-                            <div class="bg-black opacity-10 d-block w-100 my-3" style="height: 1px;"></div>
+                                    <price-check-component
+                                        adults_amount="{{$request['adults_amount']}}"
+                                        children_amount="{{$request['children_amount']}}"
+                                        infants_amount="{{$request['infants_amount']}}"
+                                        passengers_amount="{{$request['passengers_amount']}}"
+                                        total_rub="{{$request['total_rub']}}"
+                                        total_eur="{{$request['total_eur']}}"
+                                    >
+                                    </price-check-component>
+                            <div class="bg-black opacity-10 d-block w-100 mb-3" style="height: 1px;"></div>
                             <div class="row">
                                 <div class="col-8">
                                     <h6 class="my-1">При оплате в рублях:</h6>
                                 </div>
                                 <div class="col-4">
-                                    <h3 class="my-auto">699 ₽</h3>
+                                    <h3 class="my-auto fs-20px fw-600 text-end">{{$request['total_rub']}} ₽</h3>
                                 </div>
                             </div>
                             <div class="row">
@@ -479,11 +481,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-7">
                                     <h6 class="my-1">При оплате в евро:</h6>
                                 </div>
-                                <div class="col-4">
-                                    <h5 class="my-auto">14 €</h5>
+                                <div class="col-5">
+                                    <h5 class="my-auto fs-20px fw-600 text-end">{{$request['total_eur']}} €</h5>
                                 </div>
                             </div>
                             <div class="row mt-2">
@@ -495,6 +497,16 @@
                                     </div>
                                     <i class="fas fa-info-circle my-auto"></i>
                                     <p class="my-auto ms-2">Бронь действительна до 7 дней</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-black opacity-10 d-block w-100 my-3" style="height: 1px;"></div>
+
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <fieldset class="border border-1 rounded" style="all: revert;">
+                                        <legend class="text-black-200 px-2" style="all: revert;">Промокод</legend>
+                                        <input type="text" name="promo" class="w-100"></fieldset>
                                 </div>
                             </div>
 

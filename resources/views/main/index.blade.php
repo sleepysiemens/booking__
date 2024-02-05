@@ -269,7 +269,7 @@
         @if(isset($request))
             window.requestData = @json($request);
         @else
-            window.requestData = {req:' ',origin:'',origin_:'', destination:'', destination_:'', departDate:'', returnDate:'', passengers: {adults: 0, children: 0, infants: 0}, trip_class:0, passengers_amount: '1 пассажир'};
+            window.requestData = {req:' ',origin:'',origin_:'', destination:'', destination_:'', departDate:'', returnDate:'', passengers: {adults: 1, children: 0, infants: 0}, trip_class:0, passengers_amount: '1 пассажир'};
         @endif
         //console.log(window.requestData);
     </script>

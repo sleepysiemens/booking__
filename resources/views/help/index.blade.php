@@ -89,22 +89,7 @@
                                 ];
                         @endphp
                         @foreach($questions as $question)
-                            <div class="card shadow mb-3 border-0 cursor-pointer" id="question-{{$i}}">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <h4 class="col m-0 fw-500 fs-20px">{!! $question['question'] !!}</h4>
-                                        <span class="col-1 text-black opacity-50 d-flex filter-btn" id="question-{{$i}}-marker">
-                            <i class="fas fa-chevron-down m-auto"></i>
-                        </span>
-                                    </div>
-                                    <div class="row fs-16px" style="display: none" id="answer-{{$i}}">
-                                        <div class="col pt-3">
-                                            <p>{!! $question['answer'] !!}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @php $i++; @endphp
+                            <question-component class="bg-white" question="{{$question['question']}}" answer="{{$question['answer']}}"></question-component>
                         @endforeach
                     </div>
 
@@ -123,22 +108,7 @@
                                 ];
                         @endphp
                         @foreach($questions as $question)
-                            <div class="card shadow mb-3 border-0 cursor-pointer" id="question-{{$i}}">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <h4 class="col m-0 fw-500 fs-20px">{!! $question['question'] !!}</h4>
-                                        <span class="col-1 text-black opacity-50 d-flex filter-btn" id="question-{{$i}}-marker">
-                            <i class="fas fa-chevron-down m-auto"></i>
-                        </span>
-                                    </div>
-                                    <div class="row fs-16px" style="display: none" id="answer-{{$i}}">
-                                        <div class="col pt-3">
-                                            <p>{!! $question['answer'] !!}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @php $i++; @endphp
+                            <question-component class="bg-white" question="{{$question['question']}}" answer="{{$question['answer']}}"></question-component>
                         @endforeach
                     </div>
 
@@ -149,24 +119,4 @@
 @endsection
 
 @section('scripts')
-    <script>
-        let marker=[];
-        for(let cnt=1;cnt<={{$i}};cnt++)
-        {
-            marker[cnt]=0;
-            $('#question-'+cnt).on('click', function (){
-                $('#answer-'+cnt).slideToggle( "fast", function() {});
-                if(marker[cnt]==0)
-                {
-                    $('#question-'+cnt+'-marker').addClass('rotate-btn');
-                    marker[cnt]++;
-                }
-                else
-                {
-                    $('#question-'+cnt+'-marker').removeClass('rotate-btn');
-                    marker[cnt]--;
-                }
-            })
-        }
-    </script>
 @endsection

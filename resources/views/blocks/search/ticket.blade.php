@@ -15,7 +15,7 @@
                         <div class="row row-cols-lg-4 mt-3" >
                             <div class="col">
                                 <div class="container">
-                                    <p class="text-dark mb-0">{{$request['departDate']}}</p>
+                                    <p class="text-dark mb-0">{{date("Y.m.d", strtotime($request['departDate']))}}</p>
                                     <h2 class="fw-400 my-1 ff-montserrat">{{$result['depart_time']}}</h2>
                                     <p class="text-dark fw-300 mt-0">{{$result['origin']}}</p>
                                 </div>
@@ -28,7 +28,7 @@
                             </div>
                             <div class="col">
                                 <div class="container">
-                                    <p class="text-dark mb-0">{{$request['departDate']}}</p>
+                                    <p class="text-dark mb-0">{{date("Y.m.d", strtotime($request['departDate']))}}</p>
                                     <h2 class="fw-400 my-1 ff-montserrat">{{$result['arrival_time']}}</h2>
                                     <p class="text-dark fw-300 mt-0">{{$result['destination']}}</p>
                                 </div>
@@ -148,6 +148,8 @@
                                 <input type="hidden" name="adults_amount" value="{{$request['passengers']['adults']}}">
                                 <input type="hidden" name="children_amount" value="{{$request['passengers']['children']}}">
                                 <input type="hidden" name="infants_amount" value="{{$request['passengers']['infants']}}">
+
+                                <input type="hidden" name="passengers_amount" value="{{$request['passengers_amount']}}">
 
                                 <button class="btn-primary btn fs-12px h-55px m-auto">Забронировать</button>
                                 <div class="d-flex mt-lg-3 justify-content-center details mt-2">
