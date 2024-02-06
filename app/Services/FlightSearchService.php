@@ -121,7 +121,10 @@ class FlightSearchService
 
     public function parseFlightInfo($origin, $destination, $depart_date)
     {
-        $client = Client::createChromeClient();
+        //$client = Client::createChromeClient();
+        $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
+            'chromedriver_arguments' => ['--headless=new', '--disable-gpu', '--no-sandbox'],
+        ], 'http://localhost');
         $depart_date=date('dm',strtotime($depart_date));
 
         $crawler = $client->request('GET', 'https://www.onetwotrip.com/_avia-search-proxy/search/v3?route='.$depart_date.$origin.$destination.'&ad=1&cn=0&in=0&showDeeplink=false&cs=E&source=google_adwords&priceIncludeBaggage=false&noClearNoBags=true&noMix=true&srcmarker=b2b_p1_b2b-generic_wld_s_kkwd-839752446941_c_20378146076_154201628133_676270550064_1010561&cryptoTripsVersion=61&doNotMap=true');
