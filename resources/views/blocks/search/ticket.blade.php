@@ -15,9 +15,9 @@
                         <div class="row row-cols-lg-4 mt-3" >
                             <div class="col">
                                 <div class="container">
-                                    <p class="text-dark mb-0">{{date("Y.m.d", strtotime($request['departDate']))}}</p>
-                                    <h2 class="fw-400 my-1 ff-montserrat">{{$result['depart_time']}}</h2>
-                                    <p class="text-dark fw-300 mt-0">{{$result['origin']}}</p>
+                                    <p class="text-dark mb-0">{{date("Y.m.d", $result['depart_datetime'])}}</p>
+                                    <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $result['depart_datetime'])}}</h2>
+                                    <p class="text-dark fw-300 mt-0">{{$result['origin']}}, {{$request['origin']}}</p>
                                 </div>
                             </div>
                             <div class="col d-flex opacity-25">
@@ -28,16 +28,16 @@
                             </div>
                             <div class="col">
                                 <div class="container">
-                                    <p class="text-dark mb-0">{{date("Y.m.d", strtotime($request['departDate']))}}</p>
-                                    <h2 class="fw-400 my-1 ff-montserrat">{{$result['arrival_time']}}</h2>
-                                    <p class="text-dark fw-300 mt-0">{{$result['destination']}}</p>
+                                    <p class="text-dark mb-0">{{date("Y.m.d", $result['arrival_datetime'])}}</p>
+                                    <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $result['arrival_datetime'])}}</h2>
+                                    <p class="text-dark fw-300 mt-0">{{$result['destination']}}, {{$request['destination']}}</p>
                                 </div>
                             </div>
                             <div class="col d-none d-lg-block">
                                 <div class="container">
                                     <p class="fw-500 mb-0">{{$result['duration']}}</p>
                                     <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                    {{--<p class="fw-400 fs-12px text-black-200">Рейс {{8}}</p>--}}
+                                    <p class="fw-400 fs-12px text-black-200">Рейс {{$result['flight_num']}}</p>
                                 </div>
                             </div>
                         </div>
@@ -143,7 +143,7 @@
                                 <input type="hidden" name="arrivalTime" value="{{$result['arrival_time']}}">
                                 <input type="hidden" name="duration" value="{{$result['duration']}}">
                                 <input type="hidden" name="airline" value="{{$result['airline']}}">
-                                <input type="hidden" name="airline_logo" value="{{$result['airline_logo']}}">
+                                {{--<input type="hidden" name="airline_logo" value="{{$result['airline_logo']}}">--}}
 
                                 <input type="hidden" name="adults_amount" value="{{$request['passengers']['adults']}}">
                                 <input type="hidden" name="children_amount" value="{{$request['passengers']['children']}}">

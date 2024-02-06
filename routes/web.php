@@ -30,7 +30,6 @@ Route::post('/reviews', 'App\Http\Controllers\ReviewController@store')->name('re
 
 Route::post('/booking', 'App\Http\Controllers\BookingController@index')->name('booking.index');
 
-
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], function ()
 {
     Route::get('/', 'App\Http\Controllers\Admin\MainController@index')->name('admin.index');

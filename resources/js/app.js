@@ -29,6 +29,7 @@ import ImageInputComponent from "./components/ImageInputComponent.vue";
 import QuestionComponent from "./components/QuestionComponent.vue";
 import MoreInfoComponent from "./components/MoreInfoComponent.vue";
 import PriceCheckController from "./components/PriceCheckController.vue";
+import LoadingComponent from "./components/LoadingComponent.vue";
 
 app.component('origin-search-component', OriginSearchComponent);
 app.component('destination-search-component', DestinationSearchComponent);
@@ -40,6 +41,7 @@ app.component('image-input-component', ImageInputComponent);
 app.component('question-component', QuestionComponent);
 app.component('more-info-component', MoreInfoComponent);
 app.component('price-check-component', PriceCheckController);
+app.component('loading-component', LoadingComponent);
 
 /**
  * The following block of code may be used to automatically register your

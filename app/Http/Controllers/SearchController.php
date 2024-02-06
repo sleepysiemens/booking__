@@ -6,6 +6,9 @@ use App\Services\AirportService;
 use App\Services\FlightSearchService;
 use Illuminate\Support\Facades\Http;
 
+use Symfony\Component\Panther\Client;
+
+
 class SearchController extends Controller
 {
     public function __construct(FlightSearchService $flightSearchService)
@@ -28,18 +31,13 @@ class SearchController extends Controller
             $request['trip_class']=0;
         }
 
+        //dd($this->flightSearchService->parseFlightInfo());
+
         $airportService = new AirportService();
         $airports = $airportService->getAllAirports();
 
-
-        $results = $this->flightSearchService->parseFlightInfo($request['origin_'], $request['destination_'], $request['departDate']);
-
-        $airlines_filter=$this->flightSearchService->FilterAirlines($results);
-
-        // Обработка и возвращение данных по вашему усмотрению.
-
-        //dd($request);
-
-        return view('search.index', compact(['results', 'airports', 'request', 'airlines_filter']));
+        return view('search.index', compact([ 'airports', 'request']));
     }
+
+
 }
