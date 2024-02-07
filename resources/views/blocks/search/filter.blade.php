@@ -11,11 +11,11 @@
             </div>
             <div class="container" id="transfer">
                     <div class="row pt-3">
-                        <input class="col-1 h-20px my-auto" type="checkbox" id="transfer-0" name="transfer" value="0">
+                        <input wire:model.live="transfer" class="col-1 h-20px my-auto" type="radio" id="transfer-0" value="0">
                         <label class="col-auto" for="transfer-0"><p class="m-auto">Без пересадок</p></label>
                     </div>
                     <div class="row pt-3">
-                        <input class="col-1 h-20px my-auto" type="checkbox" id="transfer-1" name="transfer" value="1">
+                        <input wire:model.live="transfer" class="col-1 h-20px my-auto" type="radio" id="transfer-1" value="1">
                         <label class="col-auto" for="transfer-1"><p class="m-auto">С пересадками</p></label>
                     </div>
             </div>
@@ -37,7 +37,7 @@
                 @foreach($airlines_filter as $airline)
                     @php $ii++; @endphp
                     <div class="row pt-3">
-                        <input class="col-1 h-20px my-auto" type="checkbox" id="company-{{$ii}}">
+                        <input wire:model.live="airlines" class="col-1 h-20px my-auto" type="checkbox" value="{{$airline['airline']}}" id="company-{{$ii}}">
                         <label class="col-auto d-flex" for="company-{{$ii}}">
                             <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
                                 <img class="w-100 h-100" src="{{asset('img/SU.png')}}" alt="avia">
