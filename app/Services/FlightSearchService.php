@@ -3,8 +3,10 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use Symfony\Component\Panther\Client;
-
+use App\Models\Airlines;
 
 class FlightSearchService
 {
@@ -119,12 +121,34 @@ class FlightSearchService
         return $result;
     }
 
+    public function getAllAirlines()
+    {
+        if(Airlines::first()==null)
+        {
+            $this->generateAllAirlines();
+        }
+    }
+
+    public function generateAllAirlines()
+    {
+        $response = Http::get('https://api.travelpayouts.com/data/en/airlines.json', ['x-access-token:' => '048a44328dd6efc65b762b8e8c20e30a']);
+        $body = $response->body();
+
+        $airlineData = json_decode($body, true);
+
+        foreach ($airlineData as $airline)
+        {
+            $data=['code'=>$airline['code'], 'name'=>$airline['name']];
+            Airlines::create($data);
+        }
+    }
+
     public function parseFlightInfo($origin, $destination, $depart_date)
     {
         $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
             'chromedriver_arguments' => ['--headless=new', '--disable-gpu', '--no-sandbox'],
         ], 'http://localhost');
-        //$client = Client::createChromeClient();
+        $client = Client::createChromeClient();
 
         $depart_date=date('dm',strtotime($depart_date));
 
@@ -137,37 +161,54 @@ class FlightSearchService
             });
 
         $json=json_decode($json[0]);
-        //dd($json->trips);
         $tickets=[];
+
+        $this->getAllAirlines();
+
+        $transportationVariants=collect($json->transportationVariants);
+        $prices=collect($json->prices);
 
         foreach ($json->trips as $data)
         {
             if($destination==$data->to)//выводить только прямые билеты. Исправить
             {
-                $startDateTime=explode('T', $data->startDateTime);
-                $endDateTime=explode('T', $data->endDateTime);
                 $duration=
                     [
                         'hours'=>floor($data->tripTimeMinutes / 60),
                         'minutes'=>$data->tripTimeMinutes % 60,
                     ];
+
+                $airline=Airlines::query()->where('code','=',$data->carrier)->select('name')->first();
+
+                //price_start
+                $transportationVariants_id=$transportationVariants->where('tripRefs.0.tripId', '=', $data->id)->first();
+                if($transportationVariants_id==null)
+                    $transportationVariants_id=$transportationVariants->where('tripRefs.1.tripId', '=', $data->id)->first();
+
+                $price='не найдено';
+                if($transportationVariants_id!=null)
+                    $price=$prices->where('transportationVariantIds.0','=', $transportationVariants_id->id)->first();
+
+                //$price=round($price->totalAmount);
+                $price= number_format( $price->totalAmount , 0 , " "  , " " );
+
+                //price_end
+
                 $tickets[] =
                     [
-                        'depart_date' => $startDateTime[0],
                         'depart_datetime' => strtotime($data->startDateTime),
-                        'depart_time' => $startDateTime[1],
-                        'arrival_date' => $endDateTime[0],
                         'arrival_datetime' => strtotime($data->endDateTime),
-                        'arrival_time' => $endDateTime[1],
-                        'airline' => 'не найдено',
+                        'airline' => $airline->name,
                         'duration' => $duration['hours'].' ч '.$duration['minutes'].' мин',
-                        'price' => 'не найдено',
+                        'price' => $price,
                         'origin' => $data->from,
                         'destination' => $data->to,
                         'flight_num' => $data->carrier.' '.$data->carrierTripNumber,
                     ];
             }
         }
+
+        //dd($tickets);
 
         return($tickets);
     }

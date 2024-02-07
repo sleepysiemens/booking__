@@ -11,7 +11,7 @@
                     </div>
                     {{--/HEADER--}}
                     {{--BODY--}}
-                    <div style="display: block;" id="details-short-{{$cnt}}">
+                    <div style="display: block;">
                         <div class="row row-cols-lg-4 mt-3" >
                             <div class="col">
                                 <div class="container">
@@ -138,9 +138,8 @@
                                 <input type="hidden" name="origin" value="{{$request['origin']}}">
                                 <input type="hidden" name="destination_" value="{{$result['destination']}}">
                                 <input type="hidden" name="destination" value="{{$request['destination']}}">
-                                <input type="hidden" name="departDate" value="{{$request['departDate']}}">
-                                <input type="hidden" name="departTime" value="{{$result['depart_time']}}">
-                                <input type="hidden" name="arrivalTime" value="{{$result['arrival_time']}}">
+                                <input type="hidden" name="depart_datetime" value="{{$result['depart_datetime']}}">
+                                <input type="hidden" name="arrival_datetime" value="{{$result['arrival_datetime']}}">
                                 <input type="hidden" name="duration" value="{{$result['duration']}}">
                                 <input type="hidden" name="airline" value="{{$result['airline']}}">
                                 {{--<input type="hidden" name="airline_logo" value="{{$result['airline_logo']}}">--}}

@@ -28,7 +28,7 @@ class AirportService
     public function getAllAirports()
     {
         // Проверяем, есть ли кэш для этого массива
-        return Cache::remember('big_array_cache_key', now()->addHour(), function () {
+        return Cache::remember('airports_array', now()->addHour(), function () {
             // Если кэша нет, создаем массив и кэшируем его
             return $this->generateAllAirports();
         });

@@ -37,14 +37,7 @@
     <!-- END section -->
     <div class="section d-lg-none bg-light py-0" style="height: 220px;">
     </div>
-    <div class="section bg-light py-3 d-lg-none">
-        <div class="container">
-            <button class="btn border-primary border-2 bg-primary-100 text-primary w-100 d-flex shadow h-50px justify-content-center" id="filter-btn">
-                <i class="fas fa-filter my-auto"></i>
-                <p class="my-auto ms-2">Фильтр</p>
-            </button>
-        </div>
-    </div>
+
     <!-- BEGIN section -->
     <div class="section pt-0 bg-light min-vh-100 pt-lg-5">
         <!-- BEGIN container -->
