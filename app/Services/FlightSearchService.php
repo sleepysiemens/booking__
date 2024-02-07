@@ -148,7 +148,7 @@ class FlightSearchService
         $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
             'chromedriver_arguments' => ['--headless=new', '--disable-gpu', '--no-sandbox'],
         ], 'http://localhost');
-        $client = Client::createChromeClient();
+        //$client = Client::createChromeClient();
 
         $depart_date=date('dm',strtotime($depart_date));
 
