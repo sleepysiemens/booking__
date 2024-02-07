@@ -50,7 +50,7 @@
         <!-- BEGIN container -->
         <div class="container px-0">
             <!-- BEGIN row -->
-            <livewire:SearchResults  :request="$request" lazy/>
+            <livewire:search_res  :request="$request" lazy/>
             <!-- END row -->
 
         </div>

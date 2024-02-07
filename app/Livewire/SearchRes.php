@@ -2,11 +2,10 @@
 
 namespace App\Livewire;
 
-use App\Services\AirportService;
 use App\Services\FlightSearchService;
 use Livewire\Component;
 
-class searchResults extends Component
+class SearchRes extends Component
 {
     public $request;
     public function initializeItems($request)
