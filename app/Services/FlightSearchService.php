@@ -170,7 +170,7 @@ class FlightSearchService
 
         foreach ($json->trips as $data)
         {
-            if($destination==$data->to)//выводить только прямые билеты. Исправить
+            //if($destination==$data->to)//выводить только прямые билеты. Исправить
             {
                 $duration=
                     [
@@ -190,14 +190,18 @@ class FlightSearchService
                     $price=$prices->where('transportationVariantIds.0','=', $transportationVariants_id->id)->first();
 
                 //$price=round($price->totalAmount);
-                $price= number_format( $price->totalAmount , 0 , " "  , " " );
-
+                $price= $price->totalAmount;
                 //price_end
+
+                $depart_date=explode('T', $data->startDateTime);
+                $arrival_date=explode('T', $data->endDateTime);
 
                 $tickets[] =
                     [
                         'depart_datetime' => strtotime($data->startDateTime),
+                        'depart_date' => $depart_date[0],
                         'arrival_datetime' => strtotime($data->endDateTime),
+                        'arrival_date' => $arrival_date[0],
                         'airline' => $airline->name,
                         'duration' => $duration['hours'].' ч '.$duration['minutes'].' мин',
                         'price' => $price,

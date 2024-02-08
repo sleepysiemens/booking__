@@ -12,10 +12,17 @@ class SearchRes extends Component
     public $transfer;
     public $airlines=[];
 
+    public $depart_start_time_filter;
+    public $depart_end_time_filter;
+    public $arrival_start_time_filter;
+    public $arrival_end_time_filter;
+    public $reset_filter=0;
+
     public function initializeItems($request)
     {
         $this->request = $request;
     }
+
 
     public function placeholder()
     {
@@ -30,10 +37,21 @@ class SearchRes extends Component
         $results = $this->flightSearchService->parseFlightInfo($request['origin_'], $request['destination_'], $request['departDate']);
         $airlines_filter=$this->flightSearchService->FilterAirlines($results);
 
-        $results=collect($results);
+        if($this->reset_filter==1)
+        {
+            $this->transfer=null;
+            $this->airlines=[];
+            $this->depart_start_time_filter=null;
+            $this->depart_end_time_filter=null;
+            $this->arrival_start_time_filter=null;
+            $this->arrival_end_time_filter=null;
+            $this->reset_filter=0;
+        }
 
         if($this->airlines!=null)
         {
+            $results=collect($results);
+
             $cnt=0;
             foreach ($this->airlines as $airline)
             {
@@ -52,6 +70,68 @@ class SearchRes extends Component
             }
         }
 
+        if($this->depart_start_time_filter!=null)
+        {
+            $results=collect($results);
+
+            $i=0;
+            foreach ($results as $result)
+            {
+                if($result['depart_datetime']<=strtotime($result['depart_date'].$this->depart_start_time_filter))
+                {
+                    unset($results[$i]);
+                }
+                $i++;
+            }
+        }
+
+        if($this->depart_end_time_filter!=null)
+        {
+            $results=collect($results);
+
+            $i=0;
+            foreach ($results as $result)
+            {
+                if($result['depart_datetime']>=strtotime($result['depart_date'].$this->depart_end_time_filter))
+                {
+                    unset($results[$i]);
+                }
+                $i++;
+            }
+        }
+
+        if($this->arrival_start_time_filter!=null)
+        {
+            $results=collect($results);
+
+            $i=0;
+            foreach ($results as $result)
+            {
+                if($result['arrival_datetime']<=strtotime($result['arrival_date'].$this->arrival_start_time_filter))
+                {
+                    unset($results[$i]);
+                }
+                $i++;
+            }
+        }
+
+        if($this->arrival_end_time_filter!=null)
+        {
+            $results=collect($results);
+
+            $i=0;
+            foreach ($results as $result)
+            {
+                if($result['arrival_datetime']>=strtotime($result['arrival_date'].$this->arrival_end_time_filter))
+                {
+                    unset($results[$i]);
+                }
+                $i++;
+            }
+        }
+
+        //dd($results);
         return view('livewire.search-results', compact(['results', 'request', 'airlines_filter']));
     }
+
 }

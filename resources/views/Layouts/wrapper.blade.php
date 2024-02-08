@@ -75,10 +75,18 @@
                 </div>
             </div>
             <div class="header-btn">
-                <a href="{{route('login')}}" class="btn btn-primary fw-bold rounded-pill header-link">
-                    <p class="first">Войти <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
-                    <p class="second">Войти <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
-                </a>
+                @if(auth()->user()==null)
+                    <a href="{{route('login')}}" class="btn btn-primary fw-bold rounded-pill header-link">
+                        <p class="first">Войти <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
+                        <p class="second">Войти <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
+                    </a>
+                @else
+                    <a href="{{route('login')}}" class="btn btn-primary fw-bold rounded-pill header-link">
+                        <p class="first">Мой профиль <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
+                        <p class="second">Мой профиль <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
+                    </a>
+                @endif
+
             </div>
             <button class="header-mobile-nav-toggler" type="button" data-toggle="header-mobile-nav">
                 <span class="header-mobile-nav-toggler-icon"></span>

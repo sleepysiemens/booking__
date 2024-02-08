@@ -125,12 +125,12 @@
                     <div class="container h-100">
                         <div class="h-100 d-flex d-lg-block justify-content-between">
                             <div class="d-lg-none">
-                                <p class="fw-500 mb-0">4 ч 30 мин</p>
+                                <p class="fw-500 mb-0">{{$result['duration']}}</p>
                                 <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                <p class="fw-400 fs-12px text-black-200">Рейс {{9}}</p>
+                                <p class="fw-400 fs-12px text-black-200">Рейс {{$result['flight_num']}}</p>
                             </div>
                             <div class="row my-auto">
-                                <h2 class="fw-500 my-lg-1 fs-22px ff-montserrat text-lg-center text-end mt-lg-3">{{$result['price']}} ₽</h2>
+                                <h2 class="fw-500 my-lg-1 fs-22px ff-montserrat text-lg-center text-end mt-lg-3">{{ number_format( $result['price'] , 0 , " "  , " " )}} ₽</h2>
                             </div>
                             <form class="row mt-lg-5 d-flex position-relative" method="post" action="{{route('booking.index')}}">
                                 @csrf
@@ -142,7 +142,7 @@
                                 <input type="hidden" name="arrival_datetime" value="{{$result['arrival_datetime']}}">
                                 <input type="hidden" name="duration" value="{{$result['duration']}}">
                                 <input type="hidden" name="airline" value="{{$result['airline']}}">
-                                {{--<input type="hidden" name="airline_logo" value="{{$result['airline_logo']}}">--}}
+                                <input type="hidden" name="flight_num" value="{{$result['flight_num']}}">
 
                                 <input type="hidden" name="adults_amount" value="{{$request['passengers']['adults']}}">
                                 <input type="hidden" name="children_amount" value="{{$request['passengers']['children']}}">

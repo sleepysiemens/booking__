@@ -35,13 +35,5 @@ class MainController extends Controller
     {
         return view('help.index');
     }
-    public function wait($stage)
-    {
-        return view('wait.index', compact(['stage']));
-    }
 
-    public function ticket()
-    {
-        return view('ticket.index');
-    }
 }

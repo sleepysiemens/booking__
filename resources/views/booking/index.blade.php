@@ -31,7 +31,8 @@
         <!-- END container -->
     </div>
     <!-- END section -->
-    <div class="section bg-light pt-4">
+    <form class="section bg-light pt-4" method="post" action="{{route('pay.post.index')}}">
+        @csrf
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-12">
@@ -60,8 +61,8 @@
                                 <div class="row row-cols-lg-4 mt-3">
                                     <div class="col">
                                         <div class="container">
-                                            <p class="text-dark mb-0">{{date("d M D",strtotime($request['departDate']))}}</p>
-                                            <h2 class="fw-400 my-1 ff-montserrat">{{$request['departTime']}}</h2>
+                                            <p class="text-dark mb-0">{{date("d M D", $request['depart_datetime'])}}</p>
+                                            <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $request['depart_datetime'])}}</h2>
                                             <p class="text-dark fw-300 mt-0">{{$request['origin']}} ({{$request['origin_']}})</p>
                                         </div>
                                     </div>
@@ -72,8 +73,8 @@
                                     </div>
                                     <div class="col">
                                         <div class="container">
-                                            <p class="text-dark mb-0">{{date("d M D",strtotime($request['departDate']))}}</p>
-                                            <h2 class="fw-400 my-1 ff-montserrat">{{$request['arrivalTime']}}</h2>
+                                            <p class="text-dark mb-0">{{date("d M D", $request['arrival_datetime'])}}</p>
+                                            <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $request['arrival_datetime'])}}</h2>
                                             <p class="text-dark fw-300 mt-0 fs-12px">{{$request['destination']}} ({{$request['destination_']}})</p>
                                         </div>
                                     </div>
@@ -81,7 +82,7 @@
                                         <div class="container">
                                             <p class="fw-500 mb-0">{{$request['duration']}}</p>
                                             <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                            {{--<p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>--}}
+                                            <p class="fw-400 fs-12px text-black-200">{{$request['flight_num']}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -133,26 +134,44 @@
                         </div>
                     </div>
 
-                    <div class="card border-0 shadow mb-3">
-                        <div class="card-body">
-                            <h4 class="m-0">Контактные данные</h4>
-                            <p class="opacity-50 mt-2">На почту мы отправим документ “Подтверждение бронирования”</p>
-                            <div class="row pb-2">
-                                <div class="col">
-                                    <fieldset style="all: revert;" class="border border-1 rounded">
-                                        <legend style="all: revert;" class="text-black-200 px-2">Email</legend>
-                                        <input type="email" name="email" class="w-100">
-                                    </fieldset>
-                                </div>
-                                <div class="col">
-                                    <fieldset style="all: revert;" class="border border-1 rounded">
-                                        <legend style="all: revert;" class="text-black-200 px-2">Телефон</legend>
-                                        <input type="tel" name="phone" class="w-100">
-                                    </fieldset>
+                    @if(auth()->user()!=null)
+                        <div class="card border-0 shadow mb-3">
+                            <div class="card-body">
+                                <h4 class="m-0">Контактные данные</h4>
+                                <p class="opacity-50 mt-2">На почту мы отправим документ “Подтверждение бронирования”</p>
+                                <div class="row pb-2">
+                                    <div class="col">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Email</legend>
+                                            <input type="email" name="email" class="w-100" value="{{auth()->user()->email}}" required>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col">
+                                        <fieldset style="all: revert;" class="border border-1 rounded">
+                                            <legend style="all: revert;" class="text-black-200 px-2">Телефон</legend>
+                                            <input type="tel" name="phone" class="w-100" value="{{auth()->user()->phone}}">
+                                        </fieldset>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="card border-0 shadow mb-3">
+                            <div class="card-body">
+                                <h4 class="m-0">Авторизуйтесь</h4>
+                                <p class="opacity-50 mt-2">Вход в личный кабинет</p>
+                                <div class="row pb-2">
+                                    <div class="col">
+                                        <a href="{{route('login')}}" class="btn btn-primary d-flex fw-bold header-link h-55px">
+                                            <p class="text-center m-auto">Войти</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" required name="auth">
+                    @endif
+
 
                     <div class="card border-0 shadow mb-3">
                         @php $passengers_cnt=0; @endphp
@@ -181,19 +200,19 @@
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Фамилия на латинице</legend>
-                                        <input type="text" name="surname" class="w-100">
+                                        <input type="text" name="surname" class="w-100" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Имя на латинице</legend>
-                                        <input type="text" name="name" class="w-100">
+                                        <input type="text" name="name" class="w-100" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Дата рождения</legend>
-                                        <input type="date" name="date" class="w-100">
+                                        <input type="date" name="date" class="w-100" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
@@ -214,7 +233,7 @@
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Гражданство</legend>
-                                        <select class="w-100" name="country">
+                                        <select class="w-100" name="country" required>
                                             <option value="Russia">Россия</option>
                                         </select>
                                     </fieldset>
@@ -222,7 +241,7 @@
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Документ</legend>
-                                        <select class="w-100" name="doc">
+                                        <select class="w-100" name="doc" required>
                                             <option value="zag">Заграничный паспорт РФ</option>
                                             <option value="vn">Внутренний паспорт РФ</option>
                                         </select>
@@ -231,13 +250,13 @@
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
-                                        <input type="text" name="number" class="w-100">
+                                        <input type="text" name="number" class="w-100" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
-                                        <input type="text" name="serial" class="w-100">
+                                        <input type="text" name="serial" class="w-100" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
@@ -274,25 +293,25 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Фамилия на латинице</legend>
-                                            <input type="text" name="surname" class="w-100">
+                                            <input type="text" name="surname" class="w-100" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Имя на латинице</legend>
-                                            <input type="text" name="name" class="w-100">
+                                            <input type="text" name="name" class="w-100" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Дата рождения</legend>
-                                            <input type="date" name="date" class="w-100">
+                                            <input type="date" name="date" class="w-100" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Пол</legend>
-                                            <select class="w-100" name="sex">
+                                            <select class="w-100" name="sex" required>
                                                 <option value="m">Мужской</option>
                                                 <option value="f">Женский</option>
                                             </select>
@@ -307,7 +326,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Гражданство</legend>
-                                            <select class="w-100" name="country">
+                                            <select class="w-100" name="country" required>
                                                 <option value="Russia">Россия</option>
                                             </select>
                                         </fieldset>
@@ -315,7 +334,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Документ</legend>
-                                            <select class="w-100" name="doc">
+                                            <select class="w-100" name="doc" required>
                                                 <option value="zag">Заграничный паспорт РФ</option>
                                                 <option value="vn">Внутренний паспорт РФ</option>
                                             </select>
@@ -324,13 +343,13 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
-                                            <input type="text" name="number" class="w-100">
+                                            <input type="text" name="number" class="w-100" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
-                                            <input type="text" name="serial" class="w-100">
+                                            <input type="text" name="serial" class="w-100" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
@@ -367,25 +386,25 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Фамилия на латинице</legend>
-                                            <input type="text" name="surname" class="w-100">
+                                            <input type="text" name="surname" class="w-100" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Имя на латинице</legend>
-                                            <input type="text" name="name" class="w-100">
+                                            <input type="text" name="name" class="w-100" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Дата рождения</legend>
-                                            <input type="date" name="date" class="w-100">
+                                            <input type="date" name="date" class="w-100" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Пол</legend>
-                                            <select class="w-100" name="sex">
+                                            <select class="w-100" name="sex" required>
                                                 <option value="m">Мужской</option>
                                                 <option value="f">Женский</option>
                                             </select>
@@ -400,7 +419,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Гражданство</legend>
-                                            <select class="w-100" name="country">
+                                            <select class="w-100" name="country" required>
                                                 <option value="Russia">Россия</option>
                                             </select>
                                         </fieldset>
@@ -408,7 +427,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Документ</legend>
-                                            <select class="w-100" name="doc">
+                                            <select class="w-100" name="doc" required>
                                                 <option value="zag">Заграничный паспорт РФ</option>
                                                 <option value="vn">Внутренний паспорт РФ</option>
                                             </select>
@@ -417,19 +436,19 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
-                                            <input type="text" name="number" class="w-100">
+                                            <input type="text" name="number" class="w-100" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
-                                            <input type="text" name="serial" class="w-100">
+                                            <input type="text" name="serial" class="w-100" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Срок действия</legend>
-                                            <input type="date" name="serial" class="w-100">
+                                            <input type="date" name="serial" class="w-100" required>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -520,5 +539,7 @@
                 </div>
             </div>
         </div>
-    </div>
+        <input type="hidden" name="total_rub" value="{{$request['total_rub']}}">
+        <input type="hidden" name="total_eur" value="{{$request['total_eur']}}">
+    </form>
 @endsection

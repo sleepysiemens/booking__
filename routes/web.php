@@ -18,8 +18,7 @@ Route::get('/', 'App\Http\Controllers\MainController@index')->name('main.index')
 Route::get('/profile', 'App\Http\Controllers\MainController@profile')->name('profile.index');
 Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tariff.index');
 Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
-Route::get('/wait/{stage}', 'App\Http\Controllers\MainController@wait')->name('wait.index');
-Route::get('/ticket', 'App\Http\Controllers\MainController@ticket')->name('ticket.index');
+Route::get('/ticket', 'App\Http\Controllers\TicketController@index')->name('ticket.index');
 Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
 
 Route::get('/blog/{page}', 'App\Http\Controllers\BlogController@index')->name('blog.index');
@@ -29,6 +28,13 @@ Route::get('/reviews', 'App\Http\Controllers\ReviewController@index')->name('rev
 Route::post('/reviews', 'App\Http\Controllers\ReviewController@store')->name('reviews.store');
 
 Route::post('/booking', 'App\Http\Controllers\BookingController@index')->name('booking.index');
+Route::post('/pay', 'App\Http\Controllers\BookingController@pay_page_post')->name('pay.post.index');
+Route::get('/pay', 'App\Http\Controllers\BookingController@pay_page_get')->name('pay.get.index');
+
+Route::get('/payment-confirm', 'App\Http\Controllers\PayController@index')->name('payment.index');
+
+Route::get('/wait/', 'App\Http\Controllers\WaitController@index')->name('wait.index');
+
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], function ()
 {

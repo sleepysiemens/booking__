@@ -203,7 +203,17 @@ export default {
         },
         handleDocumentClick(event) {
             // Проверим, был ли клик внутри div, если нет, скроем div
-            if (!this.$el.contains(event.target)) {
+            if (!this.$el.contains(event.target))
+            {
+                if(!this.startDate)
+                {
+                    this.startDate=this.currentDate.toISOString().split('T')[0];
+                }
+
+                if(!this.endDate)
+                {
+                    this.endDate='не установлено';
+                }
                 this.isCalendarVisible=false;
             }
         },
