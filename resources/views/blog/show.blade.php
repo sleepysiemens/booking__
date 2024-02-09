@@ -35,13 +35,13 @@
                 <p class="opacity-70 text-black text-decoration-underline">
                     <a class="text-black" href="{{route('main.index')}}">Главная</a>
                     /
-                    <a class="text-black" href="{{route('blog.index', 1)}}">Блог</a>
+                    <a class="text-black" href="{{route('blog.index')}}">Блог</a>
                     /
                     <a class="text-black" href="{{route('blog.show',$post->id)}})}}">{{$post->title}}</a>
                 </p>
             </div>
             <div class="row my-2">
-                <a href="{{route('blog.index',1)}}" class="fs-16px d-flex"><i class="fas fa-arrow-left fs-14px my-auto me-1"></i> назад</a>
+                <a href="{{route('blog.index')}}" class="fs-16px d-flex"><i class="fas fa-arrow-left fs-14px my-auto me-1"></i> назад</a>
             </div>
 
             <div class="row mt-4">

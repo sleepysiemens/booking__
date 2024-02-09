@@ -64,5 +64,18 @@
                 @endif
                 //console.log(window.requestData);
             </script>
+
+    <script>
+        function details(id)
+        {
+            $( "#ticket-body-"+id ).slideToggle( "slow", function() {});
+            $( "#details-div-"+id ).slideToggle( "slow", function() {});
+            if (!$('#details-btn-marker-' + id).hasClass('rotate-btn')) {
+                $('#details-btn-marker-' + id).addClass('rotate-btn');
+            } else {
+                $('#details-btn-marker-' + id).removeClass('rotate-btn');
+            }
+        }
+    </script>
 @endsection
 

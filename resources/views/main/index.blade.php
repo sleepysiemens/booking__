@@ -59,7 +59,7 @@
                             <div class="news-title">{{$post->title}}</div>
                             <div class="news-date">{{date("d M Y", strtotime($post->created_at))}}</div>
                         </div>
-                        <a href="#" class="stretched-link"></a>
+                        <a href="{{route('blog.show',$post->id)}}" class="stretched-link"></a>
                     </div>
                     <!-- END news -->
                 </div>
@@ -70,7 +70,7 @@
             <!-- END row -->
 
             <div class="text-center mt-2">
-                <a href="{{route('blog.index', 1 )}}" class="arrow-btn">
+                <a href="{{route('blog.index')}}" class="arrow-btn">
                     <span>
                         <i class="fa fa-arrow-right first"></i>
                         <i class="fa fa-arrow-right second"></i>

@@ -121,6 +121,23 @@ class FlightSearchService
         return $result;
     }
 
+    public function FilterTransfers($tickets)
+    {
+        $transfers=[];
+        foreach ($tickets as $ticket)
+        {
+            $transfers[]=
+                [
+                    'transfers_amount'=>$ticket['transfers_amount'],
+                ];
+        }
+        $associativeArray = array_column($transfers, null, 'transfers_amount');
+
+        $result=array_values($associativeArray);
+        return $result;
+
+    }
+
     public function getAllAirlines()
     {
         if(Airlines::first()==null)
@@ -145,10 +162,10 @@ class FlightSearchService
 
     public function parseFlightInfo($origin, $destination, $depart_date)
     {
-        $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
+         $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
             'chromedriver_arguments' => ['--headless=new', '--disable-gpu', '--no-sandbox'],
         ], 'http://localhost');
-        //$client = Client::createChromeClient();
+        $client = Client::createChromeClient();
 
         $depart_date=date('dm',strtotime($depart_date));
 
@@ -163,11 +180,13 @@ class FlightSearchService
         $json=json_decode($json[0]);
         $tickets=[];
 
+
         $this->getAllAirlines();
 
         $transportationVariants=collect($json->transportationVariants);
         $prices=collect($json->prices);
 
+        $ticket_cnt=0;
         foreach ($json->trips as $data)
         {
             //if($destination==$data->to)//выводить только прямые билеты. Исправить
@@ -195,9 +214,9 @@ class FlightSearchService
 
                 $depart_date=explode('T', $data->startDateTime);
                 $arrival_date=explode('T', $data->endDateTime);
-
-                $tickets[] =
+                $data_=
                     [
+                        'id'=>$ticket_cnt,
                         'depart_datetime' => strtotime($data->startDateTime),
                         'depart_date' => $depart_date[0],
                         'arrival_datetime' => strtotime($data->endDateTime),
@@ -208,7 +227,68 @@ class FlightSearchService
                         'origin' => $data->from,
                         'destination' => $data->to,
                         'flight_num' => $data->carrier.' '.$data->carrierTripNumber,
+                        'transfer'=>'прямой',
+                        'transfers_amount'=>0,
+
                     ];
+
+                if($data->to != $destination and $data->from == $origin)
+                {
+                    $data_['transfer']='start';
+                }
+
+                if($data->to != $destination and $data->from != $origin)
+                {
+                    $data_['transfer']='transfer';
+                }
+
+                if($data->to == $destination and $data->from != $origin)
+                {
+                    $data_['transfer']='end';
+                }
+
+                $tickets[] =$data_;
+            }
+            $ticket_cnt++;
+
+        }
+        $ticket_buffer=[];
+        $start_ticket=[];
+
+        foreach ($tickets as $ticket)
+        {
+            if($ticket['transfer']=='прямой')
+            {
+                $tickets[$ticket['id']]['transfers_amount']=0;
+            }
+            else
+            {
+                if($ticket['transfer']=='start')
+                {
+                    $start_ticket=$ticket;
+                    $start_ticket['transfers'][]=$ticket;
+                    unset($tickets[$ticket['id']]);
+                }
+
+                $ticket_buffer=$start_ticket;
+
+                if($ticket['transfer']=='end')
+                {
+                    $ticket_buffer['transfers'][]=$ticket;
+                    $ticket_buffer['id']=$ticket['id'];
+
+                    $tickets[$ticket['id']]['origin']=$ticket_buffer['origin'];
+                    $tickets[$ticket['id']]['depart_datetime']=$ticket_buffer['depart_datetime'];
+
+                    $tickets[$ticket['id']]=$ticket_buffer;
+
+                    $tickets[$ticket['id']]['destination']=$ticket['destination'];
+                    $tickets[$ticket['id']]['arrival_datetime']=$ticket['arrival_datetime'];
+                    $tickets[$ticket['id']]['arrival_date']=$ticket['arrival_date'];
+
+                    $tickets[$ticket['id']]['transfers_amount']++;
+                    $tickets[$ticket['id']]['transfer']='пересадок: '. $tickets[$ticket['id']]['transfers_amount'];
+                }
             }
         }
 

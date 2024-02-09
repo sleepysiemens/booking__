@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-6">
                             <p class="opacity-50 fs-13px mb-0">Дата вылета</p>
-                            <p class="fs-16px mt-1">{{date("Y.m.d", $request->depart_datetime)}}</p>
+                            <p class="fs-16px mt-1">{{date("Y.m.d", $result->depart_datetime)}}</p>
                         </div>
                         <div class="col-6">
                             <p class="opacity-50 fs-13px mb-0">Кол-во пассажиров</p>

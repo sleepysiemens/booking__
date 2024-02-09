@@ -14,19 +14,33 @@ use Illuminate\Support\Facades\Route;
 */
 //
 
+
+//==========MAIN==========
 Route::get('/', 'App\Http\Controllers\MainController@index')->name('main.index');
-Route::get('/profile', 'App\Http\Controllers\MainController@profile')->name('profile.index');
 Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tariff.index');
 Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
 Route::get('/ticket', 'App\Http\Controllers\TicketController@index')->name('ticket.index');
 Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
 
-Route::get('/blog/{page}', 'App\Http\Controllers\BlogController@index')->name('blog.index');
+
+//==========PROFILE==========
+Route::group(['middleware' => ['auth'], ], function (){
+    Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('profile.index');
+    Route::patch('/profile/{user}', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
+    Route::get('/profile/logout', 'App\Http\Controllers\ProfileController@logout')->name('profile.logout');
+});
+
+//==========BLOG==========
+Route::get('/blog', 'App\Http\Controllers\BlogController@index')->name('blog.index');
 Route::get('/blog/post/{post}', 'App\Http\Controllers\BlogController@show')->name('blog.show');
 
+
+//==========REVIEWS==========
 Route::get('/reviews', 'App\Http\Controllers\ReviewController@index')->name('reviews.index');
 Route::post('/reviews', 'App\Http\Controllers\ReviewController@store')->name('reviews.store');
 
+
+//==========BOOKING==========
 Route::post('/booking', 'App\Http\Controllers\BookingController@index')->name('booking.index');
 Route::post('/pay', 'App\Http\Controllers\BookingController@pay_page_post')->name('pay.post.index');
 Route::get('/pay', 'App\Http\Controllers\BookingController@pay_page_get')->name('pay.get.index');
@@ -36,6 +50,7 @@ Route::get('/payment-confirm', 'App\Http\Controllers\PayController@index')->name
 Route::get('/wait/', 'App\Http\Controllers\WaitController@index')->name('wait.index');
 
 
+//==========ADMIN==========
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], function ()
 {
     Route::get('/', 'App\Http\Controllers\Admin\MainController@index')->name('admin.index');
@@ -51,8 +66,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], functio
     Route::get('/blog/{post}/edit', 'App\Http\Controllers\Admin\BlogController@edit')->name('admin.blog.edit');
     Route::patch('/blog/{post}', 'App\Http\Controllers\Admin\BlogController@update')->name('admin.blog.update');
 
+    Route::get('/orders', 'App\Http\Controllers\Admin\OrdersController@index')->name('admin.orders.index');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//By sleepy_siemens 2024 Jan
+//2001sema@gmail.com
+//TG: @sleepysiemens

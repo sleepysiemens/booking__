@@ -8,17 +8,9 @@ use App\Models\BlogCategory;
 
 class BlogController extends Controller
 {
-    public function index($page)
+    public function index()
     {
-        $offset=($page-1)*10;
-        $posts=BlogPost::query()->limit(9)->offset($offset)->get();
-        $categories=BlogCategory::all();
-
-        $page_cnt=BlogPost::count();
-        $page_cnt=(intdiv($page_cnt,8))+1;
-        //dd($posts);
-
-        return view('blog.index', compact(['posts', 'page', 'categories','page_cnt']));
+        return view('blog.index');
     }
     public function show(BlogPost $post)
     {

@@ -5,6 +5,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use App\Models\Airports;
 
 class AirportService
 {
@@ -440,9 +441,9 @@ class AirportService
                         if($airport['city_code']==$city['code'] and $airport['iata_type']=='airport')
                         {
                             $airport_name=$this->get_ru_name($airport);
-                            $result[]=
+                            $data=
                                 [
-                                    //'country_name'=>$country_name,
+                                    'country_name'=>$country_name,
                                     'city_name'=>$city_name,
                                     'city_code'=>$city['code'],
                                     'name'=>$airport_name,
@@ -451,6 +452,9 @@ class AirportService
                                     'code'=>$country['name_translations']['en'].'/'.$this->translit($country['name_translations']['en'],'ru').'/'.$country_name.'/'.$this->translit($country_name, 'en').'/'.$country['code'].'/'.$this->translit($country['code'],'en').'/'.
                                         $city['name_translations']['en'].'/'.$this->translit($city['name_translations']['en'], 'ru').'/'.$city_name.'/'.$this->translit($city_name,'en').'/'.$city['code'].'/'.$this->translit($city['code'],'en').'/'.$airport_name.'/'.$this->translit($airport_name,'en').'/'.$airport['name_translations']['en'].'/'.$this->translit($airport['name_translations']['en'], 'ru').'/'.$airport['code'].'/'.$this->translit($airport['code'],'en'),
                                 ];
+
+                            $result[]= $data;
+                            Airports::create($data);
                         }
                     }
                 }

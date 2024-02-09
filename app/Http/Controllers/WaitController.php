@@ -13,7 +13,7 @@ class WaitController extends Controller
         else
         {
             $stage=1;
-            return view('wait.index', compact(['stage']));
+            return view('wait.index');
         }
     }
 }

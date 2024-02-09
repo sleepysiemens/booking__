@@ -1,4 +1,6 @@
-<div class="col-lg-9 col-12 sec sec-active" id="personal">
+<form method="post" action="{{route('profile.update', auth()->user()->id)}}" class="col-lg-9 col-12 sec sec-active" id="personal">
+    @csrf
+    @method('patch')
     <div class="card border-0 shadow mb-4">
         <div class="card-body">
             <h4 class="fw-500 mb-3">Персональные данные</h4>
@@ -6,27 +8,27 @@
                 <div class="col-6 mb-3">
                     <fieldset style="all: revert;" class="border border-1 rounded">
                         <legend style="all: revert;" class="text-black-200 px-2">Фамилия</legend>
-                        <input type="text" name="surname" class="w-100">
+                        <input type="text" name="surname" class="w-100" value="{{auth()->user()->surname}}" required>
                     </fieldset>
                 </div>
                 <div class="col-6 mb-3">
                     <fieldset style="all: revert;" class="border border-1 rounded">
                         <legend style="all: revert;" class="text-black-200 px-2">Имя</legend>
-                        <input type="text" name="name" class="w-100">
+                        <input type="text" name="name" class="w-100" value="{{auth()->user()->name}}" required>
                     </fieldset>
                 </div>
                 <div class="col-6 mb-3">
                     <fieldset style="all: revert;" class="border border-1 rounded">
                         <legend style="all: revert;" class="text-black-200 px-2">Дата рождения</legend>
-                        <input type="date" name="date" class="w-100">
+                        <input type="date" name="date_of_birth" class="w-100" value="{{auth()->user()->date_of_birth}}" required>
                     </fieldset>
                 </div>
                 <div class="col-6 mb-3">
                     <fieldset style="all: revert;" class="border border-1 rounded">
                         <legend style="all: revert;" class="text-black-200 px-2">Пол</legend>
-                        <select class="w-100" name="sex">
-                            <option value="m">Мужской</option>
-                            <option value="f">Женский</option>
+                        <select class="w-100" name="sex" required>
+                            <option @if(auth()->user()->sex!=null and auth()->user()->sex==1) selected @endif value="1">Мужской</option>
+                            <option @if(auth()->user()->sex!=null and auth()->user()->sex==0) selected @endif value="0">Женский</option>
                         </select>
                     </fieldset>
                 </div>
@@ -39,36 +41,36 @@
                 <div class="col-6 mb-3">
                     <fieldset style="all: revert;" class="border border-1 rounded">
                         <legend style="all: revert;" class="text-black-200 px-2">Гражданство</legend>
-                        <select class="w-100" name="country">
-                            <option value="Russia">Россия</option>
+                        <select class="w-100" name="citizenship" required>
+                            <option @if(auth()->user()->citizenship!=null and auth()->user()->citizenship==0) selected @endif value="0">Россия</option>
                         </select>
                     </fieldset>
                 </div>
                 <div class="col-6 mb-3">
                     <fieldset style="all: revert;" class="border border-1 rounded">
                         <legend style="all: revert;" class="text-black-200 px-2">Документ</legend>
-                        <select class="w-100" name="doc">
-                            <option value="zag">Заграничный паспорт РФ</option>
-                            <option value="vn">Внутренний паспорт РФ</option>
+                        <select class="w-100" name="doc_type" required>
+                            <option @if(auth()->user()->doc_type!=null and auth()->user()->doc_type==1) selected @endif value="1">Заграничный паспорт РФ</option>
+                            <option @if(auth()->user()->doc_type!=null and auth()->user()->doc_type==0) selected @endif value="0">Внутренний паспорт РФ</option>
                         </select>
                     </fieldset>
                 </div>
                 <div class="col-6 mb-3">
                     <fieldset style="all: revert;" class="border border-1 rounded">
                         <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
-                        <input type="text" name="number" class="w-100">
+                        <input type="text" name="number" class="w-100" value="{{auth()->user()->number}}">
                     </fieldset>
                 </div>
                 <div class="col-6 mb-3">
                     <fieldset style="all: revert;" class="border border-1 rounded">
                         <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
-                        <input type="text" name="serial" class="w-100">
+                        <input type="text" name="serial" class="w-100" value="{{auth()->user()->serial}}">
                     </fieldset>
                 </div>
                 <div class="col-6 mb-3">
                     <fieldset style="all: revert;" class="border border-1 rounded">
                         <legend style="all: revert;" class="text-black-200 px-2">Срок действия</legend>
-                        <input type="date" name="serial" class="w-100">
+                        <input type="date" name="serial" class="w-100" value="{{auth()->user()->validity}}">
                     </fieldset>
                 </div>
             </div>
@@ -78,18 +80,17 @@
     <div class="card border-0 shadow mb-4">
         <div class="card-body">
             <h4 class="m-0">Контактные данные</h4>
-            <p class="opacity-50 mt-2">На почту мы отправим документ “Подтверждение бронирования”</p>
-            <div class="row pb-2">
+            <div class="row pb-2 mt-3">
                 <div class="col">
                     <fieldset style="all: revert;" class="border border-1 rounded">
                         <legend style="all: revert;" class="text-black-200 px-2">Email</legend>
-                        <input type="email" name="email" class="w-100">
+                        <input type="email" name="email" class="w-100" value="{{auth()->user()->email}}" required>
                     </fieldset>
                 </div>
                 <div class="col">
                     <fieldset style="all: revert;" class="border border-1 rounded">
                         <legend style="all: revert;" class="text-black-200 px-2">Телефон</legend>
-                        <input type="tel" name="phone" class="w-100">
+                        <input type="tel" name="phone" class="w-100" value="{{auth()->user()->phone}}">
                     </fieldset>
                 </div>
             </div>
@@ -103,4 +104,4 @@
             </button>
         </div>
     </div>
-</div>
+</form>

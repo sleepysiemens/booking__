@@ -24,6 +24,7 @@
     ])
 
     <script src="{{'https://kit.fontawesome.com/0a007e12dc.js'}}" crossorigin="anonymous"></script>
+    @livewireStyles
 
 </head>
 <body>
@@ -68,13 +69,7 @@
                 </div>
                 <div class="menu-header"></div>
                 <div class="menu-item @yield('applications')">
-                    <a href="{{route('admin.index')}}" class="menu-link">
-                        <div class="menu-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="menu-text">Заявки</div>
-                        <div class="menu-badge">10</div>
-                    </a>
+                    <livevire:new_orders />
                 </div>
                 <div class="menu-item @yield('blog')">
                     <a href="{{route('admin.blog.index')}}" class="menu-link">
@@ -139,3 +134,4 @@
 --}}
 </body>
 </html>
+@livewireScripts

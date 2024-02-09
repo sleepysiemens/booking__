@@ -21,11 +21,6 @@ class MainController extends Controller
         return view('main.index', compact('airports', 'posts', 'reviews'));
     }
 
-    public function profile()
-    {
-        return view('profile.index');
-    }
-
     public function tariff()
     {
         return view('tariff.index');

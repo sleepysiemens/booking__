@@ -61,7 +61,7 @@
                         </a>
                     </div>
                     <div class="header-nav-item">
-                        <a href="{{route('blog.index', 1)}}" class="header-nav-link header-link">
+                        <a href="{{route('blog.index')}}" class="header-nav-link header-link">
                             <p class="first">Блог</p>
                             <p class="second">Блог</p>
                         </a>
@@ -134,7 +134,7 @@
                         <h4 class="footer-title">Клиентам</h4>
                         <ul class="footer-link-list">
                             <li><a href="{{route('tariff.index')}}">Тариф</a></li>
-                            <li><a href="{{route('blog.index', 1)}}">Блог</a></li>
+                            <li><a href="{{route('blog.index')}}">Блог</a></li>
                             <li><a href="{{route('reviews.index')}}">Отзывы</a></li>
                         </ul>
                     </div>

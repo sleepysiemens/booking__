@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Airports;
 use App\Services\AirportService;
 use App\Services\FlightSearchService;
 use Illuminate\Support\Facades\Http;

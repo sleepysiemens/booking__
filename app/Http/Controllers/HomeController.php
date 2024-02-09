@@ -19,12 +19,18 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function index()
     {
-        if(auth()->user()->is_admin==1)
-        return redirect(route('admin.index'));
+        if(auth()->user() !== null)
+        {
+            if(auth()->user()->is_admin==1)
+                return redirect()->route('admin.index');
+            else
+                return redirect()->route('profile.index');
+        }
+
         else
         return redirect(route('main.index'));
     }

@@ -36,7 +36,7 @@
                 <div class="col-lg-3 mb-4">
                     <div class="card border-0 shadow">
                         <div class="card-body">
-                            <p class="py-1 mt-1 text-black-200">email@email.com</p>
+                            <p class="py-1 mt-1 text-black-200">{{auth()->user()->email}}</p>
                             <div class="bg-black opacity-20 d-block w-100 mb-3" style="height: 1px;"></div>
 
                             <a class="btn w-100 d-flex btn-white border-0 mb-2 active" id="personal-btn" href="#personal" onclick="section()">
@@ -55,7 +55,7 @@
                                 <i class="fas fa-wallet my-auto fs-18px text-primary"></i>
                                 <p class="my-auto ms-2 fw-400">Партнерская программа</p>
                             </a>
-                            <a class="btn w-100 d-flex btn-white border-0 mb-2" href="#">
+                            <a class="btn w-100 d-flex btn-white border-0 mb-2" href="{{route('profile.logout')}}">
                                 <i class="fas fa-sign-out-alt my-auto fs-18px text-primary"></i>
                                 <p class="my-auto ms-2 fw-400">Выйти</p>
                             </a>

@@ -54,8 +54,8 @@
             <div class="row">
                 @foreach($reviews as $review)
                     <div class="col-12 col-lg-4 mt-4">
-                        <div class="card shadow border-0 overflow-hidden cursor-pointer">
-                            <div class="card-body">
+                        <div class="card shadow border-0 overflow-hidden cursor-pointer h-100">
+                            <div class="card-body position-relative">
                                 <div class="row py-2 mt-1 justify-content-between">
                                     <h6 class="col my-auto fs-20px">{{$review->name}} {{$review->surname}}</h6>
                                 </div>
@@ -73,13 +73,13 @@
                                         </span>
                                     </div>--}}
                                 </div>
-                                <div class="row mt-3">
+                                <div class="row mt-3 mb-3">
                                     <p class="opacity-80">
                                         {{$review->text}}
                                     </p>
                                 </div>
-                                <div class="row mt-3">
-                                    <p class="text-black-200 fs-12px m-0">{{date("d.m.Y H:i",strtotime($review->created_at))}}</p>
+                                <div class="row mt-3 position-absolute bottom-0">
+                                    <p class="text-black-200 fs-12px">{{date("d.m.Y H:i",strtotime($review->created_at))}}</p>
                                 </div>
                             </div>
                         </div>

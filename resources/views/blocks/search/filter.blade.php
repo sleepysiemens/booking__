@@ -10,14 +10,12 @@
                 </a>
             </div>
             <div class="container" id="transfer">
+                @foreach($transfers_filters as $transfers_filter)
                     <div class="row pt-3">
-                        <input wire:model.live="transfer" class="col-1 h-20px my-auto" type="radio" id="transfer-0" value="0">
-                        <label class="col-auto" for="transfer-0"><p class="m-auto">Без пересадок</p></label>
+                        <input wire:model.live="transfer" class="col-1 h-20px my-auto" type="radio" value="{{$transfers_filter['transfers_amount']}}">
+                        <label class="col-auto"><p class="m-auto">@if($transfers_filter['transfers_amount']==0) Без пересадок@else Пересадок: {{$transfers_filter['transfers_amount']}} @endif</p></label>
                     </div>
-                    <div class="row pt-3">
-                        <input wire:model.live="transfer" class="col-1 h-20px my-auto" type="radio" id="transfer-1" value="1">
-                        <label class="col-auto" for="transfer-1"><p class="m-auto">С пересадками</p></label>
-                    </div>
+                @endforeach
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Airports;
 use App\Services\FlightSearchService;
 use Livewire\Component;
 
@@ -17,6 +18,7 @@ class SearchRes extends Component
     public $arrival_start_time_filter;
     public $arrival_end_time_filter;
     public $reset_filter=0;
+    public $details=-1;
 
     public function initializeItems($request)
     {
@@ -36,6 +38,14 @@ class SearchRes extends Component
 
         $results = $this->flightSearchService->parseFlightInfo($request['origin_'], $request['destination_'], $request['departDate']);
         $airlines_filter=$this->flightSearchService->FilterAirlines($results);
+        $transfers_filters=$this->flightSearchService->FilterTransfers($results);
+
+        if($this->transfer!=null)
+        {
+            $transfers=$this->transfer;
+            $results=collect($results);
+            $results=$results->where('transfers_amount', '=', $transfers);
+        }
 
         if($this->reset_filter==1)
         {
@@ -130,8 +140,9 @@ class SearchRes extends Component
             }
         }
 
+        $airports_=Airports::all();
         //dd($results);
-        return view('livewire.search-results', compact(['results', 'request', 'airlines_filter']));
+        return view('livewire.search-results', compact(['results', 'request', 'airlines_filter', 'transfers_filters', 'airports_']));
     }
 
 }

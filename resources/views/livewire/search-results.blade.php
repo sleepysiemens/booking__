@@ -4,7 +4,9 @@
 
         <div class="col-lg-9 pe-lg-0">
             @foreach($results as $result)
-                @include('blocks.search.ticket')
+                    @include('blocks.search.ticket')
             @endforeach
         </div>
     </div>
+
+

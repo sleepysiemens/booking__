@@ -36,103 +36,124 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-12">
-                    <div class="card border-0 shadow mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12 col-lg-6 d-flex pb-3">
-                                    <div class="rounded-circle overflow-hidden bg-light w-45px h-45px my-auto d-flex">
-                                        <i class="fas fa-plane-departure m-auto text-black-100 fs-18px"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <h4 class="m-0">{{$request['origin']}} - {{$request['destination']}}</h4>
-                                        <p class="text-warning m-0">прямой</p>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <div class="d-flex justify-content-start justify-content-lg-end">
-                                        <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
-                                            <img class="w-100 h-100" src="http://127.0.0.1:8000/img/SU.png" alt="avia">
+                    @if($result->transfers_amount==0)
+                        <div class="card border-0 shadow mb-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 col-lg-6 d-flex pb-3">
+                                        <div class="rounded-circle overflow-hidden bg-light w-45px h-45px my-auto d-flex">
+                                            <i class="fas fa-plane-departure m-auto text-black-100 fs-18px"></i>
                                         </div>
-                                        <p class="my-auto ms-2">{{$request['airline']}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="" id="details-long-1">
-                                <div class="row row-cols-lg-4 mt-3">
-                                    <div class="col">
-                                        <div class="container">
-                                            <p class="text-dark mb-0">{{date("d M D", $request['depart_datetime'])}}</p>
-                                            <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $request['depart_datetime'])}}</h2>
-                                            <p class="text-dark fw-300 mt-0">{{$request['origin']}} ({{$request['origin_']}})</p>
+                                        <div class="ms-3">
+                                            <h4 class="m-0">{{$request->origin}} - {{$request->destination}}</h4>
+                                            <p class="text-warning m-0">прямой</p>
                                         </div>
                                     </div>
-                                    <div class="col d-flex opacity-25">
-                                        <div class="bg-black w-100 my-auto position-relative" style="height: 2px">
-                                        </div>
-                                        <i class="fas fa-caret-right my-auto" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col">
-                                        <div class="container">
-                                            <p class="text-dark mb-0">{{date("d M D", $request['arrival_datetime'])}}</p>
-                                            <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $request['arrival_datetime'])}}</h2>
-                                            <p class="text-dark fw-300 mt-0 fs-12px">{{$request['destination']}} ({{$request['destination_']}})</p>
-                                        </div>
-                                    </div>
-                                    <div class="col d-none d-lg-block">
-                                        <div class="container">
-                                            <p class="fw-500 mb-0">{{$request['duration']}}</p>
-                                            <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                            <p class="fw-400 fs-12px text-black-200">{{$request['flight_num']}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{--
-                                <div class="container">
-                                    <div class="card bg-light border-light">
-                                        <div class="card-body row text-black-200 py-2">
-                                            <div class="col d-flex">
-                                                <i class="far fa-clock my-auto" aria-hidden="true"></i>
-                                                <p class="m-0 my-auto ms-2">Пересадка</p>
+                                    <div class="col-12 col-lg-6">
+                                        <div class="d-flex justify-content-start justify-content-lg-end">
+                                            <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
+                                                <img class="w-100 h-100" src="http://127.0.0.1:8000/img/SU.png" alt="avia">
                                             </div>
-                                            <div class="col d-flex justify-content-end">
-                                                <p class="m-0 my-auto">3 ч 20 мин</p>
+                                            <p class="my-auto ms-2">{{$result->airline}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="" id="details-long-1">
+                                    <div class="row row-cols-lg-4 mt-3">
+                                        <div class="col">
+                                            <div class="container">
+                                                <p class="text-dark mb-0">{{date("d M D", $result->depart_datetime)}}</p>
+                                                <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $result->depart_datetime)}}</h2>
+                                                @php $origin__=$airports->where('airport_code', '=', $result->origin)->first(); @endphp
+                                                <p class="text-dark fw-300 mt-0">{{$result->origin}} ({{$origin__['city_name']}})</p>
+                                            </div>
+                                        </div>
+                                        <div class="col d-flex opacity-25">
+                                            <div class="bg-black w-100 my-auto position-relative" style="height: 2px">
+                                            </div>
+                                            <i class="fas fa-caret-right my-auto" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col">
+                                            <div class="container">
+                                                <p class="text-dark mb-0">{{date("d M D", $result->arrival_datetime)}}</p>
+                                                <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $result->arrival_datetime)}}</h2>
+                                                @php $destination__=$airports->where('airport_code', '=', $result->destination)->first(); @endphp
+                                                <p class="text-dark fw-300 mt-0 fs-12px">{{$result->destination}} ({{$destination__['city_name']}})</p>
+                                            </div>
+                                        </div>
+                                        <div class="col d-none d-lg-block">
+                                            <div class="container">
+                                                <p class="fw-500 mb-0">{{$result->duration}}</p>
+                                                <p class="fw-400 fs-12px text-green mb-0">прямой</p>
+                                                <p class="fw-400 fs-12px text-black-200">{{$result->flight_num}}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                --}}
-                                {{--
-                                <div class="row row-cols-lg-4 mt-3">
-                                    <div class="col">
-                                        <div class="container">
-                                            <p class="text-dark mb-0">21 января, вс</p>
-                                            <h2 class="fw-400 my-1 ff-montserrat">18:25</h2>
-                                            <p class="text-dark fw-300 mt-0">Россия, Новосибирск (OVB)</p>
-                                        </div>
-                                    </div>
-                                    <div class="col d-flex opacity-25">
-                                        <div class="bg-black w-100 my-auto position-relative" style="height: 2px">
-                                        </div>
-                                        <i class="fas fa-caret-right my-auto" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="col">
-                                        <div class="container">
-                                            <p class="text-dark mb-0">21 января, вс</p>
-                                            <h2 class="fw-400 my-1 ff-montserrat">06:55</h2>
-                                            <p class="text-dark fw-300 mt-0">Россия, Москва (MOW)</p>
-                                        </div>
-                                    </div>
-                                    <div class="col d-none d-lg-block">
-                                        <div class="container">
-                                            <p class="fw-500 mb-0">4 ч 30 мин</p>
-                                            <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                            <p class="fw-400 fs-12px text-black-200">Рейс SU-1461</p>
-                                        </div>
-                                    </div>
-                                </div>--}}
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="card border-0 shadow mb-3">
+                            <div class="card-body">
+                                @foreach($result->transfers as $transfer)
+
+                                    @if($transfer->transfer!='start' and isset($last_arrival))
+                                        <div class="container">
+                                            <div class="card bg-light border-light">
+                                                <div class="card-body row text-black-200 py-2">
+                                                    <div class="col d-flex">
+                                                        <i class="far fa-clock my-auto"></i>
+                                                        <p class="m-0 my-auto ms-2">Пересадка</p>
+                                                    </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        @php
+                                                            $date1 = Carbon\Carbon::parse(date("Y-m-d H:i:s",$transfer->depart_datetime));
+                                                            $date2 = Carbon\Carbon::parse(date("Y-m-d H:i:s",$last_arrival));
+                                                            $diff = $date1->diff($date2);
+                                                        @endphp
+                                                        <p class="m-0 my-auto">{{$diff->h}} ч {{$diff->i}} мин</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    <div class="row row-cols-lg-4 mt-3" >
+                                        <div class="col">
+                                            <div class="container">
+                                                <p class="text-dark mb-0">{{date("Y.m.d", $transfer->depart_datetime)}}</p>
+                                                <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $transfer->depart_datetime)}}</h2>
+                                                @php $origin__=$airports->where('airport_code', '=', $transfer->origin)->first(); @endphp
+                                                <p class="text-dark fw-300 mt-0">{{$origin__['city_name']}}, {{$origin__['name']}}, {{$transfer->origin}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col d-flex opacity-25">
+                                            <div class="bg-black w-100 my-auto position-relative" style="height: 2px">
+                                            </div>
+                                            <i class="fas fa-caret-right my-auto"></i>
+                                        </div>
+                                        <div class="col">
+                                            <div class="container">
+                                                <p class="text-dark mb-0">{{date("Y.m.d", $transfer->arrival_datetime)}}</p>
+                                                <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $transfer->arrival_datetime)}}</h2>
+                                                @php $destination__=$airports->where('airport_code', '=', $transfer->destination)->first(); @endphp
+
+                                                <p class="text-dark fw-300 mt-0">{{$destination__['city_name']}}, {{$destination__['name']}}, {{$transfer->destination}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col d-none d-lg-block">
+                                            <div class="container">
+                                                <p class="fw-500 mb-0">{{$transfer->duration}}</p>
+                                                <p class="fw-400 fs-12px text-green mb-0">прямой</p>
+                                                <p class="fw-400 fs-12px text-black-200">Рейс {{$transfer->flight_num}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @php $last_arrival=$transfer->arrival_datetime @endphp
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
 
                     @if(auth()->user()!=null)
                         <div class="card border-0 shadow mb-3">
@@ -143,7 +164,7 @@
                                     <div class="col">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Email</legend>
-                                            <input type="email" name="email" class="w-100" value="{{auth()->user()->email}}" required>
+                                            <input type="email" name="email" class="w-100" value="{{auth()->user()->email}}" @if(auth()->user()->email!=null) readonly @endif required>
                                         </fieldset>
                                     </div>
                                     <div class="col">
@@ -162,21 +183,20 @@
                                 <p class="opacity-50 mt-2">Вход в личный кабинет</p>
                                 <div class="row pb-2">
                                     <div class="col">
-                                        <a href="{{route('login')}}" class="btn btn-primary d-flex fw-bold header-link h-55px">
+                                        <a href="{{route('login')}}" class="btn btn-primary d-flex fw-bold header-link h-55px" target="_blank">
                                             <p class="text-center m-auto">Войти</p>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" required name="auth">
                     @endif
 
 
                     <div class="card border-0 shadow mb-3">
                         @php $passengers_cnt=0; @endphp
 
-                        @for($i=1;$i<=$request['adults_amount'];$i++)
+                        @for($i=1;$i<=$request->passengers->adults;$i++)
                             @php $passengers_cnt++; @endphp
                             @if($passengers_cnt!=1)
                                 <div class="col-1 p-0 bg-black m-auto opacity-20 d-none d-lg-block" style="height: 1px; width: 95%"></div>
@@ -200,25 +220,25 @@
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Фамилия на латинице</legend>
-                                        <input type="text" name="surname" class="w-100" required>
+                                        <input type="text" name="surname" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Имя на латинице</legend>
-                                        <input type="text" name="name" class="w-100" required>
+                                        <input type="text" name="name" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Дата рождения</legend>
-                                        <input type="date" name="date" class="w-100" required>
+                                        <input type="date" name="date" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Пол</legend>
-                                        <select class="w-100" name="sex">
+                                        <select class="w-100" name="sex" @if(auth()->user()==null) disabled @endif>
                                             <option value="m">Мужской</option>
                                             <option value="f">Женский</option>
                                         </select>
@@ -233,7 +253,7 @@
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Гражданство</legend>
-                                        <select class="w-100" name="country" required>
+                                        <select class="w-100" name="country" required @if(auth()->user()==null) disabled @endif>
                                             <option value="Russia">Россия</option>
                                         </select>
                                     </fieldset>
@@ -241,7 +261,7 @@
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Документ</legend>
-                                        <select class="w-100" name="doc" required>
+                                        <select class="w-100" name="doc" required @if(auth()->user()==null) disabled @endif>
                                             <option value="zag">Заграничный паспорт РФ</option>
                                             <option value="vn">Внутренний паспорт РФ</option>
                                         </select>
@@ -250,26 +270,26 @@
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
-                                        <input type="text" name="number" class="w-100" required>
+                                        <input type="text" name="number" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
-                                        <input type="text" name="serial" class="w-100" required>
+                                        <input type="text" name="serial" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Срок действия</legend>
-                                        <input type="date" name="serial" class="w-100">
+                                        <input type="date" name="validity" class="w-100" @if(auth()->user()==null) disabled @endif>
                                     </fieldset>
                                 </div>
                             </div>
                         </div>
                         @endfor
 
-                        @for($i=1;$i<=$request['children_amount'];$i++)
+                        @for($i=1;$i<=$request->passengers->children;$i++)
                             @php $passengers_cnt++; @endphp
                             @if($passengers_cnt!=1)
                                 <div class="col-1 p-0 bg-black m-auto opacity-20 d-none d-lg-block" style="height: 1px; width: 95%"></div>
@@ -293,25 +313,25 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Фамилия на латинице</legend>
-                                            <input type="text" name="surname" class="w-100" required>
+                                            <input type="text" name="surname" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Имя на латинице</legend>
-                                            <input type="text" name="name" class="w-100" required>
+                                            <input type="text" name="name" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Дата рождения</legend>
-                                            <input type="date" name="date" class="w-100" required>
+                                            <input type="date" name="date" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Пол</legend>
-                                            <select class="w-100" name="sex" required>
+                                            <select class="w-100" name="sex" required @if(auth()->user()==null) disabled @endif>
                                                 <option value="m">Мужской</option>
                                                 <option value="f">Женский</option>
                                             </select>
@@ -326,7 +346,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Гражданство</legend>
-                                            <select class="w-100" name="country" required>
+                                            <select class="w-100" name="country" required @if(auth()->user()==null) disabled @endif>
                                                 <option value="Russia">Россия</option>
                                             </select>
                                         </fieldset>
@@ -334,7 +354,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Документ</legend>
-                                            <select class="w-100" name="doc" required>
+                                            <select class="w-100" name="doc" required @if(auth()->user()==null) disabled @endif>
                                                 <option value="zag">Заграничный паспорт РФ</option>
                                                 <option value="vn">Внутренний паспорт РФ</option>
                                             </select>
@@ -343,26 +363,26 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
-                                            <input type="text" name="number" class="w-100" required>
+                                            <input type="text" name="number" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
-                                            <input type="text" name="serial" class="w-100" required>
+                                            <input type="text" name="serial" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Срок действия</legend>
-                                            <input type="date" name="serial" class="w-100">
+                                            <input type="date" name="validity" class="w-100" @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                 </div>
                             </div>
                         @endfor
 
-                        @for($i=1;$i<=$request['infants_amount'];$i++)
+                        @for($i=1;$i<=$request->passengers->infants;$i++)
                             @php $passengers_cnt++; @endphp
                             @if($passengers_cnt!=1)
                                 <div class="col-1 p-0 bg-black m-auto opacity-20 d-none d-lg-block" style="height: 1px; width: 95%"></div>
@@ -386,25 +406,25 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Фамилия на латинице</legend>
-                                            <input type="text" name="surname" class="w-100" required>
+                                            <input type="text" name="surname" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Имя на латинице</legend>
-                                            <input type="text" name="name" class="w-100" required>
+                                            <input type="text" name="name" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Дата рождения</legend>
-                                            <input type="date" name="date" class="w-100" required>
+                                            <input type="date" name="date" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Пол</legend>
-                                            <select class="w-100" name="sex" required>
+                                            <select class="w-100" name="sex" required @if(auth()->user()==null) disabled @endif>
                                                 <option value="m">Мужской</option>
                                                 <option value="f">Женский</option>
                                             </select>
@@ -419,7 +439,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Гражданство</legend>
-                                            <select class="w-100" name="country" required>
+                                            <select class="w-100" name="country" required @if(auth()->user()==null) disabled @endif>
                                                 <option value="Russia">Россия</option>
                                             </select>
                                         </fieldset>
@@ -427,7 +447,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Документ</legend>
-                                            <select class="w-100" name="doc" required>
+                                            <select class="w-100" name="doc" required @if(auth()->user()==null) disabled @endif>
                                                 <option value="zag">Заграничный паспорт РФ</option>
                                                 <option value="vn">Внутренний паспорт РФ</option>
                                             </select>
@@ -436,19 +456,19 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
-                                            <input type="text" name="number" class="w-100" required>
+                                            <input type="text" name="number" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
-                                            <input type="text" name="serial" class="w-100" required>
+                                            <input type="text" name="serial" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Срок действия</legend>
-                                            <input type="date" name="serial" class="w-100" required>
+                                            <input type="date" name="serial" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -466,7 +486,7 @@
                                 <div class="col">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Комментарий к заказу</legend>
-                                        <textarea name="comment" class="w-100 h-100px"></textarea>
+                                        <textarea name="comment" class="w-100 h-100px" @if(auth()->user()==null) disabled @endif></textarea>
                                     </fieldset>
                                 </div>
                             </div>
@@ -477,12 +497,12 @@
                     <div class="card border-0 shadow">
                         <div class="card-body">
                                     <price-check-component
-                                        adults_amount="{{$request['adults_amount']}}"
-                                        children_amount="{{$request['children_amount']}}"
-                                        infants_amount="{{$request['infants_amount']}}"
-                                        passengers_amount="{{$request['passengers_amount']}}"
-                                        total_rub="{{$request['total_rub']}}"
-                                        total_eur="{{$request['total_eur']}}"
+                                        adults_amount="{{$request->passengers->adults}}"
+                                        children_amount="{{$request->passengers->children}}"
+                                        infants_amount="{{$request->passengers->infants}}"
+                                        passengers_amount="{{$request->passengers_amount}}"
+                                        total_rub="{{$request->total_rub}}"
+                                        total_eur="{{$request->total_eur}}"
                                     >
                                     </price-check-component>
                             <div class="bg-black opacity-10 d-block w-100 mb-3" style="height: 1px;"></div>
@@ -491,7 +511,7 @@
                                     <h6 class="my-1">При оплате в рублях:</h6>
                                 </div>
                                 <div class="col-4">
-                                    <h3 class="my-auto fs-20px fw-600 text-end">{{$request['total_rub']}} ₽</h3>
+                                    <h3 class="my-auto fs-20px fw-600 text-end">{{$request->total_rub}} ₽</h3>
                                 </div>
                             </div>
                             <div class="row">
@@ -504,7 +524,7 @@
                                     <h6 class="my-1">При оплате в евро:</h6>
                                 </div>
                                 <div class="col-5">
-                                    <h5 class="my-auto fs-20px fw-600 text-end">{{$request['total_eur']}} €</h5>
+                                    <h5 class="my-auto fs-20px fw-600 text-end">{{$request->total_eur}} €</h5>
                                 </div>
                             </div>
                             <div class="row mt-2">
@@ -531,7 +551,7 @@
 
                             <div class="row mt-4">
                                 <div class="col">
-                                    <button class="btn-primary btn fs-12px h-55px m-auto w-100">К оплате</button>
+                                    <button class="btn-primary btn fs-12px h-55px m-auto w-100" @if(auth()->user()==null) disabled @endif>К оплате</button>
                                 </div>
                             </div>
                         </div>
@@ -539,7 +559,7 @@
                 </div>
             </div>
         </div>
-        <input type="hidden" name="total_rub" value="{{$request['total_rub']}}">
-        <input type="hidden" name="total_eur" value="{{$request['total_eur']}}">
+        <input type="hidden" name="total_rub" value="{{$request->total_rub}}">
+        <input type="hidden" name="total_eur" value="{{$request->total_eur}}">
     </form>
 @endsection

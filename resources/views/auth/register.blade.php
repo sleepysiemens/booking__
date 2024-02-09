@@ -124,7 +124,7 @@
             </div>
 
             <div class="mb-15px">
-                <button type="submit" class="btn btn-theme d-block h-45px w-100 btn-lg fs-14px">Войти</button>
+                <button type="submit" class="btn btn-theme d-block h-45px w-100 btn-lg fs-14px">Подтвердить</button>
             </div>
             <div class="mb-40px pb-40px text-dark">
                 Уже есть аккаунт? <a href="{{ route('login') }}" class="text-primary">Войти</a>.
