@@ -135,7 +135,6 @@ class SearchRes extends Component
         }
 
 
-        //dd($results);
         return view('livewire.search-results', compact(['results', 'request', 'airlines_filter', 'transfers_filters', 'airports_']));
     }
 

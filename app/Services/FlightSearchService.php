@@ -292,7 +292,6 @@ class FlightSearchService
             }
         }
 
-        //dd($tickets);
 
         return($tickets);
     }
