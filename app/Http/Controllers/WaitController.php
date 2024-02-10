@@ -8,7 +8,7 @@ class WaitController extends Controller
 {
     public function index()
     {
-        if(!isset($_COOKIE['order']) OR !isset($_COOKIE['user_info']))
+        if(!isset($_COOKIE['order']))
             return redirect()->route('main.index');
         else
         {

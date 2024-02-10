@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\MainController@index')->name('main.index');
 Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tariff.index');
 Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
-Route::get('/ticket', 'App\Http\Controllers\TicketController@index')->name('ticket.index');
+Route::get('/ticket/{order}', 'App\Http\Controllers\TicketController@index')->name('ticket.index');
 Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
 
 
@@ -46,6 +46,7 @@ Route::post('/pay', 'App\Http\Controllers\BookingController@pay_page_post')->nam
 Route::get('/pay', 'App\Http\Controllers\BookingController@pay_page_get')->name('pay.get.index');
 
 Route::get('/payment-confirm', 'App\Http\Controllers\PayController@index')->name('payment.index');
+Route::post('/payment-confirm/confirm', 'App\Http\Controllers\PayController@confirm')->name('payment.confirm');
 
 Route::get('/wait/', 'App\Http\Controllers\WaitController@index')->name('wait.index');
 

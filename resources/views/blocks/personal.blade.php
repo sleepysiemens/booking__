@@ -51,7 +51,7 @@
                         <legend style="all: revert;" class="text-black-200 px-2">Документ</legend>
                         <select class="w-100" name="doc_type" required>
                             <option @if(auth()->user()->doc_type!=null and auth()->user()->doc_type==1) selected @endif value="1">Заграничный паспорт РФ</option>
-                            <option @if(auth()->user()->doc_type!=null and auth()->user()->doc_type==0) selected @endif value="0">Внутренний паспорт РФ</option>
+                            <option @if(auth()->user()->doc_type==0) selected @endif value="0">Внутренний паспорт РФ</option>
                         </select>
                     </fieldset>
                 </div>
@@ -70,7 +70,7 @@
                 <div class="col-6 mb-3">
                     <fieldset style="all: revert;" class="border border-1 rounded">
                         <legend style="all: revert;" class="text-black-200 px-2">Срок действия</legend>
-                        <input type="date" name="serial" class="w-100" value="{{auth()->user()->validity}}">
+                        <input type="date" name="validity" class="w-100" value="{{auth()->user()->validity}}">
                     </fieldset>
                 </div>
             </div>

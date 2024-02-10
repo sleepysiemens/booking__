@@ -11,7 +11,10 @@
 <h3>
     Страница подтверждения оплаты
 </h3>
-<a href="{{route('wait.index')}}">подтвердить</a>
+<form method="post" action="{{route('payment.confirm')}}">
+    @csrf
+    <button>подтвердить</button>
+</form>
 </body>
 </html>
 

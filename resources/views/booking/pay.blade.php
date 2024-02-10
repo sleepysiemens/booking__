@@ -43,25 +43,25 @@
                         <h4 class="col-12">О заказе</h4>
 
                         <div class="col-6">
-                            <p class="opacity-50 fs-13px mb-0">Номер заказа</p>
-                            <p class="fs-16px mt-1">№{{$request->order_number}}</p>
+                            <p class="opacity-50 fs-13px mb-0">Заказчик</p>
+                            <p class="fs-16px mt-1">{{auth()->user()->email}}</p>
                         </div>
                         <div class="col-6">
                             <p class="opacity-50 fs-13px mb-0">Сумма заказа</p>
-                            <p class="fs-16px mt-1">{{$user_info->total_rub}} ₽/ {{$user_info->total_eur}} €</p>
+                            <p class="fs-16px mt-1">{{$cookie->user_data->total_rub}} ₽/ {{$cookie->user_data->total_eur}} €</p>
                         </div>
 
                         <div class="col-6">
                             <p class="opacity-50 fs-13px mb-0">Направление перелета</p>
-                            <p class="fs-16px mt-1">{{$request->origin}} - {{$request->destination}}</p>
+                            <p class="fs-16px mt-1">{{$cookie->origin}} - {{$cookie->destination}}</p>
                         </div>
                         <div class="col-6">
                             <p class="opacity-50 fs-13px mb-0">Дата вылета</p>
-                            <p class="fs-16px mt-1">{{date("Y.m.d", $result->depart_datetime)}}</p>
+                            <p class="fs-16px mt-1">{{date("Y.m.d", $cookie->depart_datetime)}}</p>
                         </div>
                         <div class="col-6">
                             <p class="opacity-50 fs-13px mb-0">Кол-во пассажиров</p>
-                            <p class="fs-16px mt-1"><i class="fas fa-male my-auto" aria-hidden="true"></i> {{$request->passengers_amount}}</p>
+                            <p class="fs-16px mt-1"><i class="fas fa-male my-auto" aria-hidden="true"></i> {{$cookie->passengers_amount}}</p>
                         </div>
                     </div>
 
@@ -86,11 +86,11 @@
                     <div class="row mt-5">
                         <div class="col-6 d-flex">
                             <p class="my-auto">При оплате в рублях:</p>
-                            <h4 class="my-auto ms-2">{{$user_info->total_rub}} ₽</h4>
+                            <h4 class="my-auto ms-2">{{$cookie->user_data->total_rub}} ₽</h4>
                         </div>
                         <div class="col-6 d-flex">
                             <p class="my-auto">При оплате в евро:</p>
-                            <h4 class="my-auto ms-2">{{$user_info->total_eur}} €</h4>
+                            <h4 class="my-auto ms-2">{{$cookie->user_data->total_eur}} €</h4>
                         </div>
                     </div>
 

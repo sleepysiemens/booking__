@@ -9,18 +9,15 @@ use App\Models\Order;
 
 class TicketController extends Controller
 {
-    public function index()
+    public function index(Order $order)
     {
         $airportService = new AirportService();
         $airports = Airports::all();
 
-        $order=Order::query()->where('user_id', '=', auth()->user()->id)->latest()->first();
-        $data=json_decode($order->data);
-        //dd($airports);
-        $request=$data->request;
-        $result=$data->result;
-        $user_info=$data->user_info;
+        $cookie=json_decode($order->data);
+        //dd($cookie);
 
-        return view('ticket.index', compact(['request', 'result', 'order', 'user_info', 'airports']));
+
+        return view('ticket.index', compact(['cookie', 'airports', 'order']));
     }
 }

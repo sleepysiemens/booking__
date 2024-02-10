@@ -36,7 +36,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-12">
-                    @if($result->transfers_amount==0)
+                    @if($cookie->transfers_amount==0)
                         <div class="card border-0 shadow mb-3">
                             <div class="card-body">
                                 <div class="row">
@@ -45,7 +45,7 @@
                                             <i class="fas fa-plane-departure m-auto text-black-100 fs-18px"></i>
                                         </div>
                                         <div class="ms-3">
-                                            <h4 class="m-0">{{$request->origin}} - {{$request->destination}}</h4>
+                                            <h4 class="m-0">{{$cookie->origin}} - {{$cookie->destination}}</h4>
                                             <p class="text-warning m-0">прямой</p>
                                         </div>
                                     </div>
@@ -54,7 +54,7 @@
                                             <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
                                                 <img class="w-100 h-100" src="http://127.0.0.1:8000/img/SU.png" alt="avia">
                                             </div>
-                                            <p class="my-auto ms-2">{{$result->airline}}</p>
+                                            <p class="my-auto ms-2">{{$cookie->airline}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -62,10 +62,10 @@
                                     <div class="row row-cols-lg-4 mt-3">
                                         <div class="col">
                                             <div class="container">
-                                                <p class="text-dark mb-0">{{date("d M D", $result->depart_datetime)}}</p>
-                                                <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $result->depart_datetime)}}</h2>
-                                                @php $origin__=$airports->where('airport_code', '=', $result->origin)->first(); @endphp
-                                                <p class="text-dark fw-300 mt-0">{{$result->origin}} ({{$origin__['city_name']}})</p>
+                                                <p class="text-dark mb-0">{{date("d M D", $cookie->depart_datetime)}}</p>
+                                                <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $cookie->depart_datetime)}}</h2>
+                                                @php $origin__=$airports->where('airport_code', '=', $cookie->origin)->first(); @endphp
+                                                <p class="text-dark fw-300 mt-0">{{$cookie->origin}} ({{$origin__['city_name']}})</p>
                                             </div>
                                         </div>
                                         <div class="col d-flex opacity-25">
@@ -75,17 +75,17 @@
                                         </div>
                                         <div class="col">
                                             <div class="container">
-                                                <p class="text-dark mb-0">{{date("d M D", $result->arrival_datetime)}}</p>
-                                                <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $result->arrival_datetime)}}</h2>
-                                                @php $destination__=$airports->where('airport_code', '=', $result->destination)->first(); @endphp
-                                                <p class="text-dark fw-300 mt-0 fs-12px">{{$result->destination}} ({{$destination__['city_name']}})</p>
+                                                <p class="text-dark mb-0">{{date("d M D", $cookie->arrival_datetime)}}</p>
+                                                <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $cookie->arrival_datetime)}}</h2>
+                                                @php $destination__=$airports->where('airport_code', '=', $cookie->destination)->first(); @endphp
+                                                <p class="text-dark fw-300 mt-0 fs-12px">{{$cookie->destination}} ({{$destination__['city_name']}})</p>
                                             </div>
                                         </div>
                                         <div class="col d-none d-lg-block">
                                             <div class="container">
-                                                <p class="fw-500 mb-0">{{$result->duration}}</p>
+                                                <p class="fw-500 mb-0">{{$cookie->duration}}</p>
                                                 <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                                <p class="fw-400 fs-12px text-black-200">{{$result->flight_num}}</p>
+                                                <p class="fw-400 fs-12px text-black-200">{{$cookie->flight_num}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -95,7 +95,7 @@
                     @else
                         <div class="card border-0 shadow mb-3">
                             <div class="card-body">
-                                @foreach($result->transfers as $transfer)
+                                @foreach($cookie->transfers as $transfer)
 
                                     @if($transfer->transfer!='start' and isset($last_arrival))
                                         <div class="container">
@@ -124,7 +124,7 @@
                                                 <p class="text-dark mb-0">{{date("Y.m.d", $transfer->depart_datetime)}}</p>
                                                 <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $transfer->depart_datetime)}}</h2>
                                                 @php $origin__=$airports->where('airport_code', '=', $transfer->origin)->first(); @endphp
-                                                <p class="text-dark fw-300 mt-0">{{$origin__['city_name']}}, {{$origin__['name']}}, {{$transfer->origin}}</p>
+                                                <p class="text-dark fw-300 mt-0">{{$origin__['city_name']}} ({{$transfer->origin}})</p>
                                             </div>
                                         </div>
                                         <div class="col d-flex opacity-25">
@@ -138,7 +138,7 @@
                                                 <h2 class="fw-400 my-1 ff-montserrat">{{date("H:i", $transfer->arrival_datetime)}}</h2>
                                                 @php $destination__=$airports->where('airport_code', '=', $transfer->destination)->first(); @endphp
 
-                                                <p class="text-dark fw-300 mt-0">{{$destination__['city_name']}}, {{$destination__['name']}}, {{$transfer->destination}}</p>
+                                                <p class="text-dark fw-300 mt-0">{{$destination__['city_name']}} ({{$transfer->destination}})</p>
                                             </div>
                                         </div>
                                         <div class="col d-none d-lg-block">
@@ -164,13 +164,13 @@
                                     <div class="col">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Email</legend>
-                                            <input type="email" name="email" class="w-100" value="{{auth()->user()->email}}" @if(auth()->user()->email!=null) readonly @endif required>
+                                            <input type="email" name="email" class="w-100" @if(auth()->user()->email!=null) value="{{auth()->user()->email}}" @endif @if(auth()->user()->email!=null) readonly @endif required>
                                         </fieldset>
                                     </div>
                                     <div class="col">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Телефон</legend>
-                                            <input type="tel" name="phone" class="w-100" value="{{auth()->user()->phone}}">
+                                            <input type="tel" name="phone" class="w-100" @if(auth()->user()->phone!=null) value="{{auth()->user()->phone}}" @endif>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -196,7 +196,7 @@
                     <div class="card border-0 shadow mb-3">
                         @php $passengers_cnt=0; @endphp
 
-                        @for($i=1;$i<=$request->passengers->adults;$i++)
+                        @for($i=1;$i<=$cookie->passengers->adults;$i++)
                             @php $passengers_cnt++; @endphp
                             @if($passengers_cnt!=1)
                                 <div class="col-1 p-0 bg-black m-auto opacity-20 d-none d-lg-block" style="height: 1px; width: 95%"></div>
@@ -220,27 +220,27 @@
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Фамилия на латинице</legend>
-                                        <input type="text" name="surname" class="w-100" required @if(auth()->user()==null) disabled @endif>
+                                        <input type="text" name="surname" class="w-100" required @if(auth()->user()==null) disabled @else @if($passengers_cnt==1 and auth()->user()->surname!=null) value="{{auth()->user()->surname}}" @endif @endif>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Имя на латинице</legend>
-                                        <input type="text" name="name" class="w-100" required @if(auth()->user()==null) disabled @endif>
+                                        <input type="text" name="name" class="w-100" required @if(auth()->user()==null) disabled @else @if($passengers_cnt==1 and auth()->user()->name!=null) value="{{auth()->user()->name}}" @endif @endif>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Дата рождения</legend>
-                                        <input type="date" name="date" class="w-100" required @if(auth()->user()==null) disabled @endif>
+                                        <input type="date" name="date" class="w-100" required @if(auth()->user()==null) disabled @else @if($passengers_cnt==1 and auth()->user()->date_of_birth!=null) value="{{auth()->user()->date_of_birth}}" @endif @endif>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Пол</legend>
                                         <select class="w-100" name="sex" @if(auth()->user()==null) disabled @endif>
-                                            <option value="m">Мужской</option>
-                                            <option value="f">Женский</option>
+                                            <option @if($passengers_cnt==1 and auth()->user()!=null and auth()->user()->sex==1) selected @endif value="1">Мужской</option>
+                                            <option @if($passengers_cnt==1 and auth()->user()!=null and auth()->user()->sex==0) selected @endif value="0">Женский</option>
                                         </select>
                                     </fieldset>
                                 </div>
@@ -253,7 +253,7 @@
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Гражданство</legend>
-                                        <select class="w-100" name="country" required @if(auth()->user()==null) disabled @endif>
+                                        <select class="w-100" name="citizenship" required @if(auth()->user()==null) disabled @else @if($passengers_cnt!=1 and auth()->user()->phone!=null) value="{{auth()->user()->citizenship}}" @endif @endif>
                                             <option value="Russia">Россия</option>
                                         </select>
                                     </fieldset>
@@ -262,34 +262,34 @@
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Документ</legend>
                                         <select class="w-100" name="doc" required @if(auth()->user()==null) disabled @endif>
-                                            <option value="zag">Заграничный паспорт РФ</option>
-                                            <option value="vn">Внутренний паспорт РФ</option>
+                                            <option value="1" @if($passengers_cnt==1 and auth()->user()!=null and auth()->user()->doc_type==1) selected @endif>Заграничный паспорт РФ</option>
+                                            <option value="0" @if($passengers_cnt==1 and auth()->user()!=null and auth()->user()->doc_type==0) selected @endif>Внутренний паспорт РФ</option>
                                         </select>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
-                                        <input type="text" name="number" class="w-100" required @if(auth()->user()==null) disabled @endif>
+                                        <input type="text" name="number" class="w-100" required @if(auth()->user()==null) disabled @else @if($passengers_cnt==1 and auth()->user()->number!=null) value="{{auth()->user()->number}}" @endif @endif>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
-                                        <input type="text" name="serial" class="w-100" required @if(auth()->user()==null) disabled @endif>
+                                        <input type="text" name="serial" class="w-100" required @if(auth()->user()==null) disabled @else @if($passengers_cnt==1 and auth()->user()->serial!=null) value="{{auth()->user()->serial}}" @endif @endif>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Срок действия</legend>
-                                        <input type="date" name="validity" class="w-100" @if(auth()->user()==null) disabled @endif>
+                                        <input type="date" name="validity" class="w-100" @if(auth()->user()==null) disabled @else @if($passengers_cnt==1 and auth()->user()->validity!=null) value="{{auth()->user()->validity}}" @endif @endif>
                                     </fieldset>
                                 </div>
                             </div>
                         </div>
                         @endfor
 
-                        @for($i=1;$i<=$request->passengers->children;$i++)
+                        @for($i=1;$i<=$cookie->passengers->children;$i++)
                             @php $passengers_cnt++; @endphp
                             @if($passengers_cnt!=1)
                                 <div class="col-1 p-0 bg-black m-auto opacity-20 d-none d-lg-block" style="height: 1px; width: 95%"></div>
@@ -332,8 +332,8 @@
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Пол</legend>
                                             <select class="w-100" name="sex" required @if(auth()->user()==null) disabled @endif>
-                                                <option value="m">Мужской</option>
-                                                <option value="f">Женский</option>
+                                                <option value="1">Мужской</option>
+                                                <option value="0">Женский</option>
                                             </select>
                                         </fieldset>
                                     </div>
@@ -346,7 +346,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Гражданство</legend>
-                                            <select class="w-100" name="country" required @if(auth()->user()==null) disabled @endif>
+                                            <select class="w-100" name="citizenship" required @if(auth()->user()==null) disabled @endif>
                                                 <option value="Russia">Россия</option>
                                             </select>
                                         </fieldset>
@@ -382,7 +382,7 @@
                             </div>
                         @endfor
 
-                        @for($i=1;$i<=$request->passengers->infants;$i++)
+                        @for($i=1;$i<=$cookie->passengers->infants;$i++)
                             @php $passengers_cnt++; @endphp
                             @if($passengers_cnt!=1)
                                 <div class="col-1 p-0 bg-black m-auto opacity-20 d-none d-lg-block" style="height: 1px; width: 95%"></div>
@@ -425,8 +425,8 @@
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Пол</legend>
                                             <select class="w-100" name="sex" required @if(auth()->user()==null) disabled @endif>
-                                                <option value="m">Мужской</option>
-                                                <option value="f">Женский</option>
+                                                <option value="1">Мужской</option>
+                                                <option value="0">Женский</option>
                                             </select>
                                         </fieldset>
                                     </div>
@@ -439,7 +439,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Гражданство</legend>
-                                            <select class="w-100" name="country" required @if(auth()->user()==null) disabled @endif>
+                                            <select class="w-100" name="citizenship" required @if(auth()->user()==null) disabled @endif>
                                                 <option value="Russia">Россия</option>
                                             </select>
                                         </fieldset>
@@ -497,12 +497,12 @@
                     <div class="card border-0 shadow">
                         <div class="card-body">
                                     <price-check-component
-                                        adults_amount="{{$request->passengers->adults}}"
-                                        children_amount="{{$request->passengers->children}}"
-                                        infants_amount="{{$request->passengers->infants}}"
-                                        passengers_amount="{{$request->passengers_amount}}"
-                                        total_rub="{{$request->total_rub}}"
-                                        total_eur="{{$request->total_eur}}"
+                                        adults_amount="{{$cookie->passengers->adults}}"
+                                        children_amount="{{$cookie->passengers->children}}"
+                                        infants_amount="{{$cookie->passengers->infants}}"
+                                        passengers_amount="{{$cookie->passengers_amount}}"
+                                        total_rub="{{$cookie->booking_price_rub}}"
+                                        total_eur="{{$cookie->booking_price_eur}}"
                                     >
                                     </price-check-component>
                             <div class="bg-black opacity-10 d-block w-100 mb-3" style="height: 1px;"></div>
@@ -511,7 +511,7 @@
                                     <h6 class="my-1">При оплате в рублях:</h6>
                                 </div>
                                 <div class="col-4">
-                                    <h3 class="my-auto fs-20px fw-600 text-end">{{$request->total_rub}} ₽</h3>
+                                    <h3 class="my-auto fs-20px fw-600 text-end">{{$cookie->booking_price_rub}} ₽</h3>
                                 </div>
                             </div>
                             <div class="row">
@@ -524,7 +524,7 @@
                                     <h6 class="my-1">При оплате в евро:</h6>
                                 </div>
                                 <div class="col-5">
-                                    <h5 class="my-auto fs-20px fw-600 text-end">{{$request->total_eur}} €</h5>
+                                    <h5 class="my-auto fs-20px fw-600 text-end">{{$cookie->booking_price_eur}} €</h5>
                                 </div>
                             </div>
                             <div class="row mt-2">
@@ -559,7 +559,7 @@
                 </div>
             </div>
         </div>
-        <input type="hidden" name="total_rub" value="{{$request->total_rub}}">
-        <input type="hidden" name="total_eur" value="{{$request->total_eur}}">
+        <input type="hidden" name="total_rub" value="{{$cookie->booking_price_rub}}">
+        <input type="hidden" name="total_eur" value="{{$cookie->booking_price_eur}}">
     </form>
 @endsection

@@ -29,7 +29,7 @@ class AirportService
     public function getAllAirports()
     {
         // Проверяем, есть ли кэш для этого массива
-        return Cache::remember('airports_array', now()->addHour(), function () {
+        return Cache::remember('airports_array', now()->addMonth(), function () {
             // Если кэша нет, создаем массив и кэшируем его
             return $this->generateAllAirports();
         });

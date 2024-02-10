@@ -129,7 +129,7 @@
                             <div class="row my-auto">
                                 <h2 class="fw-500 my-lg-1 fs-22px ff-montserrat text-lg-center text-end mt-lg-3">{{ number_format( $result['price'] , 0 , " "  , " " )}} ₽</h2>
                             </div>
-                            <form class="row mt-lg-5 d-flex position-relative" method="post" action="{{route('booking.index')}}">
+                            <form class="row mt-lg-5 d-flex position-relative" method="post" action="{{route('booking.index')}}" target="_blank">
                                 @csrf
                                 <input type="hidden" name="request" value="{{json_encode($request)}}">
                                 <input type="hidden" name="result" value="{{json_encode($result)}}">
