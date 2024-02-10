@@ -67,6 +67,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], functio
     Route::patch('/blog/{post}', 'App\Http\Controllers\Admin\BlogController@update')->name('admin.blog.update');
 
     Route::get('/orders', 'App\Http\Controllers\Admin\OrdersController@index')->name('admin.orders.index');
+    Route::get('/orders/{order}/edit', 'App\Http\Controllers\Admin\OrdersController@edit')->name('admin.orders.edit');
+    Route::patch('/orders/{order}', 'App\Http\Controllers\Admin\OrdersController@update')->name('admin.orders.update');
+    Route::delete('/orders/{order}', 'App\Http\Controllers\Admin\OrdersController@delete')->name('admin.orders.delete');
+
 });
 
 Auth::routes();

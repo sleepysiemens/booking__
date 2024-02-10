@@ -29,7 +29,6 @@
                         <div class="col-1 text-center"></div>
                         <div class="col-1 text-center"></div>
                     </div>
-                    <tbody>
                     @php
                     $i=0;
                     @endphp
@@ -57,7 +56,6 @@
 
                         </div>
                     @endforeach
-                    </tbody>
                 </div>
             </div>
             <!-- END table-responsive -->

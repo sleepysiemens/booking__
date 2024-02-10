@@ -4,7 +4,9 @@
             <i class="fas fa-envelope"></i>
         </div>
         <div class="menu-text">Заявки</div>
-        <div class="menu-badge">10</div>
+        @if($orders_cnt>0)
+        <div class="menu-badge">{{$orders_cnt}}</div>
+        @endif
     </a>
 </div>
 

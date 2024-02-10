@@ -35,6 +35,5 @@ class ReviewController extends Controller
     {
         $review->delete();
         return redirect(route('admin.reviews.index'));
-
     }
 }

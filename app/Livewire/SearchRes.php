@@ -36,111 +36,105 @@ class SearchRes extends Component
         $request=$this->request;
         $this->flightSearchService = $flightSearchService;
 
-        $results = $this->flightSearchService->parseFlightInfo($request['origin_'], $request['destination_'], $request['departDate']);
-        $airlines_filter=$this->flightSearchService->FilterAirlines($results);
-        $transfers_filters=$this->flightSearchService->FilterTransfers($results);
-
-        if($this->transfer!=null)
+        if($request['origin_']!=null and $request['destination_']!=null)
         {
-            $transfers=$this->transfer;
-            $results=collect($results);
-            $results=$results->where('transfers_amount', '=', $transfers);
-        }
 
-        if($this->reset_filter==1)
-        {
-            $this->transfer=null;
-            $this->airlines=[];
-            $this->depart_start_time_filter=null;
-            $this->depart_end_time_filter=null;
-            $this->arrival_start_time_filter=null;
-            $this->arrival_end_time_filter=null;
-            $this->reset_filter=0;
-        }
+            $results = $this->flightSearchService->parseFlightInfo($request['origin_'], $request['destination_'], $request['departDate']);
 
-        if($this->airlines!=null)
-        {
-            $results=collect($results);
-
-            $cnt=0;
-            foreach ($this->airlines as $airline)
-            {
-                $cnt++;
-                $results_[$cnt]=$results->where('airline', '=', $airline);
+            if ($this->transfer != null) {
+                $transfers = $this->transfer;
+                $results = collect($results);
+                $results = $results->where('transfers_amount', '=', $transfers);
             }
 
+            if ($this->reset_filter == 1) {
+                $this->transfer = null;
+                $this->airlines = [];
+                $this->depart_start_time_filter = null;
+                $this->depart_end_time_filter = null;
+                $this->arrival_start_time_filter = null;
+                $this->arrival_end_time_filter = null;
+                $this->reset_filter = 0;
+            }
+
+            if ($this->airlines != null) {
+                $results = collect($results);
+
+                $cnt = 0;
+                foreach ($this->airlines as $airline) {
+                    $cnt++;
+                    $results_[$cnt] = $results->where('airline', '=', $airline);
+                }
+
+                $results = [];
+
+                foreach ($results_ as $result_) {
+                    foreach ($result_ as $result) {
+                        $results[] = $result;
+                    }
+                }
+            }
+
+            if ($this->depart_start_time_filter != null) {
+                $results = collect($results);
+
+                $i = 0;
+                foreach ($results as $result) {
+                    if ($result['depart_datetime'] <= strtotime($result['depart_date'] . $this->depart_start_time_filter)) {
+                        unset($results[$i]);
+                    }
+                    $i++;
+                }
+            }
+
+            if ($this->depart_end_time_filter != null) {
+                $results = collect($results);
+
+                $i = 0;
+                foreach ($results as $result) {
+                    if ($result['depart_datetime'] >= strtotime($result['depart_date'] . $this->depart_end_time_filter)) {
+                        unset($results[$i]);
+                    }
+                    $i++;
+                }
+            }
+
+            if ($this->arrival_start_time_filter != null) {
+                $results = collect($results);
+
+                $i = 0;
+                foreach ($results as $result) {
+                    if ($result['arrival_datetime'] <= strtotime($result['arrival_date'] . $this->arrival_start_time_filter)) {
+                        unset($results[$i]);
+                    }
+                    $i++;
+                }
+            }
+
+            if ($this->arrival_end_time_filter != null) {
+                $results = collect($results);
+
+                $i = 0;
+                foreach ($results as $result) {
+                    if ($result['arrival_datetime'] >= strtotime($result['arrival_date'] . $this->arrival_end_time_filter)) {
+                        unset($results[$i]);
+                    }
+                    $i++;
+                }
+            }
+            $airports_=Airports::all();
+            $airlines_filter=$this->flightSearchService->FilterAirlines($results);
+            $transfers_filters=$this->flightSearchService->FilterTransfers($results);
+        }
+        else
+        {
             $results=[];
-
-            foreach ($results_ as $result_)
-            {
-                foreach ($result_ as $result)
-                {
-                    $results[]=$result;
-                }
-            }
+            $airports_=[];
+            $airlines_filter=[];
+            $transfers_filters=[];
         }
 
-        if($this->depart_start_time_filter!=null)
-        {
-            $results=collect($results);
 
-            $i=0;
-            foreach ($results as $result)
-            {
-                if($result['depart_datetime']<=strtotime($result['depart_date'].$this->depart_start_time_filter))
-                {
-                    unset($results[$i]);
-                }
-                $i++;
-            }
-        }
-
-        if($this->depart_end_time_filter!=null)
-        {
-            $results=collect($results);
-
-            $i=0;
-            foreach ($results as $result)
-            {
-                if($result['depart_datetime']>=strtotime($result['depart_date'].$this->depart_end_time_filter))
-                {
-                    unset($results[$i]);
-                }
-                $i++;
-            }
-        }
-
-        if($this->arrival_start_time_filter!=null)
-        {
-            $results=collect($results);
-
-            $i=0;
-            foreach ($results as $result)
-            {
-                if($result['arrival_datetime']<=strtotime($result['arrival_date'].$this->arrival_start_time_filter))
-                {
-                    unset($results[$i]);
-                }
-                $i++;
-            }
-        }
-
-        if($this->arrival_end_time_filter!=null)
-        {
-            $results=collect($results);
-
-            $i=0;
-            foreach ($results as $result)
-            {
-                if($result['arrival_datetime']>=strtotime($result['arrival_date'].$this->arrival_end_time_filter))
-                {
-                    unset($results[$i]);
-                }
-                $i++;
-            }
-        }
-
-        $airports_=Airports::all();
         //dd($results);
         return view('livewire.search-results', compact(['results', 'request', 'airlines_filter', 'transfers_filters', 'airports_']));
     }

@@ -6,6 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
+    <script src="https://kit.fontawesome.com/0a007e12dc.js" crossorigin="anonymous"></script>
 
     <!-- ================== BEGIN core-css ================== -->
     @vite([
@@ -24,6 +25,9 @@
     <div class="login login-with-news-feed">
         <!-- BEGIN news-feed -->
         <div class="news-feed">
+            <div class="position-relative w-100 bg-white z-3 text-black fs-20px py-2">
+                <a href="{{route('main.index')}}" class="text-decoration-none text-black"><i class="fas fa-arrow-left"></i> На главную</a>
+            </div>
             <div class="news-image" style="background-image: url({{asset('img/login-bg-11.jpg')}})"></div>
             <div class="news-caption">
                 <h4 class="caption-title"><b>Trip</b>Avia</h4>

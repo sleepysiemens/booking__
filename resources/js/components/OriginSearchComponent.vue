@@ -1,8 +1,8 @@
 <template>
     <fieldset class="first_input brdr-b-l p-0 col-1 h-60px m-0 col-lg col-6 position-relative d-flex">
         <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Откуда</legend>
-        <input class="bg-transparent border-0 ms-3 p-0 h-100" v-model="searchQuery" @input="search" @focus="showCard" @blur="hideCard" type="text" name="origin" autocomplete="off"/>
-        <input type="hidden" name="origin_" v-model="searchQuery_">
+        <input class="bg-transparent border-0 ms-3 p-0 h-100" v-model="searchQuery" @input="search" @focus="showCard" @blur="hideCard" type="text" name="origin" autocomplete="off" required/>
+        <input type="hidden" name="origin_" v-model="searchQuery_" required>
         <div class="card position-absolute top-100 mt-3 search-origin-component overflow-y-scroll z-3" v-show="isCardVisible">
                 <ul class="list-group border-0">
                     <li class="list-group-item border-0 select-item border-bottom border-1" v-for="result in getDisplayResults()" :key="result.id" @click="selectItem(result)">

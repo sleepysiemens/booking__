@@ -68,8 +68,8 @@
                     </a>
                 </div>
                 <div class="menu-header"></div>
-                <div class="menu-item @yield('applications')">
-                    <livevire:new_orders />
+                <div class="menu-item @yield('orders')">
+                    <livewire:new_orders />
                 </div>
                 <div class="menu-item @yield('blog')">
                     <a href="{{route('admin.blog.index')}}" class="menu-link">
@@ -85,6 +85,14 @@
                             <i class="fas fa-bullhorn"></i>
                         </div>
                         <div class="menu-text">Отзывы <span class="menu-label">NEW</span></div>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="{{route('profile.logout')}}" class="menu-link">
+                        <div class="menu-icon">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <div class="menu-text">Выйти</div>
                     </a>
                 </div>
 

@@ -15,4 +15,26 @@ class OrdersController extends Controller
         $orders=Order::all();
         return view('admin.orders.index', compact(['orders']));
     }
+
+    public function edit(Order $order)
+    {
+        return view('admin.orders.edit', compact(['order']));
+    }
+
+    public function update(Order $order)
+    {
+        $data=request()->all();
+        unset($data['_method'], $data['_token']);
+        if(!isset($data['is_payed']))
+            $data['is_payed']=0;
+
+        $order->update($data);
+        return redirect(route('admin.orders.index'));
+    }
+
+    public function delete(Order $order)
+    {
+        $order->delete();
+        return redirect(route('admin.orders.index'));
+    }
 }
