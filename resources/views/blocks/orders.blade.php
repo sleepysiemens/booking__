@@ -4,11 +4,7 @@
         @foreach($orders as $order)
             @php
                 $json=$order->data;
-                $result=json_decode($json);
-                $result=$result->result;
-
-                $request=json_decode($json);
-                $request=$request->request;
+                $cookie=json_decode($json);
             @endphp
             <a class="card border-0 shadow mb-4">
                 <span class="card-header bg-white mx-3">
@@ -29,26 +25,26 @@
                                 </div>
                                 <div class="col-4">
                                     <p class="fs-12px m-0 opacity-50">Откуда:</p>
-                                    <p class=" my-2">{{$request->origin}} ({{$result->origin}})</p>
+                                    <p class=" my-2">{{$cookie->origin_city}} ({{$cookie->origin}})</p>
                                 </div>
                                 <div class="col-4">
                                     <p class="fs-12px m-0 opacity-50">Куда:</p>
-                                    <p class=" my-2">{{$request->destination}} ({{$result->destination}})</p>
+                                    <p class=" my-2">{{$cookie->destination_city}} ({{$cookie->destination}})</p>
                                 </div>
                             </div>
 
                             <div class="row mt-3">
                                 <div class="col-4">
                                     <p class="fs-12px m-0 opacity-50">Авиакомпания:</p>
-                                    <p class=" my-2">{{$result->airline}}</p>
+                                    <p class=" my-2">{{$cookie->airline}}</p>
                                 </div>
                                 <div class="col-4">
                                     <p class="fs-12px m-0 opacity-50">Рейс:</p>
-                                    <p class=" my-2">{{$result->flight_num}}</p>
+                                    <p class=" my-2">{{$cookie->flight_num}}</p>
                                 </div>
                                 <div class="col-4">
                                     <p class="fs-12px m-0 opacity-50">Кол-во пассажиров:</p>
-                                    <p class=" my-2">{{$request->passengers_amount}}</p>
+                                    <p class=" my-2">{{$cookie->passengers_amount}}</p>
                                 </div>
                             </div>
                         </div>
