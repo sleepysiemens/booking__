@@ -36,7 +36,7 @@ class SearchRes extends Component
         $request=$this->request;
         $this->flightSearchService = $flightSearchService;
 
-        if($request['origin_']!=null and $request['destination_']!=null)
+        if($request['origin_']==null and $request['destination_']==null)
         {
 
             $results = $this->flightSearchService->parseFlightInfo($request['origin_'], $request['destination_'], $request['departDate']);
