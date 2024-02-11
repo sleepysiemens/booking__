@@ -86,7 +86,6 @@ class FlightSearchService
 
         $json=json_decode($json[0]);
         $tickets=[];
-        dd($json);
 
         $this->getAllAirlines();
 
@@ -96,7 +95,6 @@ class FlightSearchService
         $ticket_cnt=0;
         foreach ($json->trips as $data)
         {
-            //if($destination==$data->to)//выводить только прямые билеты. Исправить
             {
                 $duration=
                     [
