@@ -435,6 +435,7 @@ class AirportService
                             'city_code'=>$city['code'],
                             'airport_code'=>$city['code'],
                         ];
+                    $airports_check=Airports::query()->first();
 
                     foreach ($airportData as $airport)
                     {
@@ -454,7 +455,6 @@ class AirportService
                                 ];
 
                             $result[]= $data;
-                            $airports_check=Airports::query()->first();
                             if($airports_check==null)
                             Airports::create($data);
                         }
