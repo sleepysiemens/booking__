@@ -127,7 +127,7 @@
                                 @endif
                             </div>
                             <div class="row my-auto">
-                                <h2 class="fw-500 my-lg-1 fs-22px ff-montserrat text-lg-center text-end mt-lg-3">{{ number_format( $result['price'] , 0 , " "  , " " )}} ₽</h2>
+                                <h2 class="fw-500 my-lg-1 fs-22px ff-montserrat text-lg-center text-end mt-lg-3">@if( gettype($result['price'])!='string') {{ number_format( $result['price'] , 0 , " "  , " " )}} @endif ₽</h2>
                             </div>
                             <form class="row mt-lg-5 d-flex position-relative" method="post" action="{{route('booking.index')}}" target="_blank">
                                 @csrf

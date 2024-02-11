@@ -114,7 +114,10 @@ class FlightSearchService
                     $price=$prices->where('transportationVariantIds.0','=', $transportationVariants_id->id)->first();
 
                 //$price=round($price->totalAmount);
+                if(isset($price->totalAmount))
                 $price= $price->totalAmount;
+                //dd($price);
+
                 //price_end
 
                 $depart_date=explode('T', $data->startDateTime);
