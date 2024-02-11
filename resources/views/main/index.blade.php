@@ -53,7 +53,9 @@
                     <!-- BEGIN news -->
                     <div class="news">
                         <div class="news-media">
-                            <div class="news-media-img news-media-img-lg" style="background-image: url({{asset('img/blog/'.$post->image)}});"></div>
+                            <div class="news-media-img news-media-img-lg position-relative">
+                                <img class="w-100 h-100 object-fit-cover position-absolute top-0" src="{{asset('img/blog/'.$post->image)}}" alt="img">
+                            </div>
                         </div>
                         <div class="news-content">
                             <div class="news-title">{{$post->title}}</div>
