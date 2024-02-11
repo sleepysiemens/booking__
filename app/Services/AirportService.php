@@ -413,6 +413,8 @@ class AirportService
         $countryData = json_decode($body, true);
 
         $result=[];
+        $airports_check=Airports::query()->first();
+
 
         foreach ($countryData as $country)
         {
@@ -435,7 +437,6 @@ class AirportService
                             'city_code'=>$city['code'],
                             'airport_code'=>$city['code'],
                         ];
-                    $airports_check=Airports::query()->first();
 
                     foreach ($airportData as $airport)
                     {
