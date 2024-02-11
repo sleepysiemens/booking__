@@ -36,7 +36,6 @@ class SearchRes extends Component
 
         if($request['origin_']!=null and $request['destination_']!=null)
         {
-            dd('test');
 
             $results = $flightSearchService->parseFlightInfo($request['origin_'], $request['destination_'], $request['departDate']);
 
@@ -124,6 +123,8 @@ class SearchRes extends Component
             $airports_=Airports::all();
             $airlines_filter=$flightSearchService->FilterAirlines($results);
             $transfers_filters=$flightSearchService->FilterTransfers($results);
+            dd('test');
+
         }
         else
         {
