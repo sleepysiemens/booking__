@@ -38,14 +38,8 @@
                             <div class="col text-center">{{$order->id}}</div>
                             <div class="col text-center">{{$order->created_at}}</div>
                             <div class="col text-center">{{$order->user_id}}</div>
-                            @php
-                                $data=$order->data;
-                                $data=json_decode($data);
-                                $request=$data->request;
-                                //dd($request);
-                            @endphp
-                            <div class="col text-center">{{$request->origin}}({{$request->origin_}}) - {{$request->destination}}({{$request->destination_}})</div>
-                            <div class="col text-center">{{$request->passengers_amount}}</div>
+                            <div class="col text-center">{{$order->origin_city}}({{$order->origin}}) - {{$order->destination_city}}({{$order->destination}})</div>
+                            <div class="col text-center">{{$order->passengers_amount}}</div>
                             <div class="col text-center">{{$order->price}}</div>
                             <div class="col text-center">@if($order->is_payed)<i class="fas fa-check"></i>@else<i class="fas fa-times"></i>@endif</div>
                             <div class="col text-center"><a href="{{route('admin.orders.edit',$order->id)}}"><i class="far fa-edit fs-20px"></i></a></div>
