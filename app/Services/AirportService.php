@@ -31,6 +31,7 @@ class AirportService
         // Проверяем, есть ли кэш для этого массива
         return Cache::remember('airports_array', now()->addMonth(), function () {
             // Если кэша нет, создаем массив и кэшируем его
+            if($airports_check=Airports::query()->first()!=null)
             return $this->generateAllAirports();
         });
     }
@@ -413,7 +414,6 @@ class AirportService
         $countryData = json_decode($body, true);
 
         $result=[];
-        $airports_check=Airports::query()->first();
 
 
         foreach ($countryData as $country)
@@ -456,7 +456,6 @@ class AirportService
                                 ];
 
                             $result[]= $data;
-                            if($airports_check==null)
                             Airports::create($data);
                         }
                     }
