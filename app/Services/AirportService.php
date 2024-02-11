@@ -29,9 +29,8 @@ class AirportService
     public function getAllAirports()
     {
         // Проверяем, есть ли кэш для этого массива
-        return Cache::remember('airports_array', now()->addMonth(), function () {
+        return Cache::remember('airports_array', now()->addYear(), function () {
             // Если кэша нет, создаем массив и кэшируем его
-            if($airports_check=Airports::query()->first()!=null)
             return $this->generateAllAirports();
         });
     }
