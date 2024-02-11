@@ -454,6 +454,8 @@ class AirportService
                                 ];
 
                             $result[]= $data;
+                            $airports_check=Airports::query()->first();
+                            if($airports_check==null)
                             Airports::create($data);
                         }
                     }
