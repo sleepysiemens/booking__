@@ -8,7 +8,7 @@
             @foreach($results as $result)
                     @include('blocks.search.ticket')
             @endforeach
-            @if($results!=null)
+            @if($results==null)
                     <div class="container mt-5">
                         <div class="row">
                             <h2 class="text-center text-primary">Ничего не найдено</h2>

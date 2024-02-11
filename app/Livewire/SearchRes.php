@@ -18,7 +18,6 @@ class SearchRes extends Component
     public $arrival_start_time_filter;
     public $arrival_end_time_filter;
     public $reset_filter=0;
-    public $details=-1;
 
     public function initializeItems($request)
     {
@@ -133,8 +132,6 @@ class SearchRes extends Component
             $airlines_filter=[];
             $transfers_filters=[];
         }
-
-        dd($results);
 
         return view('livewire.search-results', compact(['results', 'request', 'airlines_filter', 'transfers_filters', 'airports_']));
     }
