@@ -13,7 +13,7 @@
                 @foreach($transfers_filters as $transfers_filter)
                     <div class="row pt-3">
                         <input wire:model.live="transfer" class="col-1 h-20px my-auto" type="radio" value="{{$transfers_filter['transfers_amount']}}">
-                        <label class="col-auto"><p class="m-auto">@if($transfers_filter['transfers_amount']==0) Без пересадок@else Пересадок: {{$transfers_filter['transfers_amount']}} @endif</p></label>
+                        <label class="col-auto"><p class="m-auto">@if($transfers_filter['transfers_amount']==1) Без пересадок@else Пересадок: {{$transfers_filter['transfers_amount']}} @endif</p></label>
                     </div>
                 @endforeach
             </div>
