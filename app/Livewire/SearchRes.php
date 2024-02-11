@@ -32,6 +32,7 @@ class SearchRes extends Component
 
     public function render(FlightSearchService $flightSearchService)
     {
+        dd('test');
         $request=$this->request;
         $this->flightSearchService = $flightSearchService;
 
