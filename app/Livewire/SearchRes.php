@@ -32,14 +32,13 @@ class SearchRes extends Component
 
     public function render(FlightSearchService $flightSearchService)
     {
-        dd('test');
         $request=$this->request;
-        $this->flightSearchService = $flightSearchService;
+        dd('test');
 
         if($request['origin_']!=null and $request['destination_']!=null)
         {
 
-            $results = $this->flightSearchService->parseFlightInfo($request['origin_'], $request['destination_'], $request['departDate']);
+            $results = $flightSearchService->parseFlightInfo($request['origin_'], $request['destination_'], $request['departDate']);
 
             if ($this->transfer != null) {
                 $transfers = $this->transfer;
@@ -123,8 +122,8 @@ class SearchRes extends Component
                 }
             }
             $airports_=Airports::all();
-            $airlines_filter=$this->flightSearchService->FilterAirlines($results);
-            $transfers_filters=$this->flightSearchService->FilterTransfers($results);
+            $airlines_filter=$flightSearchService->FilterAirlines($results);
+            $transfers_filters=$flightSearchService->FilterTransfers($results);
         }
         else
         {
