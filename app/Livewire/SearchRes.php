@@ -120,10 +120,11 @@ class SearchRes extends Component
                     $i++;
                 }
             }
+            dd('test');
+
             $airports_=Airports::all();
             $airlines_filter=$flightSearchService->FilterAirlines($results);
             $transfers_filters=$flightSearchService->FilterTransfers($results);
-            dd('test');
 
         }
         else
