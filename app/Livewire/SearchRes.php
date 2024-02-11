@@ -33,10 +33,10 @@ class SearchRes extends Component
     public function render(FlightSearchService $flightSearchService)
     {
         $request=$this->request;
-        dd('test');
 
         if($request['origin_']!=null and $request['destination_']!=null)
         {
+            dd('test');
 
             $results = $flightSearchService->parseFlightInfo($request['origin_'], $request['destination_'], $request['departDate']);
 
