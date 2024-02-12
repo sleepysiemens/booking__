@@ -46,17 +46,7 @@
                                 </div>
                             </div>
 
-                            <livewire:wait lazy/>
-
-                            <div class="mt-5">
-                                <h4 class="text-center m-0 text-primary opacity-70">Обычно это занимает до 10 минут.</h4>
-                                <loading-component
-                                    bg_light="{{asset('img/loading/bg-light.svg')}}"
-                                    bg_dark="{{asset('img/loading/bg-dark.svg')}}"
-                                    building="{{asset('img/loading/building.svg')}}"
-                                    plane="{{asset('img/loading/plane.svg')}}"
-                                ></loading-component>
-                            </div>
+                            @include('livewire.wait_3_stage')
 
                         </div>
                     </div>

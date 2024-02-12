@@ -269,14 +269,8 @@
                                 </div>
                                 <div class="col-6 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
-                                        <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
-                                        <input type="text" name="number" class="w-100" required @if(auth()->user()==null) disabled @else @if($passengers_cnt==1 and auth()->user()->number!=null) value="{{auth()->user()->number}}" @endif @endif>
-                                    </fieldset>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <fieldset style="all: revert;" class="border border-1 rounded">
-                                        <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
-                                        <input type="text" name="serial" class="w-100" required @if(auth()->user()==null) disabled @else @if($passengers_cnt==1 and auth()->user()->serial!=null) value="{{auth()->user()->serial}}" @endif @endif>
+                                        <legend style="all: revert;" class="text-black-200 px-2">Серия и номер документа</legend>
+                                        <input type="text" name="serial_number" class="w-100" required @if(auth()->user()==null) disabled @else @if($passengers_cnt==1 and auth()->user()->serial_number!=null) value="{{auth()->user()->serial_number}}" @endif @endif>
                                     </fieldset>
                                 </div>
                                 <div class="col-6 mb-3">
@@ -362,14 +356,8 @@
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
-                                            <input type="text" name="number" class="w-100" required @if(auth()->user()==null) disabled @endif>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
-                                            <input type="text" name="serial" class="w-100" required @if(auth()->user()==null) disabled @endif>
+                                            <legend style="all: revert;" class="text-black-200 px-2">Серия и номер документа</legend>
+                                            <input type="text" name="serial_number" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
@@ -455,14 +443,8 @@
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
-                                            <input type="text" name="number" class="w-100" required @if(auth()->user()==null) disabled @endif>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
-                                            <input type="text" name="serial" class="w-100" required @if(auth()->user()==null) disabled @endif>
+                                            <legend style="all: revert;" class="text-black-200 px-2">Серия и номер документа</legend>
+                                            <input type="text" name="serial_number" class="w-100" required @if(auth()->user()==null) disabled @endif>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">

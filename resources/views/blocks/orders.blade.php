@@ -6,7 +6,7 @@
                 $json=$order->data;
                 $cookie=json_decode($json);
             @endphp
-            <a class="card border-0 shadow mb-4">
+            <div class="card border-0 shadow mb-4">
                 <span class="card-header bg-white mx-3">
                     <div class="row py-2">
                         <div class="col d-flex">
@@ -52,11 +52,12 @@
                         <div class="col-2" style="border-left: 1px solid rgba(0,0,0,.2)">
                             <p class="fs-12px m-0 opacity-50 text-center">Стоимость:</p>
                             <h3 class="text-center mt-3">{{$order->price}} ₽</h3>
+                            <p class="text-center mt-4"><a href="{{route('order.index', $order->id)}}">Посмотреть</a></p>
                         </div>
                     </div>
 
                 </div>
-            </a>
+            </div>
         @endforeach
     @else
         <div class="section h-100">

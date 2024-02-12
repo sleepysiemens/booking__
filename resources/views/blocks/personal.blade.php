@@ -57,14 +57,8 @@
                 </div>
                 <div class="col-6 mb-3">
                     <fieldset style="all: revert;" class="border border-1 rounded">
-                        <legend style="all: revert;" class="text-black-200 px-2">Номер документа</legend>
-                        <input type="text" name="number" class="w-100" value="{{auth()->user()->number}}">
-                    </fieldset>
-                </div>
-                <div class="col-6 mb-3">
-                    <fieldset style="all: revert;" class="border border-1 rounded">
-                        <legend style="all: revert;" class="text-black-200 px-2">Серия документа</legend>
-                        <input type="text" name="serial" class="w-100" value="{{auth()->user()->serial}}">
+                        <legend style="all: revert;" class="text-black-200 px-2">Серия и номер документа</legend>
+                        <input type="text" name="serial_number" class="w-100" value="{{auth()->user()->serial_number}}">
                     </fieldset>
                 </div>
                 <div class="col-6 mb-3">

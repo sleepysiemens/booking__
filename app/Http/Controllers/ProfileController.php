@@ -18,6 +18,7 @@ class ProfileController extends Controller
     public function update(User $user)
     {
         $data=\request()->all();
+
         unset($data['_method']);
         unset($data['_token']);
 

@@ -13,7 +13,7 @@
                 @foreach($transfers_filters as $transfers_filter)
                     <div class="row pt-3">
                         <input wire:model.live="transfer" class="col-1 h-20px my-auto" type="radio" value="{{$transfers_filter['transfers_amount']}}">
-                        <label class="col-auto"><p class="m-auto">@if($transfers_filter['transfers_amount']==1) Без пересадок@else Пересадок: {{$transfers_filter['transfers_amount']}} @endif</p></label>
+                        <label class="col-auto"><p class="m-auto">@if($transfers_filter['transfers_amount']==0) Без пересадок@else Пересадок: {{$transfers_filter['transfers_amount']}} @endif</p></label>
                     </div>
                 @endforeach
             </div>
@@ -37,8 +37,8 @@
                     <div class="row pt-3">
                         <input wire:model.live="airlines" class="col-1 h-20px my-auto" type="checkbox" value="{{$airline['airline']}}" id="company-{{$ii}}">
                         <label class="col-auto d-flex" for="company-{{$ii}}">
-                            <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
-                                <img class="w-100 h-100" src="{{asset('img/SU.png')}}" alt="avia">
+                            <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto d-flex">
+                                <img class="w-75 h-75 m-auto" src="https://static.onetwotrip.com/images/airlines/svg/{{$airline['airline_short']}}.svg" alt="avia">
                             </div>
                             <p class="m-auto ms-2">{{$airline['airline']}}</p>
                         </label>

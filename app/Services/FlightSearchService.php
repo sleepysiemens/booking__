@@ -19,6 +19,7 @@ class FlightSearchService
             $airlines[]=
                 [
                     'airline'=>$ticket['airline'],
+                    'airline_short'=>$ticket['airline_short'],
                 ];
         }
 
@@ -73,7 +74,7 @@ class FlightSearchService
          $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
             'chromedriver_arguments' => ['--headless=new', '--disable-gpu', '--no-sandbox'],
         ], 'http://localhost');
-        //$client = Client::createChromeClient();
+         //$client = Client::createChromeClient();
 
         $depart_date=date('dm',strtotime($depart_date));
 
@@ -92,7 +93,7 @@ class FlightSearchService
         $prices=collect($json->prices);
         $trips=collect($json->trips);
 
-        //dd($trips);
+        //dd($transportationVariants);
 
         $i=0;
         foreach ($transportationVariants as $transportationVariant)
@@ -114,8 +115,9 @@ class FlightSearchService
                         'arrival_datetime'=>strtotime($trips[$trip_ref->tripId]->endDateTime),
                         'arrival_date'=>$arrival_date[0],
                         'airline'=>$airline->name,
+                        'airline_short'=>$trips[$trip_ref->tripId]->carrier,
                         'duration'=>(intdiv($trips[$trip_ref->tripId]->tripTimeMinutes, 60)).'ч '.($trips[$trip_ref->tripId]->tripTimeMinutes%60).'м',
-                        'flight_num'=>$trips[$trip_ref->tripId]->carrier.$trips[$trip_ref->tripId]->carrierTripNumber,
+                        'flight_num'=>$trips[$trip_ref->tripId]->carrier.' '.$trips[$trip_ref->tripId]->carrierTripNumber,
                         'transfer'=>'прямой',
                 ];
 
@@ -127,7 +129,7 @@ class FlightSearchService
             $tickets[$i]['transfers_amount']=count($tickets[$i]['transfers'])-1;
 
             //
-            if($tickets[$i]['transfers_amount']==1)
+            if($tickets[$i]['transfers_amount']<1)
             {
                 //
                 $tickets[$i]['transfer']='прямой';
@@ -144,6 +146,7 @@ class FlightSearchService
             //
             $airline=Airlines::query()->where('code','=',$trips[$trip_ref->tripId]->carrier)->select('name')->first();
             $tickets[$i]['airline']=$airline->name;
+            $tickets[$i]['airline_short']=$trips[$trip_ref->tripId]->carrier;
 
             //
             $depart_date=explode('T', $trips[$trip_ref->tripId]->startDateTime);

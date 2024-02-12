@@ -11,7 +11,7 @@
             <div class="rounded-circle w-20px h-20px border border-3 border-green ">
             </div>
             <div class="position-absolute w-100px" style="right: -40px">
-                <p class="text-center fw-400 text-green fs-16px mt-2">Обработка заказа</p>
+                <p class="text-center fw-600 text-green fs-16px mt-2">Обработка заказа</p>
             </div>
         </div>
 
@@ -24,7 +24,7 @@
             <div class="rounded-circle w-20px h-20px border border-3 border-green">
             </div>
             <div class="position-absolute w-100px" style="right: -40px">
-                <p class="text-center fw-400  text-green fs-16px mt-2">Подготовка документов</p>
+                <p class="text-center fw-600  text-green fs-16px mt-2">Подготовка документов</p>
             </div>
         </div>
 
@@ -37,7 +37,7 @@
             <div class="rounded-circle w-20px h-20px border border-3 border-green ">
             </div>
             <div class="position-absolute w-100px" style="right: -40px">
-                <p class="text-center fw-400 text-green fs-16px mt-2">Готово</p>
+                <p class="text-center fw-600 text-green fs-16px mt-2">Готово</p>
             </div>
         </div>
     </div>

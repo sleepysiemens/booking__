@@ -23,11 +23,26 @@ Route::get('/ticket/{order}', 'App\Http\Controllers\TicketController@index')->na
 Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
 
 
-//==========PROFILE==========
+
 Route::group(['middleware' => ['auth'], ], function (){
+    //==========PROFILE==========
     Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('profile.index');
     Route::patch('/profile/{user}', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
     Route::get('/profile/logout', 'App\Http\Controllers\ProfileController@logout')->name('profile.logout');
+
+    //==========PAY==========
+    Route::post('/pay', 'App\Http\Controllers\BookingController@pay_page_post')->name('pay.post.index');
+    //Route::get('/pay', 'App\Http\Controllers\BookingController@pay_page_get')->name('pay.get.index');
+
+    Route::get('/payment-confirm', 'App\Http\Controllers\PayController@index')->name('payment.index');
+    Route::post('/payment-confirm/confirm', 'App\Http\Controllers\PayController@confirm')->name('payment.confirm');
+
+    //==========WAIT==========
+    Route::get('/wait/', 'App\Http\Controllers\WaitController@index')->name('wait.index');
+
+    //==========ORDER==========
+    Route::get('/order/{order}', 'App\Http\Controllers\OrderController@index')->name('order.index');
+
 });
 
 //==========BLOG==========
@@ -42,13 +57,6 @@ Route::post('/reviews', 'App\Http\Controllers\ReviewController@store')->name('re
 
 //==========BOOKING==========
 Route::post('/booking', 'App\Http\Controllers\BookingController@index')->name('booking.index');
-Route::post('/pay', 'App\Http\Controllers\BookingController@pay_page_post')->name('pay.post.index');
-Route::get('/pay', 'App\Http\Controllers\BookingController@pay_page_get')->name('pay.get.index');
-
-Route::get('/payment-confirm', 'App\Http\Controllers\PayController@index')->name('payment.index');
-Route::post('/payment-confirm/confirm', 'App\Http\Controllers\PayController@confirm')->name('payment.confirm');
-
-Route::get('/wait/', 'App\Http\Controllers\WaitController@index')->name('wait.index');
 
 
 //==========ADMIN==========

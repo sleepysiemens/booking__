@@ -67,7 +67,7 @@
 
                     @php $pay_methods=[1,2,3] @endphp
                     @foreach($pay_methods as $pay_method)
-                        <label class="row card mb-2">
+                        <label class="row card mb-2 mt-4">
                             <span class="card-body">
                                 <span class="row">
                                     <span class="col-1 d-flex">

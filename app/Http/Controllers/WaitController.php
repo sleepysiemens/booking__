@@ -12,7 +12,7 @@ class WaitController extends Controller
             return redirect()->route('main.index');
         else
         {
-            $stage=1;
+            unset($_COOKIE['order']);
             return view('wait.index');
         }
     }

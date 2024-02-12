@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="col-4">
                                             <p class="fw-500 mb-2">Document / Документ</p>
-                                            <p class="fw-400 mb-0">{{$cookie->user_data->number}} {{$cookie->user_data->serial}}</p>
+                                            <p class="fw-400 mb-0">{{$cookie->user_data->serial_number}}</p>
                                         </div>
                                     </div>
                                 </div>

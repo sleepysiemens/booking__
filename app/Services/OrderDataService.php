@@ -11,6 +11,17 @@ class OrderDataService
         unset($request->_token);
         $request->total_rub=($request->passengers->children+$request->passengers->adults+$request->passengers->infants)*699;
         $request->total_eur=($request->passengers->children+$request->passengers->adults+$request->passengers->infants)*14;
+
+        //
+        if(!isset($result->flight_num))
+        {
+            $flight_num='';
+            foreach ($result->transfers as $transfer)
+            {
+                $flight_num=$flight_num.' '.$transfer->flight_num;
+            }
+            $result->flight_num=$flight_num;
+        }
         //
         $cookie=
             [

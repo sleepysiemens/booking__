@@ -26,8 +26,7 @@ class User extends Authenticatable
         'date_of_birth',
         'citizenship',
         'doc_type',
-        'serial',
-        'number',
+        'serial_number',
         'validity',
     ];
 

@@ -4,8 +4,8 @@
                 <div class="col-lg">
                     {{--HEADER--}}
                     <div class="d-flex">
-                        <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
-                            <img class="w-100 h-100" src="{{asset('img/SU.png')}}" alt="avia">
+                        <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto d-flex">
+                            <img class="w-75 h-75 m-auto" src="https://static.onetwotrip.com/images/airlines/svg/{{$result['airline_short']}}.svg" alt="avia">
                         </div>
                         <p class="m-auto ms-2">{{$result['airline']}}</p>
                     </div>
@@ -23,7 +23,7 @@
                             </div>
                             <div class="col d-flex opacity-25">
                                 <div class="bg-black w-100 my-auto position-relative" style="height: 2px">
-                                    @if($result['transfers_amount']!=1)
+                                    @if($result['transfers_amount']!=0)
                                     <div class="position-absolute bg-white m-auto rounded-circle border-2 border-black border" style="width: 10px; height: 10px; left: 0; right: 0; top: 0; bottom: 0"></div>
                                     @endif
                                 </div>
@@ -40,8 +40,8 @@
                             <div class="col d-none d-lg-block">
                                 <div class="container">
                                     <p class="fw-500 mb-0">{{$result['duration']}}</p>
-                                    <p class="fw-400 fs-12px @if($result['transfers_amount']==1) text-green @else text-warning @endif mb-0">{{$result['transfer']}}</p>
-                                    @if($result['transfers_amount']==1)
+                                    <p class="fw-400 fs-12px @if($result['transfers_amount']==0) text-green @else text-warning @endif mb-0">{{$result['transfer']}}</p>
+                                    @if($result['transfers_amount']==0)
                                         <p class="fw-400 fs-12px text-black-200">Рейс {{$result['flight_num']}}</p>
                                     @endif
                                 </div>
@@ -50,7 +50,7 @@
 
                     </div>
                     {{--DETAILS--}}
-                    @if($result['transfers_amount']>1)
+                    @if($result['transfers_amount']>0)
                         <div style="display:none;" id="details-div-{{$result['id']}}">
                             @foreach($result['transfers'] as $transfer)
 
@@ -121,8 +121,8 @@
                         <div class="h-100 d-flex d-lg-block justify-content-between">
                             <div class="d-lg-none">
                                 <p class="fw-500 mb-0">{{$result['duration']}}</p>
-                                <p class="fw-400 fs-12px @if($result['transfers_amount']==1) text-green @else text-warning @endif mb-0">{{$result['transfer']}}</p>
-                                @if($result['transfers_amount']==1)
+                                <p class="fw-400 fs-12px @if($result['transfers_amount']==0) text-green @else text-warning @endif mb-0">{{$result['transfer']}}</p>
+                                @if($result['transfers_amount']==0)
                                     <p class="fw-400 fs-12px text-black-200">Рейс {{$result['flight_num']}}</p>
                                 @endif
                             </div>
@@ -136,7 +136,7 @@
 
                                 <button class="btn-primary btn fs-12px h-55px m-auto">Забронировать</button>
                                 <div class="d-flex mt-lg-3 justify-content-center details mt-2">
-                                    @if($result['transfers_amount']>1)
+                                    @if($result['transfers_amount']>0)
                                         <a class="text-primary cursor-pointer w-100" onclick="details({{$result['id']}})"><i class="fas fa-chevron-down filter-btn" id="details-btn-marker-{{$result['id']}}"></i> Детали перелета</a>
                                     @endif
                                 </div>
