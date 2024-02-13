@@ -71,6 +71,14 @@
                 <div class="menu-item @yield('orders')">
                     <livewire:new_orders />
                 </div>
+                <div class="menu-item @yield('users')">
+                    <a href="{{route('admin.users.index')}}" class="menu-link">
+                        <div class="menu-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="menu-text">Пользователи</div>
+                    </a>
+                </div>
                 <div class="menu-item @yield('blog')">
                     <a href="{{route('admin.blog.index')}}" class="menu-link">
                         <div class="menu-icon">

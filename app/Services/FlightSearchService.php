@@ -69,16 +69,20 @@ class FlightSearchService
         }
     }
 
-    public function parseFlightInfo($origin, $destination, $depart_date)
+    public function parseFlightInfo($origin, $destination, $depart_date, $return_date)
     {
          $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
             'chromedriver_arguments' => ['--headless=new', '--disable-gpu', '--no-sandbox'],
         ], 'http://localhost');
-         //$client = Client::createChromeClient();
+         $client = Client::createChromeClient();
 
         $depart_date=date('dm',strtotime($depart_date));
+        if($return_date!='не установлено')
+            $return_date=date('dm',strtotime($return_date));
+        else
+            $return_date=null;
 
-        $crawler = $client->request('GET', 'https://www.onetwotrip.com/_avia-search-proxy/search/v3?route='.$depart_date.$origin.$destination.'&ad=1&cn=0&in=0&showDeeplink=false&cs=E&source=google_adwords&priceIncludeBaggage=false&noClearNoBags=true&noMix=true&srcmarker=b2b_p1_b2b-generic_wld_s_kkwd-839752446941_c_20378146076_154201628133_676270550064_1010561&cryptoTripsVersion=61&doNotMap=true');
+        $crawler = $client->request('GET', 'https://www.onetwotrip.com/_avia-search-proxy/search/v3?route='.$depart_date.$origin.$destination.$return_date.'&ad=1&cn=0&in=0&showDeeplink=false&cs=E&source=google_adwords&priceIncludeBaggage=false&noClearNoBags=true&noMix=true&srcmarker=b2b_p1_b2b-generic_wld_s_kkwd-839752446941_c_20378146076_154201628133_676270550064_1010561&cryptoTripsVersion=61&doNotMap=true');
 
         $json = $crawler->filter('pre')->first()
             ->each(function ($child)
@@ -140,7 +144,7 @@ class FlightSearchService
             else
             {
                 //
-                $tickets[$i]['transfer']='пересадок:'.$tickets[$i]['transfers_amount'] ;
+                $tickets[$i]['transfer']='пересадок: '.$tickets[$i]['transfers_amount'] ;
             }
 
             //
@@ -162,8 +166,12 @@ class FlightSearchService
             $tickets[$i]['destination']=$tickets[$i]['transfers'][$tickets[$i]['transfers_amount']]['destination'];
 
             //
-            //dd($transportationVariant->id);
-            $tickets[$i]['price']=$prices->where('transportationVariantIds.0', '=', $transportationVariant->id)->first()->totalAmount;
+            if($prices->where('transportationVariantIds.0', '=', $transportationVariant->id)->first()!=null)
+                $tickets[$i]['price']=$prices->where('transportationVariantIds.0', '=', $transportationVariant->id)->first()->totalAmount;
+            elseif ($prices->where('transportationVariantIds.1', '=', $transportationVariant->id)->first()!=null)
+                $tickets[$i]['price']=$prices->where('transportationVariantIds.1', '=', $transportationVariant->id)->first()->totalAmount;
+            else
+                $tickets[$i]['price']=0;
 
             if($i>10)
             {

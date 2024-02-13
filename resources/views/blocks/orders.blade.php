@@ -11,6 +11,11 @@
                     <div class="row py-2">
                         <div class="col d-flex">
                             <h5 class="text-primary my-auto">Заказ №{{$order->id}}</h5>
+                            @if($order->is_confirmed)
+                                <p class="my-auto ms-2 text-green">Подтвержден</p>
+                            @else
+                                <p class="my-auto ms-2 text-warning">Ожидает подтверждения</p>
+                            @endif
                         </div>
                     </div>
                 </span>

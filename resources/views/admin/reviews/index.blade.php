@@ -5,8 +5,6 @@
 @endsection
 
 @section('content')
-    <h1 class="page-header">Отзывы <small></small></h1>
-    <br>
     <div class="panel panel-inverse" data-sortable-id="table-basic-2" style="">
         <!-- BEGIN panel-heading -->
         <div class="panel-heading ui-sortable-handle">

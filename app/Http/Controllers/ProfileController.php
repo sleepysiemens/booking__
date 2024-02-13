@@ -10,7 +10,7 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $orders=Order::query()->where('user_id', '=', auth()->user()->id)->get();
+        $orders=Order::query()->where('user_id', '=', auth()->user()->id)->orderBy('created_at', 'desc')->get();
         //dd($orders);
         return view('profile.index', compact(['orders']));
     }

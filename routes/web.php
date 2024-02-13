@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\MainController@index')->name('main.index');
 Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tariff.index');
 Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
-Route::get('/ticket/{order}', 'App\Http\Controllers\TicketController@index')->name('ticket.index');
 Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
 
 
@@ -42,6 +41,9 @@ Route::group(['middleware' => ['auth'], ], function (){
 
     //==========ORDER==========
     Route::get('/order/{order}', 'App\Http\Controllers\OrderController@index')->name('order.index');
+
+    //==========TICKET==========
+    Route::get('/ticket/{order}', 'App\Http\Controllers\TicketController@index')->name('ticket.index');
 
 });
 
@@ -79,6 +81,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], functio
     Route::get('/orders/{order}/edit', 'App\Http\Controllers\Admin\OrdersController@edit')->name('admin.orders.edit');
     Route::patch('/orders/{order}', 'App\Http\Controllers\Admin\OrdersController@update')->name('admin.orders.update');
     Route::delete('/orders/{order}', 'App\Http\Controllers\Admin\OrdersController@delete')->name('admin.orders.delete');
+
+    Route::get('/users', 'App\Http\Controllers\Admin\UsersController@index')->name('admin.users.index');
 
 });
 

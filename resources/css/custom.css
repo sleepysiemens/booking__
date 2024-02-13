@@ -239,3 +239,12 @@ input:-webkit-autofill {
 {
     box-shadow: var(--bs-box-shadow);
 }
+
+.table-row{
+    background-color: rgba(194,194,195, .4)!important;
+    transition: .3s;
+}
+
+.table-row:hover{
+    background-color: rgba(194,194,195, .6)!important;
+}

@@ -12,7 +12,7 @@ class OrdersController extends Controller
 {
     public function index()
     {
-        $orders=Order::all();
+        $orders=Order::query()->join('users', 'users.id','=','orders.user_id')->select('orders.*', 'users.email')->orderBy('created_at', 'desc')->get();
         return view('admin.orders.index', compact(['orders']));
     }
 

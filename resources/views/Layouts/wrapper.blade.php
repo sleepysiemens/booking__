@@ -49,6 +49,12 @@
             <div class="header-nav">
                 <div class="container">
                     <div class="header-nav-item">
+                        <a href="{{route('main.index')}}" class="header-nav-link header-link">
+                            <p class="first">Главная</p>
+                            <p class="second">Главная</p>
+                        </a>
+                    </div>
+                    <div class="header-nav-item">
                         <a href="{{route('tariff.index')}}" class="header-nav-link header-link">
                             <p class="first">Тариф</p>
                             <p class="second">Тариф</p>
