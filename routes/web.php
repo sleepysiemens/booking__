@@ -22,7 +22,11 @@ Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.inde
 Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
 
 ////==========CONFIRM CHECK==========
-Route::get('/check-ticket', 'App\Http\Controllers\ConfirmTicketController@index')->name('confirm-ticket.index');
+Route::get('/pnrcheck', 'App\Http\Controllers\ConfirmTicketController@index')->name('pnrcheck.index');
+Route::post('/pnrcheck', 'App\Http\Controllers\ConfirmTicketController@check')->name('pnrcheck.check');
+
+
+Route::get('/qr-code', 'App\Http\Controllers\QRCodeController@index')->name('qr-code');
 
 
 

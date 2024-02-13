@@ -70,6 +70,17 @@
                             </a>
                         </div>
                     </div>
+
+                    <div class="card border-0 shadow mt-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <img class="w-75 m-auto" src="{{ url('/qr-code') }}" alt="QR Code">
+                            </div>
+                            <div class="row">
+                                <a class="m-auto text-center fs-16px fw-500" href="{{route('pnrcheck.index')}}">Проверка бронирования</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 @include('blocks.personal')
                 @include('blocks.orders')

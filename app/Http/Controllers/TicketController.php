@@ -11,7 +11,7 @@ class TicketController extends Controller
 {
     public function index(Order $order)
     {
-        if(auth()->user()->id ==$order->usser_id or auth()->user()->is_admin==1)
+        if(auth()->user()->id ==$order->user_id or auth()->user()->is_admin==1)
         {
             $airports = Airports::all();
 

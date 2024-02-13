@@ -21,16 +21,23 @@
                         </div>
                     </div>
 
-                    <div class="row mt-4 mb-2 justify-content-center">
-                        <div class="col-lg-5 col-6">
-                            <p class="fw-500 mb-2">Reservation date / Дата бронирования: </p>
-                            <p class="fw-500 mb-2">Reservation code / Код бронирования: </p>
-                            <p class="fw-500">Status / Статус: </p>
+                    <div class="row mt-4 mb-4 justify-content-between">
+                        <div class="col-lg-4 col-6 d-flex">
+                            <div class="my-auto">
+                                <p class="fw-500 mb-2">Reservation date / Дата бронирования: </p>
+                                <p class="fw-500 mb-2">Reservation code / Код бронирования: </p>
+                                <p class="fw-500">Status / Статус: </p>
+                            </div>
                         </div>
-                        <div class="col-lg-5 col-6">
-                            <p class="fw-400 mb-2">{{$order->created_at}}</p>
-                            <p class="fw-400 mb-2">WBBYWD</p>
-                            <p class="fw-400">Confirmed / Подтверждено </p>
+                        <div class="col-lg-4 col-6 d-flex">
+                            <div class="my-auto">
+                                <p class="fw-400 mb-2">{{$order->created_at}}</p>
+                                <p class="fw-400 mb-2">WBBYWD</p>
+                                <p class="fw-400"> @if($order->is_confirmed) Confirmed / Подтверждено @else Not confirmed / Не подтверждено @endif</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-6 d-flex justify-content-lg-end justify-content-start">
+                            <img class="w-100px my-auto" src="{{ url('/qr-code') }}" alt="QR Code">
                         </div>
                     </div>
 
