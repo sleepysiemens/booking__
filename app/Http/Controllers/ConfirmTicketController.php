@@ -25,7 +25,7 @@ class ConfirmTicketController extends Controller
             $order_id=Order::query()
                 ->join('users','users.id','=','orders.user_id')
                 ->where('users.surname','=',\request()->surname)
-                ->where('orders.reservation_code','=',\request()->pnr)->latest()->first();
+                ->where('orders.reservation_code','=',\request()->pnr)->first();
 
             $order_id=$order_id->id;
         }
