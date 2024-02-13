@@ -76,7 +76,7 @@
                                 <div class="col-lg-4 col-12 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">Фамилия пассажира</legend>
-                                        <input type="text" name="surname" class="w-100" value="{{ auth()->user()->surname }}">
+                                        <input type="text" name="surname" class="w-100" value="@if(auth()->user()!=null) {{ auth()->user()->surname }}@endif">
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-4 col-12 mb-3 mt-2 d-flex">
