@@ -32,7 +32,7 @@
                         <div class="col-lg-4 col-6 d-flex">
                             <div class="my-auto">
                                 <p class="fw-400 mb-2">{{$order->created_at}}</p>
-                                <p class="fw-400 mb-2">WBBYWD</p>
+                                <p class="fw-400 mb-2">{{$order->reservation_code}}</p>
                                 <p class="fw-400"> @if($order->is_confirmed) Confirmed / Подтверждено @else Not confirmed / Не подтверждено @endif</p>
                             </div>
                         </div>

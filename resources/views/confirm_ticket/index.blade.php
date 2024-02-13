@@ -121,7 +121,7 @@
                                                 <div class="row">
                                                     <div class="col-12 d-flex justify-content-start text-red-300">
                                                         <i class="fas fa-ban fs-26px"></i>
-                                                        <h5 class="my-auto ms-2">Не подтверждено</h5>
+                                                        <h5 class="my-auto ms-2">Бронирование не найдено</h5>
                                                     </div>
                                                 </div>
                                             </div>
