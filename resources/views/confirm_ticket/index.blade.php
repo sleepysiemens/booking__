@@ -100,7 +100,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                        <div class="row mt-4">
+                                        {{--<div class="row mt-4">
                                             <div class="col">
                                                 <button class="d-flex btn btn-primary w-100 h-50px">
                                                     <p class="m-auto fs-12px d-block d-sm-none">Скачать билет</p>
@@ -113,7 +113,7 @@
                                                     <p class="m-auto fs-16px d-none d-lg-block">Посмотреть билет</p>
                                                 </a>
                                             </div>
-                                        </div>
+                                        </div>--}}
                                     @else
                                     <div class="row mt-2 px-4">
                                         <div class="card bg-red-100 border-5" style="border-color: rgba(255,0,0,.2)">
