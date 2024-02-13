@@ -21,6 +21,9 @@ Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tarif
 Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
 Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
 
+////==========CONFIRM CHECK==========
+Route::get('/check-ticket', 'App\Http\Controllers\ConfirmTicketController@index')->name('confirm-ticket.index');
+
 
 
 Route::group(['middleware' => ['auth'], ], function (){
