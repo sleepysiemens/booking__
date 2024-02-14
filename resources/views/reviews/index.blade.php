@@ -15,7 +15,7 @@
     <div class="section bg-light pt-4">
         <div class="container">
             <div class="row">
-                <h1 class="col-lg-9 col-6">{{_('Отзывы')}}</h1>
+                <h1 class="col-lg-9 col-6">{{__('Отзывы')}}</h1>
                 <div class="col-lg-3 col-6">
                     <a class="btn btn-primary d-flex justify-content-center py-3" onclick="toggle_review()">
                         <i class="fas fa-plus my-auto me-2"></i>
