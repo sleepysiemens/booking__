@@ -11,7 +11,7 @@
     <div class="section bg-light pt-4">
         <div class="container">
             <div class="display-6 fw-bolder mb-3 d-flex align-items-center justify-content-center">
-                Тариф
+                {{__('Тариф')}}
             </div>
             <div class="row mt-4 justify-content-center">
                 <div class="col-lg-8 col">
