@@ -4,7 +4,7 @@
     <div class="card border-0 shadow mb-3">
         <div class="card-body">
             <div class="row">
-                <p class="fs-16px col mb-0">Пересадки</p>
+                <p class="fs-16px col mb-0">{{__('Пересадки')}}</p>
                 <a class="col-2 text-black opacity-50 d-flex filter-btn cursor-pointer" id="transfer-btn">
                     {{--<i class="fas fa-chevron-down m-auto"></i>--}}
                 </a>
@@ -13,7 +13,7 @@
                 @foreach($transfers_filters as $transfers_filter)
                     <div class="row pt-3">
                         <input wire:model.live="transfer" class="col-1 h-20px my-auto" type="radio" value="{{$transfers_filter['transfers_amount']}}">
-                        <label class="col-auto"><p class="m-auto">@if($transfers_filter['transfers_amount']==0) Без пересадок@else Пересадок: {{$transfers_filter['transfers_amount']}} @endif</p></label>
+                        <label class="col-auto"><p class="m-auto">@if($transfers_filter['transfers_amount']==0) {{__('Без пересадок')}}@else {{__('Пересадок')}}: {{$transfers_filter['transfers_amount']}} @endif</p></label>
                     </div>
                 @endforeach
             </div>
@@ -25,7 +25,7 @@
     <div class="card border-0 shadow mb-3">
         <div class="card-body">
             <div class="row">
-                <p class="fs-16px col mb-0">Авиакомпании</p>
+                <p class="fs-16px col mb-0">{{__('Авиакомпании')}}</p>
                 <a class="col-2 text-black opacity-50 d-flex filter-btn cursor-pointer" id="avia-btn">
                     {{--<i class="fas fa-chevron-down m-auto"></i>--}}
                 </a>
@@ -54,7 +54,7 @@
     <div class="card border-0 shadow mb-3">
         <div class="card-body">
             <div class="row">
-                <p class="fs-16px col mb-0">Вылет и прибытие</p>
+                <p class="fs-16px col mb-0">{{__('Вылет и прибытие')}}</p>
                 <a class="col-2 text-black opacity-50 d-flex filter-btn cursor-pointer" id="flight-btn">
                     {{--<i class="fas fa-chevron-down m-auto"></i>--}}
                 </a>
@@ -79,7 +79,7 @@
     {{--/Filter card--}}
     <div class="container fs-16px text-primary">
         <input type="radio" wire:model.live="reset_filter" id="reset_filter" value="1" class="d-none">
-        <label for="reset_filter" class="cursor-pointer"><i class="fas fa-times"></i> Сбросить фильтр</label>
+        <label for="reset_filter" class="cursor-pointer"><i class="fas fa-times"></i> {{__('Сбросить фильтр')}}</label>
     </div>
 </div>
 {{--/FILTER--}}
@@ -87,7 +87,7 @@
     <div class="container">
         <button class="btn border-primary border-2 bg-primary-100 text-primary w-100 d-flex shadow h-50px justify-content-center" id="filter-btn">
             <i class="fas fa-filter my-auto"></i>
-            <p class="my-auto ms-2">Фильтр</p>
+            <p class="my-auto ms-2">{{__('Фильтр')}}</p>
         </button>
     </div>
 </div>

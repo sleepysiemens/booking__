@@ -14,59 +14,64 @@ use Illuminate\Support\Facades\Route;
 */
 //
 
+Route::group(['middleware' => 'locale' ], function (){
 
-//==========MAIN==========
-Route::get('/', 'App\Http\Controllers\MainController@index')->name('main.index');
-Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tariff.index');
-Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
-Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
+    //==========MAIN==========
+    Route::get('/', 'App\Http\Controllers\MainController@index')->name('main.index');
+    Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tariff.index');
+    Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
+    Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
 
 ////==========CONFIRM CHECK==========
-Route::get('/pnrcheck', 'App\Http\Controllers\ConfirmTicketController@index')->name('pnrcheck.index');
-Route::post('/pnrcheck', 'App\Http\Controllers\ConfirmTicketController@check')->name('pnrcheck.check');
+    Route::get('/pnrcheck', 'App\Http\Controllers\ConfirmTicketController@index')->name('pnrcheck.index');
+    Route::post('/pnrcheck', 'App\Http\Controllers\ConfirmTicketController@check')->name('pnrcheck.check');
 
 
-Route::get('/qr-code', 'App\Http\Controllers\QRCodeController@index')->name('qr-code');
+    Route::get('/qr-code', 'App\Http\Controllers\QRCodeController@index')->name('qr-code');
 
 
 
-Route::group(['middleware' => ['auth'], ], function (){
-    //==========PROFILE==========
-    Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('profile.index');
-    Route::patch('/profile/{user}', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
-    Route::get('/profile/logout', 'App\Http\Controllers\ProfileController@logout')->name('profile.logout');
+    Route::group(['middleware' => ['auth'], ], function (){
+        //==========PROFILE==========
+        Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('profile.index');
+        Route::patch('/profile/{user}', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
+        Route::get('/profile/logout', 'App\Http\Controllers\ProfileController@logout')->name('profile.logout');
 
-    //==========PAY==========
-    Route::post('/pay', 'App\Http\Controllers\BookingController@pay_page_post')->name('pay.post.index');
-    //Route::get('/pay', 'App\Http\Controllers\BookingController@pay_page_get')->name('pay.get.index');
+        //==========PAY==========
+        Route::post('/pay', 'App\Http\Controllers\BookingController@pay_page_post')->name('pay.post.index');
+        //Route::get('/pay', 'App\Http\Controllers\BookingController@pay_page_get')->name('pay.get.index');
 
-    Route::get('/payment-confirm', 'App\Http\Controllers\PayController@index')->name('payment.index');
-    Route::post('/payment-confirm/confirm', 'App\Http\Controllers\PayController@confirm')->name('payment.confirm');
+        Route::get('/payment-confirm', 'App\Http\Controllers\PayController@index')->name('payment.index');
+        Route::post('/payment-confirm/confirm', 'App\Http\Controllers\PayController@confirm')->name('payment.confirm');
 
-    //==========WAIT==========
-    Route::get('/wait/', 'App\Http\Controllers\WaitController@index')->name('wait.index');
+        //==========WAIT==========
+        Route::get('/wait/', 'App\Http\Controllers\WaitController@index')->name('wait.index');
 
-    //==========ORDER==========
-    Route::get('/order/{order}', 'App\Http\Controllers\OrderController@index')->name('order.index');
+        //==========ORDER==========
+        Route::get('/order/{order}', 'App\Http\Controllers\OrderController@index')->name('order.index');
 
-    //==========TICKET==========
-    Route::get('/ticket/{order}', 'App\Http\Controllers\TicketController@index')->name('ticket.index');
+        //==========TICKET==========
+        Route::get('/ticket/{order}', 'App\Http\Controllers\TicketController@index')->name('ticket.index');
 
-});
+    });
+
+    Route::get('/locale/{lang}', 'App\Http\Controllers\ChangeLocaleController@change_locale')->name('locale.change');
 
 //==========BLOG==========
-Route::get('/blog', 'App\Http\Controllers\BlogController@index')->name('blog.index');
-Route::get('/blog/post/{post}', 'App\Http\Controllers\BlogController@show')->name('blog.show');
+    Route::get('/blog', 'App\Http\Controllers\BlogController@index')->name('blog.index');
+    Route::get('/blog/post/{post}', 'App\Http\Controllers\BlogController@show')->name('blog.show');
 
 
 //==========REVIEWS==========
-Route::get('/reviews', 'App\Http\Controllers\ReviewController@index')->name('reviews.index');
-Route::post('/reviews', 'App\Http\Controllers\ReviewController@store')->name('reviews.store');
+    Route::get('/reviews', 'App\Http\Controllers\ReviewController@index')->name('reviews.index');
+    Route::post('/reviews', 'App\Http\Controllers\ReviewController@store')->name('reviews.store');
 
 
 //==========BOOKING==========
-Route::post('/booking', 'App\Http\Controllers\BookingController@index')->name('booking.index');
+    Route::post('/booking', 'App\Http\Controllers\BookingController@index')->name('booking.index');
 
+
+});
 
 //==========ADMIN==========
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], function ()

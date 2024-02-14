@@ -42,7 +42,7 @@
                                     <p class="fw-500 mb-0">{{$result['duration']}}</p>
                                     <p class="fw-400 fs-12px @if($result['transfers_amount']==0) text-green @else text-warning @endif mb-0">{{$result['transfer']}}</p>
                                     @if($result['transfers_amount']==0)
-                                        <p class="fw-400 fs-12px text-black-200">Рейс {{$result['flight_num']}}</p>
+                                        <p class="fw-400 fs-12px text-black-200">{{__('Рейс')}} {{$result['flight_num']}}</p>
                                     @endif
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                             <div class="card-body row text-black-200 py-2">
                                                 <div class="col d-flex">
                                                     <i class="far fa-clock my-auto"></i>
-                                                    <p class="m-0 my-auto ms-2">Пересадка</p>
+                                                    <p class="m-0 my-auto ms-2">{{__('Пересадка')}}</p>
                                                 </div>
                                                 <div class="col d-flex justify-content-end">
                                                     @php
@@ -68,7 +68,7 @@
                                                         $date2 = Carbon\Carbon::parse(date("Y-m-d H:i:s",$last_arrival));
                                                         $diff = $date1->diff($date2);
                                                     @endphp
-                                                    <p class="m-0 my-auto">{{$diff->h}} ч {{$diff->i}} мин</p>
+                                                    <p class="m-0 my-auto">{{$diff->h}} {{__('ч')}} {{$diff->i}} {{__('мин')}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -101,8 +101,8 @@
                                         <div class="col d-none d-lg-block">
                                             <div class="container">
                                                 <p class="fw-500 mb-0">{{$transfer['duration']}}</p>
-                                                <p class="fw-400 fs-12px text-green mb-0">прямой</p>
-                                                <p class="fw-400 fs-12px text-black-200">Рейс {{$transfer['flight_num']}}</p>
+                                                <p class="fw-400 fs-12px text-green mb-0">{{__('прямой')}}</p>
+                                                <p class="fw-400 fs-12px text-black-200">{{__('Рейс')}} {{$transfer['flight_num']}}</p>
                                             </div>
                                         </div>
                                 </div>
@@ -123,7 +123,7 @@
                                 <p class="fw-500 mb-0">{{$result['duration']}}</p>
                                 <p class="fw-400 fs-12px @if($result['transfers_amount']==0) text-green @else text-warning @endif mb-0">{{$result['transfer']}}</p>
                                 @if($result['transfers_amount']==0)
-                                    <p class="fw-400 fs-12px text-black-200">Рейс {{$result['flight_num']}}</p>
+                                    <p class="fw-400 fs-12px text-black-200">{{__('Рейс')}} {{$result['flight_num']}}</p>
                                 @endif
                             </div>
                             <div class="row my-auto">
@@ -134,10 +134,10 @@
                                 <input type="hidden" name="request" value="{{json_encode($request)}}">
                                 <input type="hidden" name="result" value="{{json_encode($result)}}">
 
-                                <button class="btn-primary btn fs-12px h-55px m-auto">Забронировать</button>
+                                <button class="btn-primary btn fs-12px h-55px m-auto">{{__('Забронировать')}}</button>
                                 <div class="d-flex mt-lg-3 justify-content-center details mt-2">
                                     @if($result['transfers_amount']>0)
-                                        <a class="text-primary cursor-pointer w-100" onclick="details({{$result['id']}})"><i class="fas fa-chevron-down filter-btn" id="details-btn-marker-{{$result['id']}}"></i> Детали перелета</a>
+                                        <a class="text-primary cursor-pointer w-100" onclick="details({{$result['id']}})"><i class="fas fa-chevron-down filter-btn" id="details-btn-marker-{{$result['id']}}"></i> {{__('Детали перелета')}}</a>
                                     @endif
                                 </div>
                             </form>

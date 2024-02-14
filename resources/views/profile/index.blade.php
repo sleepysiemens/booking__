@@ -1,43 +1,7 @@
 @extends('Layouts.wrapper')
 
 @section('content')
-    <div class="section section-hero h-300px">
-        <!-- BEGIN section-bg -->
-        @php
-            $rand=rand(1,3)
-        @endphp
-        @if($rand==1)
-            <div class="section-bg with-cover" style="background-image: url({{asset('img/top-view-tourist-items-with-copy-space.jpg')}});"></div>
-        @elseif($rand==2)
-            <div class="section-bg with-cover" style="background-image: url({{asset('img/christmas-travel-concept-with-laptop.jpg')}});"></div>
-        @elseif($rand==3)
-            <div class="section-bg with-cover" style="background-image: url({{asset('img/traveling-tools-with-copy-space.jpg')}});"></div>
-        @endif
-        <div class="section-bg bg-gray-800 bg-opacity-50"></div>
-        <!-- END section-bg -->
-
-        <!-- BEGIN container -->
-        <div class="container position-relative">
-            <!-- BEGIN section-hero-content -->
-            <div class="section-hero-content">
-                <!-- BEGIN row -->
-                <div class="row">
-                    <!-- BEGIN col-8 -->
-                    <div class="col-lg-8 col-lg-10 col-lg-12">
-                        <!-- BEGIN hero-title-desc -->
-                        <h1 class="hero-title mb-3 mt-5 pt-md-5">
-                            Бронирование авиабилетов {{--для визы--}}
-                        </h1>
-                        <!-- END hero-title-desc -->
-                    </div>
-                    <!-- END col-8 -->
-                </div>
-                <!-- END row -->
-            </div>
-            <!-- END section-hero-content -->
-        </div>
-        <!-- END container -->
-    </div>
+    @include('blocks.welcome')
 
     <div class="section bg-light">
         <div class="container">
@@ -50,23 +14,23 @@
 
                             <a class="btn w-100 d-flex btn-white border-0 mb-2 active" id="personal-btn" href="#personal" onclick="section()">
                                 <i class="far fa-user my-auto fs-18px text-primary"></i>
-                                <p class="my-auto ms-2 fw-400">Персональные данные</p>
+                                <p class="my-auto ms-2 fw-400">{{__('Персональные данные')}}</p>
                             </a>
                             <a class="btn w-100 d-flex btn-white border-0 mb-2" id="orders-btn" href="#orders" onclick="section()">
                                 <i class="far fa-check-circle my-auto fs-18px text-primary"></i>
-                                <p class="my-auto ms-2 fw-400">Заказы</p>
+                                <p class="my-auto ms-2 fw-400">{{__('Заказы')}}</p>
                             </a>
                             <a class="btn w-100 d-flex btn-white border-0 mb-2" id="passengers-btn" href="#passengers" onclick="section()">
                                 <i class="fas fa-list-ul my-auto fs-18px text-primary"></i>
-                                <p class="my-auto ms-2 fw-400">Пассажиры</p>
+                                <p class="my-auto ms-2 fw-400">{{__('Пассажиры')}}</p>
                             </a>
                             <a class="btn w-100 d-flex btn-white border-0 mb-2" id="partnership-btn" href="#partnership" onclick="section()">
                                 <i class="fas fa-wallet my-auto fs-18px text-primary"></i>
-                                <p class="my-auto ms-2 fw-400">Партнерская программа</p>
+                                <p class="my-auto ms-2 fw-400">{{__('Партнерская программа')}}</p>
                             </a>
                             <a class="btn w-100 d-flex btn-white border-0 mb-2" href="{{route('profile.logout')}}">
                                 <i class="fas fa-sign-out-alt my-auto fs-18px text-primary"></i>
-                                <p class="my-auto ms-2 fw-400">Выйти</p>
+                                <p class="my-auto ms-2 fw-400">{{__('Выйти')}}</p>
                             </a>
                         </div>
                     </div>
@@ -77,7 +41,7 @@
                                 <img class="w-75 m-auto" src="{{ url('/qr-code') }}" alt="QR Code">
                             </div>
                             <div class="row">
-                                <a class="m-auto text-center fs-16px fw-500" href="{{route('pnrcheck.index')}}">Проверка бронирования</a>
+                                <a class="m-auto text-center fs-16px fw-500" href="{{route('pnrcheck.index')}}">{{__('Проверка бронирования')}}</a>
                             </div>
                         </div>
                     </div>

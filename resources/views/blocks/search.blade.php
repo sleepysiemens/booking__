@@ -14,7 +14,7 @@
 
         </div>
         <div class="col w-25 d-flex btn-primary p-0 bg-blue-600 rounded-2 h-50px h-lg-60px">
-            <button class="p-0 btn m-auto h-100 w-100 text-white">Найти</button>
+            <button class="p-0 btn m-auto h-100 w-100 text-white">{{__('Найти')}}</button>
         </div>
     </div>
 </form>

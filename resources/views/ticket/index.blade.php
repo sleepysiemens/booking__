@@ -94,36 +94,48 @@
                                         <div class="row mb-3">
                                             <div class="col-3">
                                                 <p class="fw-500 mb-2">Flight / Рейс</p>
-                                                <p class="fw-400 mb-0">{{$cookie->user_data->flight_num}}</p>
-                                                <p class="fw-400 mb-0">{{$cookie->user_data->airline}}</p>
+                                                <p class="fw-400 mb-0">{{--$cookie->user_data->flight_num--}}</p>
+                                                <p class="fw-400 mb-0">{{$cookie->airline}}</p>
                                                 {{--<p class="fw-400 mb-0">Boeing 787-9</p>--}}
                                                 <p class="fw-400 mb-0">Economy / Эконом</p>
                                             </div>
                                             <div class="col-5">
                                                 <p class="fw-500 mb-2">Departing / Отправление</p>
                                                 <div class="d-lg-flex d-block">
-                                                    <p class="fw-500 mb-0">{{date('Y.m.d', $cookie->user_data->depart_datetime)}}</p>
-                                                    <p class="fw-400 mb-0 ms-2">{{$cookie->user_data->origin}},  {{$cookie->user_data->origin}}</p>
+                                                    <p class="fw-500 mb-0">{{date('Y.m.d', $cookie->depart_datetime)}}</p>
+                                                    @php
+                                                        $origin_city=$airports->where('airport_code', '=', $cookie->origin)->first();
+                                                    @endphp
+                                                    <p class="fw-400 mb-0 ms-2">{{$origin_city->city_name_en}},  {{$cookie->origin}} / {{$cookie->origin_city}},  {{$cookie->origin}}</p>
                                                 </div>
                                                 <div class="d-lg-flex d-block mt-2 mt-lg-0">
-                                                    <p class="fw-500 mb-0">{{date('H:i', $cookie->user_data->depart_datetime)}}</p>
-                                                    <p class="fw-400 mb-0 ms-2">{{$cookie->user_data->origin}},  {{$cookie->user_data->origin}}</p>
+                                                    <p class="fw-500 mb-0">{{date('H:i', $cookie->depart_datetime)}}</p>
+                                                    <p class="fw-400 mb-0 ms-2">{{$origin_city->city_name_en}},  {{$cookie->origin}} / {{$cookie->origin_city}},  {{$cookie->origin}}</p>
                                                 </div>
                                                 <br>
                                                 <div class="d-lg-flex d-none mt-2 mt-lg-0">
                                                     <p class="fw-500 mb-0">Flight time / Время в пути: </p>
-                                                    <p class="fw-400 mb-0 ms-lg-2">{{$cookie->user_data->duration}}</p>
+                                                    @php
+                                                        $duration=explode('ч', $cookie->duration);
+                                                        $hours=$duration[0];
+                                                        $minutes= explode('м',$duration[1]);
+                                                        $minutes=$minutes[0];
+                                                    @endphp
+                                                    <p class="fw-400 mb-0 ms-lg-2">{{$hours}} h {{$minutes}} m /{{$cookie->duration}}</p>
                                                 </div>
                                             </div>
                                             <div class="col-4">
                                                 <p class="fw-500 mb-2">Arriving / Прибытие</p>
                                                 <div class="d-lg-flex d-block mt-2 mt-lg-0">
-                                                    <p class="fw-500 mb-0">{{date('Y.m.d', $cookie->user_data->arrival_datetime)}}</p>
-                                                    <p class="fw-400 mb-0 ms-2">{{$cookie->user_data->destination}},  {{$cookie->user_data->destination}}</p>
+                                                    <p class="fw-500 mb-0">{{date('Y.m.d', $cookie->arrival_datetime)}}</p>
+                                                    @php
+                                                        $destination_city=$airports->where('airport_code', '=', $cookie->destination)->first();
+                                                    @endphp
+                                                    <p class="fw-400 mb-0 ms-2">{{$destination_city->city_name_en}}, {{$cookie->destination}} / {{$cookie->destination_city}},  {{$cookie->destination}}</p>
                                                 </div>
                                                 <div class="d-lg-flex d-block mt-2 mt-lg-0">
-                                                    <p class="fw-500 mb-0">{{date('H:i', $cookie->user_data->depart_datetime)}}</p>
-                                                    <p class="fw-400 mb-0 ms-2">{{$cookie->user_data->destination}},  {{$cookie->user_data->destination}}</p>
+                                                    <p class="fw-500 mb-0">{{date('H:i', $cookie->depart_datetime)}}</p>
+                                                    <p class="fw-400 mb-0 ms-2">{{$destination_city->city_name_en}}, {{$cookie->destination}} / {{$cookie->destination_city}},  {{$cookie->destination}}</p>
                                                 </div>
                                             </div>
 
@@ -162,33 +174,37 @@
                                                 <div class="col-5">
                                                     <div class="d-lg-flex d-block mt-2 mt-lg-0">
                                                         <p class="fw-500 mb-0">{{ date("d.m.Y", $transfer->depart_datetime) }}</p>
-                                                        @php $origin__=$airports->where('airport_code', '=', $transfer->origin)->first(); @endphp
-                                                        <p class="fw-400 mb-0 ms-2">{{$transfer->origin}}, {{$origin__->city_name}}</p>
+                                                        <p class="fw-400 mb-0 ms-2">{{$transfer->origin_city}}, {{$transfer->origin}}</p>
                                                     </div>
                                                     <div class="d-lg-flex d-block mt-2 mt-lg-0">
                                                         <p class="fw-500 mb-0">{{ date("H:i", $transfer->depart_datetime) }}</p>
-                                                        <p class="fw-400 mb-0 ms-2">{{$transfer->origin}}, {{$origin__->city_name}}</p>
+                                                        <p class="fw-400 mb-0 ms-2">{{$transfer->origin_city}}, {{$transfer->origin}}</p>
                                                     </div>
                                                     <br>
                                                     <div class="d-lg-flex d-none mt-2 mt-lg-0">
                                                         <p class="fw-500 mb-0">Flight time / Время в пути:</p>
-                                                        <p class="fw-400 mb-0 ms-lg-2">{{$transfer->duration}}</p>
+                                                        @php
+                                                            $duration=explode('ч', $transfer->duration);
+                                                            $hours=$duration[0];
+                                                            $minutes= explode('м',$duration[1]);
+                                                            $minutes=$minutes[0];
+                                                        @endphp
+                                                        <p class="fw-400 mb-0 ms-lg-2">{{$hours}} h {{$minutes}} m /{{$transfer->duration}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="d-lg-flex d-block mt-2 mt-lg-0">
                                                         <p class="fw-500 mb-0">{{ date("d.m.Y", $transfer->arrival_datetime) }}</p>
-                                                        @php $destination__=$airports->where('airport_code', '=', $transfer->destination)->first(); @endphp
-                                                        <p class="fw-400 mb-0 ms-2">{{$transfer->destination}}, {{$destination__->city_name}}</p>
+                                                        <p class="fw-400 mb-0 ms-2">{{$transfer->destination_city}}, {{$destination->destination}}</p>
                                                     </div>
                                                     <div class="d-lg-flex d-block mt-2 mt-lg-0">
                                                         <p class="fw-500 mb-0">{{ date("H:i", $transfer->arrival_datetime) }}</p>
-                                                        <p class="fw-400 mb-0 ms-2">{{$transfer->destination}}, {{$destination__->city_name}}</p>
+                                                        <p class="fw-400 mb-0 ms-2">{{$transfer->destination_city}}, {{$transfer->destination}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 d-lg-none d-flex mt-2">
                                                     <p class="fw-500 mb-0">Flight time / Время в пути:</p>
-                                                    <p class="fw-400 mb-0 ms-2">{{$cookie->duration}}</p>
+                                                    <p class="fw-400 mb-0 ms-2">{{$transfer->destination_city}}</p>
                                                 </div>
                                             </div>
                                             @php $last_arrival=$transfer->arrival_datetime @endphp

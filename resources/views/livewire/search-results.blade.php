@@ -11,8 +11,8 @@
             @if($results==null)
                     <div class="container mt-5">
                         <div class="row">
-                            <h2 class="text-center text-primary">Ничего не найдено</h2>
-                            <p class="text-center">Проверьте правильность введенных данных и повторите попытку</p>
+                            <h2 class="text-center text-primary">{{__('Ничего не найдено')}}</h2>
+                            <p class="text-center">{{__('Проверьте правильность введенных данных и повторите попытку')}}</p>
                         </div>
                         <div class="row">
                             <img class="w-75 m-auto" src="{{asset('img/8685825_3969203.svg')}}">

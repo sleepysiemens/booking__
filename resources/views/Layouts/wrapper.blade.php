@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="overflow-x-hidden">
+<html lang="{{__('lang')}}" class="overflow-x-hidden">
 <head>
     <meta charset="utf-8" />
     <title>Trip Avia | Home</title>
@@ -50,32 +50,32 @@
                 <div class="container">
                     <div class="header-nav-item">
                         <a href="{{route('main.index')}}" class="header-nav-link header-link">
-                            <p class="first">Главная</p>
-                            <p class="second">Главная</p>
+                            <p class="first">{{__('Главная')}}</p>
+                            <p class="second">{{__('Главная')}}</p>
                         </a>
                     </div>
                     <div class="header-nav-item">
                         <a href="{{route('tariff.index')}}" class="header-nav-link header-link">
-                            <p class="first">Тариф</p>
-                            <p class="second">Тариф</p>
+                            <p class="first">{{__('Тариф')}}</p>
+                            <p class="second">{{__('Тариф')}}</p>
                         </a>
                     </div>
                     <div class="header-nav-item">
                         <a href="{{route('help.index')}}" class="header-nav-link header-link">
-                            <p class="first">Помощь</p>
-                            <p class="second">Помощь</p>
+                            <p class="first">{{__('Помощь')}}</p>
+                            <p class="second">{{__('Помощь')}}</p>
                         </a>
                     </div>
                     <div class="header-nav-item">
                         <a href="{{route('blog.index')}}" class="header-nav-link header-link">
-                            <p class="first">Блог</p>
-                            <p class="second">Блог</p>
+                            <p class="first">{{__('Блог')}}</p>
+                            <p class="second">{{__('Блог')}}</p>
                         </a>
                     </div>
                     <div class="header-nav-item">
                         <a href="{{route('reviews.index')}}" class="header-nav-link header-link">
-                            <p class="first">Отзывы</p>
-                            <p class="second">Отзывы</p>
+                            <p class="first">{{__('Отзывы')}}</p>
+                            <p class="second">{{__('Отзывы')}}</p>
                         </a>
                     </div>
                 </div>
@@ -83,16 +83,29 @@
             <div class="header-btn">
                 @if(auth()->user()==null)
                     <a href="{{route('login')}}" class="btn btn-primary fw-bold rounded-pill header-link">
-                        <p class="first">Войти <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
-                        <p class="second">Войти <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
+                        <p class="first">{{__('Войти')}} <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
+                        <p class="second">{{__('Войти')}} <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
                     </a>
                 @else
                     <a href="{{route('login')}}" class="btn btn-primary fw-bold rounded-pill header-link">
-                        <p class="first">Мой профиль <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
-                        <p class="second">Мой профиль <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
+                        <p class="first">{{__('Мой профиль')}} <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
+                        <p class="second">{{__('Мой профиль')}} <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
                     </a>
                 @endif
+            </div>
 
+            <div class="my-auto ms-2">
+                @if(__('lang')=='ru')
+                    <a href="{{route('locale.change', 'en')}}"  class="btn btn-primary rounded-pill header-link">
+                        <p class="first">en</p>
+                        <p class="second">en</p>
+                    </a>
+                @elseif(__('lang')=='en')
+                    <a href="{{route('locale.change', 'ru')}}"  class="btn btn-primary rounded-pill header-link">
+                        <p class="first">ru</p>
+                        <p class="second">ru</p>
+                    </a>
+                @endif
             </div>
             <button class="header-mobile-nav-toggler" type="button" data-toggle="header-mobile-nav">
                 <span class="header-mobile-nav-toggler-icon"></span>
@@ -112,8 +125,9 @@
                         <span class="footer-logo-text">TripAvia <small>CORPORATE</small></span>
                     </div>
                     <p class="footer-desc">
-                        Ваш надежный партнер в организации поездок. Откройте мир с нашим сервисом по поиску и бронированию авиабилетов для визы. Наши инструменты помогут вам найти оптимальные варианты перелетов, а заботливая поддержка обеспечит беззаботное путешествие.                    </p>
-                    <h4 class="footer-title">Мы в социальных сетях</h4>
+                    {{__('Ваш надежный партнер в организации поездок. Откройте мир с нашим сервисом по поиску и бронированию авиабилетов для визы. Наши инструменты помогут вам найти оптимальные варианты перелетов, а заботливая поддержка обеспечит беззаботное путешествие')}}
+                    </p>
+                    <h4 class="footer-title">{{__('Мы в социальных сетях')}}</h4>
                     <div class="row">
                         <div class="footer-media-list col-6">
                             <a href="#" class="me-1"><i class="fab fa-lg fa-facebook fa-fw"></i></a>
@@ -126,28 +140,28 @@
                 </div>
                 <div class="col-lg-4 mb-4 mb-lg-0 d-flex">
                     <div class="col mb-4 mb-lg-0">
-                        <h4 class="footer-title">Помощь</h4>
+                        <h4 class="footer-title">{{__('Помощь')}}</h4>
                         <ul class="footer-link-list">
-                            <li><a href="{{route('help.index')}}">Частозадаваемые вопросы</a></li>
+                            <li><a href="{{route('help.index')}}">{{__('Частозадаваемые вопросы')}}</a></li>
                         </ul>
                         <br>
-                        <h4 class="footer-title">Сотрудничество</h4>
+                        <h4 class="footer-title">{{__('Сотрудничество')}}</h4>
                         <ul class="footer-link-list">
-                            <li><a href="#">Партнерская программа</a></li>
+                            <li><a href="#">{{__('Партнерская программа')}}</a></li>
                         </ul>
                     </div>
                     <div class="col mb-4 mb-lg-0 ps-5">
-                        <h4 class="footer-title">Клиентам</h4>
+                        <h4 class="footer-title">{{__('Клиентам')}}</h4>
                         <ul class="footer-link-list">
-                            <li><a href="{{route('tariff.index')}}">Тариф</a></li>
-                            <li><a href="{{route('blog.index')}}">Блог</a></li>
-                            <li><a href="{{route('reviews.index')}}">Отзывы</a></li>
+                            <li><a href="{{route('tariff.index')}}">{{__('Тариф')}}</a></li>
+                            <li><a href="{{route('blog.index')}}">{{__('Блог')}}</a></li>
+                            <li><a href="{{route('reviews.index')}}">{{__('Отзывы')}}</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-4 mb-lg-0">
                     <div class="col mb-4 mb-lg-0">
-                        <h4 class="footer-title mb-3">Способы оплаты</h4>
+                        <h4 class="footer-title mb-3">{{__('Способы оплаты')}}</h4>
                         <div class="container ps-0">
                             <div class="row">
                                 <div class="col-4 d-flex">

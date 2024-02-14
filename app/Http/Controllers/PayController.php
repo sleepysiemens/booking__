@@ -42,6 +42,8 @@ class PayController extends Controller
                     'flight_num'=>$order->flight_num,
                     'data'=>$_COOKIE['order'],
                     'is_payed'=>true,
+                    //Возможно, придется убрать
+                    'is_confirmed'=>true,
                     'reservation_code'=>$reservation_code
                 ];
             Order::create($data);

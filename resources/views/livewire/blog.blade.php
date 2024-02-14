@@ -1,13 +1,13 @@
 <div class="container">
     <div class="display-6 fw-bolder mb-3 d-flex align-items-center justify-content-center">
-        Блог о путешествиях
+        {{__('Блог о путешествиях')}}
     </div>
 
     <div class="row">
         <div class="col-auto pe-0 mb-2">
             <label>
                 <input type="radio" name="category" class="d-none" wire:model.live="category_" value="-1">
-                <div class="btn d-flex @if($category_==-1) btn-primary @else btn-white @endif rounded-5 h-40px"><p class="m-auto px-2">Все</p></div>
+                <div class="btn d-flex @if($category_==-1) btn-primary @else btn-white @endif rounded-5 h-40px"><p class="m-auto px-2">{{__('Все')}}</p></div>
             </label>
         </div>
 

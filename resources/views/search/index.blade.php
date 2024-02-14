@@ -27,7 +27,7 @@
                     <div class="col-lg-8 col-lg-10 col-lg-12">
                         <!-- BEGIN hero-title-desc -->
                         <h1 class="hero-title mb-3 mt-5 pt-md-5">
-                            Бронирование авиабилетов {{--для визы--}}
+                            {{__('Бронирование авиабилетов для визы')}}
                         </h1>
                         <!-- END hero-title-desc -->
 

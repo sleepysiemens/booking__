@@ -14,6 +14,7 @@ class ConfirmTicketController extends Controller
 
     public function check()
     {
+        $pnr=\request()->pnr;
         $order_id=null;
         $check=Order::query()
             ->join('users','users.id','=','orders.user_id')
@@ -22,14 +23,17 @@ class ConfirmTicketController extends Controller
 
         if($check)
         {
-            $order_id=Order::query()
+            $order=Order::query()
                 ->join('users','users.id','=','orders.user_id')
                 ->where('users.surname','=',\request()->surname)
-                ->where('orders.reservation_code','=',\request()->pnr)->first();
+                ->where('orders.reservation_code','=',\request()->pnr)->select('orders.*')->first();
 
-            $order_id=$order_id->id;
+            $data=json_decode($order->data);
+            $check=$order->is_confirmed;
         }
 
-        return view('confirm_ticket.index',compact(['check', 'order_id']));
+        //dd($data);
+
+        return view('confirm_ticket.index',compact(['check', 'order', 'pnr', 'data']));
     }
 }

@@ -35,6 +35,11 @@
                                 <input  class="ms-2" type="checkbox" id="is_published" name="is_payed" value="1" @if($order->is_payed) checked @endif>
                             </div>
 
+                            <div class="mb-3 d-flex">
+                                <label class="form-label my-auto" for="is_confirmed">Подтверждено</label>
+                                <input  class="ms-2" type="checkbox" id="is_confirmed" name="is_confirmed" value="1" @if($order->is_confirmed) checked @endif>
+                            </div>
+
                             <button type="submit" class="btn btn-primary w-100px me-5px">Сохранить</button>
                             <a href="{{route('admin.reviews.index')}}" class="btn btn-default w-100px">Отмена</a>
                         </fieldset>

@@ -17,7 +17,7 @@
                     <div class="col-lg-8 col-lg-10 col-lg-12">
                         <!-- BEGIN hero-title-desc -->
                         <h1 class="hero-title mb-3 mt-5 pt-md-5">
-                            Бронирование авиабилетов для визы
+                            {{__('Бронирование авиабилетов для визы')}}
                         </h1>
                         <!-- END hero-title-desc -->
                     </div>
@@ -33,15 +33,15 @@
         <div class="container">
             <div class="row">
                 <p class="opacity-70 text-black text-decoration-underline">
-                    <a class="text-black" href="{{route('main.index')}}">Главная</a>
+                    <a class="text-black" href="{{route('main.index')}}">{{__('Главная')}}</a>
                     /
-                    <a class="text-black" href="{{route('blog.index')}}">Блог</a>
+                    <a class="text-black" href="{{route('blog.index')}}">{{__('Блог')}}</a>
                     /
                     <a class="text-black" href="{{route('blog.show',$post->id)}})}}">{{$post->title}}</a>
                 </p>
             </div>
             <div class="row my-2">
-                <a href="{{route('blog.index')}}" class="fs-16px d-flex"><i class="fas fa-arrow-left fs-14px my-auto me-1"></i> назад</a>
+                <a href="{{route('blog.index')}}" class="fs-16px d-flex"><i class="fas fa-arrow-left fs-14px my-auto me-1"></i> {{__('назад')}}</a>
             </div>
 
             <div class="row mt-4">
@@ -86,7 +86,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <h6>Поделиться</h6>
+                                    <h6>{{__('Поделиться')}}</h6>
                                 </div>
                             </div>
                             <div class="row">
@@ -112,7 +112,7 @@
                 </div>
 
                 <div class="col-3 d-none d-lg-block" style="transform: translateY(-25px)">
-                    <h6>Последние новости</h6>
+                    <h6>{{__('Последние новости')}}</h6>
                     @foreach($latest_posts as $latest_post)
                         <div class="card shadow border-0 mb-3">
                             <div class="card-body">
@@ -133,7 +133,7 @@
     <div class="section bg-light pt-0">
         <div class="container">
             <div class="row mb-3">
-                <h1>Может быть интересно</h1>
+                <h1>{{__('Может быть интересно')}}</h1>
             </div>
             <div class="row">
                 @foreach($common_posts as $common_post)

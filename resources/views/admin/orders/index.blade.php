@@ -25,21 +25,26 @@
                         <div class="col text-center">Стоимость</div>
                         <div class="col text-center">Билет</div>
                         <div class="col text-center">Оплачено</div>
+                        <div class="col text-center">Подтверждено</div>
                         <div class="col text-center"></div>
                     </div>
                     @php
                         $i=0;
                     @endphp
                     @foreach($orders as $order)
-                        @php$i++ @endphp
+                        @php
+                            $i++;
+                            $data=json_decode($order->data);
+                        @endphp
                         <div class="row py-3 @if($i%2==0) table-row @endif">
                             <div class="col text-center">{{$order->id}}</div>
                             <div class="col text-center">{{$order->created_at}}</div>
                             <div class="col text-center">{{$order->email}}</div>
-                            <div class="col text-center">{{$order->origin_city}}({{$order->origin}}) - {{$order->destination_city}}({{$order->destination}})</div>
+                            <div class="col text-center">{{$data->origin_city}}({{$data->origin}}) - {{$data->destination_city}}({{$order->destination}})</div>
                             <div class="col text-center">{{$order->price}}</div>
                             <div class="col text-center"><a target="_blank" href="{{route('ticket.index', $order->id)}}">открыть</a></div>
                             <div class="col text-center">@if($order->is_payed)<i class="fas fa-check"></i>@else<i class="fas fa-times"></i>@endif</div>
+                            <div class="col text-center">@if($order->is_confirmed)<i class="fas fa-check"></i>@else<i class="fas fa-times"></i>@endif</div>
                             <div class="col text-center"><a href="{{route('admin.orders.edit',$order->id)}}"><i class="far fa-edit fs-20px"></i></a></div>
                         </div>
                     @endforeach

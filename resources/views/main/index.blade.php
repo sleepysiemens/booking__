@@ -27,7 +27,7 @@
                     <div class="col-lg-8 col-lg-10 col-lg-12">
                         <!-- BEGIN hero-title-desc -->
                         <h1 class="hero-title mb-3 mt-5 pt-md-5">
-                            Бронирование авиабилетов {{--для визы--}}
+                            {{__('Бронирование авиабилетов для визы')}}
                         </h1>
                         <div class="fs-18px text-white text-opacity-80">
                             <br>
@@ -52,7 +52,7 @@
     <div class="section">
         <!-- BEGIN container -->
         <div class="container">
-            <div class="section-subtitle">Последние новости</div>
+            <div class="section-subtitle">{{__('Последние новости')}}</div>
 
             <!-- BEGIN row -->
             <div class="row">
@@ -86,7 +86,7 @@
                         <i class="fa fa-arrow-right first"></i>
                         <i class="fa fa-arrow-right second"></i>
                     </span>
-                    Все новости
+                    {{__('Все новости')}}
                 </a>
             </div>
         </div>
@@ -101,10 +101,10 @@
             <!-- BEGIN section-title -->
             <div class="pt-lg-5 pb-lg-3 text-center">
                 <div class="display-6 fw-bolder mb-3 d-flex align-items-center justify-content-center">
-                    Как это работает?
+                    {{__('Как это работает?')}}
                 </div>
                 <p class="fs-18px mb-5">
-                    Забронируйте билет за несколько шагов
+                    {{__('Забронируйте билет за несколько шагов')}}
                 </p>
             </div>
             <!-- END section-title -->
@@ -127,7 +127,7 @@
                             <div class="news-media-img" style="background-image:url({{asset('img/top-view-tourist-items-with-copy-space.jpg')}});"></div>
                         </div>
                         <div class="news-content px-4 py-4">
-                            <div class="news-label"><span class="bg-teal-200 text-teal-800">1 шаг</span></div>
+                            <div class="news-label"><span class="bg-teal-200 text-teal-800">{{__('1 шаг')}}</span></div>
                             <div class="news-title">Текст</div>
                             <div class="news-date">Текст</div>
                         </div>
@@ -144,7 +144,7 @@
                             <div class="news rounded-3 overflow-hidden shadow-lg d-flex h-100 mb-0">
                                 <div class="news-content w-50 p-4 d-flex align-items-center">
                                     <div>
-                                        <div class="news-label"><span class="bg-warning-200 text-warning-800">2 шаг</span></div>
+                                        <div class="news-label"><span class="bg-warning-200 text-warning-800">{{__('2 шаг')}}</span></div>
                                         <div class="news-title">Текст</div>
                                         <div class="news-date">Текст</div>
                                     </div>
@@ -164,7 +164,7 @@
                                 </div>
                                 <div class="news-content w-50 p-4 d-flex align-items-center">
                                     <div>
-                                        <div class="news-label"><span class="bg-primary-200 text-theme-800">3 шаг</span></div>
+                                        <div class="news-label"><span class="bg-primary-200 text-theme-800">{{__('3 шаг')}}</span></div>
                                         <div class="news-title">Текст</div>
                                         <div class="news-date">Текст</div>
                                     </div>
@@ -191,7 +191,7 @@
             <!-- BEGIN section-title -->
             <div class="pt-lg-5 pb-lg-3 text-center">
                 <div class="display-6 fw-bolder mb-3 d-flex align-items-center justify-content-center">
-                    Вопросы и ответы
+                    {{__('Вопросы и ответы')}}
                 </div>
             </div>
             <!-- END section-title -->
@@ -211,7 +211,7 @@
                         <i class="fa fa-arrow-right first"></i>
                         <i class="fa fa-arrow-right second"></i>
                     </span>
-                     Все вопросы</a>
+                     {{__('Все вопросы')}}</a>
             </div>
 
         </div>
@@ -224,7 +224,7 @@
     <div class="section bg-light">
         <!-- BEGIN container -->
         <div class="container">
-            <div class="section-subtitle">Отзывы</div>
+            <div class="section-subtitle">{{__('Отзывы')}}</div>
 
             <!-- BEGIN row -->
             <div class="row">
@@ -236,7 +236,7 @@
                                 <div class="news">
                                     <div class="news-content">
                                         <div class="row">
-                                            <div class="news-title col">Отзыв</div>
+                                            <div class="news-title col">{{__('Отзыв')}}</div>
                                             <p class="news-date col text-end">{{date("d.m.Y H:i",strtotime($review->created_at))}}</p>
                                         </div>
                                         <div class="news-label"><span class="bg-teal-200 text-teal-800"><i class="fas fa-star text-teal-400"></i>  {{$review->rating}}.0</span></div>
@@ -261,7 +261,7 @@
                         <i class="fa fa-arrow-right first"></i>
                         <i class="fa fa-arrow-right second"></i>
                     </span>
-                    Все отзывы
+                    {{__('Все отзывы')}}
                 </a>
             </div>
         </div>

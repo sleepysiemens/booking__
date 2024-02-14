@@ -1,48 +1,13 @@
 @extends('Layouts.wrapper')
 
 @section('content')
-    <div class="section section-hero h-300px">
-        <!-- BEGIN section-bg -->
-        @php
-            $rand=rand(1,3)
-        @endphp
-        @if($rand==1)
-            <div class="section-bg with-cover" style="background-image: url({{asset('img/top-view-tourist-items-with-copy-space.jpg')}});"></div>
-        @elseif($rand==2)
-            <div class="section-bg with-cover" style="background-image: url({{asset('img/christmas-travel-concept-with-laptop.jpg')}});"></div>
-        @elseif($rand==3)
-            <div class="section-bg with-cover" style="background-image: url({{asset('img/traveling-tools-with-copy-space.jpg')}});"></div>
-        @endif        <div class="section-bg bg-gray-800 bg-opacity-50"></div>
-        <!-- END section-bg -->
-
-        <!-- BEGIN container -->
-        <div class="container position-relative">
-            <!-- BEGIN section-hero-content -->
-            <div class="section-hero-content">
-                <!-- BEGIN row -->
-                <div class="row">
-                    <!-- BEGIN col-8 -->
-                    <div class="col-lg-8 col-lg-10 col-lg-12">
-                        <!-- BEGIN hero-title-desc -->
-                        <h1 class="hero-title mb-3 mt-5 pt-md-5">
-                            Бронирование авиабилетов {{--для визы--}}
-                        </h1>
-                        <!-- END hero-title-desc -->
-                    </div>
-                    <!-- END col-8 -->
-                </div>
-                <!-- END row -->
-            </div>
-            <!-- END section-hero-content -->
-        </div>
-        <!-- END container -->
-    </div>
+    @include('blocks.welcome')
     <div class="section bg-light p-3">
         <div class="container">
             <p class="opacity-70 text-black text-decoration-underline">
-                <a class="text-black" href="{{route('main.index')}}">Главная</a>
+                <a class="text-black" href="{{route('main.index')}}">{{__('Главная')}}</a>
                 /
-                <a class="text-black" href="{{route('blog.index',1)}}">Отзывы</a>
+                <a class="text-black" href="{{route('blog.index',1)}}">{{__('Отзывы')}}</a>
             </p>
         </div>
     </div>
@@ -50,11 +15,11 @@
     <div class="section bg-light pt-4">
         <div class="container">
             <div class="row">
-                <h1 class="col-lg-9 col-6">Отзывы</h1>
+                <h1 class="col-lg-9 col-6">{{_('Отзывы')}}</h1>
                 <div class="col-lg-3 col-6">
                     <a class="btn btn-primary d-flex justify-content-center py-3" onclick="toggle_review()">
                         <i class="fas fa-plus my-auto me-2"></i>
-                        <p class="my-auto ">Оставить отзыв</p>
+                        <p class="my-auto ">{{__('Оставить отзыв')}}</p>
                     </a>
                 </div>
             </div>
@@ -109,13 +74,13 @@
                 <form method="post" action="{{asset(route('reviews.store'))}}" class="pb-3">
                     @csrf
                     <div class="row mt-3">
-                        <h1 class="fs-22px text-center">Оставить отзыв</h1>
+                        <h1 class="fs-22px text-center">{{__('Оставить отзыв')}}</h1>
                     </div>
                     <div class="row mt-3 px-4">
-                        <input class="input-group border h-35px rounded-1" placeholder="Имя" name="name" required>
+                        <input class="input-group border h-35px rounded-1" placeholder="{{__('Имя')}}" name="name" required>
                     </div>
                     <div class="row mt-3 px-4">
-                        <input class="input-group border h-35px rounded-1" placeholder="Фамилия" name="surname" required>
+                        <input class="input-group border h-35px rounded-1" placeholder="{{__('Фамилия')}}" name="surname" required>
                     </div>
                     <div class="row mt-3 px-4">
                         <rating-component></rating-component>
@@ -125,7 +90,7 @@
                     </div>
                     <div class="row mt-5 px-4">
                         <button class="btn btn-primary d-flex h-55px">
-                            <p class="m-auto">Оставить отзыв</p>
+                            <p class="m-auto">{{__('Оставить отзыв')}}</p>
                         </button>
                     </div>
                 </form>

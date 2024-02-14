@@ -428,7 +428,9 @@ class AirportService
                     $result[]=
                         [
                             'country_name'=>$country_name,
+                            'country_name_en'=>$country['name_translations']['en'],
                             'city_name'=>$city_name,
+                            'city_name_en'=>$city['name_translations']['en'],
                             'name'=>$city_name,
                             'iata_type'=>'city',
                             'code'=>$this->translit($country['name_translations']['en'], 'ru').'/'.$country['name_translations']['en'].'/'.$country_name.'/'.$this->translit($country_name, 'en').'/'.$country['code'].'/'.$this->translit($country['code'], 'en').'/'.
@@ -445,7 +447,9 @@ class AirportService
                             $data=
                                 [
                                     'country_name'=>$country_name,
+                                    'country_name_en'=>$country['name_translations']['en'],
                                     'city_name'=>$city_name,
+                                    'city_name_en'=>$city['name_translations']['en'],
                                     'city_code'=>$city['code'],
                                     'name'=>$airport_name,
                                     'airport_code'=>$airport['code'],

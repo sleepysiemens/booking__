@@ -18,7 +18,7 @@
                     <div class="col-lg-8 col-lg-10 col-lg-12">
                         <!-- BEGIN hero-title-desc -->
                         <h1 class="hero-title mb-3 mt-5 pt-md-5">
-                            Бронирование авиабилетов {{--для визы--}}
+                            {{__('Бронирование авиабилетов для визы')}}
                         </h1>
                         <!-- END hero-title-desc -->
                     </div>
@@ -37,30 +37,30 @@
             <div class="card border-0 shadow">
                 <div class="card-body px-5">
                     <div class="row mt-3">
-                        <h2 class="text-center">Оплата заказа</h2>
+                        <h2 class="text-center">{{__('Оплата заказа')}}</h2>
                     </div>
                     <div class="row mt-3">
-                        <h4 class="col-12">О заказе</h4>
+                        <h4 class="col-12">{{__('О заказе')}}</h4>
 
                         <div class="col-6">
-                            <p class="opacity-50 fs-13px mb-0">Заказчик</p>
+                            <p class="opacity-50 fs-13px mb-0">{{__('Заказчик')}}</p>
                             <p class="fs-16px mt-1">{{auth()->user()->email}}</p>
                         </div>
                         <div class="col-6">
-                            <p class="opacity-50 fs-13px mb-0">Сумма заказа</p>
+                            <p class="opacity-50 fs-13px mb-0">{{__('Сумма заказа')}}</p>
                             <p class="fs-16px mt-1">{{$cookie->user_data->total_rub}} ₽/ {{$cookie->user_data->total_eur}} €</p>
                         </div>
 
                         <div class="col-6">
-                            <p class="opacity-50 fs-13px mb-0">Направление перелета</p>
+                            <p class="opacity-50 fs-13px mb-0">{{__('Направление перелета')}}</p>
                             <p class="fs-16px mt-1">{{$cookie->origin}} - {{$cookie->destination}}</p>
                         </div>
                         <div class="col-6">
-                            <p class="opacity-50 fs-13px mb-0">Дата вылета</p>
+                            <p class="opacity-50 fs-13px mb-0">{{__('Дата вылета')}}</p>
                             <p class="fs-16px mt-1">{{date("Y.m.d", $cookie->depart_datetime)}}</p>
                         </div>
                         <div class="col-6">
-                            <p class="opacity-50 fs-13px mb-0">Кол-во пассажиров</p>
+                            <p class="opacity-50 fs-13px mb-0">{{__('Кол-во пассажиров')}}</p>
                             <p class="fs-16px mt-1"><i class="fas fa-male my-auto" aria-hidden="true"></i> {{$cookie->passengers_amount}}</p>
                         </div>
                     </div>
@@ -75,8 +75,8 @@
                                     </span>
 
                                     <div class="col-11">
-                                        <p class="mb-0">Банковской картой РФ</p>
-                                        <p class="opacity-50 fs-14px mb-0">Оплата возможна только картой выпущенной банком РФ</p>
+                                        <p class="mb-0">{{__('Банковской картой РФ')}}</p>
+                                        <p class="opacity-50 fs-14px mb-0">{{__('Оплата возможна только картой выпущенной банком РФ')}}</p>
                                     </div>
                                 </span>
                             </span>
@@ -85,18 +85,18 @@
 
                     <div class="row mt-5">
                         <div class="col-6 d-flex">
-                            <p class="my-auto">При оплате в рублях:</p>
+                            <p class="my-auto">{{__('При оплате в рублях:')}}</p>
                             <h4 class="my-auto ms-2">{{$cookie->user_data->total_rub}} ₽</h4>
                         </div>
                         <div class="col-6 d-flex">
-                            <p class="my-auto">При оплате в евро:</p>
+                            <p class="my-auto">{{__('При оплате в евро:')}}</p>
                             <h4 class="my-auto ms-2">{{$cookie->user_data->total_eur}} €</h4>
                         </div>
                     </div>
 
                     <div class="row mt-5 mb-3">
                         <a href="{{route('payment.index')}}" class="d-flex btn btn-primary h-55px">
-                            <p class="m-auto">Оплатить</p>
+                            <p class="m-auto">{{__('Оплатить')}}</p>
                         </a>
                     </div>
                 </div>

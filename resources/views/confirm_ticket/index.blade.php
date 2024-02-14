@@ -1,54 +1,17 @@
 @extends('Layouts.wrapper')
 
 @section('content')
-    <div class="section section-hero h-300px">
-        <!-- BEGIN section-bg -->
-        @php
-            $rand=rand(1,3)
-        @endphp
-        @if($rand==1)
-            <div class="section-bg with-cover" style="background-image: url({{asset('img/top-view-tourist-items-with-copy-space.jpg')}});"></div>
-        @elseif($rand==2)
-            <div class="section-bg with-cover" style="background-image: url({{asset('img/christmas-travel-concept-with-laptop.jpg')}});"></div>
-        @elseif($rand==3)
-            <div class="section-bg with-cover" style="background-image: url({{asset('img/traveling-tools-with-copy-space.jpg')}});"></div>
-        @endif
-        <div class="section-bg bg-gray-800 bg-opacity-50"></div>
-        <!-- END section-bg -->
-
-        <!-- BEGIN container -->
-        <div class="container position-relative">
-            <!-- BEGIN section-hero-content -->
-            <div class="section-hero-content">
-                <!-- BEGIN row -->
-                <div class="row">
-                    <!-- BEGIN col-8 -->
-                    <div class="col-lg-8 col-lg-10 col-lg-12">
-                        <!-- BEGIN hero-title-desc -->
-                        <h1 class="hero-title mb-3 mt-5 pt-md-5">
-                            Бронирование авиабилетов {{--для визы--}}
-                        </h1>
-                        <!-- END hero-title-desc -->
-                    </div>
-                    <!-- END col-8 -->
-                </div>
-                <!-- END row -->
-            </div>
-            <!-- END section-hero-content -->
-        </div>
-        <!-- END container -->
-    </div>
-
+    @include('blocks.welcome')
     <div class="section bg-light p-3">
         <div class="container">
-            <p class="opacity-70 text-black text-decoration-underline"><a class="text-black" href="{{route('main.index')}}">Главная</a> / <a class="text-black" href="{{route('pnrcheck.index')}}">Проверка билета</a></p>
+            <p class="opacity-70 text-black text-decoration-underline"><a class="text-black" href="{{route('main.index')}}">{{__('Главная')}}</a> / <a class="text-black" href="{{route('pnrcheck.index')}}">{{__('Проверка бронирования')}}</a></p>
         </div>
     </div>
 
     <div class="section bg-light pt-4">
         <div class="container pb-5">
             <div class="display-6 fw-bolder mb-3 d-flex align-items-center justify-content-center">
-                Проверка бронирования
+                {{__('Проверка бронирования')}}
             </div>
             <div class="row mt-4 justify-content-center">
                 <div class=" col">
@@ -60,7 +23,7 @@
                                         <i class="fas fa-key m-auto text-black-100 fs-18px" aria-hidden="true"></i>
                                     </div>
                                     <div class="ms-3 my-auto">
-                                        <h4 class="m-0">Код PNR</h4>
+                                        <h4 class="m-0">{{__('Код PNR')}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -69,19 +32,19 @@
                                 @csrf
                                 <div class="col-lg-4 col-12 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
-                                        <legend style="all: revert;" class="text-black-200 px-2">Код бронирования (PNR)</legend>
-                                        <input type="text" name="pnr" class="w-100" value="{{ '' }}">
+                                        <legend style="all: revert;" class="text-black-200 px-2">{{__('Код бронирования (PNR)')}}</legend>
+                                        <input type="text" name="pnr" class="w-100" value="@if(isset($pnr)) {{$pnr}} @endif">
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-4 col-12 mb-3">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
-                                        <legend style="all: revert;" class="text-black-200 px-2">Фамилия пассажира</legend>
+                                        <legend style="all: revert;" class="text-black-200 px-2">{{__('Фамилия пассажира')}}</legend>
                                         <input type="text" name="surname" class="w-100" value="@if(auth()->user()!=null) {{ auth()->user()->surname }}@endif">
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-4 col-12 mb-3 mt-2 d-flex">
                                     <button class="btn btn-primary w-100">
-                                        Проверить
+                                        {{__('Проверить')}}
                                     </button>
                                 </div>
                             </form>
@@ -94,26 +57,100 @@
                                                 <div class="row">
                                                     <div class="col-12 d-flex justify-content-start text-green-300">
                                                         <i class="fas fa-check fs-26px"></i>
-                                                        <h5 class="my-auto ms-2">Подтверждено</h5>
+                                                        <h5 class="my-auto ms-2">{{__('Подтверждено')}}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-3">
+                                                    <div class="card border-2 opacity-75">
+                                                        <div class="card-body">
+                                                            <div class="row">
+
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="row">
+                                                                        <p class="fw-600"><i class="fas fa-plane me-2"></i>{{__('Информация о перелете:')}}</p>
+                                                                    </div>
+                                                                    <div class="row px-2">
+                                                                        <div class="d-flex">
+                                                                            <p class="m-0 mt-1 fw-500">{{__('Авиакомпания:')}}</p>
+                                                                            <p class="m-0 mt-1 ms-1">{{$data->airline}}</p>
+                                                                        </div>
+                                                                        <div class="d-flex">
+                                                                            <p class="m-0 mt-1 fw-500">{{__('Рейс:')}}</p>
+                                                                            <p class="m-0 mt-1 ms-1">{{$data->flight_num}}</p>
+                                                                        </div>
+                                                                        <div class="d-flex">
+                                                                            <p class="m-0 mt-1 fw-500">{{__('Дата вылета:')}}</p>
+                                                                            <p class="m-0 mt-1 ms-1">{{date("d M Y", $order->depart_datetime)}}</p>
+                                                                        </div>
+                                                                        <div class="d-flex">
+                                                                            <p class="m-0 mt-1 fw-500">{{__('Дата прибытия:')}}</p>
+                                                                            <p class="m-0 mt-1 ms-1">{{date("d M Y", $order->arrival_datetime)}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="row">
+                                                                        <p class="fw-600"><i class="fas fa-male me-2"></i> {{__('Пассажиры:')}}</p>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="d-flex">
+                                                                            <p class="m-0 mt-1 fw-500">{{__('Всего количество:')}}</p>
+                                                                            @php $passengers_amount=explode(' ', $data->passengers_amount) @endphp
+                                                                            <p class="m-0 mt-1 ms-1">{{$passengers_amount[0]}}</p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="d-flex">
+                                                                            <p class="m-0 mt-1 fw-500">{{__('Взрослые:')}}</p>
+                                                                            <p class="m-0 mt-1 ms-1">{{$data->passengers->adults}}</p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="d-flex">
+                                                                            <p class="m-0 mt-1 fw-500">{{__('Дети:')}}</p>
+                                                                            <p class="m-0 mt-1 ms-1">{{$data->passengers->children}}</p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="d-flex">
+                                                                            <p class="m-0 mt-1 fw-500">{{__('Младенцы:')}}</p>
+                                                                            <p class="m-0 mt-1 ms-1">{{$data->passengers->infants}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="row border-top mt-3">
+                                                                <div class="col-12 mt-3">
+                                                                    <div class="row">
+                                                                        <p class="fw-600"><i class="fas fa-phone me-2"></i>{{__('Контактная информация:')}}</p>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        @if($data->user_data->phone!=null)
+                                                                            <div class="col d-flex">
+                                                                                <p class="m-0 mt-1 fw-500">{{__('Телефон:')}}</p>
+                                                                                <p class="m-0 mt-1 ms-1">{{$data->user_data->phone}}</p>
+                                                                            </div>
+                                                                        @endif
+                                                                            <div class="col d-flex">
+                                                                                <p class="m-0 mt-1 fw-500">Email:</p>
+                                                                                <p class="m-0 mt-1 ms-1">{{$data->user_data->email}}</p>
+                                                                            </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                        {{--<div class="row mt-4">
-                                            <div class="col">
-                                                <button class="d-flex btn btn-primary w-100 h-50px">
-                                                    <p class="m-auto fs-12px d-block d-sm-none">Скачать билет</p>
-                                                    <p class="m-auto fs-16px d-none d-lg-block">Скачать билет</p>
-                                                </button>
-                                            </div>
-                                            <div class="col">
-                                                <a href="{{route('ticket.index', $order_id)}}" class="d-flex btn btn-white border-2 w-100 h-50px" target="_blank">
-                                                    <p class="m-auto fs-12px d-block d-sm-none">Посмотреть билет</p>
-                                                    <p class="m-auto fs-16px d-none d-lg-block">Посмотреть билет</p>
-                                                </a>
-                                            </div>
-                                        </div>--}}
+
                                     @else
                                     <div class="row mt-2 px-4">
                                         <div class="card bg-red-100 border-5" style="border-color: rgba(255,0,0,.2)">
@@ -121,7 +158,7 @@
                                                 <div class="row">
                                                     <div class="col-12 d-flex justify-content-start text-red-300">
                                                         <i class="fas fa-ban fs-26px"></i>
-                                                        <h5 class="my-auto ms-2">Бронирование не найдено</h5>
+                                                        <h5 class="my-auto ms-2">{{__('Бронирование не найдено')}}</h5>
                                                     </div>
                                                 </div>
                                             </div>

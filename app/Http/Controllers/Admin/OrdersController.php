@@ -12,7 +12,8 @@ class OrdersController extends Controller
 {
     public function index()
     {
-        $orders=Order::query()->join('users', 'users.id','=','orders.user_id')->select('orders.*', 'users.email')->orderBy('created_at', 'desc')->get();
+        $orders=Order::query()->join('users', 'users.id','=','orders.user_id')->select('orders.*', 'users.email')->orderBy('orders.created_at', 'desc')->get();
+        //dd($orders);
         return view('admin.orders.index', compact(['orders']));
     }
 
@@ -27,6 +28,9 @@ class OrdersController extends Controller
         unset($data['_method'], $data['_token']);
         if(!isset($data['is_payed']))
             $data['is_payed']=0;
+
+        if(!isset($data['is_confirmed']))
+            $data['is_confirmed']=0;
 
         $order->update($data);
         return redirect(route('admin.orders.index'));

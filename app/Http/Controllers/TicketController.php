@@ -17,6 +17,7 @@ class TicketController extends Controller
 
             $cookie=json_decode($order->data);
 
+            //dd($cookie);
             return view('ticket.index', compact(['cookie', 'airports', 'order']));
         }
         return redirect()->route('main.index');
