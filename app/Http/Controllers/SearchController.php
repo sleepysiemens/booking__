@@ -20,7 +20,6 @@ class SearchController extends Controller
     public function search()
     {
         $request=request()->all();
-
         if(!isset($request['passengers']))
         {
             $request['passengers']=
@@ -32,12 +31,29 @@ class SearchController extends Controller
             $request['trip_class']=0;
         }
 
-        //dd($this->flightSearchService->parseFlightInfo());
+        //dd($request);
+
+        setcookie('request',json_encode($request));
 
         $airportService = new AirportService();
         $airports = $airportService->getAllAirports();
 
         return view('search.index', compact([ 'airports', 'request']));
+    }
+
+    public function search_get()
+    {
+        if(isset($_COOKIE['request']))
+        {
+            $request=json_decode($_COOKIE['request'],'true');
+            //dd($request);
+
+            $airportService = new AirportService();
+            $airports = $airportService->getAllAirports();
+
+            return view('search.index', compact([ 'airports', 'request']));
+        }
+        return redirect()->route('main.index');
     }
 
 

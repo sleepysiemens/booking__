@@ -28,6 +28,7 @@ class User extends Authenticatable
         'doc_type',
         'serial_number',
         'validity',
+        'sex',
     ];
 
     /**

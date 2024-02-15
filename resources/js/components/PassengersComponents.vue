@@ -95,9 +95,9 @@ export default {
         return {
             isCardVisible: false,
 
-            counter1: window.requestData['passengers']['adults'],
-            counter2: window.requestData['passengers']['children'],
-            counter3: window.requestData['passengers']['infants'],
+            counter1: Number(window.requestData['passengers']['adults']),
+            counter2: Number(window.requestData['passengers']['children']),
+            counter3: Number(window.requestData['passengers']['infants']),
             total: window.requestData['passengers_amount'],
 
             selectedOption: 'option1',

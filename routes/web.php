@@ -21,6 +21,7 @@ Route::group(['middleware' => 'locale' ], function (){
     Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tariff.index');
     Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
     Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
+    Route::get('/search', 'App\Http\Controllers\SearchController@search_get')->name('search.get');
 
 ////==========CONFIRM CHECK==========
     Route::get('/pnrcheck', 'App\Http\Controllers\ConfirmTicketController@index')->name('pnrcheck.index');
@@ -34,7 +35,14 @@ Route::group(['middleware' => 'locale' ], function (){
     Route::group(['middleware' => ['auth'], ], function (){
         //==========PROFILE==========
         Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('profile.index');
-        Route::patch('/profile/{user}', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
+        Route::patch('/profile/update/{user}', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
+
+        Route::get('/profile/orders', 'App\Http\Controllers\ProfileController@orders')->name('profile.orders');
+        Route::get('/profile/passengers', 'App\Http\Controllers\ProfileController@passengers')->name('profile.passengers');
+        Route::get('/profile/new_passenger', 'App\Http\Controllers\ProfileController@new_passenger')->name('profile.new_passenger');
+        Route::get('/profile/partnership', 'App\Http\Controllers\ProfileController@partnership')->name('profile.partnership');
+
+        Route::put('/profile/add_passenger', 'App\Http\Controllers\ProfileController@add_passenger')->name('profile.add_passenger');
         Route::get('/profile/logout', 'App\Http\Controllers\ProfileController@logout')->name('profile.logout');
 
         //==========PAY==========
@@ -69,6 +77,7 @@ Route::group(['middleware' => 'locale' ], function (){
 
 //==========BOOKING==========
     Route::post('/booking', 'App\Http\Controllers\BookingController@index')->name('booking.index');
+    Route::get('/booking', 'App\Http\Controllers\BookingController@get')->name('booking.get');
 
 
 });

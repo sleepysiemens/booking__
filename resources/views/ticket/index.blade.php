@@ -58,20 +58,31 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <p class="fw-500 mb-2">Passenger / Пассажир</p>
-                                            <p class="fw-400 mb-0">{{$cookie->user_data->surname}} {{$cookie->user_data->name}}</p>
+                                    @php
+                                        $passengers_cnt=0;
+                                        $passengers_max=explode(' ',$cookie->passengers_amount);
+                                    @endphp
+                                    @foreach($cookie->user_data->user as $user)
+                                        @php $passengers_cnt++; @endphp
+
+                                        <div class="row">
+                                            <p class="fw-500 mb-2">{{$passengers_cnt}} passenger - {{__($user->type.'_')}} / {{$passengers_cnt}} пассажир - {{$user->type}}</p>
                                         </div>
-                                        <div class="col-4">
-                                            <p class="fw-500 mb-2">Birthday / Дата рождения</p>
-                                            <p class="fw-400 mb-0">{{$cookie->user_data->date}}</p>
+                                        <div class="row pb-2 @if($passengers_cnt!=$passengers_max[0]) mb-2 border-bottom @endif">
+                                            <div class="col-lg-4 col-12">
+                                                <p class="fw-500 mb-2">Passenger / Пассажир</p>
+                                                <p class="fw-400 mb-0">{{$user->surname}} {{$user->name}}</p>
+                                            </div>
+                                            <div class="col-lg-4 col-12">
+                                                <p class="fw-500 mb-2">Birthday / Дата рождения</p>
+                                                <p class="fw-400 mb-0">{{$user->date_of_birth}}</p>
+                                            </div>
+                                            <div class="col-lg-4 col-12">
+                                                <p class="fw-500 mb-2">Document / Документ</p>
+                                                <p class="fw-400 mb-0">{{$user->serial_number}}</p>
+                                            </div>
                                         </div>
-                                        <div class="col-4">
-                                            <p class="fw-500 mb-2">Document / Документ</p>
-                                            <p class="fw-400 mb-0">{{$cookie->user_data->serial_number}}</p>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -174,11 +185,11 @@
                                                 <div class="col-5">
                                                     <div class="d-lg-flex d-block mt-2 mt-lg-0">
                                                         <p class="fw-500 mb-0">{{ date("d.m.Y", $transfer->depart_datetime) }}</p>
-                                                        <p class="fw-400 mb-0 ms-2">{{$transfer->origin_city}}, {{$transfer->origin}}</p>
+                                                        <p class="fw-400 mb-0 ms-2">{{$cookie->origin_city}}, {{$transfer->origin}}</p>
                                                     </div>
                                                     <div class="d-lg-flex d-block mt-2 mt-lg-0">
                                                         <p class="fw-500 mb-0">{{ date("H:i", $transfer->depart_datetime) }}</p>
-                                                        <p class="fw-400 mb-0 ms-2">{{$transfer->origin_city}}, {{$transfer->origin}}</p>
+                                                        <p class="fw-400 mb-0 ms-2">{{$cookie->origin_city}}, {{$transfer->origin}}</p>
                                                     </div>
                                                     <br>
                                                     <div class="d-lg-flex d-none mt-2 mt-lg-0">
@@ -195,16 +206,16 @@
                                                 <div class="col-4">
                                                     <div class="d-lg-flex d-block mt-2 mt-lg-0">
                                                         <p class="fw-500 mb-0">{{ date("d.m.Y", $transfer->arrival_datetime) }}</p>
-                                                        <p class="fw-400 mb-0 ms-2">{{$transfer->destination_city}}, {{$destination->destination}}</p>
+                                                        <p class="fw-400 mb-0 ms-2">{{$cookie->destination_city}}, {{$transfer->destination}}</p>
                                                     </div>
                                                     <div class="d-lg-flex d-block mt-2 mt-lg-0">
                                                         <p class="fw-500 mb-0">{{ date("H:i", $transfer->arrival_datetime) }}</p>
-                                                        <p class="fw-400 mb-0 ms-2">{{$transfer->destination_city}}, {{$transfer->destination}}</p>
+                                                        <p class="fw-400 mb-0 ms-2">{{$cookie->destination_city}}, {{$transfer->destination}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 d-lg-none d-flex mt-2">
                                                     <p class="fw-500 mb-0">Flight time / Время в пути:</p>
-                                                    <p class="fw-400 mb-0 ms-2">{{$transfer->destination_city}}</p>
+                                                    <p class="fw-400 mb-0 ms-lg-2">{{$hours}} h {{$minutes}} m /{{$transfer->duration}}</p>
                                                 </div>
                                             </div>
                                             @php $last_arrival=$transfer->arrival_datetime @endphp

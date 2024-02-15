@@ -1,4 +1,4 @@
-<div class="col-lg-9 col-12 sec" id="orders">
+<div class="col-lg-9 col-12">
     <h4 class="fw-500 mb-3">{{__('Заказы')}}</h4>
     @if(isset($orders))
         @foreach($orders as $order)

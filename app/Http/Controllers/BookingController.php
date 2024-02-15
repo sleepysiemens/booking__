@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Passenger;
 use App\Services\AirportService;
 use App\Services\OrderDataService;
+use App\Services\UserDataService;
 use Illuminate\Http\Request;
 use App\Models\Order;
 
@@ -17,6 +19,7 @@ class BookingController extends Controller
 
         $airportService = new AirportService();
         $dataService = new OrderDataService();
+        $passengersService = new UserDataService();
 
         $airports = $airportService->getAllAirports();
         $airports=collect($airports);
@@ -28,9 +31,39 @@ class BookingController extends Controller
             setcookie('order',$cookie);
             $cookie=json_decode($cookie);
 
-            return view('booking.index', compact(['cookie', 'airports']));
+
+            $adults=$passengersService->define_passengers_array($cookie->passengers->adults, 'взрослый');
+            $children=$passengersService->define_passengers_array($cookie->passengers->children, 'ребенок');
+            $infants=$passengersService->define_passengers_array($cookie->passengers->infants, 'младенец');
+
+            //dd($adults);
+
+            return view('booking.index', compact(['cookie', 'airports', 'adults', 'children', 'infants']));
         }
         else
+        return redirect()->route('main.index');
+    }
+
+    public function get()
+    {
+        if(isset($_COOKIE['order']))
+        {
+            $dataService = new OrderDataService();
+            $airportService = new AirportService();
+            $passengersService = new UserDataService();
+
+
+            $cookie=$dataService->get_data();
+
+            $adults=$passengersService->define_passengers_array($cookie->passengers->adults, 'взрослый');
+            $children=$passengersService->define_passengers_array($cookie->passengers->children, 'ребенок');
+            $infants=$passengersService->define_passengers_array($cookie->passengers->infants, 'младенец');
+
+            $airports = $airportService->getAllAirports();
+            $airports=collect($airports);
+
+            return view('booking.index', compact(['cookie', 'airports', 'adults', 'children', 'infants']));
+        }
         return redirect()->route('main.index');
     }
 
@@ -48,7 +81,7 @@ class BookingController extends Controller
             return redirect()->route('main.index');
     }
 
-    public function pay_page_get()
+    /*public function pay_page_get()
     {
         if(isset($_COOKIE['order']))
         {
@@ -59,5 +92,5 @@ class BookingController extends Controller
         }
         return redirect()->route('main.index');
 
-    }
+    }*/
 }

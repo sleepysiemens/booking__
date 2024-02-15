@@ -63,10 +63,10 @@
                                                 <div class="row mt-3">
                                                     <div class="card border-2 opacity-75">
                                                         <div class="card-body">
-                                                            <div class="row">
 
-                                                                <div class="col-12 col-lg-6">
-                                                                    <div class="row">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="row mt-3">
                                                                         <p class="fw-600"><i class="fas fa-plane me-2"></i>{{__('Информация о перелете:')}}</p>
                                                                     </div>
                                                                     <div class="row px-2">
@@ -89,8 +89,10 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="col-12 col-lg-6">
-                                                                    <div class="row">
+                                                            </div>
+                                                            <div class="row border-top mt-3 border-3">
+                                                                <div class="col-12">
+                                                                    <div class="row mt-3">
                                                                         <p class="fw-600"><i class="fas fa-male me-2"></i> {{__('Пассажиры:')}}</p>
                                                                     </div>
                                                                     <div class="row">
@@ -101,31 +103,35 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="row">
-                                                                        <div class="d-flex">
-                                                                            <p class="m-0 mt-1 fw-500">{{__('Взрослые:')}}</p>
-                                                                            <p class="m-0 mt-1 ms-1">{{$data->passengers->adults}}</p>
+                                                                    @php
+                                                                        $passengers_cnt=0;
+                                                                        $passengers_max=explode(' ',$data->passengers_amount);
+                                                                    @endphp
+                                                                    @foreach($data->user_data->user as $user)
+                                                                        @php $passengers_cnt++; @endphp
+                                                                        <div class="row">
+                                                                            <p class="fw-500 mb-2">{{$passengers_cnt}} passenger - {{__($user->type.'_')}} / {{$passengers_cnt}} пассажир - {{$user->type}}</p>
                                                                         </div>
-                                                                    </div>
+                                                                        <div class="row pb-2 @if($passengers_cnt!=$passengers_max[0]) mb-2 border-bottom @endif">
+                                                                            <div class="col-4">
+                                                                                <p class="fw-500 mb-2">Passenger / Пассажир</p>
+                                                                                <p class="fw-400 mb-0">{{$user->surname}} {{$user->name}}</p>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <p class="fw-500 mb-2">Birthday / Дата рождения</p>
+                                                                                <p class="fw-400 mb-0">{{$user->date_of_birth}}</p>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <p class="fw-500 mb-2">Document / Документ</p>
+                                                                                <p class="fw-400 mb-0">{{$user->serial_number}}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endforeach
 
-                                                                    <div class="row">
-                                                                        <div class="d-flex">
-                                                                            <p class="m-0 mt-1 fw-500">{{__('Дети:')}}</p>
-                                                                            <p class="m-0 mt-1 ms-1">{{$data->passengers->children}}</p>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row">
-                                                                        <div class="d-flex">
-                                                                            <p class="m-0 mt-1 fw-500">{{__('Младенцы:')}}</p>
-                                                                            <p class="m-0 mt-1 ms-1">{{$data->passengers->infants}}</p>
-                                                                        </div>
-                                                                    </div>
                                                                 </div>
-
                                                             </div>
 
-                                                            <div class="row border-top mt-3">
+                                                            <div class="row border-top mt-3 border-3">
                                                                 <div class="col-12 mt-3">
                                                                     <div class="row">
                                                                         <p class="fw-600"><i class="fas fa-phone me-2"></i>{{__('Контактная информация:')}}</p>

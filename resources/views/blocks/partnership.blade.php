@@ -1,4 +1,4 @@
-<div class="col-lg-9 col-12 sec" id="partnership">
+<div class="col-lg-9 col-12">
     <div class="row">
         <div class="col">
             <div class="card border-0 shadow" style="background-image: url({{asset('img/top-view-tourist-items-with-copy-space.jpg')}});">
