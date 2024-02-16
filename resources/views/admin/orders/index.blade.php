@@ -9,7 +9,6 @@
         <!-- BEGIN panel-heading -->
         <div class="panel-heading ui-sortable-handle">
             <h4 class="panel-title">Заявки</h4>
-
         </div>
         <!-- END panel-heading -->
         <!-- BEGIN panel-body -->

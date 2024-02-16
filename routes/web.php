@@ -34,16 +34,28 @@ Route::group(['middleware' => 'locale' ], function (){
 
     Route::group(['middleware' => ['auth'], ], function (){
         //==========PROFILE==========
-        Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('profile.index');
-        Route::patch('/profile/update/{user}', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
+        Route::group(['prefix' => 'profile', ], function (){
+            Route::get('/', 'App\Http\Controllers\ProfileController@index')->name('profile.index');
+            Route::patch('/update/{user}', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
 
-        Route::get('/profile/orders', 'App\Http\Controllers\ProfileController@orders')->name('profile.orders');
-        Route::get('/profile/passengers', 'App\Http\Controllers\ProfileController@passengers')->name('profile.passengers');
-        Route::get('/profile/new_passenger', 'App\Http\Controllers\ProfileController@new_passenger')->name('profile.new_passenger');
-        Route::get('/profile/partnership', 'App\Http\Controllers\ProfileController@partnership')->name('profile.partnership');
+            Route::get('/orders', 'App\Http\Controllers\ProfileController@orders')->name('profile.orders');
+            Route::get('/passengers', 'App\Http\Controllers\ProfileController@passengers')->name('profile.passengers');
+            Route::get('/new_passenger', 'App\Http\Controllers\ProfileController@new_passenger')->name('profile.new_passenger');
 
-        Route::put('/profile/add_passenger', 'App\Http\Controllers\ProfileController@add_passenger')->name('profile.add_passenger');
-        Route::get('/profile/logout', 'App\Http\Controllers\ProfileController@logout')->name('profile.logout');
+            Route::put('/add_passenger', 'App\Http\Controllers\ProfileController@add_passenger')->name('profile.add_passenger');
+            Route::get('/logout', 'App\Http\Controllers\ProfileController@logout')->name('profile.logout');
+
+            //==========PARTNERSHIP==========
+            Route::group(['prefix' => 'partnership', ], function (){
+                Route::get('/', 'App\Http\Controllers\PartnershipController@index')->name('partnership.index');
+                Route::get('/become-a-partner', 'App\Http\Controllers\PartnershipController@become_partner')->name('partnership.become_partner');
+                Route::post('/become-a-partner/form', 'App\Http\Controllers\PartnershipController@form')->name('partnership.form');
+
+                Route::get('/withdraw', 'App\Http\Controllers\PartnershipController@withdraw')->name('partnership.withdraw');
+                Route::post('/withdraw-send', 'App\Http\Controllers\PartnershipController@withdraw_send')->name('partnership.withdraw.send');
+            });
+
+        });
 
         //==========PAY==========
         Route::post('/pay', 'App\Http\Controllers\BookingController@pay_page_post')->name('pay.post.index');
@@ -87,21 +99,34 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], functio
 {
     Route::get('/', 'App\Http\Controllers\Admin\MainController@index')->name('admin.index');
 
-    Route::get('/reviews', 'App\Http\Controllers\Admin\ReviewController@index')->name('admin.reviews.index');
-    Route::get('/reviews/{review}/edit', 'App\Http\Controllers\Admin\ReviewController@edit')->name('admin.reviews.edit');
-    Route::patch('/reviews/{review}', 'App\Http\Controllers\Admin\ReviewController@update')->name('admin.reviews.update');
-    Route::delete('/reviews/{review}', 'App\Http\Controllers\Admin\ReviewController@delete')->name('admin.reviews.delete');
+    Route::group(['prefix' => 'reviews',], function (){
+        Route::get('/', 'App\Http\Controllers\Admin\ReviewController@index')->name('admin.reviews.index');
+        Route::get('/{review}/edit', 'App\Http\Controllers\Admin\ReviewController@edit')->name('admin.reviews.edit');
+        Route::patch('/{review}', 'App\Http\Controllers\Admin\ReviewController@update')->name('admin.reviews.update');
+        Route::delete('/{review}', 'App\Http\Controllers\Admin\ReviewController@delete')->name('admin.reviews.delete');
+    });
 
-    Route::get('/blog', 'App\Http\Controllers\Admin\BlogController@index')->name('admin.blog.index');
-    Route::get('/blog/create', 'App\Http\Controllers\Admin\BlogController@create')->name('admin.blog.create');
-    Route::post('/blog', 'App\Http\Controllers\Admin\BlogController@store')->name('admin.blog.store');
-    Route::get('/blog/{post}/edit', 'App\Http\Controllers\Admin\BlogController@edit')->name('admin.blog.edit');
-    Route::patch('/blog/{post}', 'App\Http\Controllers\Admin\BlogController@update')->name('admin.blog.update');
+    Route::group(['prefix' => 'blog',], function (){
+        Route::get('/', 'App\Http\Controllers\Admin\BlogController@index')->name('admin.blog.index');
+        Route::get('/create', 'App\Http\Controllers\Admin\BlogController@create')->name('admin.blog.create');
+        Route::post('/', 'App\Http\Controllers\Admin\BlogController@store')->name('admin.blog.store');
+        Route::get('/{post}/edit', 'App\Http\Controllers\Admin\BlogController@edit')->name('admin.blog.edit');
+        Route::patch('/{post}', 'App\Http\Controllers\Admin\BlogController@update')->name('admin.blog.update');
+    });
 
-    Route::get('/orders', 'App\Http\Controllers\Admin\OrdersController@index')->name('admin.orders.index');
-    Route::get('/orders/{order}/edit', 'App\Http\Controllers\Admin\OrdersController@edit')->name('admin.orders.edit');
-    Route::patch('/orders/{order}', 'App\Http\Controllers\Admin\OrdersController@update')->name('admin.orders.update');
-    Route::delete('/orders/{order}', 'App\Http\Controllers\Admin\OrdersController@delete')->name('admin.orders.delete');
+    Route::group(['prefix' => 'orders',], function (){
+        Route::get('/', 'App\Http\Controllers\Admin\OrdersController@index')->name('admin.orders.index');
+        Route::get('/{order}/edit', 'App\Http\Controllers\Admin\OrdersController@edit')->name('admin.orders.edit');
+        Route::patch('/{order}', 'App\Http\Controllers\Admin\OrdersController@update')->name('admin.orders.update');
+        Route::delete('/{order}', 'App\Http\Controllers\Admin\OrdersController@delete')->name('admin.orders.delete');
+    });
+
+
+    Route::group(['prefix' => 'partners',], function (){
+        Route::get('/', 'App\Http\Controllers\Admin\PartnersController@index')->name('admin.partners.index');
+        Route::get('/accept-application/{application}', 'App\Http\Controllers\Admin\PartnersController@accept_application')->name('admin.partners.accept_application');
+            Route::get('/accept-withdraw/{withdraw}', 'App\Http\Controllers\Admin\PartnersController@accept_withdraw')->name('admin.partners.accept_withdraw');
+    });
 
     Route::get('/users', 'App\Http\Controllers\Admin\UsersController@index')->name('admin.users.index');
 

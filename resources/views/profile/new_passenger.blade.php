@@ -24,7 +24,7 @@
                                 <i class="fas fa-list-ul my-auto fs-18px text-primary"></i>
                                 <p class="my-auto ms-2 fw-400">{{__('Пассажиры')}}</p>
                             </a>
-                            <a class="btn w-100 d-flex btn-white border-0 mb-2" href="{{route('profile.partnership')}}">
+                            <a class="btn w-100 d-flex btn-white border-0 mb-2" href="{{route('partnership.index')}}">
                                 <i class="fas fa-wallet my-auto fs-18px text-primary"></i>
                                 <p class="my-auto ms-2 fw-400">{{__('Партнерская программа')}}</p>
                             </a>

@@ -29,6 +29,8 @@ class User extends Authenticatable
         'serial_number',
         'validity',
         'sex',
+        'is_partner',
+        'ref_id',
     ];
 
     /**

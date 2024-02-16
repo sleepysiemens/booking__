@@ -7,9 +7,9 @@
                         <h1 class="my-3">{{__('Партнерская программа')}}</h1>
                         <p class="mb-5">{{__('Зарабатывайте с бронирования авиабилетов до 40₽ за каждого пассажира!')}}</p>
                     </div>
-                    <button class="btn btn-primary h-50px d-flex px-5">
+                    <a href="{{route('partnership.become_partner')}}" class="btn btn-primary h-50px d-flex px-5">
                         <p class="m-auto text-white fw-500">{{__('Стать партнером')}}</p>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

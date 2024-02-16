@@ -12,7 +12,7 @@
                             <p class="py-1 mt-1 text-black-200">{{auth()->user()->email}}</p>
                             <div class="bg-black opacity-20 d-block w-100 mb-3" style="height: 1px;"></div>
 
-                            <a class="btn w-100 d-flex btn-white border-0 mb-2 active" href="{{route('profile.index')}}">
+                            <a class="btn w-100 d-flex btn-white border-0 mb-2" href="{{route('profile.index')}}">
                                 <i class="far fa-user my-auto fs-18px text-primary"></i>
                                 <p class="my-auto ms-2 fw-400">{{__('Персональные данные')}}</p>
                             </a>
@@ -24,7 +24,7 @@
                                 <i class="fas fa-list-ul my-auto fs-18px text-primary"></i>
                                 <p class="my-auto ms-2 fw-400">{{__('Пассажиры')}}</p>
                             </a>
-                            <a class="btn w-100 d-flex btn-white border-0 mb-2" href="{{route('partnership.index')}}">
+                            <a class="btn w-100 d-flex btn-white border-0 mb-2 active" href="{{route('partnership.index')}}">
                                 <i class="fas fa-wallet my-auto fs-18px text-primary"></i>
                                 <p class="my-auto ms-2 fw-400">{{__('Партнерская программа')}}</p>
                             </a>
@@ -46,8 +46,16 @@
                         </div>
                     </div>
                 </div>
-                @include('blocks.personal')
 
+                {{----}}
+                <div class="col-lg-9 col-12">
+                    <h3 class="text-center">{{__('Заявка на рассмотрении')}}</h3>
+                    <p class="text-center mb-0">{{__('Ожидайте решения на почту')}}</p>
+                    <div class="container d-flex">
+                        <img class="w-75 mx-auto" src="{{asset('img/8685825_3969203.svg')}}">
+                    </div>
+                </div>
+                {{----}}
             </div>
         </div>
     </div>

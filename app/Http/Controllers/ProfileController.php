@@ -26,10 +26,6 @@ class ProfileController extends Controller
         return view('profile.passengers', compact(['passengers']));
     }
 
-    public function partnership()
-    {
-        return view('profile.partnership');
-    }
 
     public function new_passenger()
     {

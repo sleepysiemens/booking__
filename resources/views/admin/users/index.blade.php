@@ -1,6 +1,6 @@
 @extends('Layouts.admin')
 
-@section('orders')
+@section('users')
     active
 @endsection
 

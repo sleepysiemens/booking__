@@ -68,9 +68,12 @@
                     </a>
                 </div>
                 <div class="menu-header"></div>
+
                 <div class="menu-item @yield('orders')">
                     <livewire:new_orders />
                 </div>
+
+
                 <div class="menu-item @yield('users')">
                     <a href="{{route('admin.users.index')}}" class="menu-link">
                         <div class="menu-icon">
@@ -79,22 +82,34 @@
                         <div class="menu-text">Пользователи</div>
                     </a>
                 </div>
+
                 <div class="menu-item @yield('blog')">
                     <a href="{{route('admin.blog.index')}}" class="menu-link">
                         <div class="menu-icon">
                             <i class="fab fa-simplybuilt"></i>
                         </div>
-                        <div class="menu-text">Блог <span class="menu-label">NEW</span></div>
+                        <div class="menu-text">Блог</div>
                     </a>
                 </div>
+
                 <div class="menu-item @yield('reviews')">
                     <a href="{{route('admin.reviews.index')}}" class="menu-link">
                         <div class="menu-icon">
                             <i class="fas fa-bullhorn"></i>
                         </div>
-                        <div class="menu-text">Отзывы <span class="menu-label">NEW</span></div>
+                        <div class="menu-text">Отзывы</div>
                     </a>
                 </div>
+
+                <div class="menu-item @yield('partners')">
+                    <a href="{{route('admin.partners.index')}}" class="menu-link">
+                        <div class="menu-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="menu-text">Партнеры <span class="menu-label">NEW</span></div>
+                    </a>
+                </div>
+
                 <div class="menu-item">
                     <a href="{{route('profile.logout')}}" class="menu-link">
                         <div class="menu-icon">

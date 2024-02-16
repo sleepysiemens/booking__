@@ -170,6 +170,18 @@
     "Обычно это занимает до 10 минут.": "This usually takes up to 10 minutes.",
     "Возраст": "Age",
     "Пассажир": "Passenger",
+    "Данные о партнере": "Partner's data",
+    "Ссылка на ресурс": "Resource link",
+    "Ссылка": "Link",
+    "Баланс": "Balance",
+    "Пользователи": "Users",
+    "Вывод средств": "Withdraw",
+    "Ссылка на кошелек": "Wallet link",
+    "В данный момент вывсти заработанные средства возможно только в USDT и только в сети TRC20. Среднее время обработки заявки на вывод средств - 24 часа\n": "At the moment, it is possible to withdraw earned funds only in USDT and only on the TRC20 network. The average processing time for a withdrawal request is 24 hours",
+    "Сумма": "Amount",
+    "История операций": "Withdraw history",
+    "Завершен": "Done",
+    "В обработке": "Processing",
 
     "": ""
 }
