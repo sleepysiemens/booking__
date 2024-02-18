@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function ($table)
         {
-            $table->boolean('is_partner')->defaut(false);
+            $table->boolean('is_partner')->defaut(0);
             $table->integer('ref_id')->nullable();
         });
     }
