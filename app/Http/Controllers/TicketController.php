@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Airports;
-use App\Services\AirportService;
-use Illuminate\Http\Request;
 use App\Models\Order;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 class TicketController extends Controller
 {
-    public function index(Order $order)
+    public function old(Order $order)
     {
         if(auth()->user()->id ==$order->user_id or auth()->user()->is_admin==1)
         {
@@ -21,5 +21,75 @@ class TicketController extends Controller
             return view('ticket.index', compact(['cookie', 'airports', 'order']));
         }
         return redirect()->route('main.index');
+    }
+
+    public function index(Order $order)
+    {
+        $airports = Airports::all();
+
+        $cookie=json_decode($order->data);
+
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $options->set('isRemoteEnabled', true);
+
+        $path=base_path('public/img/qr-code/qrcode.png');
+        //dd($path);
+        $type=pathinfo($path, PATHINFO_EXTENSION);
+        $data_=file_get_contents($path);
+        $pic='data:image/'.$type.';base64,'.base64_encode($data_);
+
+        $data = [
+            'airports'=>$airports,
+            'cookie'=>$cookie,
+            'order'=>$order,
+            'pic'=>$pic,
+        ];
+
+        $dompdf = new Dompdf($options);
+        $html = view('ticket.ticket', $data)->render();
+        $dompdf->loadHtml(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8')); // Указываем кодировку
+
+        // Рендеринг PDF
+        $dompdf->render();
+
+        // Возвращаем PDF как ответ
+        return $dompdf->stream('filename.pdf', array('Attachment' => true));
+    }
+
+    public function download(Order $order)
+    {
+        $airports = Airports::all();
+
+        $cookie=json_decode($order->data);
+
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $options->set('isRemoteEnabled', true);
+
+        $path=base_path('public/img/qr-code/qrcode.png');
+        //dd($path);
+        $type=pathinfo($path, PATHINFO_EXTENSION);
+        $data_=file_get_contents($path);
+        $pic='data:image/'.$type.';base64,'.base64_encode($data_);
+
+        $data = [
+            'airports'=>$airports,
+            'cookie'=>$cookie,
+            'order'=>$order,
+            'pic'=>$pic,
+        ];
+
+        $dompdf = new Dompdf($options);
+        $html = view('ticket.ticket', $data)->render();
+        $dompdf->loadHtml(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8')); // Указываем кодировку
+
+        // Рендеринг PDF
+        $dompdf->render();
+
+        // Возвращаем PDF как ответ
+        return $dompdf->stream('filename.pdf', array('Attachment' => false));
     }
 }

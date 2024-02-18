@@ -19,7 +19,8 @@ class QRCodeController extends Controller
         $rendererStyle = new RendererStyle(400);
         $renderer = new ImageRenderer($rendererStyle, new ImagickImageBackEnd());
         $writer = new Writer($renderer);
-        $data = $writer->writeString($url);
+        $writer->writeFile($url, '../public/img/qr-code/qrcode.png');
+        //$data = $writer->writeString($url);
 
         // Вывод изображения QR-кода
         return response($data)->header('Content-Type', 'image/png');

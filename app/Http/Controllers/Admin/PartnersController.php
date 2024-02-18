@@ -35,8 +35,9 @@ class PartnersController extends Controller
     {
         $user=User::query()->where('id','=',$application->user_id)->first();
         $user->update(['is_partner'=>1]);
+        $ref_link=hash('sha256',$user->email);
 
-        $application->update(['is_active'=>true]);
+        $application->update(['is_active'=>true, 'link'=>$ref_link]);
         return redirect()->route('admin.partners.index');
     }
 

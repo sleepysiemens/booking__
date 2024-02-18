@@ -15,7 +15,7 @@
                 <!-- BEGIN row -->
                 <div class="row">
                     <!-- BEGIN col-8 -->
-                    <div class="col-lg-8 col-lg-10 col-lg-12">
+                    <div class="col-lg-8 col-12">
                         <!-- BEGIN hero-title-desc -->
                         <h1 class="hero-title mb-3 mt-5 pt-md-5">
                             {{__('Бронирование авиабилетов для визы')}}
@@ -33,7 +33,7 @@
     <!-- END section -->
 
     <div class="section bg-light">
-        <div class="container w-50">
+        <div class="container">
             <div class="card border-0 shadow">
                 <div class="card-body px-5">
                     <div class="row mt-3">
@@ -84,13 +84,13 @@
                     @endforeach
 
                     <div class="row mt-5">
-                        <div class="col-6 d-flex">
+                        <div class="col-6 d-lg-flex">
                             <p class="my-auto">{{__('При оплате в рублях:')}}</p>
-                            <h4 class="my-auto ms-2">{{$cookie->user_data->total_rub}} ₽</h4>
+                            <h4 class="my-auto ms-2 text-center text-lg-start">{{$cookie->user_data->total_rub}} ₽</h4>
                         </div>
-                        <div class="col-6 d-flex">
+                        <div class="col-6 d-lg-flex">
                             <p class="my-auto">{{__('При оплате в евро:')}}</p>
-                            <h4 class="my-auto ms-2">{{$cookie->user_data->total_eur}} €</h4>
+                            <h4 class="my-auto ms-2 text-center text-lg-start">{{$cookie->user_data->total_eur}} €</h4>
                         </div>
                     </div>
 

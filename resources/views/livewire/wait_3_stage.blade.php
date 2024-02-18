@@ -48,13 +48,13 @@
 
     <div class="row mt-4 mb-3 h-50px px-20px">
             <div class="col">
-                <button class="d-flex btn btn-primary w-100 h-50px">
+                <a href="{{route('ticket.index', $order_id)}}" class="d-flex btn btn-primary w-100 h-50px">
                     <p class="m-auto fs-12px d-block d-sm-none">Скачать билет</p>
                     <p class="m-auto fs-16px d-none d-lg-block">Скачать билет</p>
-                </button>
+                </a>
             </div>
             <div class="col">
-                <a href="{{route('ticket.index', $order_id)}}" class="d-flex btn btn-white border-2 w-100 h-50px" target="_blank">
+                <a href="{{route('ticket.download', $order_id)}}" class="d-flex btn btn-white border-2 w-100 h-50px" target="_blank">
                     <p class="m-auto fs-12px d-block d-sm-none">Посмотреть билет</p>
                     <p class="m-auto fs-16px d-none d-lg-block">Посмотреть билет</p>
                 </a>

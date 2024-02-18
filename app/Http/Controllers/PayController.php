@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PartnershipApplication;
 use Illuminate\Http\Request;
 use App\Models\Order;
 
@@ -43,11 +44,19 @@ class PayController extends Controller
                     'data'=>$_COOKIE['order'],
                     'is_payed'=>true,
                     //Возможно, придется убрать
-                    'is_confirmed'=>true,
+                    'is_confirmed'=>false,
                     'reservation_code'=>$reservation_code
                 ];
             Order::create($data);
             unset($_COOKIE['order']);
+
+
+            //partnership
+            if(auth()->user()->ref_id!=null)
+            {
+                $partner=PartnershipApplication::query()->where('user_id','=',auth()->user()->ref_id)->first();
+                $partner->update(['balance'=>$partner['balance']+10]);
+            }
 
             return redirect()->route('wait.index');
         }

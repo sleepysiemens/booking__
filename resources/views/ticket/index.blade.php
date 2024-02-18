@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-6 d-flex justify-content-lg-end justify-content-start">
-                            <img class="w-100px my-auto" src="{{ url('/qr-code') }}" alt="QR Code">
+                            <img class="w-100px my-auto" src="{{asset('/img/qr-code/qrcode.png')}}" alt="QR Code">
                         </div>
                     </div>
 

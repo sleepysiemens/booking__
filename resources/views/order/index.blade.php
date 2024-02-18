@@ -20,8 +20,11 @@
                                 </div>
                             </div>
 
-                            @include('livewire.wait_3_stage')
-
+                            @if($order->is_confirmed)
+                                @include('livewire.wait_3_stage')
+                            @else
+                                <livewire:wait2 :order_id="$order_id" lazy/>
+                            @endif
                         </div>
                     </div>
                 </div>

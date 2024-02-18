@@ -18,6 +18,7 @@ Route::group(['middleware' => 'locale' ], function (){
 
     //==========MAIN==========
     Route::get('/', 'App\Http\Controllers\MainController@index')->name('main.index');
+    Route::get('/ref/{ref_link}', 'App\Http\Controllers\MainController@ref')->name('main.ref');
     Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tariff.index');
     Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
     Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
@@ -72,7 +73,7 @@ Route::group(['middleware' => 'locale' ], function (){
 
         //==========TICKET==========
         Route::get('/ticket/{order}', 'App\Http\Controllers\TicketController@index')->name('ticket.index');
-
+        Route::get('/ticket/{order}/download', 'App\Http\Controllers\TicketController@download')->name('ticket.download');
     });
 
     Route::get('/locale/{lang}', 'App\Http\Controllers\ChangeLocaleController@change_locale')->name('locale.change');

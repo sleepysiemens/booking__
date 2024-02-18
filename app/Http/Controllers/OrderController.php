@@ -10,6 +10,6 @@ class OrderController extends Controller
     public function index(Order $order)
     {
         $order_id=$order->id;
-        return view('order.index', compact(['order_id']));
+        return view('order.index', compact(['order_id', 'order']));
     }
 }

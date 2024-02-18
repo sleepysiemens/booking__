@@ -38,7 +38,7 @@
                     <div class="card border-0 shadow mt-4">
                         <div class="card-body">
                             <div class="row">
-                                <img class="w-75 m-auto" src="{{ url('/qr-code') }}" alt="QR Code">
+                                <img class="w-75 m-auto" src="{{asset('img/qr-code/qrcode.png')}}" alt="QR Code">
                             </div>
                             <div class="row">
                                 <a class="m-auto text-center fs-16px fw-500" href="{{route('pnrcheck.index')}}">{{__('Проверка бронирования')}}</a>

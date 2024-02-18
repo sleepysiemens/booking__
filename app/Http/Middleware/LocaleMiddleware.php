@@ -23,7 +23,7 @@ class LocaleMiddleware
         }
         else
         {
-            Session::put('locale', 'en');
+            Session::put('locale', 'ru');
             App::setLocale(Session::get('locale'));
         }
 

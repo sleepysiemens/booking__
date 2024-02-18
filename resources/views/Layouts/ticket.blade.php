@@ -21,7 +21,7 @@
 
         html, body
         {
-            font-family: "Roboto" !important;
+            font-family: "DejaVu Sans", sans-serif !important;
         }
             input:active, input:hover, input:focus, input, select, select:active, select:hover, select:focus, textarea, textarea:active, textarea:hover, textarea:focus
             {
@@ -136,6 +136,11 @@
             {
                 font-family: 'Montserrat' !important;
             }
+
+        .text-center
+        {
+            text-align: center;
+        }
     </style>
 
     <!-- ================== END core-css ================== -->
