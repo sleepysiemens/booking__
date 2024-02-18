@@ -35,7 +35,8 @@
     <div class="section bg-light">
         <div class="container">
             <div class="card border-0 shadow">
-                <div class="card-body px-5">
+                <form method="post" action="{{route('payment.index')}}" class="card-body px-5">
+                    @csrf
                     <div class="row mt-3">
                         <h2 class="text-center">{{__('Оплата заказа')}}</h2>
                     </div>
@@ -65,18 +66,21 @@
                         </div>
                     </div>
 
-                    @php $pay_methods=[1,2,3] @endphp
+                    @php $pay_methods=[1] @endphp
                     @foreach($pay_methods as $pay_method)
                         <label class="row card mb-2 mt-4">
                             <span class="card-body">
                                 <span class="row">
                                     <span class="col-1 d-flex">
-                                        <input class="m-auto" type="radio" name="pay_method">
+                                        <input class="m-auto" type="radio" name="pay_method" required>
                                     </span>
 
                                     <div class="col-11">
-                                        <p class="mb-0">{{__('Банковской картой РФ')}}</p>
-                                        <p class="opacity-50 fs-14px mb-0">{{__('Оплата возможна только картой выпущенной банком РФ')}}</p>
+                                        <div class="d-flex">
+                                            <p class="my-auto">{{__('Криптовалютой')}}</p>
+                                            <img class="h-15px ms-2" src="https://cryptocloud.plus/_nuxt/img/logo.a6a93c4.svg" alt="crypto-cloud">
+                                        </div>
+                                        {{--<p class="opacity-50 fs-14px mb-0">{{__('Оплата возможна только картой выпущенной банком РФ')}}</p>--}}
                                     </div>
                                 </span>
                             </span>
@@ -95,11 +99,11 @@
                     </div>
 
                     <div class="row mt-5 mb-3">
-                        <a href="{{route('payment.index')}}" class="d-flex btn btn-primary h-55px">
+                        <button class="d-flex btn btn-primary h-55px">
                             <p class="m-auto">{{__('Оплатить')}}</p>
-                        </a>
+                        </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

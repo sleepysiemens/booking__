@@ -10,7 +10,26 @@ class PayController extends Controller
 {
     public function index()
     {
-        return view('pay.index');
+        if(isset($_COOKIE['order']))
+        {
+            $request=\request()->all();
+            //dd($request);
+
+            $order=json_decode($_COOKIE['order']);
+
+            //dd(gettype($order->booking_price_rub));
+            $API=
+                [
+                    'API_Key'=>'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoiTVRRNU1UQT0iLCJ0eXBlIjoicHJvamVjdCIsInYiOiIyMTc2YjlmYzUxZGRjMjVkNzA2OGUzOWVjN2JjOTIxMTlhYjI1YjkwZTRiMDYxNzk4ZGQ0ZWE4ZWNmZmU2N2Y1IiwiZXhwIjo4ODEwNjUwNjIwMn0.AKlgP70-IOhFwPicUeiIH2jHeAwhvNTMrM2Z4LLuNNw',
+                    'ShopID'=>'7QbiBLnzTncsKhJn',
+                    'Secret'=>'B0IrZSr0tYON2FoAvxK2NqLHwv1HqxOBtcxe',
+                    'price'=>$order->booking_price_rub,
+                    'currency'=>'RUB',
+                ];
+            return view('pay.index', compact(['API']));
+        }
+        else
+            return redirect()->route('main.index');
     }
 
     public function generate_code()
@@ -43,7 +62,6 @@ class PayController extends Controller
                     'flight_num'=>$order->flight_num,
                     'data'=>$_COOKIE['order'],
                     'is_payed'=>true,
-                    //Возможно, придется убрать
                     'is_confirmed'=>false,
                     'reservation_code'=>$reservation_code
                 ];
@@ -61,5 +79,10 @@ class PayController extends Controller
             return redirect()->route('wait.index');
         }
         return redirect()->route('main.index');
+    }
+
+    public function fail()
+    {
+        return view('pay.fail');
     }
 }

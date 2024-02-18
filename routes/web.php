@@ -60,10 +60,11 @@ Route::group(['middleware' => 'locale' ], function (){
 
         //==========PAY==========
         Route::post('/pay', 'App\Http\Controllers\BookingController@pay_page_post')->name('pay.post.index');
-        //Route::get('/pay', 'App\Http\Controllers\BookingController@pay_page_get')->name('pay.get.index');
+        Route::get('/pay', 'App\Http\Controllers\BookingController@pay_page_get')->name('pay.get.index');
 
-        Route::get('/payment-confirm', 'App\Http\Controllers\PayController@index')->name('payment.index');
-        Route::post('/payment-confirm/confirm', 'App\Http\Controllers\PayController@confirm')->name('payment.confirm');
+        Route::post('/payment-confirm', 'App\Http\Controllers\PayController@index')->name('payment.index');
+        Route::get('/successful-payment', 'App\Http\Controllers\PayController@confirm')->name('payment.confirm');
+        Route::get('/failed-payment', 'App\Http\Controllers\PayController@fail')->name('payment.failed');
 
         //==========WAIT==========
         Route::get('/wait/', 'App\Http\Controllers\WaitController@index')->name('wait.index');

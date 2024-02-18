@@ -11,15 +11,10 @@
                     <div class="row mt-3">
                         <h2 class="text-center">{{__('Оплата заказа')}}</h2>
                     </div>
-
-                    <link href="https://api.cryptocloud.plus/static/widget/v2/css/app.css"
-                          rel="stylesheet">
-
-                    <vue-widget shop_id="{{$API['ShopID']}}" api_key="{{$API['API_Key']}}"
-                                currency="{{$API['currency']}}" amount="{{$API['price']}}"></vue-widget>
-
-                    <script src="https://api.cryptocloud.plus/static/widget/v2/js/app.js"></script>
-
+                    <div class="row mt-3">
+                        <p class="text-center">{{__('Не удалось выполнить платеж')}}</p>
+                        <a class="text-center" href="{{route('pay.get.index')}}">{{__('Назад')}}</a>
+                    </div>
                 </div>
             </div>
         </div>

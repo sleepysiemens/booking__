@@ -81,7 +81,7 @@ class BookingController extends Controller
             return redirect()->route('main.index');
     }
 
-    /*public function pay_page_get()
+    public function pay_page_get()
     {
         if(isset($_COOKIE['order']))
         {
@@ -91,6 +91,5 @@ class BookingController extends Controller
             return view('booking.pay', compact(['cookie']));
         }
         return redirect()->route('main.index');
-
-    }*/
+    }
 }
