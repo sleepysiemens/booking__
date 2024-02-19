@@ -128,28 +128,33 @@
                         </div>
                     @endif
 
-                    @if(auth()->user()!=null)
+                    {{--@if(auth()->user()!=null)--}}
                         <div class="card border-0 shadow mb-3">
                             <div class="card-body">
                                 <h4 class="m-0">{{__('Контактные данные')}}</h4>
                                 <p class="opacity-50 mt-2">{{__('На почту мы отправим документ “Подтверждение бронирования”')}}</p>
+                                @if(session('error')!=null)
+                                <div class="bg-red-200 rounded-pill">
+                                    <p class="opacity-50 mt-2 p-1 px-4">{{__('Email уже используется. Войдите, чтобы забронировать билет')}}</p>
+                                </div>
+                                @endif
                                 <div class="row pb-2">
                                     <div class="col">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Email</legend>
-                                            <input type="email" name="email" class="w-100" @if(auth()->user()->email!=null) value="{{auth()->user()->email}}" @endif @if(auth()->user()->email!=null) readonly @endif required>
+                                            <input type="email" name="email" class="w-100" @if(auth()->user()!=null and auth()->user()->email!=null) value="{{auth()->user()->email}}" @endif @if(auth()->user()!=null and auth()->user()->email!=null) readonly @endif required>
                                         </fieldset>
                                     </div>
                                     <div class="col">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Телефон')}}</legend>
-                                            <input type="tel" name="phone" class="w-100" @if(auth()->user()->phone!=null) value="{{auth()->user()->phone}}" @endif>
+                                            <input type="tel" name="phone" class="w-100" @if(auth()->user()!=null and auth()->user()->phone!=null) value="{{auth()->user()->phone}}" @endif>
                                         </fieldset>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @else
+                    {{--@else
                         <div class="card border-0 shadow mb-3">
                             <div class="card-body">
                                 <h4 class="m-0">{{__('Авторизуйтесь')}}</h4>
@@ -163,7 +168,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    @endif--}}
 
 
                     <div class="card border-0 shadow mb-3">
@@ -194,25 +199,25 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Фамилия на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100" required value="{{$adult['surname']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100" required value="{{$adult['surname']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Имя на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100" required value="{{$adult['name']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100" required value="{{$adult['name']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Дата рождения')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" class="w-100" required value="{{$adult['date_of_birth']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" class="w-100" required value="{{$adult['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Пол')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][sex]" @if(auth()->user()==null) disabled @endif>
+                                            <select class="w-100" name="user[{{$passengers_cnt}}][sex]" {{--@if(auth()->user()==null) disabled @endif--}}>
                                                 <option @if($adult['sex']==1) selected @endif value="1">{{__('Мужской')}}</option>
                                                 <option @if($adult['sex']==0) selected @endif value="0">{{__('Женский')}}</option>
                                             </select>
@@ -227,7 +232,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Гражданство')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][citizenship]" required @if(auth()->user()==null) disabled @endif>
+                                            <select class="w-100" name="user[{{$passengers_cnt}}][citizenship]" required {{--@if(auth()->user()==null) disabled @endif--}}>
                                                 <option value="1">{{__('Россия')}}</option>
                                             </select>
                                         </fieldset>
@@ -235,7 +240,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Документ')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][doc_type]" required @if(auth()->user()==null) disabled @endif>
+                                            <select class="w-100" name="user[{{$passengers_cnt}}][doc_type]" required {{--@if(auth()->user()==null) disabled @endif--}}>
                                                 <option value="1" @if($adult['doc_type']==1) selected @endif>{{__('Заграничный паспорт РФ')}}</option>
                                                 <option value="0" @if($adult['doc_type']==0) selected @endif>{{__('Внутренний паспорт РФ')}}</option>
                                             </select>
@@ -244,13 +249,13 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Серия и номер документа')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100" required value="{{$adult['serial_number']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100" required value="{{$adult['serial_number']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Срок действия')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" class="w-100" value="{{$adult['validity']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" class="w-100" value="{{$adult['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -283,25 +288,25 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Фамилия на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100" required value="{{$child['surname']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100" required value="{{$child['surname']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Имя на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100" required value="{{$child['name']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100" required value="{{$child['name']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Дата рождения')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" class="w-100" required value="{{$child['date_of_birth']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" class="w-100" required value="{{$child['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Пол')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][sex]" @if(auth()->user()==null) disabled @endif>
+                                            <select class="w-100" name="user[{{$passengers_cnt}}][sex]" {{--@if(auth()->user()==null) disabled @endif--}}>
                                                 <option @if($child['sex']==1) selected @endif value="1">{{__('Мужской')}}</option>
                                                 <option @if($child['sex']==0) selected @endif value="0">{{__('Женский')}}</option>
                                             </select>
@@ -316,7 +321,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Гражданство')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][citizenship]" required @if(auth()->user()==null) disabled @endif>
+                                            <select class="w-100" name="user[{{$passengers_cnt}}][citizenship]" required {{--@if(auth()->user()==null) disabled @endif--}}>
                                                 <option value="1">{{__('Россия')}}</option>
                                             </select>
                                         </fieldset>
@@ -324,7 +329,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Документ')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][doc_type]" required @if(auth()->user()==null) disabled @endif>
+                                            <select class="w-100" name="user[{{$passengers_cnt}}][doc_type]" required {{--@if(auth()->user()==null) disabled @endif--}}>
                                                 <option value="1" @if($child['doc_type']==1) selected @endif>{{__('Заграничный паспорт РФ')}}</option>
                                                 <option value="0" @if($child['doc_type']==0) selected @endif>{{__('Внутренний паспорт РФ')}}</option>
                                             </select>
@@ -333,13 +338,13 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Серия и номер документа')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100" required value="{{$child['serial_number']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100" required value="{{$child['serial_number']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Срок действия')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" class="w-100" value="{{$child['validity']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" class="w-100" value="{{$child['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -372,25 +377,25 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Фамилия на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100" required value="{{$infant['surname']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100" required value="{{$infant['surname']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Имя на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100" required value="{{$infant['name']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100" required value="{{$infant['name']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Дата рождения')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" class="w-100" required value="{{$infant['date_of_birth']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" class="w-100" required value="{{$infant['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Пол')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][sex]" @if(auth()->user()==null) disabled @endif>
+                                            <select class="w-100" name="user[{{$passengers_cnt}}][sex]" {{--@if(auth()->user()==null) disabled @endif--}}>
                                                 <option @if($infant['sex']==1) selected @endif value="1">{{__('Мужской')}}</option>
                                                 <option @if($infant['sex']==0) selected @endif value="0">{{__('Женский')}}</option>
                                             </select>
@@ -405,7 +410,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Гражданство')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][citizenship]" required @if(auth()->user()==null) disabled @endif>
+                                            <select class="w-100" name="user[{{$passengers_cnt}}][citizenship]" required {{--@if(auth()->user()==null) disabled @endif--}}>
                                                 <option value="1">{{__('Россия')}}</option>
                                             </select>
                                         </fieldset>
@@ -413,7 +418,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Документ')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][doc_type]" required @if(auth()->user()==null) disabled @endif>
+                                            <select class="w-100" name="user[{{$passengers_cnt}}][doc_type]" required {{--@if(auth()->user()==null) disabled @endif--}}>
                                                 <option value="1" @if($infant['doc_type']==1) selected @endif>{{__('Заграничный паспорт РФ')}}</option>
                                                 <option value="0" @if($infant['doc_type']==0) selected @endif>{{__('Внутренний паспорт РФ')}}</option>
                                             </select>
@@ -422,13 +427,13 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Серия и номер документа')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100" required value="{{$infant['serial_number']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100" required value="{{$infant['serial_number']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Срок действия')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" class="w-100" value="{{$infant['validity']}}" @if(auth()->user()==null) disabled @endif>
+                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" class="w-100" value="{{$infant['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -447,7 +452,7 @@
                                 <div class="col">
                                     <fieldset style="all: revert;" class="border border-1 rounded">
                                         <legend style="all: revert;" class="text-black-200 px-2">{{__('Комментарий к заказу')}}</legend>
-                                        <textarea name="comment" class="w-100 h-100px" @if(auth()->user()==null) disabled @endif></textarea>
+                                        <textarea name="comment" class="w-100 h-100px" {{--@if(auth()->user()==null) disabled @endif--}}></textarea>
                                     </fieldset>
                                 </div>
                             </div>
@@ -512,7 +517,7 @@
 
                             <div class="row mt-4">
                                 <div class="col">
-                                    <button class="btn-primary btn fs-12px h-55px m-auto w-100" @if(auth()->user()==null) disabled @endif>{{__('К оплате')}}</button>
+                                    <button class="btn-primary btn fs-12px h-55px m-auto w-100" {{--@if(auth()->user()==null) disabled @endif--}}>{{__('К оплате')}}</button>
                                 </div>
                             </div>
                         </div>

@@ -48,7 +48,21 @@ class UserDataService
             }
             else
             {
-                $array=[];
+                for($i=0;$i<$amount; $i++)
+                {
+                    $array[]=
+                        [
+                            'surname'=>null,
+                            'name'=>null,
+                            'date_of_birth'=>null,
+                            'sex'=>null,
+                            'citizenship'=>null,
+                            'doc_type'=>null,
+                            'serial_number'=>null,
+                            'validity'=>null,
+                            'type'=>null,
+                        ];
+                }
             }
         }
         else

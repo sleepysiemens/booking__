@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Passenger;
+use App\Models\User;
 use App\Services\AirportService;
 use App\Services\OrderDataService;
 use App\Services\UserDataService;
-use Illuminate\Http\Request;
-use App\Models\Order;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+
 
 class BookingController extends Controller
 {
@@ -39,7 +42,8 @@ class BookingController extends Controller
 
             //dd($adults);
 
-            return view('booking.index', compact(['cookie', 'airports', 'adults', 'children', 'infants']));
+            //return view('booking.index', compact(['cookie', 'airports', 'adults', 'children', 'infants']));
+            return redirect()->route('booking.get');
         }
         else
         return redirect()->route('main.index');
@@ -74,9 +78,52 @@ class BookingController extends Controller
 
         if($_COOKIE['order']!=null)
         {
-            $cookie=$dataService->update_data(\request()->all());
-            setcookie('order',json_encode($cookie));
-            return view('booking.pay', compact(['cookie']));
+            if(auth()->user()==null)
+            {
+                $is_registered=User::query()->where('email','=', request()->email)->exists();
+                if($is_registered)
+                {
+                    return redirect()->back()->with('error','true');
+                }
+                else
+                {
+                    $password=Str::random(8);
+                    if(Session::get('ref_id')==null)
+                    {
+                        $user =User::create([
+                            'name' => request()->user[1]['name'],
+                            'email' => request()->email,
+                            'password' => Hash::make($password),
+                            'is_partner' => false,
+                        ]);
+                    }
+                    else
+                    {
+                        $user =User::create([
+                            'name' => request()->user[1]['name'],
+                            'email' => request()->email,
+                            'password' => Hash::make($password),
+                            'ref_id' => Session::get('ref_id'),
+                            'is_partner' => false,
+                        ]);
+                    }
+
+                    // Текст сообщения с паролем
+                    $messageText = "Ваш пароль: $password";
+
+                    // Отправка письма с паролем
+                    Mail::raw($messageText, function ($message) use ($user) {
+                        $message->to($user->email)->subject('Ваш пароль');
+                    });
+
+                    auth()->login($user);
+                }
+            }
+
+                $cookie=$dataService->update_data(\request()->all());
+                setcookie('order',json_encode($cookie));
+                return view('booking.pay', compact(['cookie']));
+
         }
         else
             return redirect()->route('main.index');

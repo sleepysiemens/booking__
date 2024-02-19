@@ -21,10 +21,14 @@ Route::group(['middleware' => 'locale' ], function (){
     Route::get('/ref/{ref_link}', 'App\Http\Controllers\MainController@ref')->name('main.ref');
     Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tariff.index');
     Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
-    Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
-    Route::get('/search', 'App\Http\Controllers\SearchController@search_get')->name('search.get');
 
-////==========CONFIRM CHECK==========
+    //==========SEARCH==========
+    Route::get('/search', 'App\Http\Controllers\SearchController@search_get')->name('search.get');
+    Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
+
+
+
+        //==========CONFIRM CHECK==========
     Route::get('/pnrcheck', 'App\Http\Controllers\ConfirmTicketController@index')->name('pnrcheck.index');
     Route::post('/pnrcheck', 'App\Http\Controllers\ConfirmTicketController@check')->name('pnrcheck.check');
 
@@ -59,9 +63,6 @@ Route::group(['middleware' => 'locale' ], function (){
         });
 
         //==========PAY==========
-        Route::post('/pay', 'App\Http\Controllers\BookingController@pay_page_post')->name('pay.post.index');
-        Route::get('/pay', 'App\Http\Controllers\BookingController@pay_page_get')->name('pay.get.index');
-
         Route::post('/payment-confirm', 'App\Http\Controllers\PayController@index')->name('payment.index');
         Route::get('/successful-payment', 'App\Http\Controllers\PayController@confirm')->name('payment.confirm');
         Route::get('/failed-payment', 'App\Http\Controllers\PayController@fail')->name('payment.failed');
@@ -93,7 +94,8 @@ Route::group(['middleware' => 'locale' ], function (){
     Route::post('/booking', 'App\Http\Controllers\BookingController@index')->name('booking.index');
     Route::get('/booking', 'App\Http\Controllers\BookingController@get')->name('booking.get');
 
-
+    Route::post('/pay', 'App\Http\Controllers\BookingController@pay_page_post')->name('pay.post.index');
+    Route::get('/pay', 'App\Http\Controllers\BookingController@pay_page_get')->name('pay.get.index');
 });
 
 //==========ADMIN==========

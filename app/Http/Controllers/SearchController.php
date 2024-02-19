@@ -21,7 +21,6 @@ class SearchController extends Controller
 
     public function search()
     {
-        try {
             $request=request()->all();
             if(!isset($request['passengers']))
             {
@@ -41,16 +40,8 @@ class SearchController extends Controller
             $airportService = new AirportService();
             $airports = $airportService->getAllAirports();
 
-            return view('search.index', compact([ 'airports', 'request']));
-        }
-        catch (HttpException $exception)
-        {
-            if ($exception->getStatusCode() == 419)
-            {
-                dd(0);
-                return redirect()->route('your.route.name'); // Замените на нужный маршрут
-            }
-        }
+            //return view('search.index', compact([ 'airports', 'request']));
+        return redirect()->route('search.get');
     }
 
     public function search_get()
