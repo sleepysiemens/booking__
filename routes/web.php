@@ -99,8 +99,11 @@ Route::group(['middleware' => 'locale' ], function (){
 //==========ADMIN==========
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], function ()
 {
+    //==========MAIN==========
     Route::get('/', 'App\Http\Controllers\Admin\MainController@index')->name('admin.index');
+    Route::patch('/save_price', 'App\Http\Controllers\Admin\MainController@save_price')->name('admin.save_price');
 
+    //==========REVIEWS==========
     Route::group(['prefix' => 'reviews',], function (){
         Route::get('/', 'App\Http\Controllers\Admin\ReviewController@index')->name('admin.reviews.index');
         Route::get('/{review}/edit', 'App\Http\Controllers\Admin\ReviewController@edit')->name('admin.reviews.edit');
@@ -108,6 +111,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], functio
         Route::delete('/{review}', 'App\Http\Controllers\Admin\ReviewController@delete')->name('admin.reviews.delete');
     });
 
+    //==========BLOG==========
     Route::group(['prefix' => 'blog',], function (){
         Route::get('/', 'App\Http\Controllers\Admin\BlogController@index')->name('admin.blog.index');
         Route::get('/create', 'App\Http\Controllers\Admin\BlogController@create')->name('admin.blog.create');
@@ -116,6 +120,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], functio
         Route::patch('/{post}', 'App\Http\Controllers\Admin\BlogController@update')->name('admin.blog.update');
     });
 
+    //==========BOOKING_ORDERS==========
     Route::group(['prefix' => 'orders',], function (){
         Route::get('/', 'App\Http\Controllers\Admin\OrdersController@index')->name('admin.orders.index');
         Route::get('/{order}/edit', 'App\Http\Controllers\Admin\OrdersController@edit')->name('admin.orders.edit');
@@ -123,13 +128,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], functio
         Route::delete('/{order}', 'App\Http\Controllers\Admin\OrdersController@delete')->name('admin.orders.delete');
     });
 
-
+    //==========PARTNERS==========
     Route::group(['prefix' => 'partners',], function (){
         Route::get('/', 'App\Http\Controllers\Admin\PartnersController@index')->name('admin.partners.index');
         Route::get('/accept-application/{application}', 'App\Http\Controllers\Admin\PartnersController@accept_application')->name('admin.partners.accept_application');
             Route::get('/accept-withdraw/{withdraw}', 'App\Http\Controllers\Admin\PartnersController@accept_withdraw')->name('admin.partners.accept_withdraw');
     });
 
+    //==========USERS==========
     Route::get('/users', 'App\Http\Controllers\Admin\UsersController@index')->name('admin.users.index');
 
 });

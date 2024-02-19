@@ -24,6 +24,7 @@ class BookingController extends Controller
         $airports = $airportService->getAllAirports();
         $airports=collect($airports);
 
+
         $cookie=$dataService->set_data($request, $result);
 
         if($cookie!=null)

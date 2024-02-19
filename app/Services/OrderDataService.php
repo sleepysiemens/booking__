@@ -2,6 +2,7 @@
 // app/Services/SetOrderDataService.php
 namespace App\Services;
 
+use App\Models\Price;
 use Illuminate\Support\Facades\Http;
 
 class OrderDataService
@@ -9,8 +10,9 @@ class OrderDataService
     public function set_data($request, $result)
     {
         unset($request->_token);
-        $request->total_rub=($request->passengers->children+$request->passengers->adults+$request->passengers->infants)*699;
-        $request->total_eur=($request->passengers->children+$request->passengers->adults+$request->passengers->infants)*14;
+        $price=Price::query()->first();
+        $request->total_rub=($request->passengers->children+$request->passengers->adults+$request->passengers->infants)*$price->regular_price_rub;
+        $request->total_eur=($request->passengers->children+$request->passengers->adults+$request->passengers->infants)*$price->regular_price_eur;
 
         //
         if(!isset($result->flight_num))
