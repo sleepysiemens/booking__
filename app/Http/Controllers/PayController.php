@@ -16,8 +16,6 @@ class PayController extends Controller
             //dd($request);
 
             $order=json_decode($_COOKIE['order']);
-
-            //dd(gettype($order->booking_price_rub));
             $API=
                 [
                     'API_Key'=>'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoiTVRRNU1UQT0iLCJ0eXBlIjoicHJvamVjdCIsInYiOiIyMTc2YjlmYzUxZGRjMjVkNzA2OGUzOWVjN2JjOTIxMTlhYjI1YjkwZTRiMDYxNzk4ZGQ0ZWE4ZWNmZmU2N2Y1IiwiZXhwIjo4ODEwNjUwNjIwMn0.AKlgP70-IOhFwPicUeiIH2jHeAwhvNTMrM2Z4LLuNNw',
@@ -26,7 +24,7 @@ class PayController extends Controller
                     'price'=>$order->booking_price_rub,
                     'currency'=>'RUB',
                 ];
-            return view('pay.index', compact(['API']));
+            return view('pay.index', compact(['API', 'request']));
         }
         else
             return redirect()->route('main.index');

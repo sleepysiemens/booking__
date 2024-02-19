@@ -13,12 +13,12 @@
                     <h4 class="text-uppercase">стоимость бронирования</h4>
                     <div class="row mt-4">
                         <div class="col-xxxl-4 col-6 d-flex">
-                            <input class="w-75 fs-24px text-white fw-600" value="{{$price->regular_price_rub}}" name="regular_price_rub" required/>
+                            <input type="number" class="w-75 fs-24px text-white fw-600" value="{{$price->regular_price_rub}}" name="regular_price_rub" required/>
                             <p>₽</p>
                         </div>
                         <h4 class="col-xxxl-2 col-12 my-auto mx-2">или</h4>
                         <div class="col-xxxl-4 col-6 d-flex">
-                            <input class="w-75 fs-24px text-white fw-600" value="{{$price->regular_price_eur}}" name="regular_price_eur" required/>
+                            <input type="number" class="w-75 fs-24px text-white fw-600" value="{{$price->regular_price_eur}}" name="regular_price_eur" required/>
                             <p>€</p>
                         </div>
                     </div>
