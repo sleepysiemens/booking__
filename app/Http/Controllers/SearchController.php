@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Airports;
 use App\Services\AirportService;
 use App\Services\FlightSearchService;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Http;
-
 use Symfony\Component\Panther\Client;
+
+
 
 
 class SearchController extends Controller
@@ -19,26 +21,36 @@ class SearchController extends Controller
 
     public function search()
     {
-        $request=request()->all();
-        if(!isset($request['passengers']))
-        {
-            $request['passengers']=
-                [
-                    'adults'=>1,
-                    'children'=>0,
-                    'infants'=>0,
-                ];
-            $request['trip_class']=0;
+        try {
+            $request=request()->all();
+            if(!isset($request['passengers']))
+            {
+                $request['passengers']=
+                    [
+                        'adults'=>1,
+                        'children'=>0,
+                        'infants'=>0,
+                    ];
+                $request['trip_class']=0;
+            }
+
+            //dd($request);
+
+            setcookie('request',json_encode($request));
+
+            $airportService = new AirportService();
+            $airports = $airportService->getAllAirports();
+
+            return view('search.index', compact([ 'airports', 'request']));
         }
-
-        //dd($request);
-
-        setcookie('request',json_encode($request));
-
-        $airportService = new AirportService();
-        $airports = $airportService->getAllAirports();
-
-        return view('search.index', compact([ 'airports', 'request']));
+        catch (HttpException $exception)
+        {
+            if ($exception->getStatusCode() == 419)
+            {
+                dd(0);
+                return redirect()->route('your.route.name'); // Замените на нужный маршрут
+            }
+        }
     }
 
     public function search_get()

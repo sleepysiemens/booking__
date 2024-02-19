@@ -45,7 +45,7 @@ class PayController extends Controller
     }
     public function confirm()
     {
-        if(isset($_COOKIE['order']))
+        if(isset($_COOKIE['order']) and $_COOKIE['order']!=null)
         {
             $order=json_decode($_COOKIE['order']);
             $reservation_code=$this->generate_code();
@@ -64,8 +64,6 @@ class PayController extends Controller
                     'reservation_code'=>$reservation_code
                 ];
             Order::create($data);
-            unset($_COOKIE['order']);
-
 
             //partnership
             if(auth()->user()->ref_id!=null)
