@@ -112,10 +112,10 @@ class BookingController extends Controller
                     $messageText = "Ваш пароль: $password";
 
                     // Отправка письма с паролем
+                    /*
                     Mail::raw($messageText, function ($message) use ($user) {
                         $message->to($user->email)->subject('Ваш пароль');
-                    });
-
+                    });*/
                     auth()->login($user);
                 }
             }
