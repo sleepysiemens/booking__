@@ -20,8 +20,6 @@ class ProfileController extends Controller
     {
         $orders=Order::query()->where('user_id', '=', auth()->user()->id)->orderBy('created_at', 'desc')->get();
 
-        UpdateOrderStatus::dispatch($orders->first());
-
         return view('profile.orders', compact(['orders']));
     }
 
