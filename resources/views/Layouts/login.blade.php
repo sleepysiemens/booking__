@@ -6,7 +6,9 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
-    <script src="https://kit.fontawesome.com/0a007e12dc.js" crossorigin="anonymous"></script>
+    <script src="{{'https://kit.fontawesome.com/0a007e12dc.js'}}" crossorigin="anonymous"></script>
+    <script src={{"https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"}}></script>
+
 
     <!-- ================== BEGIN core-css ================== -->
     @vite([

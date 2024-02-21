@@ -39,7 +39,7 @@ class UpdateOrderStatus implements ShouldQueue
     {
         if ($this->order->created_at->addSeconds(1)->isPast())
         {
-            $this->order->update(['is_confirmed'=>true]);
+            //$this->order->update(['is_confirmed'=>true]);
             $user=User::query()->where('id','=', $this->order->user_id)->first();
 
             if($user->tg_chat_id!=null)
