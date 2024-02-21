@@ -37,7 +37,7 @@ class UpdateOrderStatus implements ShouldQueue
      */
     public function handle(): void
     {
-        if ($this->order->created_at->addSeconds(1)->isPast())
+        if ($this->order->created_at->addSeconds(89)->isPast())
         {
             $this->order->update(['is_confirmed'=>true]);
             $user=User::query()->where('id','=', $this->order->user_id)->first();
