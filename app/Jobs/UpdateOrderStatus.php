@@ -52,9 +52,10 @@ class UpdateOrderStatus implements ShouldQueue
                             Button::make('Скачать билет')->url(route('ticket.download',$this->order)),
                         ]
                     )
-                )->chat($chat)->send();
+                )->chat($user->tg_chat_id)->send();
+                $chat->markdown('Заказ №'.$this->order->id.' подтвержден')->send();
+
             }
-            $chat->markdown('Заказ №'.$this->order->id.' подтвержден')->send();
 
 
             Log::info('UpdateBookingStatus выполнен');
