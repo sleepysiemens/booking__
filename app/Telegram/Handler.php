@@ -12,7 +12,7 @@ class Handler extends WebhookHandler
 {
     public function start()
     {
-        $this->reply('Данный бот предназначен для регистрации и получения уведомлений с сайта tripavia.com. чтобы зарегистрироваться, введите команду /register');
+        $this->reply('Данный бот предназначен для регистрации и получения уведомлений с сайта tripavia.com. чтобы зарегистрироваться, введите команду /register ваш email');
     }
 
     public function register($email)
