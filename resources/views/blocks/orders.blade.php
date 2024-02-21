@@ -57,7 +57,11 @@
                         <div class="col-2" style="border-left: 1px solid rgba(0,0,0,.2)">
                             <p class="fs-12px m-0 opacity-50 text-center">{{__('Стоимость:')}}</p>
                             <h3 class="text-center mt-3">{{$order->price}} ₽</h3>
+                            @if($order->created_at->addDays(7)->isFuture())
                             <p class="text-center mt-4"><a href="{{route('order.index', $order->id)}}">{{__('Посмотреть')}}</a></p>
+                            @else
+                                <p class="text-center mt-4 text-warning">Срок действия истек</p>
+                            @endif
                         </div>
                     </div>
 

@@ -11,6 +11,8 @@ class TicketController extends Controller
 {
     public function index(Order $order)
     {
+        if($order->created_at->addDays(7)->isPast())
+            return redirect()->route('main.index');
         $airports = Airports::all();
 
         $cookie=json_decode($order->data);
@@ -46,6 +48,9 @@ class TicketController extends Controller
 
     public function download(Order $order)
     {
+        if($order->created_at->addDays(7)->isPast())
+            return redirect()->route('main.index');
+
         $airports = Airports::all();
 
         $cookie=json_decode($order->data);
