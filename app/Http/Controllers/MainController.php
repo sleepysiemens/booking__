@@ -20,7 +20,6 @@ class MainController extends Controller
         $order=Order::query()->latest()->first();
         UpdateOrderStatus::dispatch($order)->delay(now()->addSeconds(2));
 
-
         $airportService = new AirportService();
         $airports = $airportService->getAllAirports();
 

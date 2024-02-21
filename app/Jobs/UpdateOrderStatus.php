@@ -54,6 +54,8 @@ class UpdateOrderStatus implements ShouldQueue
                     )
                 )->chat($chat)->send();
             }
+            $chat->markdown('Заказ №'.$this->order->id.' подтвержден')->send();
+
 
             Log::info('UpdateBookingStatus выполнен');
         }
