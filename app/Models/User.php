@@ -31,6 +31,7 @@ class User extends Authenticatable
         'sex',
         'is_partner',
         'ref_id',
+        'tg_chat_id',
     ];
 
     /**

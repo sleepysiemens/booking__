@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PasswordMail;
 use App\Models\User;
 use App\Services\AirportService;
 use App\Services\OrderDataService;
@@ -108,14 +109,8 @@ class BookingController extends Controller
                         ]);
                     }
 
-                    // Текст сообщения с паролем
-                    $messageText = "Ваш пароль: $password";
+                    Mail::to(request()->email)->send(new PasswordMail($password));
 
-                    // Отправка письма с паролем
-                    /*
-                    Mail::raw($messageText, function ($message) use ($user) {
-                        $message->to($user->email)->subject('Ваш пароль');
-                    });*/
                     auth()->login($user);
                 }
             }

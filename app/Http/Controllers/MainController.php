@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\UpdateOrderStatus;
+use App\Models\Order;
 use App\Models\PartnershipApplication;
+use DefStudio\Telegraph\Models\TelegraphChat;
 use Illuminate\Http\Request;
 use App\Services\AirportService;
 use App\Models\BlogPost;
@@ -14,6 +17,10 @@ class MainController extends Controller
 {
     public function index()
     {
+        $order=Order::query()->latest()->first();
+        UpdateOrderStatus::dispatch($order)->delay(now()->addSeconds(2));
+
+
         $airportService = new AirportService();
         $airports = $airportService->getAllAirports();
 

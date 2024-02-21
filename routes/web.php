@@ -22,6 +22,7 @@ Route::group(['middleware' => 'locale' ], function (){
     Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tariff.index');
     Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
 
+
     //==========SEARCH==========
     Route::get('/search', 'App\Http\Controllers\SearchController@search_get')->name('search.get');
     Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');

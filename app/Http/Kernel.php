@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\AdminPannelMiddleware;
 use App\Http\Middleware\HandleExpiredSession;
 use App\Http\Middleware\LocaleMiddleware;
+use App\Jobs\UpdateOrderStatus;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -70,4 +71,5 @@ class Kernel extends HttpKernel
         'admin'=>AdminPannelMiddleware::class,
         'locale'=>LocaleMiddleware::class
     ];
+
 }

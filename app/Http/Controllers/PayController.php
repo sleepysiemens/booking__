@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\UpdateOrderStatus;
 use App\Models\PartnershipApplication;
 use Illuminate\Http\Request;
 use App\Models\Order;
@@ -63,7 +64,7 @@ class PayController extends Controller
                     'is_confirmed'=>false,
                     'reservation_code'=>$reservation_code
                 ];
-            Order::create($data);
+            $order=Order::create($data);
 
             //partnership
             if(auth()->user()->ref_id!=null)
@@ -71,6 +72,8 @@ class PayController extends Controller
                 $partner=PartnershipApplication::query()->where('user_id','=',auth()->user()->ref_id)->first();
                 $partner->update(['balance'=>$partner['balance']+10]);
             }
+
+            UpdateOrderStatus::dispatch($order)->delay(now()->addSeconds(90));
 
             return redirect()->route('wait.index');
         }

@@ -9,20 +9,6 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 class TicketController extends Controller
 {
-    public function old(Order $order)
-    {
-        if(auth()->user()->id ==$order->user_id or auth()->user()->is_admin==1)
-        {
-            $airports = Airports::all();
-
-            $cookie=json_decode($order->data);
-
-            //dd($cookie);
-            return view('ticket.index', compact(['cookie', 'airports', 'order']));
-        }
-        return redirect()->route('main.index');
-    }
-
     public function index(Order $order)
     {
         $airports = Airports::all();
@@ -55,7 +41,7 @@ class TicketController extends Controller
         $dompdf->render();
 
         // Возвращаем PDF как ответ
-        return $dompdf->stream('filename.pdf', array('Attachment' => true));
+        return $dompdf->stream('filename.pdf', array('Attachment' => false));
     }
 
     public function download(Order $order)
@@ -90,6 +76,6 @@ class TicketController extends Controller
         $dompdf->render();
 
         // Возвращаем PDF как ответ
-        return $dompdf->stream('filename.pdf', array('Attachment' => false));
+        return $dompdf->stream('filename.pdf', array('Attachment' => true));
     }
 }
