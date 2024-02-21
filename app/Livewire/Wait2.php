@@ -21,7 +21,7 @@ class Wait2 extends Component
 
     public function render()
     {
-        sleep(10);
+        sleep(90);
         return view('livewire.wait_3_stage');
     }
 }
