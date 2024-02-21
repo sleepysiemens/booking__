@@ -18,8 +18,6 @@ class ProfileController extends Controller
 
     public function orders()
     {
-        $order=Order::query()->latest()->first();
-        UpdateOrderStatus::dispatch($order)->delay(now()->addSeconds(2));
         $orders=Order::query()->where('user_id', '=', auth()->user()->id)->orderBy('created_at', 'desc')->get();
         return view('profile.orders', compact(['orders']));
     }
