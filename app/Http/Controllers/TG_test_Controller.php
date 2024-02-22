@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Log;
 
 class TG_test_Controller extends Controller
 {
-    public function index(Order $order)
+    public function index($order)
     {
-        dd($order);
+        $order=Order::query()->where('id','=',$order)->first();
         if ($order->created_at->addSeconds(1)->isPast())
         {
             $user=User::query()->where('id','=', $order->user_id)->first();
