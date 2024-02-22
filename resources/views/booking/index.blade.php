@@ -218,8 +218,8 @@
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Пол')}}</legend>
                                             <select class="w-100" name="user[{{$passengers_cnt}}][sex]" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option @if($adult['sex']==1) selected @endif value="1">{{__('Мужской')}}</option>
                                                 <option @if($adult['sex']==0) selected @endif value="0">{{__('Женский')}}</option>
+                                                <option @if($adult['sex']==1 or !isset($adult['sex'])) selected @endif value="1">{{__('Мужской')}}</option>
                                             </select>
                                         </fieldset>
                                     </div>
@@ -241,8 +241,9 @@
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Документ')}}</legend>
                                             <select class="w-100" name="user[{{$passengers_cnt}}][doc_type]" required {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option value="1" @if($adult['doc_type']==1) selected @endif>{{__('Заграничный паспорт РФ')}}</option>
                                                 <option value="0" @if($adult['doc_type']==0) selected @endif>{{__('Внутренний паспорт РФ')}}</option>
+                                                <option value="1" @if($adult['doc_type']==1 or $adult['doc_type']==null) selected @endif>{{__('Заграничный паспорт РФ')}}</option>
+
                                             </select>
                                         </fieldset>
                                     </div>
@@ -307,8 +308,9 @@
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Пол')}}</legend>
                                             <select class="w-100" name="user[{{$passengers_cnt}}][sex]" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option @if($child['sex']==1) selected @endif value="1">{{__('Мужской')}}</option>
                                                 <option @if($child['sex']==0) selected @endif value="0">{{__('Женский')}}</option>
+                                                <option @if($child['sex']==1 or $child['sex']==null) selected @endif value="1">{{__('Мужской')}}</option>
+
                                             </select>
                                         </fieldset>
                                     </div>
@@ -330,8 +332,8 @@
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Документ')}}</legend>
                                             <select class="w-100" name="user[{{$passengers_cnt}}][doc_type]" required {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option value="1" @if($child['doc_type']==1) selected @endif>{{__('Заграничный паспорт РФ')}}</option>
                                                 <option value="0" @if($child['doc_type']==0) selected @endif>{{__('Внутренний паспорт РФ')}}</option>
+                                                <option value="1" @if($child['doc_type']==1 or $child['doc_type']==null) selected @endif>{{__('Заграничный паспорт РФ')}}</option>
                                             </select>
                                         </fieldset>
                                     </div>
@@ -396,8 +398,8 @@
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Пол')}}</legend>
                                             <select class="w-100" name="user[{{$passengers_cnt}}][sex]" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option @if($infant['sex']==1) selected @endif value="1">{{__('Мужской')}}</option>
                                                 <option @if($infant['sex']==0) selected @endif value="0">{{__('Женский')}}</option>
+                                                <option @if($infant['sex']==1 or $infant['sex']==null) selected @endif value="1">{{__('Мужской')}}</option>
                                             </select>
                                         </fieldset>
                                     </div>
@@ -419,8 +421,8 @@
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Документ')}}</legend>
                                             <select class="w-100" name="user[{{$passengers_cnt}}][doc_type]" required {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option value="1" @if($infant['doc_type']==1) selected @endif>{{__('Заграничный паспорт РФ')}}</option>
                                                 <option value="0" @if($infant['doc_type']==0) selected @endif>{{__('Внутренний паспорт РФ')}}</option>
+                                                <option value="1" @if($infant['doc_type']==1 or $infant['doc_type']==null) selected @endif>{{__('Заграничный паспорт РФ')}}</option>
                                             </select>
                                         </fieldset>
                                     </div>

@@ -41,8 +41,6 @@ class BookingController extends Controller
             $children=$passengersService->define_passengers_array($cookie->passengers->children, 'ребенок');
             $infants=$passengersService->define_passengers_array($cookie->passengers->infants, 'младенец');
 
-            //dd($adults);
-
             //return view('booking.index', compact(['cookie', 'airports', 'adults', 'children', 'infants']));
             return redirect()->route('booking.get');
         }
@@ -64,6 +62,8 @@ class BookingController extends Controller
             $adults=$passengersService->define_passengers_array($cookie->passengers->adults, 'взрослый');
             $children=$passengersService->define_passengers_array($cookie->passengers->children, 'ребенок');
             $infants=$passengersService->define_passengers_array($cookie->passengers->infants, 'младенец');
+
+            //dd($adults);
 
             $airports = $airportService->getAllAirports();
             $airports=collect($airports);
