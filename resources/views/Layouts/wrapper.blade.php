@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Trip Avia | Home</title>
+    <link rel="icon" type="image/x-icon" href="{{asset('img/favicon/favicon.png')}}">
     <scrpt src="{{asset ('js/app.js')}}" defer></scrpt>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
@@ -29,11 +30,6 @@
     <!-- ================== END core-css ================== -->
 </head>
 <body class="overflow-x-hidden">
-<!-- begin #page-loader -->
-<div id="page-loader" class="fade show">
-    <span class="spinner"></span>
-</div>
-<!-- end #page-loader -->
 <!-- BEGIN #app -->
 <div id="app">
 
@@ -43,7 +39,7 @@
         <div class="container d-flex">
             <div class="header-logo">
                 <a href="{{asset(route('main.index'))}}" class="logo-link">
-                    <span class="logo"></span><b>TripAvia</b> <small>CORPORATE</small>
+                    {{--<span class="logo"></span>--}}<img class="logo border-0 rounded-0" src="{{asset('img/favicon/favicon.png')}}" alt="logo"><b>TripAvia</b> <small>CORPORATE</small>
                 </a>
             </div>
             <div class="header-nav">
