@@ -59,6 +59,19 @@ class Handler extends WebhookHandler
         }
     }
 
+    public function login()
+    {
+        $check=User::query()->where('th_chat_id','=',$this->message->toArray()['chat']['id'])->exists();
+        if($check)
+        {
+
+        }
+        else
+        {
+            $this->reply('У вас еще нет аккаунта. Чтобы зарегистрироваться, введите /register email');
+        }
+    }
+
     protected function handleUnknownCommand(Stringable $text):void
     {
         $this->reply('Неизвестная команда');

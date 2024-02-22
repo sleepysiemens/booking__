@@ -148,6 +148,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/test/{oredr}', [App\Http\Controllers\TG_test_Controller::class, 'index'])->name('test');
+Route::get('/fk-verify.html', function (){
+    return('9cd0b00d60d9926a56aef563928a8162');
+});
 
 
 //By sleepy_siemens 2024 Jan

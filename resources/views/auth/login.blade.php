@@ -32,6 +32,14 @@
             <div class="mb-15px">
                 <button type="submit" class="btn btn-theme d-block h-45px w-100 btn-lg fs-14px">Войти</button>
             </div>
+            <div class="row mb-15px">
+                <hr class="col my-auto">
+                <p class="col-auto my-auto">или</p>
+                <hr class="col my-auto">
+            </div>
+            <a class="mb-15px text-decoration-none d-block" href="https://t.me/tripavia_test_bot" target="_blank">
+                <button type="submit" class="btn btn-theme d-block h-45px w-100 btn-lg fs-14px" style="background-color: #2AABEE; border-color: #2AABEE"><i class="fab fa-telegram-plane"></i>Войти через Telegram</button>
+            </a>
             <div class="mb-40px pb-40px text-dark">
                 Нет аккаунта? Нажмите <a href="{{ route('register') }}" class="text-primary">здесь</a>, чтобы зарегистрироваться.
             </div>
