@@ -7,6 +7,8 @@ use DefStudio\Telegraph\Handlers\WebhookHandler;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
+use Illuminate\Support\Facades\Cache;
+
 
 class Handler extends WebhookHandler
 {
@@ -64,7 +66,11 @@ class Handler extends WebhookHandler
         $check=User::query()->where('th_chat_id','=',$this->message->toArray()['chat']['id'])->exists();
         if($check)
         {
+            $user=User::query()->where('th_chat_id','=',$this->message->toArray()['chat']['id'])->first();
+            $hash=Hash::make($user->email.date("YmdHis").$user->tg_chat_id);
+            Cache::put($hash, $user, now()->addMinutes(5));
 
+            $this->reply(route('tg.auth',$hash));
         }
         else
         {
