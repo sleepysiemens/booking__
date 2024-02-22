@@ -148,7 +148,6 @@ Route::get('/tg-auth/{hash}', [App\Http\Controllers\TGAuth::class, 'index'])->na
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/test/{order}', [App\Http\Controllers\TG_test_Controller::class, 'index'])->name('test');
 Route::get('/fk-verify.html', function (){
     return('9cd0b00d60d9926a56aef563928a8162');
 });
