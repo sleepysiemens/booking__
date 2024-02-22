@@ -25,7 +25,7 @@
                                     <div class="col-12 col-lg-6">
                                         <div class="d-flex justify-content-start justify-content-lg-end">
                                             <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
-                                                <img class="w-100 h-100" src="http://127.0.0.1:8000/img/SU.png" alt="avia">
+                                                <img class="w-100 h-100" src="https://static.onetwotrip.com/images/airlines/svg/{{$cookie->transfers[0]->airline_short}}.svg" alt="avia">
                                             </div>
                                             <p class="my-auto ms-2">{{$cookie->airline}}</p>
                                         </div>
@@ -184,7 +184,7 @@
                                 <div class="row pb-3">
                                     <div class="col d-flex">
                                         <div class="rounded-circle overflow-hidden bg-light w-lg-45px h-lg-45px h-20px w-25px my-auto d-none d-lg-flex">
-                                            <i class="fas fa-user m-auto text-black-100 fs-18px "></i>
+                                            <i class="fas fa-user m-auto text-black-100 fs-18px"></i>
                                         </div>
                                         <div class="ms-3 d-flex">
                                             <h4 class="my-auto">{{$passengers_cnt}}-{{__('пассажир')}}, {{__('взрослый')}}</h4>
@@ -199,13 +199,13 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Фамилия на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100" required value="{{$adult['surname']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100 input-words" required value="{{$adult['surname']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Имя на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100" required value="{{$adult['name']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100 input-words" required value="{{$adult['name']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
@@ -249,7 +249,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Серия и номер документа')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100" required value="{{$adult['serial_number']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100 input-number" required value="{{$adult['serial_number']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
@@ -288,13 +288,13 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Фамилия на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100" required value="{{$child['surname']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100 input-words" required value="{{$child['surname']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Имя на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100" required value="{{$child['name']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100 input-words" required value="{{$child['name']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
@@ -338,7 +338,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Серия и номер документа')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100" required value="{{$child['serial_number']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100 input-number" required value="{{$child['serial_number']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
@@ -377,13 +377,13 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Фамилия на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100" required value="{{$infant['surname']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100 input-words" required value="{{$infant['surname']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Имя на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100" required value="{{$infant['name']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100 input-words" required value="{{$infant['name']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
@@ -427,7 +427,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Серия и номер документа')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100" required value="{{$infant['serial_number']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100 input-number" required value="{{$infant['serial_number']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
@@ -528,4 +528,16 @@
         <input type="hidden" name="total_rub" value="{{$cookie->booking_price_rub}}">
         <input type="hidden" name="total_eur" value="{{$cookie->booking_price_eur}}">
     </form>
+@endsection
+
+@section('scripts')
+    <script>
+        $('body').on('input', '.input-words', function(){
+            this.value = this.value.replace(/[^a-z\s]/gi, '');
+        });
+
+        $('body').on('input', '.input-number', function(){
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    </script>
 @endsection

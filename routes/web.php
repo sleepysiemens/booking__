@@ -147,6 +147,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/test/{oredr}', [App\Http\Controllers\TG_test_Controller::class, 'index'])->name('test');
+
 
 //By sleepy_siemens 2024 Jan
 //2001sema@gmail.com

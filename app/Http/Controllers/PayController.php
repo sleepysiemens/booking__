@@ -49,6 +49,12 @@ class PayController extends Controller
         if(isset($_COOKIE['order']) and $_COOKIE['order']!=null)
         {
             $order=json_decode($_COOKIE['order']);
+
+            if($order->user_data==null)
+            {
+                return redirect()->route('booking.get');
+            }
+
             $reservation_code=$this->generate_code();
             $data=
                 [

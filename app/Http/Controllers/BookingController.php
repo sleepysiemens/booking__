@@ -67,7 +67,6 @@ class BookingController extends Controller
 
             $airports = $airportService->getAllAirports();
             $airports=collect($airports);
-
             return view('booking.index', compact(['cookie', 'airports', 'adults', 'children', 'infants']));
         }
         return redirect()->route('main.index');
