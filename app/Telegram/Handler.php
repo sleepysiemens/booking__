@@ -80,7 +80,7 @@ class Handler extends WebhookHandler
 
     public function login_check()
     {
-        $this->reply('hello');
+        $this->reply(route('main.index'));
     }
 
     protected function handleUnknownCommand(Stringable $text):void
