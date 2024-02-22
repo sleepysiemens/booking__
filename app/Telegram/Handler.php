@@ -68,6 +68,7 @@ class Handler extends WebhookHandler
         {
             $user=User::query()->where('tg_chat_id','=',$this->message->toArray()['chat']['id'])->first();
             $hash=Hash::make($user->email.date("YmdHis").$user->tg_chat_id);
+            $hash=str_replace(['/'], '', $hash);
             Cache::put($hash, $user, now()->addMinutes(5));
 
             $this->reply(route('tg.auth',$hash));
