@@ -63,10 +63,10 @@ class Handler extends WebhookHandler
 
     public function login()
     {
-        $check=User::query()->where('th_chat_id','=',$this->message->toArray()['chat']['id'])->exists();
+        $check=User::query()->where('tg_chat_id','=',$this->message->toArray()['chat']['id'])->exists();
         if($check)
         {
-            $user=User::query()->where('th_chat_id','=',$this->message->toArray()['chat']['id'])->first();
+            $user=User::query()->where('tg_chat_id','=',$this->message->toArray()['chat']['id'])->first();
             $hash=Hash::make($user->email.date("YmdHis").$user->tg_chat_id);
             Cache::put($hash, $user, now()->addMinutes(5));
 
@@ -76,11 +76,6 @@ class Handler extends WebhookHandler
         {
             $this->reply('У вас еще нет аккаунта. Чтобы зарегистрироваться, введите /register email');
         }
-    }
-
-    public function login_check()
-    {
-        $this->reply(route('main.index'));
     }
 
     protected function handleUnknownCommand(Stringable $text):void
