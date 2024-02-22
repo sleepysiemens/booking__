@@ -78,6 +78,11 @@ class Handler extends WebhookHandler
         }
     }
 
+    public function login_check()
+    {
+        $this->reply('hello');
+    }
+
     protected function handleUnknownCommand(Stringable $text):void
     {
         $this->reply('Неизвестная команда');
