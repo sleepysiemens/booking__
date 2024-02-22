@@ -145,8 +145,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], functio
 
 Auth::routes();
 Route::get('/tg-auth/{hash}', [App\Http\Controllers\TGAuth::class, 'index'])->name('tg.auth');
-Route::get('/tg', [App\Http\Controllers\TGAuth::class, 'index'])->name('tg.auth');
-
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
