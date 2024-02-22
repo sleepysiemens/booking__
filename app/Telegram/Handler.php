@@ -20,7 +20,7 @@ class Handler extends WebhookHandler
     public function register($email)
     {
         $check=User::query()->where('tg_chat_id','=',$this->message->toArray()['chat']['id'])->exists();
-        if(!$check)
+        if($check)
         {
             $message=explode(' ',$this->message->toArray()['text']);
 
