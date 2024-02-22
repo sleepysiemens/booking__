@@ -28,5 +28,5 @@ Artisan::command('tg_bot', function () {
             'register email'=>'Зарегистрироваться',
             'login'=>'Войти на сайт',
         ]
-    ));
+    )->send());
 });
