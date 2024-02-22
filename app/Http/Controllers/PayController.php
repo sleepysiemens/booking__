@@ -79,7 +79,7 @@ class PayController extends Controller
                 $partner->update(['balance'=>$partner['balance']+10]);
             }
 
-            UpdateOrderStatus::dispatch($order)->delay(now()->addSeconds(90));
+            UpdateOrderStatus::dispatch($order->id)->delay(now()->addSeconds(90));
 
             return redirect()->route('wait.index');
         }

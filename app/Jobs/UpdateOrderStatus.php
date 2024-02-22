@@ -27,9 +27,9 @@ class UpdateOrderStatus implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(Order $order)
+    public function __construct($order)
     {
-        $this->order=$order;
+        $this->order=Order::query()->where('id','=',$order)->first();
     }
 
     /**
