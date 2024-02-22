@@ -24,7 +24,7 @@ class Handler extends WebhookHandler
         {
             $message=explode(' ',$this->message->toArray()['text']);
 
-            if($message[1]!=null and str_contains($message[1], '@'))
+            if(isset($message[1]) and str_contains($message[1], '@'))
             {
                 $email=$message[1];
 
