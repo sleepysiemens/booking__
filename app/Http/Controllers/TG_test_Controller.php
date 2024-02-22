@@ -14,6 +14,7 @@ class TG_test_Controller extends Controller
 {
     public function index(Order $order)
     {
+        dd($order);
         if ($order->created_at->addSeconds(1)->isPast())
         {
             $user=User::query()->where('id','=', $order->user_id)->first();
