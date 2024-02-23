@@ -45,7 +45,7 @@
 
                         <div class="col-6">
                             <p class="opacity-50 fs-13px mb-0">{{__('Заказчик')}}</p>
-                            <p class="fs-16px mt-1">{{}}</p>
+                            <p class="fs-16px mt-1">{{----}}</p>
                         </div>
                         <div class="col-6">
                             <p class="opacity-50 fs-13px mb-0">{{__('Сумма заказа')}}</p>
