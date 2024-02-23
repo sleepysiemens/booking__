@@ -23,6 +23,6 @@ Artisan::command('tg_bot', function () {
     $bot = \DefStudio\Telegraph\Models\TelegraphBot::find(1);
 
     dd($bot->registerCommands([
-            'start',
+            'start'=>'Запустить бота',
         ])->send());
 });
