@@ -116,7 +116,9 @@ class BookingController extends Controller
 
                 $cookie=$dataService->update_data(\request()->all());
                 setcookie('order',json_encode($cookie));
-                return view('booking.pay', compact(['cookie']));
+            dd($cookie);
+
+            return view('booking.pay', compact(['cookie']));
 
         }
         else
