@@ -152,6 +152,8 @@ Route::get('/fk-verify.html', function (){
     return('9cd0b00d60d9926a56aef563928a8162');
 });
 
+Route::get('/test', 'App\Http\Controllers\TestController@index')->name('test');
+
 
 //By sleepy_siemens 2024 Jan
 //2001sema@gmail.com
