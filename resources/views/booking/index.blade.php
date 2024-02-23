@@ -128,7 +128,26 @@
                         </div>
                     @endif
 
-                    {{--@if(auth()->user()!=null)--}}
+                        @if(auth()->user()==null)
+                            <div class="card border-0 shadow mb-3">
+                                <div class="card-body">
+                                    <h4 class="m-0">{{__('Авторизуйтесь')}}</h4>
+                                    <p class="opacity-50 mt-2">{{__('Вход в личный кабинет')}}</p>
+                                    <div class="row pb-2">
+                                        <div class="col-6">
+                                            <a href="{{route('login')}}" class="btn btn-primary d-flex fw-bold header-link h-55px" target="_blank">
+                                                <p class="text-center m-auto">{{__('Войти')}}</p>
+                                            </a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="https://t.me/trip_avia_1_bot" class="btn btn-primary d-flex fw-bold header-link h-55px" target="_blank" style="background-color: #2AABEE; border-color: #2AABEE">
+                                                <p class="text-center m-auto">{{__('Войти через Telegram')}} <i class="fab fa-telegram-plane"></i></p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         <div class="card border-0 shadow mb-3">
                             <div class="card-body">
                                 <h4 class="m-0">{{__('Контактные данные')}}</h4>
@@ -154,21 +173,6 @@
                                 </div>
                             </div>
                         </div>
-                    {{--@else
-                        <div class="card border-0 shadow mb-3">
-                            <div class="card-body">
-                                <h4 class="m-0">{{__('Авторизуйтесь')}}</h4>
-                                <p class="opacity-50 mt-2">{{__('Вход в личный кабинет')}}</p>
-                                <div class="row pb-2">
-                                    <div class="col">
-                                        <a href="{{route('login')}}" class="btn btn-primary d-flex fw-bold header-link h-55px" target="_blank">
-                                            <p class="text-center m-auto">{{__('Войти')}}</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif--}}
 
 
                     <div class="card border-0 shadow mb-3">
@@ -540,6 +544,30 @@
 
         $('body').on('input', '.input-number', function(){
             this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // При загрузке страницы пытаемся восстановить значения из localStorage для всех инпутов
+            var inputs = document.querySelectorAll('input');
+            inputs.forEach(function(input, index) {
+                var savedValue = localStorage.getItem('inputFieldValue_' + index);
+                if (savedValue) {
+                    input.value = savedValue;
+                }
+                // Слушаем событие изменения в каждом поле ввода и сохраняем значение в localStorage
+                input.addEventListener('input', function() {
+                    localStorage.setItem('inputFieldValue_' + index, input.value);
+                });
+            });
+
+            // Если вы хотите очистить значения из localStorage при отправке формы, используйте:
+            // document.getElementById('myForm').addEventListener('submit', function() {
+            //     inputs.forEach(function(input, index) {
+            //         localStorage.removeItem('inputFieldValue_' + index);
+            //     });
+            // });
         });
     </script>
 @endsection
