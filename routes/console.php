@@ -22,8 +22,7 @@ Artisan::command('tg_bot', function () {
     /** @var \DefStudio\Telegraph\Models\TelegraphBot $bot  */
     $bot = \DefStudio\Telegraph\Models\TelegraphBot::find(1);
 
-    dd($bot->unregisterCommands([
-            'register',
-            'login'
+    dd($bot->registerCommands([
+            'start',
         ])->send());
 });
