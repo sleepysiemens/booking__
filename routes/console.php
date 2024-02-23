@@ -20,7 +20,7 @@ Artisan::command('inspire', function () {
 
 Artisan::command('tg_bot', function () {
     /** @var \DefStudio\Telegraph\Models\TelegraphBot $bot  */
-    $bot = \DefStudio\Telegraph\Models\TelegraphBot::find(1);
+    $bot = \DefStudio\Telegraph\Models\TelegraphBot::first();
 
     dd($bot->registerCommands([
             'start'=>'Запустить бота',
