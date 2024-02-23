@@ -109,7 +109,8 @@ class BookingController extends Controller
                         ]);
                     }
 
-                    Mail::to(request()->email)->send(new PasswordMail($password));
+                    if($user->email!=null)
+                        Mail::to(request()->email)->send(new PasswordMail($password));
 
                     auth()->login($user);
                 }
