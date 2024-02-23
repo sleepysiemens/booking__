@@ -129,7 +129,7 @@ class BookingController extends Controller
         {
             $dataService = new OrderDataService();
             $cookie=$dataService->get_data();
-
+            dd($cookie);
             return view('booking.pay', compact(['cookie']));
         }
         return redirect()->route('main.index');
