@@ -37,7 +37,7 @@ class SearchController extends Controller
 
             $airportService = new AirportService();
             $airports = $airportService->getAllAirports();
-            dd($request);
+            //dd($request);
             $cacheKey = "{$request['origin_']}-{$request['destination_']},{$request['departDate']}_{$request['returnDate']},{$request['passengers']['adults']}_{$request['passengers']['children']}_{$request['passengers']['infants']}";
 
         //return view('search.index', compact([ 'airports', 'request']));
