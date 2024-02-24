@@ -10,7 +10,7 @@ class TestController extends Controller
 {
     public function index()
     {
-        Mail::to('2001sema@gmail.com')->send(new OrderNotifications(1));
+        Mail::to('2001sema@gmail.com')->send(new OrderNotifications(2));
         dd(1);
     }
 }
