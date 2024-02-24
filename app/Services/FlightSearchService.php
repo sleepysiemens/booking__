@@ -74,7 +74,7 @@ class FlightSearchService
          $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
             'chromedriver_arguments' => ['--headless=new', '--disable-gpu', '--no-sandbox'],
         ], 'http://localhost');
-         //$client = Client::createChromeClient();
+         $client = Client::createChromeClient();
 
         $depart_date=date('dm',strtotime($depart_date));
         if($return_date!='не установлено')
@@ -83,7 +83,7 @@ class FlightSearchService
             $return_date=null;
 
         //
-        $cacheKey = "flight_search_{$origin}_{$destination}_{$depart_date}_{$return_date}_{$adults}_{$children}_{$infants}";
+        $cacheKey = "{$origin}-{$destination},{$depart_date}-{$return_date}({$adults},{$children},{$infants})";
         if (Cache::has($cacheKey))
         {
             return Cache::get($cacheKey);

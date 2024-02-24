@@ -24,7 +24,7 @@ Route::group(['middleware' => 'locale' ], function (){
 
 
     //==========SEARCH==========
-    Route::get('/search', 'App\Http\Controllers\SearchController@search_get')->name('search.get');
+    Route::get('/search/{cacheKey}', 'App\Http\Controllers\SearchController@search_get')->name('search.get');
     Route::post('/search', 'App\Http\Controllers\SearchController@search')->name('search.index');
 
 

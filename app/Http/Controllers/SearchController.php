@@ -33,26 +33,41 @@ class SearchController extends Controller
                 $request['trip_class']=0;
             }
 
-            //dd($request);
-
             setcookie('request',json_encode($request));
 
             $airportService = new AirportService();
             $airports = $airportService->getAllAirports();
+            dd($request);
+            $cacheKey = "{$request['origin_']}-{$request['destination_']},{$request['departDate']}_{$request['returnDate']},{$request['passengers']['adults']}_{$request['passengers']['children']}_{$request['passengers']['infants']}";
 
-            //return view('search.index', compact([ 'airports', 'request']));
-        return redirect()->route('search.get');
+        //return view('search.index', compact([ 'airports', 'request']));
+        return redirect()->route('search.get', $cacheKey);
     }
 
-    public function search_get()
+    public function search_get($cacheKey)
     {
-        if(isset($_COOKIE['request']))
+        if($cacheKey!=null)
         {
-            $request=json_decode($_COOKIE['request'],'true');
-            //dd($request);
+            //$request=json_decode($_COOKIE['request'],'true');
+            $cacheKey=explode(',',$cacheKey);
+            $cities=explode('-',$cacheKey[0]);
+            $dates=explode('_',$cacheKey[1]);
+            $passengers=explode('_',$cacheKey[2]);
 
             $airportService = new AirportService();
-            $airports = $airportService->getAllAirports();
+            $airports = collect($airportService->getAllAirports());
+            $request=
+                [
+                    'origin_'=>$cities[0],
+                    'origin'=>$airports->where('airport_code','=',$cities[0])->first()['city_name'],
+                    'destination_'=>$cities[1],
+                    'destination'=>$airports->where('airport_code','=',$cities[1])->first()['city_name'],
+                    'departDate'=>$dates[0],
+                    'returnDate'=>$dates[1],
+                    'passengers_amount'=>$passengers[0]+$passengers[1]+$passengers[2],
+                    'passengers'=>['adults'=>$passengers[0], 'children'=>$passengers[1], 'infants'=>$passengers[2]]
+                ];
+
 
             return view('search.index', compact([ 'airports', 'request']));
         }
