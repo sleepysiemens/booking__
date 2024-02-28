@@ -39,5 +39,5 @@
 </div>
 
 @php
-    return redirect()->route('order.index',$order_id);
+    return redirect()->route('order.index',$order);
 @endphp

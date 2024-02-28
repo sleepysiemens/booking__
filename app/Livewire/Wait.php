@@ -14,9 +14,10 @@ class Wait extends Component
 
     public function render()
     {
-        $order_id=Order::query()->where('user_id', '=', auth()->user()->id)->latest()->first();
+        $order=Order::query()->where('user_id', '=', auth()->user()->id)->latest()->first();
+        $order=$order->number;
         sleep(3);
 
-        return view('livewire.wait_2_stage', compact(['order_id']));
+        return view('livewire.wait_2_stage', compact(['order']));
     }
 }
