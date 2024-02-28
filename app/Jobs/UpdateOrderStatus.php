@@ -60,7 +60,8 @@ class UpdateOrderStatus implements ShouldQueue
 
             if($user->email!=null)
             {
-                Mail::to(request()->email)->send(new OrderNotifications($this->order->id));
+                Mail::to($user->email)->send(new OrderNotifications($this->order->id));
+
             }
 
             Log::info('UpdateBookingStatus выполнен');
