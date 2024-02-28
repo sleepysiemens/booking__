@@ -161,7 +161,7 @@
                                     <div class="col">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Email</legend>
-                                            <input type="email" name="email" class="w-100" @if(auth()->user()!=null and auth()->user()->email!=null) value="{{auth()->user()->email}}" @endif @if(auth()->user()!=null and auth()->user()->email!=null) readonly @endif required>
+                                            <input type="email" name="email" class="w-100" @if(auth()->user()!=null and auth()->user()->email!=null) value="{{auth()->user()->email}}" @endif {{--@if(auth()->user()!=null and auth()->user()->email!=null) readonly @endif--}} required>
                                         </fieldset>
                                     </div>
                                     <div class="col">
