@@ -62,7 +62,16 @@
                         </div>
                         <div class="col-6">
                             <p class="opacity-50 fs-13px mb-0">{{__('Кол-во пассажиров')}}</p>
-                            <p class="fs-16px mt-1"><i class="fas fa-male my-auto" aria-hidden="true"></i> {{$cookie->passengers_amount}}</p>
+                            <p class="fs-16px mt-1"><i class="fas fa-male my-auto" aria-hidden="true"></i>
+                                {{$cookie->passengers_amount}}
+                                @if($cookie->passengers_amount==1)
+                                    {{__('пассажир')}}
+                                @elseif($cookie->passengers_amount>1 and $cookie->passengers_amount<5)
+                                    {{__('пассажира')}}
+                                @else
+                                    {{__('пассажиров')}}
+                                @endif
+                            </p>
                         </div>
                     </div>
 

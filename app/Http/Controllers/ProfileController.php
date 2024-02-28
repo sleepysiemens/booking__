@@ -19,7 +19,13 @@ class ProfileController extends Controller
     public function orders()
     {
         $orders=Order::query()->where('user_id', '=', auth()->user()->id)->orderBy('created_at', 'desc')->get();
-
+        foreach (Order::query()->where('is_confirmed','=',false)->get() as $order)
+        {
+            if($order->created_at->addSeconds(1)->isPast())
+            {
+                $order->update(['is_confirmed'=>true]);
+            }
+        }
         return view('profile.orders', compact(['orders']));
     }
 

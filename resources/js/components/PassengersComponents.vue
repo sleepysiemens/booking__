@@ -1,7 +1,7 @@
 <template>
     <fieldset class="first_input p-0 col-1 h-60px m-0 col-lg col-6 position-relative">
         <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Пассажиры, класс</legend>
-        <input class="bg-transparent border-0 ms-3 p-0 h-100" name="passengers_amount" @focus="toggleCard" type="text" v-model="total" readonly/>
+        <input class="bg-transparent border-0 ms-3 p-0 h-100" name="passengers_amount" @focus="toggleCard" @load="updateTotal" type="text" v-model="total" readonly/>
         <input type="hidden" name="passengers[adults]" v-model="counter1">
         <input type="hidden" name="passengers[children]" v-model="counter2">
         <input type="hidden" name="passengers[infants]" v-model="counter3">
@@ -162,6 +162,11 @@ export default {
             this.selectedOption = selected;
         },
     },
+
+    mounted()
+    {
+        this.updateTotal();
+    }
 };
 </script>
 

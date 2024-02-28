@@ -49,7 +49,18 @@
                                 </div>
                                 <div class="col-4">
                                     <p class="fs-12px m-0 opacity-50">{{__('Кол-во пассажиров:')}}</p>
-                                    <p class=" my-2">{{$cookie->passengers_amount}}</p>
+                                    <p class=" my-2">
+                                        {{$cookie->passengers_amount}}
+                                        @if(gettype($cookie->passengers_amount)!='string')
+                                            @if($cookie->passengers_amount==1)
+                                                {{__('пассажир')}}
+                                            @elseif($cookie->passengers_amount>1 and $cookie->passengers_amount<5 )
+                                                {{__('пассажира')}}
+                                            @else
+                                                {{__('пассажиров')}}
+                                            @endif
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
                         </div>
