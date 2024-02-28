@@ -7,16 +7,16 @@ use Livewire\Component;
 
 class Wait2 extends Component
 {
-    public $order_id;
+    public $order;
 
     public function placeholder()
     {
         return view('livewire.wait_2_2_stage');
     }
 
-    public function initializeItems($order_id)
+    public function initializeItems($order)
     {
-        $this->request = $order_id;
+        $this->order = $order;
     }
 
     public function render()

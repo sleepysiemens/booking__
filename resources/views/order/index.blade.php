@@ -23,7 +23,7 @@
                             @if($order->is_confirmed)
                                 @include('livewire.wait_3_stage')
                             @else
-                                <livewire:wait2 :order_id="$order_id" lazy/>
+                                <livewire:wait2 :order="$order" lazy/>
                             @endif
                         </div>
                     </div>
