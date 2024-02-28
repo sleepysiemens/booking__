@@ -13,7 +13,7 @@ class TGAuth extends Controller
         {
             $user=Cache::get($hash);
             auth()->login($user);
-            return redirect()->route('profile.index');
+            return redirect()->route('booking.index');
         }
         else
         {
