@@ -277,7 +277,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Срок действия')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" min="{{date("Y-m-d", $transfer->arrival_datetime)}}" class="w-100" value="{{$adult['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" min="{{date("Y-m-d", $cookie->arrival_datetime)}}" class="w-100" value="{{$adult['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -367,7 +367,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Срок действия')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" min="{{date("Y-m-d", $transfer->arrival_datetime)}}" class="w-100" value="{{$child['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" min="{{date("Y-m-d", $cookie->arrival_datetime)}}" class="w-100" value="{{$child['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -456,7 +456,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Срок действия')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" min="{{date("Y-m-d", $transfer->arrival_datetime)}}" class="w-100" value="{{$infant['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" min="{{date("Y-m-d", $cookie->arrival_datetime)}}" class="w-100" value="{{$infant['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                 </div>
