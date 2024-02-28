@@ -67,8 +67,7 @@ class SearchController extends Controller
                     'passengers_amount'=>$passengers[0]+$passengers[1]+$passengers[2],
                     'passengers'=>['adults'=>$passengers[0], 'children'=>$passengers[1], 'infants'=>$passengers[2]]
                 ];
-
-
+            //dd($cacheKey_);
             return view('search.index', compact([ 'airports', 'request']));
         }
         return redirect()->route('main.index');

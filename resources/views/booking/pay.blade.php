@@ -75,7 +75,7 @@
                         </div>
                     </div>
 
-                    @php $pay_methods=[1] @endphp
+                    {{--@php $pay_methods=[1] @endphp
                     @foreach($pay_methods as $pay_method)
                         <label class="row card mb-2 mt-4">
                             <span class="card-body">
@@ -89,12 +89,13 @@
                                             <p class="my-auto">{{__('Криптовалютой')}}</p>
                                             <img class="h-15px ms-2" src="https://cryptocloud.plus/_nuxt/img/logo.a6a93c4.svg" alt="crypto-cloud">
                                         </div>
-                                        {{--<p class="opacity-50 fs-14px mb-0">{{__('Оплата возможна только картой выпущенной банком РФ')}}</p>--}}
+                                        <p class="opacity-50 fs-14px mb-0">{{__('Оплата возможна только картой выпущенной банком РФ')}}</p>
                                     </div>
                                 </span>
                             </span>
                         </label>
                     @endforeach
+            --}}
 
                     <div class="row mt-5">
                         <div class="col-6 d-lg-flex">
@@ -108,9 +109,14 @@
                     </div>
 
                     <div class="row mt-5 mb-3">
-                        <button class="d-flex btn btn-primary h-55px">
+                        {{--<button class="d-flex btn btn-primary h-55px">
                             <p class="m-auto">{{__('Оплатить')}}</p>
-                        </button>
+                        </button>--}}
+                        <div class="row my-5 py-4">
+                            <link href="https://api.cryptocloud.plus/static/pay_btn/css/app.css" rel="stylesheet" >
+                            <vue-widget shop_id="{{$API['ShopID']}}" api_key="{{$API['API_Key']}}" background="#fff" color="#000" border_color="#000" logo="color" currency="{{$API['currency']}}" amount="{{$API['price']}}" text_btn="Pay with CryptoCloud" order_id="{{$token}}" ></vue-widget>
+                            <script src="https://api.cryptocloud.plus/static/pay_btn/js/app.js" ></script >
+                        </div>
                     </div>
                 </form>
             </div>

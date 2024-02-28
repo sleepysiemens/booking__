@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index(Order $order)
+    public function index($order)
     {
-        $order_id=$order->id;
-        return view('order.index', compact(['order_id', 'order']));
+        $order=Order::query()->where('number','=',$order)->first();
+        return view('order.index', compact(['order']));
     }
 }

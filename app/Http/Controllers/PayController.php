@@ -44,6 +44,20 @@ class PayController extends Controller
 
         return $code;
     }
+
+    public function generate_number()
+    {
+        $characters = '0123456789';
+        $code = '';
+        $length = 8;
+
+        // Генерируем случайный код
+        for ($i = 0; $i < $length; $i++) {
+            $code .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        return $code;
+    }
     public function confirm()
     {
         if(isset($_COOKIE['order']) and $_COOKIE['order']!=null)
@@ -56,6 +70,13 @@ class PayController extends Controller
             }
 
             $reservation_code=$this->generate_code();
+
+            $number=$this->generate_number();
+            while (Order::query()->where('number','=',$number)->exists())
+            {
+                $number=$this->generate_number();
+            }
+
             $data=
                 [
                     'user_id'=>auth()->user()->id,
@@ -68,7 +89,8 @@ class PayController extends Controller
                     'data'=>$_COOKIE['order'],
                     'is_payed'=>true,
                     'is_confirmed'=>false,
-                    'reservation_code'=>$reservation_code
+                    'reservation_code'=>$reservation_code,
+                    'number'=>$number
                 ];
             $order=Order::create($data);
 

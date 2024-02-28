@@ -48,7 +48,7 @@ class UpdateOrderStatus implements ShouldQueue
             {
                 $chat=TelegraphChat::query()->where('chat_id','=',$user->tg_chat_id)->first();
 
-                $chat->message('Заказ №'.$this->order->id.' подтвержден')->keyboard(
+                $chat->message('Заказ №'.$this->order->number.' подтвержден')->keyboard(
                     Keyboard::make()->buttons(
                         [
                             Button::make('Посмотреть билет')->url(route('ticket.index',$this->order)),
@@ -60,7 +60,7 @@ class UpdateOrderStatus implements ShouldQueue
 
             if($user->email!=null)
             {
-                Mail::to($user->email)->send(new OrderNotifications($this->order->id));
+                Mail::to($user->email)->send(new OrderNotifications($this->order->number));
 
             }
 

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-6">
             <h6 class="my-auto d-flex more-info" @click="ToggleInfo">
-                {{total_passengers}}
+                {{passengers}}
                 <span class="col-1 text-black d-flex filter-btn ms-2" :class="{'rotate-btn': IsInfoActive,}">
                     <i class="fas fa-chevron-down m-auto"></i>
                 </span>
@@ -67,7 +67,7 @@ export default
     {
         return {
             IsInfoActive: false,
-            total_passengers: 0,
+            total_passengers: '',
         };
     },
     computed:
@@ -101,6 +101,23 @@ export default
                     infants.push(i)
                 }
                 return infants;
+            },
+
+            passengers()
+            {
+                if(this.passengers_amount==1)
+                {
+                    return this.passengers_amount + ' пассажир';
+                }
+                if(this.passengers_amount>1 && this.passengers_amount<5)
+                {
+                    return this.passengers_amount + ' пассажира';
+                }
+                if(this.passengers_amount>=5)
+                {
+                    return this.passengers_amount + ' пассажиров';
+                }
+                //return 3;
             }
         },
     methods:
@@ -110,28 +127,8 @@ export default
               this.IsInfoActive=!this.IsInfoActive;
           },
 
-            PassengersAmount()
-            {
 
-                if(this.passengers_amount===1)
-                {
-                    this.total_passengers=this.passengers_amount + ' пассажир';
-                }
-                if(this.passengers_amount>1 && this.passengers_amount<5)
-                {
-                    this.total_passengers=this.passengers_amount + ' пассажира';
-                }
-                if(this.passengers_amount>=5)
-                {
-                    this.total_passengers=this.passengers_amount + ' пассажиров';
-                }
-                console.log('test');
-            }
         },
-    mounted()
-    {
-        this.PassengersAmount()
-    }
 }
 </script>
 

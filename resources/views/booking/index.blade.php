@@ -4,6 +4,11 @@
     <!-- BEGIN section -->
     @include('blocks.welcome')
     <!-- END section -->
+    <div class="bg-light pt-5">
+        <div class="container">
+            <a href="{{url()->previous()}}"><i class="fas fa-arrow-left"></i> {{__('Назад')}}</a>
+        </div>
+    </div>
     <form class="section bg-light pt-4" method="post" action="{{route('pay.post.index')}}">
         @csrf
         <div class="container">
@@ -145,6 +150,18 @@
                                             </a>
                                         </div>
                                     </div>
+                                    <div class="row px-5 py-2">
+                                        <hr class="col my-auto">
+                                        <p class="col-1 my-auto text-center p-0">или</p>
+                                        <hr class="col my-auto">
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <a href="{{route('register')}}" class="btn btn-primary d-flex fw-bold header-link h-55px" target="_blank">
+                                                <p class="text-center m-auto">{{__('Зарегистрироваться')}}</p>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @endif
@@ -215,7 +232,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Дата рождения')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" class="w-100" required value="{{$adult['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" class="w-100" max="{{date("Y-m-d",strtotime("- 12 years"))}}" required value="{{$adult['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
@@ -260,7 +277,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Срок действия')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" class="w-100" value="{{$adult['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" min="{{date("Y-m-d", $transfer->arrival_datetime)}}" class="w-100" value="{{$adult['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -305,7 +322,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Дата рождения')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" class="w-100" required value="{{$child['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" min="{{date("Y-m-d",strtotime("- 12 years"))}}" max="{{date("Y-m-d",strtotime("- 2 years"))}}" class="w-100" required value="{{$child['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
@@ -350,7 +367,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Срок действия')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" class="w-100" value="{{$child['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" min="{{date("Y-m-d", $transfer->arrival_datetime)}}" class="w-100" value="{{$child['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -395,7 +412,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Дата рождения')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" class="w-100" required value="{{$infant['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" max="{{date("Y-m-d")}}" min="{{date("Y-m-d",strtotime("- 2 years"))}}" class="w-100" required value="{{$infant['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                     <div class="col-6 mb-3">
@@ -439,7 +456,7 @@
                                     <div class="col-6 mb-3">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Срок действия')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" class="w-100" value="{{$infant['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" min="{{date("Y-m-d", $transfer->arrival_datetime)}}" class="w-100" value="{{$infant['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
                                         </fieldset>
                                     </div>
                                 </div>

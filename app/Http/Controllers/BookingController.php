@@ -119,7 +119,17 @@ class BookingController extends Controller
                 $cookie=$dataService->update_data(\request()->all());
                 setcookie('order',json_encode($cookie));
 
-            return view('booking.pay', compact(['cookie']));
+            $API=
+                [
+                    'API_Key'=>'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoiTVRRNU1UQT0iLCJ0eXBlIjoicHJvamVjdCIsInYiOiIyMTc2YjlmYzUxZGRjMjVkNzA2OGUzOWVjN2JjOTIxMTlhYjI1YjkwZTRiMDYxNzk4ZGQ0ZWE4ZWNmZmU2N2Y1IiwiZXhwIjo4ODEwNjUwNjIwMn0.AKlgP70-IOhFwPicUeiIH2jHeAwhvNTMrM2Z4LLuNNw',
+                    'ShopID'=>'7QbiBLnzTncsKhJn',
+                    'Secret'=>'B0IrZSr0tYON2FoAvxK2NqLHwv1HqxOBtcxe',
+                    'price'=>$cookie->booking_price_rub,
+                    'currency'=>'RUB',
+                ];
+            $token=request()->_token;
+
+            return view('booking.pay', compact(['cookie', 'API', 'token']));
 
         }
         else

@@ -96,7 +96,7 @@ Route::group(['middleware' => 'locale' ], function (){
     Route::get('/booking', 'App\Http\Controllers\BookingController@get')->name('booking.get');
 
     Route::post('/pay', 'App\Http\Controllers\BookingController@pay_page_post')->name('pay.post.index');
-    Route::get('/pay', 'App\Http\Controllers\BookingController@pay_page_get')->name('pay.get.index');
+    //Route::get('/pay', 'App\Http\Controllers\BookingController@pay_page_get')->name('pay.get.index');
 });
 
 //==========ADMIN==========

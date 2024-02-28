@@ -74,6 +74,12 @@
                             <p class="second">{{__('Отзывы')}}</p>
                         </a>
                     </div>
+                    <div class="header-nav-item">
+                        <a href="{{route('pnrcheck.index')}}" class="header-nav-link header-link">
+                            <p class="first">{{__('Проверить бронь')}}</p>
+                            <p class="second">{{__('Проверить бронь')}}</p>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="header-btn">
@@ -152,6 +158,7 @@
                             <li><a href="{{route('tariff.index')}}">{{__('Тариф')}}</a></li>
                             <li><a href="{{route('blog.index')}}">{{__('Блог')}}</a></li>
                             <li><a href="{{route('reviews.index')}}">{{__('Отзывы')}}</a></li>
+                            <li><a href="{{route('pnrcheck.index')}}">{{__('Проверить бронь')}}</a></li>
                         </ul>
                     </div>
                 </div>

@@ -9,8 +9,9 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 class TicketController extends Controller
 {
-    public function index(Order $order)
+    public function index($order)
     {
+        $order=Order::query()->where('number','=',$order)->first();
         if($order->created_at->addDays(7)->isPast())
             return redirect()->route('main.index');
         $airports = Airports::all();
@@ -43,11 +44,13 @@ class TicketController extends Controller
         $dompdf->render();
 
         // Возвращаем PDF как ответ
-        return $dompdf->stream('filename.pdf', array('Attachment' => false));
+        return $dompdf->stream('Бронирование билета #'.$order->number.'.pdf', array('Attachment' => false));
     }
 
-    public function download(Order $order)
+    public function download($order)
     {
+        $order=Order::query()->where('number','=',$order)->first();
+
         if($order->created_at->addDays(7)->isPast())
             return redirect()->route('main.index');
 
@@ -81,6 +84,6 @@ class TicketController extends Controller
         $dompdf->render();
 
         // Возвращаем PDF как ответ
-        return $dompdf->stream('filename.pdf', array('Attachment' => true));
+        return $dompdf->stream('Бронирование билета #'.$order->number.'.pdf', array('Attachment' => true));
     }
 }

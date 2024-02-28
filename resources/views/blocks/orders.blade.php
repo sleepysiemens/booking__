@@ -10,7 +10,7 @@
                 <span class="card-header bg-white mx-3">
                     <div class="row py-2">
                         <div class="col d-flex">
-                            <h5 class="text-primary my-auto">{{__('Заказ №')}} {{$order->id}}</h5>
+                            <h5 class="text-primary my-auto">{{__('Заказ №')}} {{$order->number}}</h5>
                             @if($order->is_confirmed)
                                 <p class="my-auto ms-2 text-green">{{__('Подтвержден')}}</p>
                             @else
@@ -69,7 +69,7 @@
                             <p class="fs-12px m-0 opacity-50 text-center">{{__('Стоимость:')}}</p>
                             <h3 class="text-center mt-3">{{$order->price}} ₽</h3>
                             @if($order->created_at->addDays(7)->isFuture())
-                            <p class="text-center mt-4"><a href="{{route('order.index', $order->id)}}">{{__('Посмотреть')}}</a></p>
+                            <p class="text-center mt-4"><a href="{{route('order.index', $order->number)}}">{{__('Посмотреть')}}</a></p>
                             @else
                                 <p class="text-center mt-4 text-warning">Срок действия истек</p>
                             @endif
