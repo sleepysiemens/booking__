@@ -35,4 +35,13 @@
 @endsection
 
 @section('scripts')
+    @if(!$order->is_confirmed)
+        <script>
+            console.log('test');
+            setTimeout(function(){
+                console.log('hello');
+                location.reload();
+            }, 890000);
+        </script>
+    @endif
 @endsection

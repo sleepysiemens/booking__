@@ -145,7 +145,7 @@
                                             </a>
                                         </div>
                                         <div class="col-6">
-                                            <a href="https://t.me/trip_avia_1_bot" class="btn btn-primary d-flex fw-bold header-link h-55px" target="_blank" style="background-color: #2AABEE; border-color: #2AABEE">
+                                            <a href="https://t.me/trip_avia_1_bot?start=start" class="btn btn-primary d-flex fw-bold header-link h-55px" target="_blank" style="background-color: #2AABEE; border-color: #2AABEE">
                                                 <p class="text-center m-auto">{{__('Войти через Telegram')}} <i class="fab fa-telegram-plane"></i></p>
                                             </a>
                                         </div>
