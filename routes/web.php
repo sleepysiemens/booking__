@@ -20,7 +20,9 @@ Route::group(['middleware' => 'locale' ], function (){
     Route::get('/', 'App\Http\Controllers\MainController@index')->name('main.index');
     Route::get('/ref/{ref_link}', 'App\Http\Controllers\MainController@ref')->name('main.ref');
     Route::get('/tariff', 'App\Http\Controllers\MainController@tariff')->name('tariff.index');
+    Route::get('/example', 'App\Http\Controllers\ExampleController@index')->name('example.index');
     Route::get('/help', 'App\Http\Controllers\MainController@help')->name('help.index');
+    Route::get('/policy', 'App\Http\Controllers\PolicyController@index')->name('policy.index');
 
 
     //==========SEARCH==========

@@ -70,7 +70,8 @@ export default {
             });
 
             // Ограничиваем результаты до первых 10 элементов
-            return filteredData.slice(0, 10);
+            //return filteredData.slice(0, 10);
+            return filteredData;
         },
         selectItem(itemName) {
             this.selectedResult = itemName.name;

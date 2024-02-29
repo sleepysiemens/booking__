@@ -21,6 +21,8 @@ class ConfirmTicketController extends Controller
             ->where('users.surname','=',\request()->surname)
             ->where('orders.reservation_code','=',\request()->pnr)->exists();
 
+        $order=[];
+        $data=[];
         if($check)
         {
             $order=Order::query()

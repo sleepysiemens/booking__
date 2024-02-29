@@ -31,6 +31,10 @@ class AirportService
         // Проверяем, есть ли кэш для этого массива
         return Cache::remember('airports_array', now()->addYear(), function () {
             // Если кэша нет, создаем массив и кэшируем его
+            foreach (Airports::all() as $airport)
+            {
+                $airport->delete();
+            }
             return $this->generateAllAirports();
         });
     }
@@ -433,8 +437,7 @@ class AirportService
                             'city_name_en'=>$city['name_translations']['en'],
                             'name'=>$city_name,
                             'iata_type'=>'city',
-                            'code'=>$this->translit($country['name_translations']['en'], 'ru').'/'.$country['name_translations']['en'].'/'.$country_name.'/'.$this->translit($country_name, 'en').'/'.$country['code'].'/'.$this->translit($country['code'], 'en').'/'.
-                                $this->translit($city['name_translations']['en'], 'ru').'/'.$city['name_translations']['en'].'/'.$city_name.'/'.$this->translit($city_name, 'en').'/'.$city['code'],'/'.$this->translit($city['code'], 'en').'/'.
+                            'code'=>$this->translit($country['name_translations']['en'], 'ru').'/'.$country['name_translations']['en'].'/'.$country_name.'/'.$this->translit($country_name, 'en').'/'.$country['code'].'/'.$this->translit($country['code'], 'en').'/'. $this->translit($city['name_translations']['en'], 'ru').'/'.$city['name_translations']['en'].'/'.$city_name.'/'.$this->translit($city_name, 'en').'/'.$city['code'].'/'.$this->translit($city['code'], 'en'),
                             'city_code'=>$city['code'],
                             'airport_code'=>$city['code'],
                         ];
@@ -454,8 +457,7 @@ class AirportService
                                     'name'=>$airport_name,
                                     'airport_code'=>$airport['code'],
                                     'iata_type'=>'airport',
-                                    'code'=>$country['name_translations']['en'].'/'.$this->translit($country['name_translations']['en'],'ru').'/'.$country_name.'/'.$this->translit($country_name, 'en').'/'.$country['code'].'/'.$this->translit($country['code'],'en').'/'.
-                                        $city['name_translations']['en'].'/'.$this->translit($city['name_translations']['en'], 'ru').'/'.$city_name.'/'.$this->translit($city_name,'en').'/'.$city['code'].'/'.$this->translit($city['code'],'en').'/'.$airport_name.'/'.$this->translit($airport_name,'en').'/'.$airport['name_translations']['en'].'/'.$this->translit($airport['name_translations']['en'], 'ru').'/'.$airport['code'].'/'.$this->translit($airport['code'],'en'),
+                                    'code'=>$country['name_translations']['en'].'/'.$this->translit($country['name_translations']['en'],'ru').'/'.$country_name.'/'.$this->translit($country_name, 'en').'/'.$country['code'].'/'.$this->translit($country['code'],'en').'/'. $city['name_translations']['en'].'/'.$this->translit($city['name_translations']['en'], 'ru').'/'.$city_name.'/'.$this->translit($city_name,'en').'/'.$city['code'].'/'.$this->translit($city['code'],'en').'/'.$airport_name.'/'.$this->translit($airport_name,'en').'/'.$airport['name_translations']['en'].'/'.$this->translit($airport['name_translations']['en'], 'ru').'/'.$airport['code'].'/'.$this->translit($airport['code'],'en'),
                                 ];
 
                             $result[]= $data;

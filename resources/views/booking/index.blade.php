@@ -29,10 +29,9 @@
                                     </div>
                                     <div class="col-12 col-lg-6">
                                         <div class="d-flex justify-content-start justify-content-lg-end">
-                                            <div class="rounded-circle overflow-hidden bg-primary w-25px h-25px my-auto">
-                                                <img class="w-100 h-100" src="https://static.onetwotrip.com/images/airlines/svg/{{$cookie->transfers[0]->airline_short}}.svg" alt="avia">
-                                            </div>
-                                            <p class="my-auto ms-2">{{$cookie->airline}}</p>
+                                            @foreach($cookie->transfers as $transfers)
+                                                <img class="h-25px m-0" src="https://pics.avs.io/200/50/{{$transfers->airline_short}}.png" alt="avia">
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -72,6 +71,18 @@
                         </div>
                     @else
                         <div class="card border-0 shadow mb-3">
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-start justify-content-lg-end">
+                                        @foreach($cookie->transfers as $transfers)
+                                            @if(!isset($airlines_) or $airlines_!=$transfers->airline_short)
+                                                <img class="h-25px m-0" src="https://pics.avs.io/200/50/{{$transfers->airline_short}}.png" alt="avia">
+                                            @endif
+                                            @php $airlines_=$transfers->airline_short @endphp
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 @foreach($cookie->transfers as $transfer)
 

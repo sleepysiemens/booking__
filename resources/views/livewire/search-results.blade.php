@@ -1,5 +1,5 @@
 
-    <div class="mb-5 row row-cols-lg-12 w-100 mx-auto justify-content-center">
+    <div class="mb-5 row row-cols-lg-12 w-100 mx-auto justify-content-center" id="results">
         @if($results!=null)
             @include('blocks.search.filter')
         @endif
@@ -21,5 +21,4 @@
             @endif
         </div>
     </div>
-
 

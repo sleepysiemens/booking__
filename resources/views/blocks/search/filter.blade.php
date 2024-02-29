@@ -37,10 +37,8 @@
                     <div class="row pt-3">
                         <input wire:model.live="airlines" class="col-1 h-20px my-auto" type="checkbox" value="{{$airline['airline']}}" id="company-{{$ii}}">
                         <label class="col-auto d-flex" for="company-{{$ii}}">
-                            <div class="rounded-circle overflow-hidden bg-primary @if($airline['airline_short']=='S7') bg-lime @endif w-25px h-25px my-auto d-flex">
-                                <img class="w-75 h-75 m-auto" src="https://static.onetwotrip.com/images/airlines/svg/{{$airline['airline_short']}}.svg" alt="avia">
-                            </div>
-                            <p class="m-auto ms-2">{{$airline['airline']}}</p>
+                            <img class="h-25px m-0" src="https://pics.avs.io/200/50/{{$airline['airline_short']}}.png" alt="avia">
+
                         </label>
                     </div>
                 @endforeach

@@ -80,16 +80,16 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <button class="d-flex btn btn-primary w-100 h-50px">
+                                    <a href="{{route('main.index')}}" class="d-flex btn btn-primary w-100 h-50px">
                                         <p class="m-auto fs-12px d-block d-sm-none">{{__('Забронировать')}}</p>
                                         <p class="m-auto fs-16px d-none d-lg-block">{{__('Забронировать')}}</p>
-                                    </button>
+                                    </a>
                                 </div>
                                 <div class="col">
-                                    <button class="d-flex btn btn-white border-2 w-100 h-50px">
+                                    <a href="{{route('example.index')}}" target="_blank" class="d-flex btn btn-white border-2 w-100 h-50px">
                                         <p class="m-auto fs-12px d-block d-sm-none">{{__('Пример брони (PDF)')}}</p>
                                         <p class="m-auto fs-16px d-none d-lg-block">{{__('Пример брони (PDF)')}}</p>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
 

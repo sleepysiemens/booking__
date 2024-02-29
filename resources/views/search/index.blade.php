@@ -32,7 +32,7 @@
                         <!-- END hero-title-desc -->
 
                         <!-- BEGIN row -->
-                        @include('blocks.search')
+                            @include('blocks.search')
                         <!-- END row -->
                     </div>
                     <!-- END col-8 -->

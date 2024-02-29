@@ -19,7 +19,7 @@ class MainController extends Controller
 
         $posts=BlogPost::query()->limit(4)->orderBy('created_at')->get();
         $reviews=Review::query()->where('is_published','=',1)->limit(3)->orderBy('created_at')->get();
-
+        //dd(collect($airports)->where('city_name','=','Куала-Лумпур'));
         return view('main.index', compact('airports', 'posts', 'reviews'));
     }
 

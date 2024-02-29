@@ -1,4 +1,5 @@
-<div class="w-100 d-flex" style="height: 50vh;">
+<div class="w-100 d-flex position-relative" style="height: 50vh;">
+    <div class="position-absolute w-100 h-100 z-3 bottom-100"></div>
     <div class="m-auto container rounded-2 bg-white shadow">
         <div class="row mt-4">
             <h2 class="text-center">{{__('Загружаем билеты')}}</h2>

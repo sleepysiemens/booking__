@@ -4,10 +4,7 @@
                 <div class="col-lg">
                     {{--HEADER--}}
                     <div class="d-flex">
-                        <div class="rounded-circle overflow-hidden bg-primary @if($result['airline_short']=='S7') bg-lime @endif w-25px h-25px my-auto d-flex">
-                            <img class="w-75 h-75 m-auto" src="https://static.onetwotrip.com/images/airlines/svg/{{$result['airline_short']}}.svg" alt="avia">
-                        </div>
-                        <p class="m-auto ms-2">{{$result['airline']}}</p>
+                        <img class="h-25px m-0" src="https://pics.avs.io/200/50/{{$result['airline_short']}}.png" alt="avia">
                     </div>
                     {{--/HEADER--}}
                     {{--BODY--}}

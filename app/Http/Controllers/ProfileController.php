@@ -54,11 +54,19 @@ class ProfileController extends Controller
 
     public function add_passenger()
     {
-        $request=\request()->all();
-        unset($request['_token']);
-        unset($request['_method']);
-        unset($request['1']);
-        $request['user_id']=auth()->user()->id;
+        $request=
+            [
+                'user_id'=>auth()->user()->id,
+                'type'=>request()->type,
+                'surname'=>request()->surname,
+                'date_of_birth'=>request()->date_of_birth,
+                'sex'=>request()->sex,
+                'citizenship'=>request()->citizenship,
+                'doc_type'=>request()->doc_type,
+                'serial_number'=>request()->serial_number,
+                'validity'=>request()->validity,
+            ];
+        //dd($request);
         Passenger::create($request);
         return redirect()->route('profile.passengers');
     }
