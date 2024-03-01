@@ -59,6 +59,7 @@ class ProfileController extends Controller
                 'user_id'=>auth()->user()->id,
                 'type'=>request()->type,
                 'surname'=>request()->surname,
+                'name'=>request()->name,
                 'date_of_birth'=>request()->date_of_birth,
                 'sex'=>request()->sex,
                 'citizenship'=>request()->citizenship,
