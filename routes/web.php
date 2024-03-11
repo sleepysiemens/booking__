@@ -109,6 +109,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], functio
     //==========MAIN==========
     Route::get('/', 'App\Http\Controllers\Admin\MainController@index')->name('admin.index');
     Route::patch('/save_price', 'App\Http\Controllers\Admin\MainController@save_price')->name('admin.save_price');
+    Route::post('/save_ticket', 'App\Http\Controllers\Admin\MainController@save_ticket')->name('admin.save_ticket');
 
     //==========REVIEWS==========
     Route::group(['prefix' => 'reviews',], function (){
