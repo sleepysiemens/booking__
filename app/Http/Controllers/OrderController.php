@@ -10,6 +10,7 @@ class OrderController extends Controller
     public function index($order)
     {
         $order=Order::query()->where('number','=',$order)->first();
-        return view('order.index', compact(['order']));
+        $users=json_decode($order->data)->user_data->user;
+        return view('order.index', compact(['order', 'users']));
     }
 }

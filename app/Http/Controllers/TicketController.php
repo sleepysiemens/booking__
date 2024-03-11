@@ -9,8 +9,18 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 class TicketController extends Controller
 {
-    public function index($order)
+    public function index($params)
     {
+        $params=explode('-',$params);
+        $order=$params[0];
+
+        $passenger=null;
+        if(isset($params[1]))
+            $passenger=$params[1];
+
+        //dd($passenger);
+
+
         $order=Order::query()->where('number','=',$order)->first();
         if($order->created_at->addDays(7)->isPast())
             return redirect()->route('main.index');
@@ -34,6 +44,7 @@ class TicketController extends Controller
             'cookie'=>$cookie,
             'order'=>$order,
             'pic'=>$pic,
+            'passenger'=>$passenger,
         ];
 
         $dompdf = new Dompdf($options);
@@ -47,13 +58,18 @@ class TicketController extends Controller
         return $dompdf->stream('Бронирование билета #'.$order->number.'.pdf', array('Attachment' => false));
     }
 
-    public function download($order)
+    public function download($params)
     {
-        $order=Order::query()->where('number','=',$order)->first();
+        $params=explode('-',$params);
+        $order=$params[0];
 
+        $passenger=null;
+        if(isset($params[1]))
+            $passenger=$params[1];
+
+        $order=Order::query()->where('number','=',$order)->first();
         if($order->created_at->addDays(7)->isPast())
             return redirect()->route('main.index');
-
         $airports = Airports::all();
 
         $cookie=json_decode($order->data);
@@ -74,6 +90,7 @@ class TicketController extends Controller
             'cookie'=>$cookie,
             'order'=>$order,
             'pic'=>$pic,
+            'passenger'=>$passenger,
         ];
 
         $dompdf = new Dompdf($options);

@@ -79,6 +79,8 @@ Route::group(['middleware' => 'locale' ], function (){
         //==========TICKET==========
         Route::get('/ticket/{order}', 'App\Http\Controllers\TicketController@index')->name('ticket.index');
         Route::get('/ticket/{order}/download', 'App\Http\Controllers\TicketController@download')->name('ticket.download');
+        Route::get('/ticket/{order}-{user}', 'App\Http\Controllers\TicketController@index')->name('ticket.user.index');
+        Route::get('/ticket/{order}-{user}/download', 'App\Http\Controllers\TicketController@download')->name('ticket.user.download');
     });
 
     Route::get('/locale/{lang}', 'App\Http\Controllers\ChangeLocaleController@change_locale')->name('locale.change');

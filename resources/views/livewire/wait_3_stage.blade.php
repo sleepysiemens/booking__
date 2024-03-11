@@ -46,19 +46,40 @@
         <div class="col-12 p-0 bg-black m-auto opacity-10" style="height: 2px"></div>
     </div>
 
-    <div class="row mt-4 mb-3 h-50px px-20px">
-            <div class="col">
+    <div class="row mt-4 mb-3 h-lg-50px px-20px">
+            <div class="col-lg-6 col-12">
                 <a href="{{route('ticket.download', $order->number)}}" class="d-flex btn btn-primary w-100 h-50px">
-                    <p class="m-auto fs-12px d-block d-sm-none">Скачать билет</p>
-                    <p class="m-auto fs-16px d-none d-lg-block">Скачать билет</p>
+                    <p class="m-auto fs-12px d-block d-sm-none">Скачать общий билет</p>
+                    <p class="m-auto fs-16px d-none d-lg-block">Скачать общий билет</p>
                 </a>
             </div>
-            <div class="col">
+            <div class="col-lg-6 col-12 mt-4 mt-lg-0">
                 <a href="{{route('ticket.index', $order->number)}}" class="d-flex btn btn-white border-2 w-100 h-50px" target="_blank">
-                    <p class="m-auto fs-12px d-block d-sm-none">Посмотреть билет</p>
-                    <p class="m-auto fs-16px d-none d-lg-block">Посмотреть билет</p>
+                    <p class="m-auto fs-12px d-block d-sm-none">Посмотреть общий билет</p>
+                    <p class="m-auto fs-16px d-none d-lg-block">Посмотреть общий билет</p>
                 </a>
             </div>
+    </div>
+    <div class="row px-20px my-4">
+        <hr class="col my-auto"></hr>
+        <p class="col-auto my-auto">{{__('или')}}</p>
+        <hr class="col my-auto"></hr>
+    </div>
+    <div class="row mt-4 mb-3 px-20px">
+        @foreach($users as $user)
+            <div class="col-lg-6 col-12 mt-4">
+                <a href="{{route('ticket.user.download', [$order->number, $user->surname])}}" class="d-flex btn btn-primary w-100 h-50px">
+                    <p class="m-auto fs-12px d-block d-sm-none">Скачать билет {{$user->surname}}</p>
+                    <p class="m-auto fs-16px d-none d-lg-block">Скачать билет {{$user->surname}}</p>
+                </a>
+            </div>
+            <div class="col-lg-6 col-12 mt-4">
+                <a href="{{route('ticket.user.index', [$order->number, $user->surname])}}" class="d-flex btn btn-white border-2 w-100 h-50px" target="_blank">
+                    <p class="m-auto fs-12px d-block d-sm-none">Посмотреть билет {{$user->surname}}</p>
+                    <p class="m-auto fs-16px d-none d-lg-block">Посмотреть билет {{$user->surname}}</p>
+                </a>
+            </div>
+        @endforeach
     </div>
 
 

@@ -62,6 +62,7 @@
                 $passengers_max=explode(' ',$cookie->passengers_amount);
             @endphp
             @foreach($cookie->user_data->user as $user)
+                @if($passenger==null or $passenger==$user->surname)
                 @php $passengers_cnt++; @endphp
 
                 <tr>
@@ -95,6 +96,7 @@
                     <td colspan="3" style="border-bottom: 1px solid rgba(0,0,0,.15);">
                     </td>
                 </tr>
+                @endif
             @endforeach
         </table>
     </div>
