@@ -1,5 +1,5 @@
 {{--FILTER--}}
-<div class="col-lg-3 col ps-lg-0 d-lg-block mb-3" id="filter-div">
+<div class="col-lg-3 col ps-lg-0 d-lg-block mb-3 mt-4 mt-lg-0"  style="display: none" id="filter-wrapper">
     {{--Filter card--}}
     <div class="card border-0 shadow mb-3">
         <div class="card-body">
@@ -83,9 +83,11 @@
 {{--/FILTER--}}
 <div class="section bg-light py-3 d-lg-none">
     <div class="container">
-        <button class="btn border-primary border-2 bg-primary-100 text-primary w-100 d-flex shadow h-50px justify-content-center" id="filter-btn">
+        <input type="button" class="d-none">
+        <button class="btn border-primary border-2 bg-primary-100 text-primary w-100 d-flex shadow h-50px justify-content-center" onclick="show_filter()">
             <i class="fas fa-filter my-auto"></i>
             <p class="my-auto ms-2">{{__('Фильтр')}}</p>
         </button>
     </div>
 </div>
+

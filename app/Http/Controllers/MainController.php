@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Airports;
 use App\Models\PartnershipApplication;
 use App\Services\AirportService;
 use App\Models\BlogPost;
@@ -16,10 +17,10 @@ class MainController extends Controller
     {
         $airportService = new AirportService();
         $airports = $airportService->getAllAirports();
+        //$airports=Airports::query()->orderBy('city_name')->get();
 
         $posts=BlogPost::query()->limit(4)->orderBy('created_at')->get();
         $reviews=Review::query()->where('is_published','=',1)->limit(3)->orderBy('created_at')->get();
-        //dd(collect($airports)->where('city_name','=','Куала-Лумпур'));
         return view('main.index', compact('airports', 'posts', 'reviews'));
     }
 

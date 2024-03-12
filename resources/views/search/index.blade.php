@@ -85,6 +85,11 @@
                 $('#details-btn-marker-' + id).removeClass('rotate-btn');
             }
         }
+
+        function show_filter()
+        {
+            $('#filter-wrapper').slideToggle( "slow", function() {});
+        }
     </script>
 @endsection
 

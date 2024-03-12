@@ -429,7 +429,7 @@ class AirportService
                 {
                     $city_name=$this->get_ru_name($city);
 
-                    $result[]=
+                    $data=
                         [
                             'country_name'=>$country_name,
                             'country_name_en'=>$country['name_translations']['en'],
@@ -437,10 +437,27 @@ class AirportService
                             'city_name_en'=>$city['name_translations']['en'],
                             'name'=>$city_name,
                             'iata_type'=>'city',
-                            'code'=>$this->translit($country['name_translations']['en'], 'ru').'/'.$country['name_translations']['en'].'/'.$country_name.'/'.$this->translit($country_name, 'en').'/'.$country['code'].'/'.$this->translit($country['code'], 'en').'/'. $this->translit($city['name_translations']['en'], 'ru').'/'.$city['name_translations']['en'].'/'.$city_name.'/'.$this->translit($city_name, 'en').'/'.$city['code'].'/'.$this->translit($city['code'], 'en'),
+                            'code'=>
+                                $city['code'].'/'.
+                                //$this->translit($city['code'], 'en').'/'.
+
+                                //$this->translit($country['name_translations']['en'], 'ru').'/'.
+                                $country['name_translations']['en'].'/'.
+                                $country_name.'/'.
+                                //$this->translit($country_name, 'en').'/'.
+                                $country['code'].'/'.
+                                //$this->translit($country['code'], 'en').'/'.
+                                //$this->translit($city['name_translations']['en'], 'ru').'/'.
+                                $city['name_translations']['en'].'/'.
+                                $city_name.'/'//.
+                                //$this->translit($city_name, 'en')
+                                ,
                             'city_code'=>$city['code'],
                             'airport_code'=>$city['code'],
                         ];
+
+                    $result[]= $data;
+                    Airports::create($data);
 
                     foreach ($airportData as $airport)
                     {
@@ -457,7 +474,27 @@ class AirportService
                                     'name'=>$airport_name,
                                     'airport_code'=>$airport['code'],
                                     'iata_type'=>'airport',
-                                    'code'=>$country['name_translations']['en'].'/'.$this->translit($country['name_translations']['en'],'ru').'/'.$country_name.'/'.$this->translit($country_name, 'en').'/'.$country['code'].'/'.$this->translit($country['code'],'en').'/'. $city['name_translations']['en'].'/'.$this->translit($city['name_translations']['en'], 'ru').'/'.$city_name.'/'.$this->translit($city_name,'en').'/'.$city['code'].'/'.$this->translit($city['code'],'en').'/'.$airport_name.'/'.$this->translit($airport_name,'en').'/'.$airport['name_translations']['en'].'/'.$this->translit($airport['name_translations']['en'], 'ru').'/'.$airport['code'].'/'.$this->translit($airport['code'],'en'),
+                                    'code'=>
+                                        $city['code'].'/'.
+                                        //$this->translit($city['code'],'en').'/'.
+
+                                        $airport['code'].'/'.
+                                        //$this->translit($airport['code'],'en').'/'.
+
+                                        $country['name_translations']['en'].'/'.
+                                        //$this->translit($country['name_translations']['en'],'ru').'/'.
+                                        $country_name.'/'.
+                                        //$this->translit($country_name, 'en').'/'.
+                                        $country['code'].'/'.
+                                        //$this->translit($country['code'],'en').'/'.
+                                        //$city['name_translations']['en'].'/'.
+                                        //$this->translit($city['name_translations']['en'], 'ru').'/'.
+                                        $city_name.'/'.
+                                        //$this->translit($city_name,'en').'/'.
+                                        $airport_name.'/'.
+                                        //$this->translit($airport_name,'en').'/'.
+                                        $airport['name_translations']['en'].'/'//.
+                                        //$this->translit($airport['name_translations']['en'], 'ru'),
                                 ];
 
                             $result[]= $data;
@@ -467,7 +504,6 @@ class AirportService
                 }
             }
         }
-
 
         return $result;
     }

@@ -248,3 +248,21 @@ input:-webkit-autofill {
 .table-row:hover{
     background-color: rgba(194,194,195, .6)!important;
 }
+
+
+.loading-page
+{
+    opacity: .5;
+    animation-name: blinking;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+}
+
+@keyframes blinking
+{
+    0% {opacity: .2}
+    50% {opacity: .7}
+    100% {opacity: .2}
+}
