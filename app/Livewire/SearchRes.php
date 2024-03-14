@@ -134,6 +134,7 @@ class SearchRes extends Component
             $airlines_filter=[];
             $transfers_filters=[];
         }
+        $this->dispatch('LoadingComplete');
         return view('livewire.search-results', compact(['results', 'request', 'airlines_filter', 'transfers_filters', 'airports_']));
     }
 

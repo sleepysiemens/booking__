@@ -48,6 +48,7 @@
     </div>
 
     <!-- BEGIN section -->
+    <livewire:LoadingBar/>
     <div class="section pt-0 bg-light min-vh-100 pt-lg-5">
         <!-- BEGIN container -->
         <div class="container px-0">
