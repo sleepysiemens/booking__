@@ -37,5 +37,6 @@ class TestController extends Controller
                 ],
             ];
         $tickets=$this->TravelPayoutsService->getAvailableTickets($request_data);
+        dd($tickets);
     }
 }
