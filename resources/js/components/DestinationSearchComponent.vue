@@ -1,5 +1,5 @@
 <template>
-    <fieldset class="first_input brdr-b-r p-0 col-1 h-60px m-0 col-lg col-6 position-relative d-flex">
+    <fieldset class="second_input brdr-b-r p-0 col-1 h-60px m-0 col-lg col-6 position-relative d-flex">
         <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Куда</legend>
         <input class="bg-transparent border-0 ms-3 p-0 h-100" v-model="searchQuery" @input="search" @click="showCard" @blur="hideCard" type="text" name="destination" autocomplete="off" required/>
         <input type="hidden" name="destination_" v-model="searchQuery_" required>
@@ -70,7 +70,7 @@ export default {
             });
 
             // Ограничиваем результаты до первых 10 элементов
-            //return filteredData.slice(0, 10);
+            return filteredData.slice(0, 10);
             return filteredData;
         },
         selectItem(itemName) {
