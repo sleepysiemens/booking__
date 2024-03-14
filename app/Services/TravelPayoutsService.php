@@ -8,7 +8,7 @@ class TravelPayoutsService
 {
     protected $apiKey;
 
-    public function __construct($apiKey)
+    public function __construct()
     {
         $this->apiKey = '048a44328dd6efc65b762b8e8c20e30a';
     }
