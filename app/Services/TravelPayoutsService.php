@@ -25,6 +25,7 @@ class TravelPayoutsService
         $requestData['signature'] = $this->generateSignature($requestData);
 
         // Отправьте POST-запрос к API Travelpayouts
+        $requestData=json_encode($requestData);
         $response = $client->post('https://api.travelpayouts.com/v1/flight_search', [
             'json' => $requestData,
             'headers' => [

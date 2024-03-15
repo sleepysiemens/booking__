@@ -2,41 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\OrderNotifications;
 use App\Services\TravelPayoutsService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use GuzzleHttp\Client;
+
 
 class TestController extends Controller
 {
-    public $TravelPayoutsService;
-    public function __construct(TravelPayoutsService $TravelPayoutsService)
-    {
-        $this->TravelPayoutsService=$TravelPayoutsService;
-    }
     public function index()
     {
-        $request_data=
-            [
-              'marker'=>'36076',
-              'host'=>'https://tripavia.com/',
-              'user_ip'=>$_SERVER['REMOTE_ADDR'],
-              'locale'=>'ru',
-              'trip_class'=>'Y',
-              'passengers'=>
-                [
-                    'adults'=>1,
-                    'children'=>0,
-                    'infants'=>0,
-                ],
-                'segment'=>
-                [
-                    'origin'=>'MOW',
-                    'destination'=>'OVB',
-                    'date'=>'2024-04-02',
-                ],
-            ];
-        $tickets=$this->TravelPayoutsService->getAvailableTickets($request_data);
+        $client = new Client();
+
+        $apiKey = '048a44328dd6efc65b762b8e8c20e30a';
+        $date = '2024-04-02'; // Укажите нужную дату
+        $originCity = 'BKK'; // Код города отправления
+        $destinationCity = 'OVB'; // Код города назначения
+        $currency = 'rub'; // Укажите требуемую валюту
+        $adults = 2; // Количество взрослых пассажиров
+        $children = 0; // Количество детей
+        $infants = 0; // Количество младенцев
+
+        dump($date.'/'.$originCity.'/'.$destinationCity.'/'.$currency.'/'.$adults.'/'.$children.'/'.$infants);
+
+        $method='/v3/get_special_offers';
+
+        $response = $client->get("http://api.travelpayouts.com/{$method}?currency={$currency}&origin={$originCity}&destination={$destinationCity}&depart_date={$date}&adults={$adults}&children={$children}&infants={$infants}&token={$apiKey}");
+        //$response = $client->get("http://api.travelpayouts.com/{$method}");
+
+        $tickets = json_decode($response->getBody()->getContents(), true);
         dd($tickets);
     }
 }

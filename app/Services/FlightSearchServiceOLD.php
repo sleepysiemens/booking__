@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 use Symfony\Component\Panther\Client;
 use App\Models\Airlines;
 
-class FlightSearchService
+class FlightSearchServiceOLD
 {
     public function FilterAirlines($tickets)
     {
@@ -71,10 +71,10 @@ class FlightSearchService
 
     public function parseFlightInfo($origin, $destination, $depart_date, $return_date, $adults, $children, $infants)
     {
-         $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
+        $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
             'chromedriver_arguments' => ['--headless=new', '--disable-gpu', '--no-sandbox'],
         ], 'http://localhost');
-         //$client = Client::createChromeClient();
+        //$client = Client::createChromeClient();
 
         $depart_date=date('dm',strtotime($depart_date));
         if($return_date!='не установлено')
@@ -90,11 +90,14 @@ class FlightSearchService
         }
         else
         {
-            $client->request('GET', 'https://www.onetwotrip.com/_avia-search-proxy/search/v3?route=' . $depart_date . $origin . $destination . $return_date . '&ad=' . $adults . '&cn=' . $children . '&in=' . $infants . '&showDeeplink=false&cs=E&source=google_adwords&priceIncludeBaggage=false&noClearNoBags=true&noMix=true&srcmarker=b2b_p1_b2b-generic_wld_s_kkwd-839752446941_c_20378146076_154201628133_676270550064_1010561&cryptoTripsVersion=61&doNotMap=true');
+            $crawler = $client->request('GET', 'https://www.onetwotrip.com/_avia-search-proxy/search/v3?route=' . $depart_date . $origin . $destination . $return_date . '&ad=' . $adults . '&cn=' . $children . '&in=' . $infants . '&showDeeplink=false&cs=E&source=google_adwords&priceIncludeBaggage=false&noClearNoBags=true&noMix=true&srcmarker=b2b_p1_b2b-generic_wld_s_kkwd-839752446941_c_20378146076_154201628133_676270550064_1010561&cryptoTripsVersion=61&doNotMap=true');
 
-            $json = $client->getCrawler()->getText();
+            $json = $crawler->filter('pre')->first()
+                ->each(function ($child) {
+                    return $child->text('', true);
+                });
 
-            $json = json_decode($json);
+            $json = json_decode($json[0]);
             $tickets = [];
 
             $transportationVariants = collect($json->transportationVariants);
