@@ -73,6 +73,12 @@ class FlightSearchService
 
     public function parseFlightInfo($origin, $destination, $depart_date, $return_date, $adults, $children, $infants)
     {
+        $response = Http::asForm()->post('https://test.api.amadeus.com/v1/security/oauth2/token', [
+            'grant_type' => 'client_credentials',
+            'client_id' => 'AIc7WGpeIqlRn46uS4jub25F2CjQEn3F',
+            'client_secret' => 'm1HYsJade6hkAWoJ',
+        ]);
+
         // Задаем URL и параметры запроса
         $url = 'https://test.api.amadeus.com/v2/shopping/flight-offers';
         $params = [
@@ -96,7 +102,7 @@ class FlightSearchService
         // Формируем заголовки
         $headers = [
             #'accept: application/vnd.amadeus+json',
-            'Authorization: Bearer YNrlHJr2A4YIEz22CmwEf5sqsUG3'
+            'Authorization: Bearer '.$response->json()['access_token']
         ];
 
         // Инициализируем cURL-сессию
@@ -121,9 +127,11 @@ class FlightSearchService
         // Преобразуем JSON-ответ в массив
         $tickets = json_decode($response);
 
-        // Выводим результат
-        //dump($tickets->data);
-        //($this->standart_tickets($tickets->data));
+        //проверяем действие токена
+        if(isset($tickets->errors))
+        {
+            dd($tickets->errors);
+        }
 
         return $this->standart_tickets($tickets->data);
     }

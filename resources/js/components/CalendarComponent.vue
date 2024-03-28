@@ -2,13 +2,13 @@
     <div class="m-0 col-auto row position-relative p-0">
         <fieldset class="first_input brdr-b-l p-0 col-1 h-60px m-0 col-lg col-6 position-relative d-flex">
             <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Дата туда</legend>
-            <input class="bg-transparent border-0 ms-3 p-0 h-100 input" style="width: 95%;" name="departDate" type="text" v-model="startDate" @focus="toggleStartDate" autocomplete="off">
+            <input class="bg-transparent border-0 ms-3 p-0 h-100 input" style="width: 95%;" name="departDate" type="text" v-model="startDate" @focus="toggleStartDate" autocomplete="off" required>
         </fieldset>
         <div class="col-1 p-0 bg-black h-40px m-auto opacity-30 d-none d-lg-block" style="width: 1px;"></div>
 
         <fieldset class="brdr-b-r p-0 col-1 h-60px m-0 col-lg col-6 position-relative d-flex">
             <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Дата обратно</legend>
-            <input class="bg-transparent border-0 ms-3 p-0 h-100" style="width: 95%;" name="returnDate" type="text" v-model="endDate" @focus="toggleEndDate" ref="end_date" autocomplete="off">
+            <input class="bg-transparent border-0 ms-3 p-0 h-100" style="width: 95%;" name="returnDate" type="text" v-model="endDate" @focus="toggleEndDate" ref="end_date" autocomplete="off" required>
         </fieldset>
 
         <div class="card position-absolute top-100 mt-3 z-3 p-0" id="card" v-show="isCalendarVisible" @click.stop>
