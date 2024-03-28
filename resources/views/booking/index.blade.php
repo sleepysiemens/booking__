@@ -86,7 +86,7 @@
                             <div class="card-body">
                                 @foreach($cookie->transfers as $transfer)
 
-                                    @if($transfer->transfer!='start' and isset($last_arrival))
+                                    @if(isset($last_arrival))
                                         <div class="container">
                                             <div class="card bg-light border-light">
                                                 <div class="card-body row text-black-200 py-2">

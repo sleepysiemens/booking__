@@ -50,7 +50,7 @@
                     @if($result['transfers_amount']>0)
                         <div style="display:none;" id="details-div-{{$result['id']}}">
                             @foreach($result['transfers'] as $transfer)
-
+{{--
                                 @if($transfer['transfer']!='start' and isset($last_arrival))
                                     <div class="container">
                                         <div class="card bg-light border-light">
@@ -71,7 +71,7 @@
                                         </div>
                                     </div>
                                 @endif
-
+--}}
                                 <div class="row row-cols-lg-4 mt-3" >
                                     <div class="col">
                                         <div class="container">

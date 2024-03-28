@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Airports;
 use App\Services\AirportService;
-use App\Services\FlightSearchService;
+use App\Services\FlightSearchServiceV2;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\Panther\Client;
@@ -14,7 +14,7 @@ use Symfony\Component\Panther\Client;
 
 class SearchController extends Controller
 {
-    public function __construct(FlightSearchService $flightSearchService)
+    public function __construct(FlightSearchServiceV2 $flightSearchService)
     {
         $this->flightSearchService = $flightSearchService;
     }

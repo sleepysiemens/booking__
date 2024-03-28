@@ -110,6 +110,7 @@ class PayController extends Controller
 
     public function fail()
     {
-        return view('pay.fail');
+        return redirect()->route('booking.get');
+        //return view('pay.fail');
     }
 }

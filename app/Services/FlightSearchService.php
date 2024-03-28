@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Models\Airports;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\Panther\Client;
@@ -18,7 +19,8 @@ class FlightSearchService
         {
             $airlines[]=
                 [
-                    'airline'=>$ticket['airline'],
+                    //'airline'=>$ticket['airline'],
+                    'airline'=>$ticket['airline_short'],
                     'airline_short'=>$ticket['airline_short'],
                 ];
         }
@@ -71,117 +73,106 @@ class FlightSearchService
 
     public function parseFlightInfo($origin, $destination, $depart_date, $return_date, $adults, $children, $infants)
     {
-         $client = Client::createChromeClient('/var/www/html/drivers/chromedriver', null, [
-            'chromedriver_arguments' => ['--headless=new', '--disable-gpu', '--no-sandbox'],
-        ], 'http://localhost');
-         //$client = Client::createChromeClient();
+        // Задаем URL и параметры запроса
+        $url = 'https://test.api.amadeus.com/v2/shopping/flight-offers';
+        $params = [
+            'originLocationCode' => $origin,
+            'destinationLocationCode' => $destination,
+            'departureDate' => $depart_date ,
+            'adults' => $adults,
+            'children' => $children,
+            'infants' => $infants,
+            'nonStop' => 'false',
+            'currencyCode' => 'RUB',
+            'max' => 10
+        ];
 
-        $depart_date=date('dm',strtotime($depart_date));
         if($return_date!='не установлено')
-            $return_date=date('dm',strtotime($return_date));
-        else
-            $return_date=null;
-
-        //
-        $cacheKey = "{$origin}-{$destination},{$depart_date}-{$return_date}({$adults},{$children},{$infants})";
-        if (Cache::has($cacheKey))
         {
-            return Cache::get($cacheKey);
+            $params['returnDate']=$return_date;
         }
-        else
+
+
+        // Формируем заголовки
+        $headers = [
+            #'accept: application/vnd.amadeus+json',
+            'Authorization: Bearer YNrlHJr2A4YIEz22CmwEf5sqsUG3'
+        ];
+
+        // Инициализируем cURL-сессию
+        $ch = curl_init();
+
+        // Устанавливаем опции cURL
+        curl_setopt($ch, CURLOPT_URL, $url . '?' . http_build_query($params));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        // Выполняем запрос и получаем ответ
+        $response = curl_exec($ch);
+
+        // Проверяем на наличие ошибок
+        if(curl_errno($ch)){
+            $error_msg = curl_error($ch);
+        }
+
+        // Закрываем cURL-сессию
+        curl_close($ch);
+
+        // Преобразуем JSON-ответ в массив
+        $tickets = json_decode($response);
+
+        // Выводим результат
+        //dump($tickets->data);
+        //($this->standart_tickets($tickets->data));
+
+        return $this->standart_tickets($tickets->data);
+    }
+
+    public function standart_tickets($tickets)
+    {
+        $tickets_=[];
+        $i=0;
+        foreach ($tickets as $ticket)
         {
-            $client->request('GET', 'https://www.onetwotrip.com/_avia-search-proxy/search/v3?route=' . $depart_date . $origin . $destination . $return_date . '&ad=' . $adults . '&cn=' . $children . '&in=' . $infants . '&showDeeplink=false&cs=E&source=google_adwords&priceIncludeBaggage=false&noClearNoBags=true&noMix=true&srcmarker=b2b_p1_b2b-generic_wld_s_kkwd-839752446941_c_20378146076_154201628133_676270550064_1010561&cryptoTripsVersion=61&doNotMap=true');
+            $i++;
+            $tickets_[$i]['id']=$i;
+            $tickets_[$i]['airline_short']=$ticket->itineraries[0]->segments[0]->carrierCode;
+            $tickets_[$i]['depart_datetime']=strtotime($ticket->itineraries[0]->segments[0]->departure->at);
+            $tickets_[$i]['origin']=$ticket->itineraries[0]->segments[0]->departure->iataCode;
+            $tickets_[$i]['arrival_datetime']=strtotime(Arr::last($ticket->itineraries[0]->segments)->arrival->at);
+            $tickets_[$i]['destination']=Arr::last($ticket->itineraries[0]->segments)->arrival->iataCode;
+            $tickets_[$i]['duration']=$ticket->itineraries[0]->duration;
+            $tickets_[$i]['transfers_amount']=count($ticket->itineraries[0]->segments)-1;
+            $tickets_[$i]['flight_num']='';
+            $tickets_[$i]['price']=floatval($ticket->price->total);
+            $j=0;
 
-            $json = $client->getCrawler()->getText();
-
-            $json = json_decode($json);
-            $tickets = [];
-
-            $transportationVariants = collect($json->transportationVariants);
-            $prices = collect($json->prices);
-            $trips = collect($json->trips);
-
-            //dd($transportationVariants);
-
-            $i = 0;
-            foreach ($transportationVariants as $transportationVariant) {
-                $i++;
-                foreach ($transportationVariant->tripRefs as $trip_ref) {
-                    //
-                    $depart_date = explode('T', $trips[$trip_ref->tripId]->startDateTime);
-                    $arrival_date = explode('T', $trips[$trip_ref->tripId]->endDateTime);
-                    $airline = Airlines::query()->where('code', '=', $trips[$trip_ref->tripId]->carrier)->select('name')->first();
-
-                    $tickets[$i]['transfers'][] =
-                        [
-                            'origin' => $trips[$trip_ref->tripId]->from,
-                            'destination' => $trips[$trip_ref->tripId]->to,
-                            'depart_datetime' => strtotime($trips[$trip_ref->tripId]->startDateTime),
-                            'depart_date' => $depart_date[0],
-                            'arrival_datetime' => strtotime($trips[$trip_ref->tripId]->endDateTime),
-                            'arrival_date' => $arrival_date[0],
-                            'airline' => $airline->name,
-                            'airline_short' => $trips[$trip_ref->tripId]->carrier,
-                            'duration' => (intdiv($trips[$trip_ref->tripId]->tripTimeMinutes, 60)) . 'ч ' . ($trips[$trip_ref->tripId]->tripTimeMinutes % 60) . 'м',
-                            'flight_num' => $trips[$trip_ref->tripId]->carrier . ' ' . $trips[$trip_ref->tripId]->carrierTripNumber,
-                            'transfer' => 'прямой',
-                        ];
-
-                    //
-
-                }
-
-                $tickets[$i]['id'] = $i;
-                $tickets[$i]['transfers_amount'] = count($tickets[$i]['transfers']) - 1;
-
-                //
-                if ($tickets[$i]['transfers_amount'] < 1) {
-                    //
-                    $tickets[$i]['transfer'] = 'прямой';
-                    $tickets[$i]['flight_num'] = $trips[$trip_ref->tripId]->carrier . ' ' . $trips[$trip_ref->tripId]->carrierTripNumber;
-
-                    //
-                } else {
-                    //
-                    $tickets[$i]['transfer'] = 'пересадок: ' . $tickets[$i]['transfers_amount'];
-                }
-
-                //
-                $airline = Airlines::query()->where('code', '=', $trips[$trip_ref->tripId]->carrier)->select('name')->first();
-                $tickets[$i]['airline'] = $airline->name;
-                $tickets[$i]['airline_short'] = $trips[$trip_ref->tripId]->carrier;
-
-                //
-                $depart_date = explode('T', $trips[$trip_ref->tripId]->startDateTime);
-                $arrival_date = explode('T', $trips[$trip_ref->tripId]->endDateTime);
-                $tickets[$i]['depart_datetime'] = strtotime($trips[$trip_ref->tripId]->startDateTime);
-                $tickets[$i]['depart_date'] = $depart_date[0];
-                $tickets[$i]['arrival_datetime'] = strtotime($trips[$trip_ref->tripId]->endDateTime);
-                $tickets[$i]['arrival_date'] = $arrival_date[0];
-                //
-                $tickets[$i]['duration'] = (intdiv($transportationVariant->totalJourneyTimeMinutes, 60)) . 'ч ' . ($transportationVariant->totalJourneyTimeMinutes % 60) . 'м';
-                //
-                $tickets[$i]['origin'] = $tickets[$i]['transfers'][0]['origin'];
-                $tickets[$i]['destination'] = $tickets[$i]['transfers'][$tickets[$i]['transfers_amount']]['destination'];
-
-                //
-                if ($prices->where('transportationVariantIds.0', '=', $transportationVariant->id)->first() != null)
-                    $tickets[$i]['price'] = $prices->where('transportationVariantIds.0', '=', $transportationVariant->id)->first()->totalAmount;
-                elseif ($prices->where('transportationVariantIds.1', '=', $transportationVariant->id)->first() != null)
-                    $tickets[$i]['price'] = $prices->where('transportationVariantIds.1', '=', $transportationVariant->id)->first()->totalAmount;
-                else
-                    $tickets[$i]['price'] = 0;
-
-                if ($i > 10) {
-                    break;
-                }
+            if(count($ticket->itineraries[0]->segments)==1)
+            {
+                $tickets_[$i]['transfer']='прямой';
             }
-            Cache::put($cacheKey, $tickets, now()->addHour());
+            else
+            {
+                $tickets_[$i]['transfer']='пересадок:'.count($ticket->itineraries[0]->segments)-1;
+            }
 
-            return $tickets;
+            foreach ($ticket->itineraries[0]->segments as $segment)
+            {
+                $j++;
+                $tickets_[$i]['transfers'][$j]['depart_datetime']=strtotime($segment->departure->at);
+                $tickets_[$i]['transfers'][$j]['origin']=$segment->departure->iataCode;
+                $tickets_[$i]['transfers'][$j]['destination']=$segment->arrival->iataCode;
+                $tickets_[$i]['transfers'][$j]['arrival_datetime']=strtotime($segment->arrival->at);
+                $tickets_[$i]['transfers'][$j]['duration']=$segment->duration;
+                $tickets_[$i]['transfers'][$j]['flight_num']=$segment->carrierCode.'-'.$segment->number;
+                $tickets_[$i]['transfers'][$j]['airline_short']=$segment->carrierCode;
+
+                $tickets_[$i]['flight_num']=$tickets_[$i]['flight_num'].'/'.$segment->carrierCode.'-'.$segment->number;
+            }
         }
 
-        //dd($tickets);
+        //dd($tickets_);
+        return $tickets_;
     }
 }
 

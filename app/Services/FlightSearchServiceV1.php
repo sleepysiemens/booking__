@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 use Symfony\Component\Panther\Client;
 use App\Models\Airlines;
 
-class FlightSearchServiceOLD
+class FlightSearchServiceV1
 {
     public function FilterAirlines($tickets)
     {

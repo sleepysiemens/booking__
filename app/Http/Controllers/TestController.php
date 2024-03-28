@@ -5,30 +5,53 @@ namespace App\Http\Controllers;
 use App\Services\TravelPayoutsService;
 use GuzzleHttp\Client;
 
-
 class TestController extends Controller
 {
     public function index()
     {
-        $client = new Client();
+        // Задаем URL и параметры запроса
+        // Задаем URL и параметры запроса
+        $url = 'https://test.api.amadeus.com/v2/shopping/flight-offers';
+        $params = [
+            'originLocationCode' => 'SYD',
+            'destinationLocationCode' => 'BKK',
+            'departureDate' => '2024-05-02',
+            'adults' => 1,
+            'nonStop' => 'false', // Используем строку "false" вместо логического значения false
+            'max' => 250
+        ];
 
-        $apiKey = '048a44328dd6efc65b762b8e8c20e30a';
-        $date = '2024-04-02'; // Укажите нужную дату
-        $originCity = 'BKK'; // Код города отправления
-        $destinationCity = 'OVB'; // Код города назначения
-        $currency = 'rub'; // Укажите требуемую валюту
-        $adults = 2; // Количество взрослых пассажиров
-        $children = 0; // Количество детей
-        $infants = 0; // Количество младенцев
 
-        dump($date.'/'.$originCity.'/'.$destinationCity.'/'.$currency.'/'.$adults.'/'.$children.'/'.$infants);
+        // Формируем заголовки
+        $headers = [
+            #'accept: application/vnd.amadeus+json',
+            'Authorization: Bearer 0plAN3MfTmjrUPdOaYVwoW1MJJfa'
+        ];
 
-        $method='/v3/get_special_offers';
+        // Инициализируем cURL-сессию
+        $ch = curl_init();
 
-        $response = $client->get("http://api.travelpayouts.com/{$method}?currency={$currency}&origin={$originCity}&destination={$destinationCity}&depart_date={$date}&adults={$adults}&children={$children}&infants={$infants}&token={$apiKey}");
-        //$response = $client->get("http://api.travelpayouts.com/{$method}");
+        // Устанавливаем опции cURL
+        curl_setopt($ch, CURLOPT_URL, $url . '?' . http_build_query($params));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        $tickets = json_decode($response->getBody()->getContents(), true);
+        // Выполняем запрос и получаем ответ
+        $response = curl_exec($ch);
+
+        // Проверяем на наличие ошибок
+        if(curl_errno($ch)){
+            $error_msg = curl_error($ch);
+            // Обработка ошибки...
+        }
+
+        // Закрываем cURL-сессию
+        curl_close($ch);
+
+        // Преобразуем JSON-ответ в массив
+        $tickets = json_decode($response, true);
+
+        // Выводим результат
         dd($tickets);
     }
 }

@@ -33,7 +33,7 @@ class OrderDataService
                 'destination_city'=>$request->destination,
                 'depart_datetime'=>$result->depart_datetime,
                 'arrival_datetime'=>$result->arrival_datetime,
-                'airline'=>$result->airline,
+                'airline'=>$result->airline_short,
                 'flight_num'=>$result->flight_num,
                 'duration'=>$result->duration,
                 'ticket_price'=>$result->price,
