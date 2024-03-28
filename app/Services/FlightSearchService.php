@@ -130,7 +130,9 @@ class FlightSearchService
         //проверяем действие токена
         if(isset($tickets->errors))
         {
-            dd($tickets->errors);
+            return redirect()->route('main.index');
+
+            //dd($tickets->errors);
         }
 
         return $this->standart_tickets($tickets->data);
