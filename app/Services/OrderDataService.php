@@ -11,8 +11,8 @@ class OrderDataService
     {
         unset($request->_token);
         $price=Price::query()->first();
-        $request->total_rub=($request->passengers->children+$request->passengers->adults+$request->passengers->infants)*$price->regular_price_rub;
-        $request->total_eur=($request->passengers->children+$request->passengers->adults+$request->passengers->infants)*$price->regular_price_eur;
+        $request->total_rub=$request->passengers_amount*$price->regular_price_rub;
+        $request->total_eur=$request->passengers_amount*$price->regular_price_eur;
 
         //
         if(!isset($result->flight_num))
@@ -75,7 +75,6 @@ class OrderDataService
     public function get_data()
     {
         $cookie=json_decode($_COOKIE['order']);
-        //dd($cookie);
         return $cookie;
     }
 

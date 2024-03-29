@@ -58,7 +58,7 @@ class BookingController extends Controller
 
 
             $cookie=$dataService->get_data();
-
+            //dd($cookie->booking_price_eur);
             $adults=$passengersService->define_passengers_array($cookie->passengers->adults, 'взрослый');
             $children=$passengersService->define_passengers_array($cookie->passengers->children, 'ребенок');
             $infants=$passengersService->define_passengers_array($cookie->passengers->infants, 'младенец');
@@ -118,6 +118,7 @@ class BookingController extends Controller
 
                 $cookie=$dataService->update_data(\request()->all());
                 setcookie('order',json_encode($cookie));
+                //dd($cookie);
 
             $API=
                 [
@@ -142,7 +143,17 @@ class BookingController extends Controller
         {
             $dataService = new OrderDataService();
             $cookie=$dataService->get_data();
-            return view('booking.pay', compact(['cookie']));
+            $token=(hash('md5',date('Y-m-d h:i:s').$cookie->user_data->email));
+            $API=
+                [
+                    'API_Key'=>'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoiTVRRNU1UQT0iLCJ0eXBlIjoicHJvamVjdCIsInYiOiIyMTc2YjlmYzUxZGRjMjVkNzA2OGUzOWVjN2JjOTIxMTlhYjI1YjkwZTRiMDYxNzk4ZGQ0ZWE4ZWNmZmU2N2Y1IiwiZXhwIjo4ODEwNjUwNjIwMn0.AKlgP70-IOhFwPicUeiIH2jHeAwhvNTMrM2Z4LLuNNw',
+                    'ShopID'=>'7QbiBLnzTncsKhJn',
+                    'Secret'=>'B0IrZSr0tYON2FoAvxK2NqLHwv1HqxOBtcxe',
+                    'price'=>$cookie->booking_price_rub,
+                    'currency'=>'RUB',
+                ];
+
+            return view('booking.pay', compact(['cookie', 'API', 'token']));
         }
         return redirect()->route('main.index');
     }

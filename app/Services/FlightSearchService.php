@@ -73,6 +73,22 @@ class FlightSearchService
 
     public function parseFlightInfo($origin, $destination, $depart_date, $return_date, $adults, $children, $infants)
     {
+        if(Cache::has(hash('md5',$origin.$destination.$depart_date.$return_date.$adults.$children.$infants)))
+        {
+            $tickets=Cache::get(hash('md5',$origin.$destination.$depart_date.$return_date.$adults.$children.$infants));
+            //dd('succ');
+        }
+        else
+        {
+            $tickets=$this->generate_tickets($origin, $destination, $depart_date, $return_date, $adults, $children, $infants);
+            Cache::put(hash('md5',$origin.$destination.$depart_date.$return_date.$adults.$children.$infants),$tickets, now()->addHour());
+        }
+
+        return $tickets;
+    }
+
+    public function generate_tickets($origin, $destination, $depart_date, $return_date, $adults, $children, $infants)
+    {
         $response = Http::asForm()->post('https://test.api.amadeus.com/v1/security/oauth2/token', [
             'grant_type' => 'client_credentials',
             'client_id' => 'AIc7WGpeIqlRn46uS4jub25F2CjQEn3F',
@@ -177,7 +193,7 @@ class FlightSearchService
                 $tickets_[$i]['transfers'][$j]['flight_num']=$segment->carrierCode.'-'.$segment->number;
                 $tickets_[$i]['transfers'][$j]['airline_short']=$segment->carrierCode;
 
-                $tickets_[$i]['flight_num']=$tickets_[$i]['flight_num'].'/'.$segment->carrierCode.'-'.$segment->number;
+                $tickets_[$i]['flight_num']=$tickets_[$i]['flight_num'].' '.$segment->carrierCode.'-'.$segment->number;
             }
         }
 

@@ -524,7 +524,7 @@
                                     <h6 class="my-1">{{__('При оплате в евро:')}}</h6>
                                 </div>
                                 <div class="col-5">
-                                    <h5 class="my-auto fs-20px fw-600 text-end">{{$cookie->booking_price_eur}} €</h5>
+                                    <h5 class="my-auto fs-20px fw-600 text-end">{{$eur=$cookie->booking_price_eur}} €</h5>
                                 </div>
                             </div>
                             <div class="row mt-2">
@@ -553,14 +553,13 @@
                                 <div class="col">
                                     <button class="btn-primary btn fs-12px h-55px m-auto w-100" {{--@if(auth()->user()==null) disabled @endif--}}>{{__('К оплате')}}</button>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <input type="hidden" name="total_rub" value="{{$cookie->booking_price_rub}}">
-        <input type="hidden" name="total_eur" value="{{$cookie->booking_price_eur}}">
     </form>
 @endsection
 

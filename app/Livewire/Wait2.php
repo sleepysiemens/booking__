@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Order;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
 class Wait2 extends Component
@@ -21,7 +22,20 @@ class Wait2 extends Component
 
     public function render()
     {
+        if(Cache::has('ticket_view'))
+        {
+            $ticket_view=Cache::get('ticket_view');
+        }
+        else
+        {
+            Cache::put('ticket_view','all');
+            $ticket_view='all';
+        }
+        //dd(json_decode($this->order->data)->user_data->user);
         sleep(90);
-        return view('livewire.wait_3_stage');
+
+        $users=json_decode($this->order->data)->user_data->user;
+
+        return view('livewire.wait_3_stage', compact(['ticket_view', 'users']));
     }
 }
