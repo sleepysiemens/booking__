@@ -1,7 +1,7 @@
 <template>
-    <fieldset class="second_input brdr-b-r p-0 col-1 h-60px m-0 col-lg col-6 position-relative d-flex">
+    <fieldset class="first_input brdr-b-l p-0 col-1 h-60px m-0 col-lg col-6 position-relative d-flex">
         <legend style="all: revert;" class="fs-12px ms-3 opacity-70">Куда</legend>
-        <input class="bg-transparent border-0 ms-3 p-0 h-100" v-model="searchQuery" @input="search" @click="showCard" @blur="hideCard" type="text" name="destination" autocomplete="off" required/>
+        <input class="bg-transparent border-0 ms-3 p-0 h-100" v-model="searchQuery" @input="search" @focus="showCard" @blur="hideCard" type="text" name="destination" autocomplete="off" required/>
         <input type="hidden" name="destination_" v-model="searchQuery_" required>
         <div class="card position-absolute top-100 mt-3 search-origin-component overflow-y-scroll z-3" v-show="isCardVisible">
             <ul class="list-group border-0">
@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="d-flex opacity-50" v-if="result.iata_type === 'airport'">
-                                <i class="fas fa-plane-arrival my-auto me-2"></i>
+                                <i class="fas fa-plane-departure my-auto me-2"></i>
                                 <p class="my-auto">
                                     {{ result.name}}
                                 </p>
@@ -35,11 +35,22 @@
 
 
 <script>
+function transliterate(text) {
+    const cyrillicToLatinMap = {
+        'й': 'q', 'ц': 'w', 'у': 'e', 'к': 'r', 'е': 't', 'н': 'y', 'г': 'u', 'ш': 'i', 'щ': 'o', 'з': 'p', 'х':'p', 'ъ':']',
+        'ф': 'a', 'ы': 's', 'в': 'd', 'а': 'f', 'п': 'g', 'р': 'h', 'о': 'j', 'л': 'k', 'д': 'l', 'ж': ';', 'э': '\'',
+        'я': 'z', 'ч': 'x', 'с': 'c', 'м': 'v', 'и': 'b', 'т': 'n', 'ь': 'm', 'б': ',', 'ю': '.', '.': '/'
+    };
+
+    return text.toLowerCase().split('').map(char => {
+        return cyrillicToLatinMap[char] || char;
+    }).join('');
+}
 export default {
     data() {
         return {
-            searchQuery: window.requestData['destination'],
-            searchQuery_: window.requestData['destination_'],
+            searchQuery: window.requestData['origin'],
+            searchQuery_: window.requestData['origin_'],
             searchResults: [],
             isCardVisible: false,
             selectedResult: '',
@@ -49,11 +60,21 @@ export default {
     methods: {
         updateSearchQuery(value) {
             this.searchQuery = value;
+            if (value.trim().length > 2) {
+                this.search();
+            } else {
+                this.searchResults = [];
+                this.isCardVisible = false;
+            }
         },
 
         search() {
             if (typeof this.searchQuery === 'string' && this.searchQuery.trim() !== '') {
-                this.searchResults = this.fakeSearch(this.searchQuery);
+                this.searchResults = this.fakeSearch('/'+this.searchQuery);
+                if (this.searchResults.length === 0) {
+                    const transliteratedQuery = transliterate(this.searchQuery);
+                    this.searchResults = this.fakeSearch(transliteratedQuery);
+                }
                 this.isCardVisible = true;
             } else {
                 this.searchResults = [];
@@ -104,30 +125,36 @@ export default {
 </script>
 
 <style scoped>
-.select-item {
+.select-item
+{
     transition: .3s;
 }
 
-.select-item:hover {
-    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+.select-item:hover
+{
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
 }
 
-.search-origin-component {
+.search-origin-component
+{
     width: 130%;
 }
 
-.card {
+.card
+{
     max-height: 300px;
     left: 0;
 }
 
-.card::-webkit-scrollbar {
+.card::-webkit-scrollbar
+{
     width: 0;
     height: 0;
 }
 
-input {
+input
+{
     width: 90%;
-    margin: auto !important;
+    margin: auto!important;
 }
 </style>

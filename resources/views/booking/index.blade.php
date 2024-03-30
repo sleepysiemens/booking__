@@ -60,7 +60,12 @@
                                         </div>
                                         <div class="col d-none d-lg-block">
                                             <div class="container">
-                                                <p class="fw-500 mb-0">{{$cookie->duration}}</p>
+                                                @php
+                                                    $duration=explode('H',$cookie->duration);
+                                                @endphp
+                                                <p class="fw-500 mb-0">
+                                                    {{(int) filter_var($duration[0], FILTER_SANITIZE_NUMBER_INT)}} {{__('ч')}} {{(int) filter_var($duration[1], FILTER_SANITIZE_NUMBER_INT)}} {{__('мин')}}
+                                                </p>
                                                 <p class="fw-400 fs-12px text-green mb-0">{{__('прямой')}}</p>
                                                 <p class="fw-400 fs-12px text-black-200">{{$cookie->flight_num}}</p>
                                             </div>
@@ -73,10 +78,10 @@
                         <div class="card border-0 shadow mb-3">
                             <div class="row mt-3">
                                 <div class="col-12">
-                                    <div class="d-flex justify-content-start justify-content-lg-end">
+                                    <div class="d-flex justify-content-start justify-content-lg-end px-3">
                                         @foreach($cookie->transfers as $transfers)
                                             @if(!isset($airlines_) or $airlines_!=$transfers->airline_short)
-                                                <img class="h-25px m-0" src="https://pics.avs.io/200/50/{{$transfers->airline_short}}.png" alt="avia">
+                                                <img class="h-25px m-0 ms-1" src="https://pics.avs.io/200/50/{{$transfers->airline_short}}.png" alt="avia">
                                             @endif
                                             @php $airlines_=$transfers->airline_short @endphp
                                         @endforeach
@@ -132,7 +137,12 @@
                                         </div>
                                         <div class="col d-none d-lg-block">
                                             <div class="container">
-                                                <p class="fw-500 mb-0">{{$transfer->duration}}</p>
+                                                @php
+                                                    $duration=explode('H',$transfer->duration);
+                                                @endphp
+                                                <p class="fw-500 mb-0">
+                                                    {{(int) filter_var($duration[0], FILTER_SANITIZE_NUMBER_INT)}} {{__('ч')}} {{(int) filter_var($duration[1], FILTER_SANITIZE_NUMBER_INT)}} {{__('мин')}}
+                                                </p>
                                                 <p class="fw-400 fs-12px text-green mb-0">{{__('прямой')}}</p>
                                                 <p class="fw-400 fs-12px text-black-200">{{__('Рейс')}} {{$transfer->flight_num}}</p>
                                             </div>

@@ -60,6 +60,12 @@ export default {
     methods: {
         updateSearchQuery(value) {
             this.searchQuery = value;
+            if (value.trim().length > 2) {
+                this.search();
+            } else {
+                this.searchResults = [];
+                this.isCardVisible = false;
+            }
         },
 
         search() {

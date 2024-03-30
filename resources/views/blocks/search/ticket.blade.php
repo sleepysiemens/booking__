@@ -36,7 +36,12 @@
                             </div>
                             <div class="col d-none d-lg-block">
                                 <div class="container">
-                                    <p class="fw-500 mb-0">{{$result['duration']}}</p>
+                                    @php
+                                        $duration=explode('H',$result['duration']);
+                                    @endphp
+                                    <p class="fw-500 mb-0">
+                                        {{(int) filter_var($duration[0], FILTER_SANITIZE_NUMBER_INT)}} {{__('ч')}} {{(int) filter_var($duration[1], FILTER_SANITIZE_NUMBER_INT)}} {{__('мин')}}
+                                    </p>
                                     <p class="fw-400 fs-12px @if($result['transfers_amount']==0) text-green @else text-warning @endif mb-0">{{$result['transfer']}}</p>
                                     @if($result['transfers_amount']==0)
                                         <p class="fw-400 fs-12px text-black-200">{{__('Рейс')}} {{$result['flight_num']}}</p>
