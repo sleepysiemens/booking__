@@ -37,6 +37,7 @@ class AirportService
             }
             return $this->generateAllAirports();
         });
+
     }
 
     public function translit($string, $lang)
@@ -438,7 +439,7 @@ class AirportService
                             'name'=>$city_name,
                             'iata_type'=>'city',
                             'code'=>
-                                $city['code'].'/'.
+                                '/'.$city['code'].'/'.
                                 //$this->translit($city['code'], 'en').'/'.
 
                                 //$this->translit($country['name_translations']['en'], 'ru').'/'.
@@ -477,15 +478,13 @@ class AirportService
                                     'code'=>
                                         $city['code'].'/'.
                                         //$this->translit($city['code'],'en').'/'.
-
                                         $airport['code'].'/'.
                                         //$this->translit($airport['code'],'en').'/'.
-
-                                        $country['name_translations']['en'].'/'.
+                                        //$country['name_translations']['en'].'/'.
                                         //$this->translit($country['name_translations']['en'],'ru').'/'.
-                                        $country_name.'/'.
+                                        //$country_name.'/'.
                                         //$this->translit($country_name, 'en').'/'.
-                                        $country['code'].'/'.
+                                        //$country['code'].'/'.
                                         //$this->translit($country['code'],'en').'/'.
                                         //$city['name_translations']['en'].'/'.
                                         //$this->translit($city['name_translations']['en'], 'ru').'/'.

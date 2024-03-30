@@ -35,6 +35,17 @@
 
 
 <script>
+function transliterate(text) {
+    const cyrillicToLatinMap = {
+        'й': 'q', 'ц': 'w', 'у': 'e', 'к': 'r', 'е': 't', 'н': 'y', 'г': 'u', 'ш': 'i', 'щ': 'o', 'з': 'p', 'х':'p', 'ъ':']',
+        'ф': 'a', 'ы': 's', 'в': 'd', 'а': 'f', 'п': 'g', 'р': 'h', 'о': 'j', 'л': 'k', 'д': 'l', 'ж': ';', 'э': '\'',
+        'я': 'z', 'ч': 'x', 'с': 'c', 'м': 'v', 'и': 'b', 'т': 'n', 'ь': 'm', 'б': ',', 'ю': '.', '.': '/'
+    };
+
+    return text.toLowerCase().split('').map(char => {
+        return cyrillicToLatinMap[char] || char;
+    }).join('');
+}
 export default {
     data() {
         return {
@@ -53,7 +64,11 @@ export default {
 
         search() {
             if (typeof this.searchQuery === 'string' && this.searchQuery.trim() !== '') {
-                this.searchResults = this.fakeSearch(this.searchQuery);
+                this.searchResults = this.fakeSearch('/'+this.searchQuery);
+                if (this.searchResults.length === 0) {
+                    const transliteratedQuery = transliterate(this.searchQuery);
+                    this.searchResults = this.fakeSearch(transliteratedQuery);
+                }
                 this.isCardVisible = true;
             } else {
                 this.searchResults = [];
