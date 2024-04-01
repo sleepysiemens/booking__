@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex justify-content-end text-black-200 info position-relative">
+    <div class="d-flex ms-3 ms-lg-0 mt-2 mt-lg-0 justify-content-lg-end text-black-200 info position-relative">
         <div class="card position-absolute w-100 bg-light" style="right: 200px" v-show="isInfoVisible">
             <div class="card-body position-relative">
                 <div class="position-absolute cursor-pointer" @click="ToggleInfo" style="right: 10px; top: 10px">

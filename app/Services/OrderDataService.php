@@ -58,14 +58,22 @@ class OrderDataService
 
     public function update_data($data)
     {
-        //dd($_COOKIE['order']);
         if(isset($_COOKIE['order']))
         {
             unset($data['_token']);
             $data=json_encode($data);
             $data=json_decode($data);
             $order=json_decode($_COOKIE['order']);
+
+            $order->booking_price_rub=$data->booking_price_rub;
+            $order->booking_price_eur=$data->booking_price_eur;
+            unset($data->booking_price_rub);
+            unset($data->booking_price_eur);
+            unset($data->promo);
+
             $order->user_data=$data;
+            //dd($order);
+
             return $order;
         }
         else

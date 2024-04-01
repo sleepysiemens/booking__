@@ -123,19 +123,24 @@
 
                     </div>
                     <div class="row pt-3">
-                        <div class="col-4 d-lg-flex">
+                        <div class="col-lg-4 col-6 d-lg-flex">
                             <p class="my-auto">{{__('При оплате в рублях:')}}</p>
                             <h4 class="my-auto ms-2 text-center text-lg-start">{{$cookie->booking_price_rub}} ₽</h4>
                         </div>
-                        <div class="col-4 d-lg-flex">
+                        <div class="col-lg-4 col-6 d-lg-flex">
                             <p class="my-auto">{{__('При оплате в евро:')}}</p>
                             <h4 class="my-auto ms-2 text-center text-lg-start">{{$cookie->booking_price_eur}} €</h4>
                         </div>
-
-                        <div class="col-4 py-4">
-                            <link href="https://api.cryptocloud.plus/static/pay_btn/css/app.css" rel="stylesheet" >
-                            <vue-widget shop_id="{{$API['ShopID']}}" api_key="{{$API['API_Key']}}" background="#fff" color="#000" border_color="#000" logo="color" currency="{{$API['currency']}}" amount="{{$API['price']}}" text_btn="Pay with CryptoCloud" order_id="{{$token}}" ></vue-widget>
-                            <script src="https://api.cryptocloud.plus/static/pay_btn/js/app.js" ></script >
+                        <div class="col-lg-4 col-12 py-4">
+                            @if($cookie->booking_price_rub!=0)
+                                <link href="https://api.cryptocloud.plus/static/pay_btn/css/app.css" rel="stylesheet" >
+                                <vue-widget shop_id="{{$API['ShopID']}}" api_key="{{$API['API_Key']}}" background="#fff" color="#000" border_color="#000" logo="color" currency="{{$API['currency']}}" amount="{{$API['price']}}" text_btn="Pay with CryptoCloud" order_id="{{$token}}" ></vue-widget>
+                                <script src="https://api.cryptocloud.plus/static/pay_btn/js/app.js" ></script >
+                            @else
+                                <a href="{{route('payment.confirm')}}" class="btn btn-primary w-100 h-100">
+                                    Продолжить
+                                </a>
+                            @endif
                         </div>
                         <div class="col-12">
                             <p>Отправляя данную форму вы соглашаетесь с <a href="{{route('policy.index')}}" target="_blank">политикой конфиденциальности</a></p>

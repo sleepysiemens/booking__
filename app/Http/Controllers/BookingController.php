@@ -116,9 +116,9 @@ class BookingController extends Controller
                 }
             }
 
-                $cookie=$dataService->update_data(\request()->all());
+//dd(\request()->all());
+            $cookie=$dataService->update_data(\request()->all());
                 setcookie('order',json_encode($cookie));
-                //dd($cookie);
 
             $API=
                 [

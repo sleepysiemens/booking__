@@ -27,7 +27,7 @@ class PartnersController extends Controller
             $partner->users_count=$users_count;
             $partner->orders_count=$orders_count;
         }
-        $withdraws=Withdraw::query()->where('done','=',false)->join('users','users.id','=','withdraws.user_id')->select('users.email','withdraws.*')->get();
+        $withdraws=Withdraw::query()->where('withdraws.done','=',false)->join('users','users.id','=','withdraws.user_id')->select('users.email','withdraws.*')->get();
         return view('admin.partners.index', compact('applications', 'partners', 'withdraws'));
     }
 

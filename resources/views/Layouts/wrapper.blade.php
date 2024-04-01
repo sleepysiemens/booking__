@@ -89,7 +89,7 @@
                         <p class="second">{{__('Войти')}} <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
                     </a>
                 @else
-                    <a href="{{route('login')}}" class="btn btn-primary fw-bold rounded-pill header-link">
+                    <a href="{{route('profile.index')}}" class="btn btn-primary fw-bold rounded-pill header-link">
                         <p class="first">{{__('Мой профиль')}} <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
                         <p class="second">{{__('Мой профиль')}} <i class="fa fa-arrow-right ms-1 opacity-5"></i></p>
                     </a>

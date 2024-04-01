@@ -9,7 +9,7 @@
             <a href="{{url()->previous()}}"><i class="fas fa-arrow-left"></i> {{__('Назад')}}</a>
         </div>
     </div>
-    <form class="section bg-light pt-4" method="post" action="{{route('pay.post.index')}}">
+    <form class="section bg-light pt-4" method="post" action="{{route('pay.post.index')}}" id="booking">
         @csrf
         <div class="container">
             <div class="row">
@@ -161,7 +161,7 @@
                                     <p class="opacity-50 mt-2">{{__('Вход в личный кабинет')}}</p>
                                     <div class="row pb-2">
                                         <div class="col-6">
-                                            <a href="{{route('login')}}" class="btn btn-primary d-flex fw-bold header-link h-55px" target="_blank">
+                                            <a href="{{route('login')}}" class="btn btn-primary d-flex fw-bold header-link h-55px" {{---target="_blank"--}}>
                                                 <p class="text-center m-auto">{{__('Войти')}}</p>
                                             </a>
                                         </div>
@@ -178,7 +178,7 @@
                                     </div>
                                     <div class="row mt-1">
                                         <div class="col">
-                                            <a href="{{route('register')}}" class="btn btn-primary d-flex fw-bold header-link h-55px" target="_blank">
+                                            <a href="{{route('register')}}" class="btn btn-primary d-flex fw-bold header-link h-55px" {{---target="_blank"--}}>
                                                 <p class="text-center m-auto">{{__('Зарегистрироваться')}}</p>
                                             </a>
                                         </div>
@@ -196,13 +196,13 @@
                                 </div>
                                 @endif
                                 <div class="row pb-2">
-                                    <div class="col">
+                                    <div class="col-lg-6 col-12 mb-3 mb-lg-0">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">Email</legend>
                                             <input type="email" name="email" class="w-100" @if(auth()->user()!=null and auth()->user()->email!=null) value="{{auth()->user()->email}}" @endif {{--@if(auth()->user()!=null and auth()->user()->email!=null) readonly @endif--}} required>
                                         </fieldset>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-lg-6 col-12">
                                         <fieldset style="all: revert;" class="border border-1 rounded">
                                             <legend style="all: revert;" class="text-black-200 px-2">{{__('Телефон')}}</legend>
                                             <input type="tel" name="phone" class="w-100" @if(auth()->user()!=null and auth()->user()->phone!=null) value="{{auth()->user()->phone}}" @endif>
@@ -220,89 +220,7 @@
                             @if($passengers_cnt!=1)
                                 <div class="col-1 p-0 bg-black m-auto opacity-20 d-none d-lg-block" style="height: 1px; width: 95%"></div>
                             @endif
-                            <div class="card-body">
-                                <input type="hidden" name="user[{{$passengers_cnt}}][type]" class="w-100" value="взрослый">
-
-                                <div class="row pb-3">
-                                    <div class="col d-flex">
-                                        <div class="rounded-circle overflow-hidden bg-light w-lg-45px h-lg-45px h-20px w-25px my-auto d-none d-lg-flex">
-                                            <i class="fas fa-user m-auto text-black-100 fs-18px"></i>
-                                        </div>
-                                        <div class="ms-3 d-flex">
-                                            <h4 class="my-auto">{{$passengers_cnt}}-{{__('пассажир')}}, {{__('взрослый')}}</h4>
-                                        </div>
-                                    </div>
-                                    <div class="col my-auto">
-                                        <more-info-component></more-info-component>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Фамилия на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100 input-words" required value="{{$adult['surname']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Имя на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100 input-words" required value="{{$adult['name']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Дата рождения')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" class="w-100" max="{{date("Y-m-d",strtotime("- 12 years"))}}" required value="{{$adult['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Пол')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][sex]" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option @if($adult['sex']==0) selected @endif value="0">{{__('Женский')}}</option>
-                                                <option @if($adult['sex']==1 or !isset($adult['sex'])) selected @endif value="1">{{__('Мужской')}}</option>
-                                            </select>
-                                        </fieldset>
-                                    </div>
-                                </div>
-
-                                <div class="row pb-3">
-                                    <h4 class="m-0">{{__('Данные паспорта')}}</h4>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Гражданство')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][citizenship]" required {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option value="1">{{__('Россия')}}</option>
-                                            </select>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Документ')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][doc_type]" required {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option value="0" @if($adult['doc_type']==0) selected @endif>{{__('Внутренний паспорт РФ')}}</option>
-                                                <option value="1" @if($adult['doc_type']==1 or $adult['doc_type']==null) selected @endif>{{__('Заграничный паспорт РФ')}}</option>
-
-                                            </select>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Серия и номер документа')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100 input-number" required value="{{$adult['serial_number']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Срок действия')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" min="{{date("Y-m-d", $cookie->arrival_datetime)}}" class="w-100" value="{{$adult['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('blocks.booking.adult')
                         @endforeach
 
                         @foreach($children as $child)
@@ -310,89 +228,7 @@
                             @if($passengers_cnt!=1)
                                 <div class="col-1 p-0 bg-black m-auto opacity-20 d-none d-lg-block" style="height: 1px; width: 95%"></div>
                             @endif
-                            <div class="card-body">
-                                <input type="hidden" name="user[{{$passengers_cnt}}][type]" class="w-100" value="ребенок">
-
-                                <div class="row pb-3">
-                                    <div class="col d-flex">
-                                        <div class="rounded-circle overflow-hidden bg-light w-lg-45px h-lg-45px h-20px w-25px my-auto d-none d-lg-flex">
-                                            <i class="fas fa-user m-auto text-black-100 fs-18px "></i>
-                                        </div>
-                                        <div class="ms-3 d-flex">
-                                            <h4 class="my-auto">{{$passengers_cnt}}-{{__('пассажир')}}, {{__('ребенок')}}</h4>
-                                        </div>
-                                    </div>
-                                    <div class="col my-auto">
-                                        <more-info-component></more-info-component>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Фамилия на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100 input-words" required value="{{$child['surname']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Имя на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100 input-words" required value="{{$child['name']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Дата рождения')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" min="{{date("Y-m-d",strtotime("- 12 years"))}}" max="{{date("Y-m-d",strtotime("- 2 years"))}}" class="w-100" required value="{{$child['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Пол')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][sex]" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option @if($child['sex']==0) selected @endif value="0">{{__('Женский')}}</option>
-                                                <option @if($child['sex']==1 or $child['sex']==null) selected @endif value="1">{{__('Мужской')}}</option>
-
-                                            </select>
-                                        </fieldset>
-                                    </div>
-                                </div>
-
-                                <div class="row pb-3">
-                                    <h4 class="m-0">{{__('Данные паспорта')}}</h4>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Гражданство')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][citizenship]" required {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option value="1">{{__('Россия')}}</option>
-                                            </select>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Документ')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][doc_type]" required {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option value="0" @if($child['doc_type']==0) selected @endif>{{__('Внутренний паспорт РФ')}}</option>
-                                                <option value="1" @if($child['doc_type']==1 or $child['doc_type']==null) selected @endif>{{__('Заграничный паспорт РФ')}}</option>
-                                            </select>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Серия и номер документа')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100 input-number" required value="{{$child['serial_number']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Срок действия')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" min="{{date("Y-m-d", $cookie->arrival_datetime)}}" class="w-100" value="{{$child['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('blocks.booking.child')
                         @endforeach
 
                         @foreach($infants as $infant)
@@ -400,88 +236,7 @@
                             @if($passengers_cnt!=1)
                                 <div class="col-1 p-0 bg-black m-auto opacity-20 d-none d-lg-block" style="height: 1px; width: 95%"></div>
                             @endif
-                            <div class="card-body">
-                                <input type="hidden" name="user[{{$passengers_cnt}}][type]" class="w-100" value="младенец">
-
-                                <div class="row pb-3">
-                                    <div class="col d-flex">
-                                        <div class="rounded-circle overflow-hidden bg-light w-lg-45px h-lg-45px h-20px w-25px my-auto d-none d-lg-flex">
-                                            <i class="fas fa-user m-auto text-black-100 fs-18px "></i>
-                                        </div>
-                                        <div class="ms-3 d-flex">
-                                            <h4 class="my-auto">{{$passengers_cnt}}-{{__('пассажир')}}, {{__('младенец')}}</h4>
-                                        </div>
-                                    </div>
-                                    <div class="col my-auto">
-                                        <more-info-component></more-info-component>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Фамилия на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][surname]" class="w-100 input-words" required value="{{$infant['surname']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Имя на латинице')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][name]" class="w-100 input-words" required value="{{$infant['name']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Дата рождения')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" max="{{date("Y-m-d")}}" min="{{date("Y-m-d",strtotime("- 2 years"))}}" class="w-100" required value="{{$infant['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Пол')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][sex]" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option @if($infant['sex']==0) selected @endif value="0">{{__('Женский')}}</option>
-                                                <option @if($infant['sex']==1 or $infant['sex']==null) selected @endif value="1">{{__('Мужской')}}</option>
-                                            </select>
-                                        </fieldset>
-                                    </div>
-                                </div>
-
-                                <div class="row pb-3">
-                                    <h4 class="m-0">{{__('Данные паспорта')}}</h4>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Гражданство')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][citizenship]" required {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option value="1">{{__('Россия')}}</option>
-                                            </select>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Документ')}}</legend>
-                                            <select class="w-100" name="user[{{$passengers_cnt}}][doc_type]" required {{--@if(auth()->user()==null) disabled @endif--}}>
-                                                <option value="0" @if($infant['doc_type']==0) selected @endif>{{__('Внутренний паспорт РФ')}}</option>
-                                                <option value="1" @if($infant['doc_type']==1 or $infant['doc_type']==null) selected @endif>{{__('Заграничный паспорт РФ')}}</option>
-                                            </select>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Серия и номер документа')}}</legend>
-                                            <input type="text" name="user[{{$passengers_cnt}}][serial_number]" class="w-100 input-number" required value="{{$infant['serial_number']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <fieldset style="all: revert;" class="border border-1 rounded">
-                                            <legend style="all: revert;" class="text-black-200 px-2">{{__('Срок действия')}}</legend>
-                                            <input type="date" name="user[{{$passengers_cnt}}][validity]" min="{{date("Y-m-d", $cookie->arrival_datetime)}}" class="w-100" value="{{$infant['validity']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
-                                        </fieldset>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('blocks.booking.infant')
                         @endforeach
 
 
@@ -494,7 +249,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <fieldset style="all: revert;" class="border border-1 rounded">
+                                    <fieldset style="all: revert;" class="border border-1 rounded ">
                                         <legend style="all: revert;" class="text-black-200 px-2">{{__('Комментарий к заказу')}}</legend>
                                         <textarea name="comment" class="w-100 h-100px" {{--@if(auth()->user()==null) disabled @endif--}}></textarea>
                                     </fieldset>
@@ -504,69 +259,24 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-12">
+
                     <div class="card border-0 shadow">
                         <div class="card-body">
-                                    <price-check-component
-                                        adults_amount="{{$cookie->passengers->adults}}"
-                                        children_amount="{{$cookie->passengers->children}}"
-                                        infants_amount="{{$cookie->passengers->infants}}"
-                                        passengers_amount="{{$cookie->passengers_amount}}"
-                                        total_rub="{{$cookie->booking_price_rub}}"
-                                        total_eur="{{$cookie->booking_price_eur}}"
-                                    >
-                                    </price-check-component>
+                            <price-check-component
+                                adults_amount="{{$cookie->passengers->adults}}"
+                                children_amount="{{$cookie->passengers->children}}"
+                                infants_amount="{{$cookie->passengers->infants}}"
+                                passengers_amount="{{$cookie->passengers_amount}}"
+                                total_rub="{{$cookie->booking_price_rub}}"
+                                total_eur="{{$cookie->booking_price_eur}}"
+                            >
+                            </price-check-component>
                             <div class="bg-black opacity-10 d-block w-100 mb-3" style="height: 1px;"></div>
-                            <div class="row">
-                                <div class="col-8">
-                                    <h6 class="my-1">{{__('При оплате в рублях:')}}</h6>
-                                </div>
-                                <div class="col-4">
-                                    <h3 class="my-auto fs-20px fw-600 text-end">{{$cookie->booking_price_rub}} ₽</h3>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="text-black-200 mb-1">{{__('или')}}</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-7">
-                                    <h6 class="my-1">{{__('При оплате в евро:')}}</h6>
-                                </div>
-                                <div class="col-5">
-                                    <h5 class="my-auto fs-20px fw-600 text-end">{{$eur=$cookie->booking_price_eur}} €</h5>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col d-flex fs-14px text-warning-400 position-relative info cursor-pointer">
-                                    <div class="position-absolute card bg-black-300 bottom-100 border-0 opacity-90 w-100 info-banner" style="left: 0">
-                                        <div class="card-body">
-                                            <p class="text-white fs-12px m-0">{{__('После бронирования авиакомпания может уменьшить тайм-лимит по авиабилетам в одностороннем порядке.')}}</p>
-                                        </div>
-                                    </div>
-                                    <i class="fas fa-info-circle my-auto"></i>
-                                    <p class="my-auto ms-2">{{__('Бронь действительна до 7 дней')}}</p>
-                                </div>
-                            </div>
+                            <livewire:BookingTotal :cookie="$cookie"/>
 
-                            <div class="bg-black opacity-10 d-block w-100 my-3" style="height: 1px;"></div>
-
-                            <div class="row mt-3">
-                                <div class="col">
-                                    <fieldset class="border border-1 rounded" style="all: revert;">
-                                        <legend class="text-black-200 px-2" style="all: revert;">{{__('Промокод')}}</legend>
-                                        <input type="text" name="promo" class="w-100"></fieldset>
-                                </div>
-                            </div>
-
-                            <div class="row mt-4">
-                                <div class="col">
-                                    <button class="btn-primary btn fs-12px h-55px m-auto w-100" {{--@if(auth()->user()==null) disabled @endif--}}>{{__('К оплате')}}</button>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -600,11 +310,29 @@
             });
 
             // Если вы хотите очистить значения из localStorage при отправке формы, используйте:
-            // document.getElementById('myForm').addEventListener('submit', function() {
-            //     inputs.forEach(function(input, index) {
-            //         localStorage.removeItem('inputFieldValue_' + index);
-            //     });
-            // });
+             document.getElementById('myForm').addEventListener('submit', function() {
+                 inputs.forEach(function(input, index) {
+                     localStorage.removeItem('inputFieldValue_' + index);
+                 });
+             });
         });
+    </script>
+
+    <script>
+        $('body').on('click', '#submit', function(){
+            console.log('click');
+
+            $('input[required]').each(function ()
+            {
+                if(!$( this ).val())
+                {
+                    $( this ).closest('fieldset').addClass('border-red')
+                    $( this ).closest('fieldset').addClass('bg-red-100')
+                }
+            })
+
+        });
+
+
     </script>
 @endsection

@@ -28,7 +28,13 @@ class HomeController extends Controller
             if(auth()->user()->is_admin==1)
                 return redirect()->route('admin.index');
             else
-                return redirect()->route('profile.index');
+            {
+                if(isset($_COOKIE['order']))
+                    return redirect()->route('booking.get');
+                else
+                    return redirect()->route('profile.index');
+
+            }
         }
 
         else

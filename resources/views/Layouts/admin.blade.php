@@ -111,7 +111,16 @@
                     </a>
                 </div>
 
-                <div class="menu-item">
+                <div class="menu-item @yield('sales')">
+                    <a href="{{route('admin.promocodes.index')}}" class="menu-link">
+                        <div class="menu-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="menu-text">Промокоды <span class="menu-label">NEW</span></div>
+                    </a>
+                </div>
+
+                <div class="menu-item mt-5">
                     <a href="{{route('profile.logout')}}" class="menu-link">
                         <div class="menu-icon">
                             <i class="fas fa-sign-out-alt"></i>

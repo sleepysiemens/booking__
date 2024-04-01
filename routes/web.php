@@ -140,7 +140,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin'], ], functio
     Route::group(['prefix' => 'partners',], function (){
         Route::get('/', 'App\Http\Controllers\Admin\PartnersController@index')->name('admin.partners.index');
         Route::get('/accept-application/{application}', 'App\Http\Controllers\Admin\PartnersController@accept_application')->name('admin.partners.accept_application');
-            Route::get('/accept-withdraw/{withdraw}', 'App\Http\Controllers\Admin\PartnersController@accept_withdraw')->name('admin.partners.accept_withdraw');
+        Route::get('/accept-withdraw/{withdraw}', 'App\Http\Controllers\Admin\PartnersController@accept_withdraw')->name('admin.partners.accept_withdraw');
+    });
+
+    //==========SALES==========
+    Route::group(['prefix' => 'promocodes',], function (){
+        Route::get('/', 'App\Http\Controllers\Admin\SalesController@index')->name('admin.promocodes.index');
+        Route::get('/create', 'App\Http\Controllers\Admin\SalesController@create')->name('admin.promocodes.create');
+        Route::post('/store', 'App\Http\Controllers\Admin\SalesController@store')->name('admin.promocodes.store');
     });
 
     //==========USERS==========

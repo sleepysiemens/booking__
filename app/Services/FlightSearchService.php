@@ -84,6 +84,14 @@ class FlightSearchService
             Cache::put(hash('md5',$origin.$destination.$depart_date.$return_date.$adults.$children.$infants),$tickets, now()->addHour());
         }
 
+        //Сортировка по кол-ву пересадок
+        usort($tickets, function($a, $b) {
+            return $a['transfers_amount'] <=> $b['transfers_amount'];
+        });
+
+
+        //dd($tickets);
+
         return $tickets;
     }
 
