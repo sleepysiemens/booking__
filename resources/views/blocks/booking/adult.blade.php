@@ -31,7 +31,7 @@
         <div class="col-lg-6 col-12 mb-3">
             <fieldset style="all: revert;" class="border border-1 rounded">
                 <legend style="all: revert;" class="text-black-200 px-2">{{__('Дата рождения')}}</legend>
-                <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" class="w-100" max="{{date("Y-m-d",strtotime("- 18 years"))}}" required value="{{$adult['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
+                <input type="date" name="user[{{$passengers_cnt}}][date_of_birth]" class="w-100" max="{{date("Y-m-d",strtotime("- 12 years"))}}" required value="{{$adult['date_of_birth']}}" {{--@if(auth()->user()==null) disabled @endif--}}>
             </fieldset>
         </div>
         <div class="col-lg-6 col-12 mb-3">

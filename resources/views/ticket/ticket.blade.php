@@ -159,14 +159,11 @@
                 </tr>
                 <tr>
                     @php
-                        $duration=explode('ч', $transfer->duration);
-                        $hours=$duration[0];
-                        $minutes= explode('м',$duration[1]);
-                        $minutes=$minutes[0];
+                        $duration=explode('H',$transfer->duration);
                     @endphp
                     <td></td>
                     <td>
-                        <p style="font-size: 10px; margin-bottom: 10px; padding-left: 10px; margin-top: 0">Flight time / Время в пути: {{$hours}} h {{$minutes}} m /{{$transfer->duration}}</p>
+                        <p style="font-size: 10px; margin-bottom: 10px; padding-left: 10px; margin-top: 0">Flight time / Время в пути: {{(int) filter_var($duration[0], FILTER_SANITIZE_NUMBER_INT)}} h {{(int) filter_var($duration[1], FILTER_SANITIZE_NUMBER_INT)}} m / {{(int) filter_var($duration[0], FILTER_SANITIZE_NUMBER_INT)}} ч {{(int) filter_var($duration[1], FILTER_SANITIZE_NUMBER_INT)}} м</p>
                     </td>
                     <td></td>
                 </tr>
