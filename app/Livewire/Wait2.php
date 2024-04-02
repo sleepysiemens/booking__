@@ -32,7 +32,7 @@ class Wait2 extends Component
             $ticket_view='all';
         }
         //dd(json_decode($this->order->data)->user_data->user);
-        sleep(90);
+        sleep(30);
 
         $users=json_decode($this->order->data)->user_data->user;
 

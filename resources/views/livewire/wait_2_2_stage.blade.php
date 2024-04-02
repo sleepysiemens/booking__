@@ -37,7 +37,7 @@
     </div>
 
     <div class="mt-5">
-        <h4 class="text-center m-0 text-primary opacity-70">{{__('Обычно это занимает до 10 минут.')}}</h4>
+        <h4 class="text-center m-0 text-primary opacity-70">{{__('Обычно это занимает до 5 минут.')}}</h4>
         <loading-component
             bg_light="{{asset('img/loading/bg-light.svg')}}"
             bg_dark="{{asset('img/loading/bg-dark.svg')}}"
