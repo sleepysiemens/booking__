@@ -3,38 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ConfirmTicketController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         return view('confirm_ticket.index');
     }
 
-    public function check()
+    public function check(): View
     {
-        $pnr=\request()->pnr;
-        $order_id=null;
-        $check=Order::query()
-            ->join('users','users.id','=','orders.user_id')
-            ->where('users.surname','=',\request()->surname)
-            ->where('orders.reservation_code','=',\request()->pnr)->exists();
+        $pnr = request()->pnr;
+        $check = Order::query()
+            ->join('users','users.id', '=', 'orders.user_id')
+            ->where('users.surname','=', request()->surname)
+            ->where('orders.reservation_code', '=', request()->pnr)->exists();
 
-        $order=[];
-        $data=[];
-        if($check)
-        {
-            $order=Order::query()
-                ->join('users','users.id','=','orders.user_id')
-                ->where('users.surname','=',\request()->surname)
-                ->where('orders.reservation_code','=',\request()->pnr)->select('orders.*')->first();
+        $order = [];
+        $data = [];
 
-            $data=json_decode($order->data);
-            $check=$order->is_confirmed;
+        if ($check) {
+            $order = Order::query()
+                ->join('users','users.id','=', 'orders.user_id')
+                ->where('users.surname','=', request()->surname)
+                ->where('orders.reservation_code','=', request()->pnr)->select('orders.*')->first();
+
+            $data = json_decode($order->data);
+            $check = $order->is_confirmed;
         }
-
-        //dd($data);
 
         return view('confirm_ticket.index',compact(['check', 'order', 'pnr', 'data']));
     }

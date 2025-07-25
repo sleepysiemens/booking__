@@ -16,7 +16,8 @@
         "laravel/ui": "^4.4",
         "livewire/livewire": "^3.4",
         "thewulf7/travel-payouts": "^1.1",
-        "webonyx/graphql-php": "^15.8"
+        "webonyx/graphql-php": "^15.8",
+        "ext-curl": "*"
     },
     "require-dev": {
         "dbrekelmans/bdi": "^1.1",

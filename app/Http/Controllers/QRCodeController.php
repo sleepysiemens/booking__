@@ -6,11 +6,11 @@ use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Writer;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class QRCodeController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
         // URL, на который должен вести QR-код
         $url = 'https://tripavia.com/pnrcheck';

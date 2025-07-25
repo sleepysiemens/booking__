@@ -2,19 +2,20 @@
 
 namespace App\Livewire;
 
+use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class LoadingBar extends Component
 {
-    public $complete=false;
+    public bool $complete = false;
     #[On('LoadingComplete')]
-    public function complete_()
+    public function complete_(): void
     {
-        $this->complete=true;
+        $this->complete = true;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.loading-bar');
     }

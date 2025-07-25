@@ -27,7 +27,7 @@ class TravelPayoutsService
         // Отправьте POST-запрос к API Travelpayouts
         $requestData=json_encode($requestData);
         $response = $client->post('https://api.travelpayouts.com/v1/flight_search', [
-            'json' => $requestData,
+            'json'    => $requestData,
             'headers' => [
                 'Content-Type' => 'application/json',
             ],
@@ -49,6 +49,7 @@ class TravelPayoutsService
 
         // Соберите строку для подписи
         $signatureString = '';
+
         foreach ($requestData as $key => $value) {
             $signatureString .= $key . ':' . json_encode($value) . ':';
         }

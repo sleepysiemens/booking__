@@ -18,15 +18,15 @@ return new class extends Migration
             $table->string('name');
         });
 
-        $datas=
-            [
-                ['name'=>'Путешествия'],
-                ['name'=>'Наши новости'],
-                ['name'=>'Визовый режим'],
-            ];
-        foreach ($datas as $data)
+        $data = [
+            ['name' => 'Путешествия'],
+            ['name' => 'Наши новости'],
+            ['name' => 'Визовый режим'],
+        ];
+
+        foreach ($data as $datum)
         {
-            BlogCategory::create($data);
+            BlogCategory::query()->create($datum);
 
         }
 

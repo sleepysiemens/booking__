@@ -22,7 +22,12 @@ return new class extends Migration
             $table->decimal('discount_price_eur')->nullable();
         });
 
-        Price::create(['regular_price_rub'=>699, 'discount_price_rub'=>698, 'regular_price_eur'=>14, 'discount_price_eur'=>13]);
+        Price::query()->create([
+            'regular_price_rub'  => 699,
+            'discount_price_rub' => 698,
+            'regular_price_eur'  => 14,
+            'discount_price_eur' => 13
+        ]);
     }
 
     /**

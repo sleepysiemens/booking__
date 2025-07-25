@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Airports;
 use App\Services\FlightSearchService;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class SearchRes extends Component
@@ -17,29 +18,28 @@ class SearchRes extends Component
     public $depart_end_time_filter;
     public $arrival_start_time_filter;
     public $arrival_end_time_filter;
-    public $reset_filter=0;
+    public $reset_filter = 0;
 
-    public function initializeItems($request)
+    public function initializeItems($request): void
     {
         $this->request = $request;
     }
 
 
-    public function placeholder()
+    public function placeholder(): View
     {
         return view('livewire.loading');
     }
 
-    public function render(FlightSearchService $flightSearchService)
+    public function render(FlightSearchService $flightSearchService): View
     {
         $request=$this->request;
 
-        if($request['origin_']!=null and $request['destination_']!=null)
-        {
+        if ($request['origin_'] !== null && $request['destination_'] !== null) {
             $results = $flightSearchService->parseFlightInfo($request['origin_'], $request['destination_'], $request['departDate'], $request['returnDate'], $request['passengers']['adults'], $request['passengers']['children'], $request['passengers']['infants']);
             $full_results = $results;
 
-            if ($this->transfer != null) {
+            if ($this->transfer !== null) {
                 $transfers = $this->transfer;
                 $results = collect($results);
                 $results = $results->where('transfers_amount', '=', $transfers);
@@ -57,8 +57,8 @@ class SearchRes extends Component
 
             if ($this->airlines != null) {
                 $results = collect($results);
-
                 $cnt = 0;
+
                 foreach ($this->airlines as $airline) {
                     $cnt++;
                     $results_[$cnt] = $results->where('airline', '=', $airline);
@@ -75,66 +75,71 @@ class SearchRes extends Component
 
             if ($this->depart_start_time_filter != null) {
                 $results = collect($results);
-
                 $i = 0;
+
                 foreach ($results as $result) {
                     if ($result['depart_datetime'] <= strtotime($result['depart_date'] . $this->depart_start_time_filter)) {
                         unset($results[$i]);
                     }
+
                     $i++;
                 }
             }
 
             if ($this->depart_end_time_filter != null) {
                 $results = collect($results);
-
                 $i = 0;
+
                 foreach ($results as $result) {
                     if ($result['depart_datetime'] >= strtotime($result['depart_date'] . $this->depart_end_time_filter)) {
                         unset($results[$i]);
                     }
+
                     $i++;
                 }
             }
 
             if ($this->arrival_start_time_filter != null) {
                 $results = collect($results);
-
                 $i = 0;
+
                 foreach ($results as $result) {
                     if ($result['arrival_datetime'] <= strtotime($result['arrival_date'] . $this->arrival_start_time_filter)) {
                         unset($results[$i]);
                     }
+
                     $i++;
                 }
             }
 
-            if ($this->arrival_end_time_filter != null) {
+            if ($this->arrival_end_time_filter !== null) {
                 $results = collect($results);
-
                 $i = 0;
+
                 foreach ($results as $result) {
                     if ($result['arrival_datetime'] >= strtotime($result['arrival_date'] . $this->arrival_end_time_filter)) {
                         unset($results[$i]);
                     }
+
                     $i++;
                 }
             }
 
-            $airports_=Airports::all();
+            $airports_ = Airports::all();
 
             $airlines_filter=$flightSearchService->FilterAirlines($full_results);
             $transfers_filters=$flightSearchService->FilterTransfers($full_results);
-
         }
         else
         {
-            $results=[];
-            $airports_=[];
-            $airlines_filter=[];
-            $transfers_filters=[];
+            $results = [];
+            $airports_ = [];
+            $airlines_filter = [];
+            $transfers_filters = [];
         }
+
         $this->dispatch('LoadingComplete');
+
         return view('livewire.search-results', compact(['results', 'request', 'airlines_filter', 'transfers_filters', 'airports_']));
     }
 

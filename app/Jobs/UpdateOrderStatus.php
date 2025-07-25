@@ -39,29 +39,24 @@ class UpdateOrderStatus implements ShouldQueue
      */
     public function handle(): void
     {
-        if ($this->order->created_at->addSeconds(29)->isPast())
-        {
-            $user=User::query()->where('id','=', $this->order->user_id)->first();
+        if ($this->order->created_at->addSeconds(29)->isPast()) {
+            $user = User::query()->where('id','=', $this->order->user_id)->first();
             $this->order->update(['is_confirmed'=>true]);
 
-            if($user->tg_chat_id!=null)
-            {
-                $chat=TelegraphChat::query()->where('chat_id','=',$user->tg_chat_id)->first();
+            if ($user->tg_chat_id !== null) {
+                $chat = TelegraphChat::query()->where('chat_id', '=', $user->tg_chat_id)->first();
 
                 $chat->message('Заказ №'.$this->order->number.' подтвержден')->keyboard(
-                    Keyboard::make()->buttons(
-                        [
+                    Keyboard::make()->buttons([
                             Button::make('Посмотреть билет')->url(route('ticket.index',$this->order)),
                             Button::make('Скачать билет')->url(route('ticket.download',$this->order)),
-                        ]
-                    )
+                    ])
                 )->send();
             }
 
-            if($user->email!=null)
+            if ($user->email !== null)
             {
                 Mail::to($user->email)->send(new OrderNotifications($this->order->number));
-
             }
 
             Log::info('UpdateBookingStatus выполнен');

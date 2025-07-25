@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class HomeController extends Controller
 {
@@ -16,28 +16,21 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function index()
+    public function index(): RedirectResponse
     {
-        if(auth()->user() !== null)
-        {
-            if(auth()->user()->is_admin==1)
+        if (auth()->user() !== null) {
+            if (auth()->user()->is_admin === 1) {
                 return redirect()->route('admin.index');
-            else
-            {
-                if(isset($_COOKIE['order']))
-                    return redirect()->route('booking.get');
-                else
-                    return redirect()->route('profile.index');
 
             }
+
+            if (isset($_COOKIE['order'])) {
+                return redirect()->route('booking.get');
+            }
+
+            return redirect()->route('profile.index');
         }
 
-        else
         return redirect(route('main.index'));
     }
 }
